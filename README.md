@@ -1,4 +1,4 @@
 derpaketfilterbeiopenwrt
 ========================
 
-Der Pketfilter bei OpenWrt
+Der Paketfilter bei OpenWrt
