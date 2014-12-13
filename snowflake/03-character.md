@@ -73,6 +73,31 @@ und ihr Einsatz erläutert.
 IPv4 ist das momentan am häufigsten öffentlich eingesetzte Protokoll zur
 Datenübertragung zwischen zwei Rechnern.
 
+Es ist schon sehr lange am Start, es ist etabliert, die meiste Hardware und
+Software kann damit umgehen.
+Viele Administratoren kennen sich damit aus.
+Fast alle Stärken und Schwächen sind bekannt.
+
+Der Adressraum von IPv4 ist zu klein.
+Durch NAT, das helfen soll, den Adressraum besser auszunutzen werden die
+Administration und einige Protokolle (IPSEC) noch komplizierter.
+NAT bricht das Paradigma aus der Anfangszeit des Internet vom "dummen Netz"
+und "intelligenten Endgeräten".
+
+Im Laufe des Buches werden einige Fallstricke von IPv4 angesprochen und
+Möglichkeiten aufgezeigt, wie man damit umgehen kann.
+
+IPv4 ist das momentan am häufigsten öffentlich eingesetzte Protokoll zur
+Datenübertragung.
+Es wird schon sehr lange verwendet und ist daher weithin bekannt.
+Leider ist sein Adressraum zu klein.
+NAT, das helfen soll, den Adressraum besser auszunutzen, bringt seine
+eigenen Probleme mit sich.
+Insbesondere hebt es das Paradigma vom dummen Netz mit intelligenten
+Endgeräten auf.
+Im Laufe des Buches werden Fallstricke von IPv4 angesprochen und
+Möglichkeiten, damit umzugehen, gezeigt.
+
 ## IPv6
 
 ## Kommandozeilenschnittstelle UCI
