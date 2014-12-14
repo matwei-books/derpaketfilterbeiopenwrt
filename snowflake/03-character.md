@@ -100,6 +100,34 @@ Möglichkeiten, damit umzugehen, gezeigt.
 
 ## IPv6
 
+IPv6 ist das neue Protokoll für die weltweite Datenübertragung zwischen
+Rechnern.
+
+Es will das alte Protokoll IPv4 ablösen.
+Es vergrößert den Adressraum, also die Anzahl der verfügbaren Adressen, um
+den Faktor 2 hoch 96 (etwa 7 mal 10 hoch 28).
+IPv6 entlastet die Router vom Rechenaufwand beim Weiterleiten von
+Datenpaketen, weil nicht für jedes Datenpaket eine neue Prüfsumme errechnet
+werden muss.
+
+IPv6 ist noch nicht sehr weit verbreitet.
+Dementsprechend wird es in unterschiedlichem Grad von den verschiedenen
+Geräten unterstützt.
+Die Eigenheiten und Fallstricke von IPv6 sind unter Administratoren noch
+nicht so gut bekannt, wie bei IPv4.
+
+Im Laufe des Buches werden Grundlagen zum Verständnis von IPv6 angesprochen.
+
+IPv6 ist der vorgesehene Nachfolger von IPv4 für die weltweite
+Datenübertragung zwischen Rechnern.
+Es vergrößert den Adressraum enorm und löst damit die Adressierungsprobleme
+bei IPv4.
+Außerdem entlastet es die Router bei der Weiterleitung von Datenpaketen.
+Zur Zeit ist IPv6 noch nicht sehr weit verbreitet und wird daher nicht
+vollständig von allen Geräten unterstützt.
+Auch sind die Administratoren noch nicht so gut mit den Eigenheiten von IPv6
+vertraut.
+
 ## Kommandozeilenschnittstelle UCI
 
 ## Webinterface LuCI
