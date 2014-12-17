@@ -152,6 +152,26 @@ installierte Software und erleichtert dadurch dem Sysadmin die Arbeit.
 
 ## Webinterface LuCI
 
+Das Webinterface LuCI bietet über die Konfiguration via Webbrowser eine
+einfache Möglichkeit, von verschiedenen Geräten aus Einstellungen am
+OpenWrt-System zu ändern.
+
+LuCI ergänzt UCI, da kein SSH-Zugang zum System notwendig ist und Webbrowser
+auf vielen Systemen bereits installiert sind.
+Die graphische Oberfläche erlaubt es bestimmte Informationen bereits während
+der Konfiguration anzuzeigen beziehungsweise manche Optionen erst
+anzubieten, wenn dafür notwendige Einstellungen vorgenommen sind.
+
+Es ist komplizierter ein System via LuCI automatisiert zu konfigurieren.
+
+Im Laufe des Buches wird die Konfiguration der Paketfilter via LuCI
+erläutert.
+
+LuCI ist das Programm der Wahl, wenn einige wenige Systemeinstellungen "mal
+schnell eben konfiguriert" werden sollen.
+Über LuCI kann ein OpenWrt-System von beinahe beliebigen Geräten aus
+administriert werden.
+
 ## Testumgebungen
 
 ## Hardware
