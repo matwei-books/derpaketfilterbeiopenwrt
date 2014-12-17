@@ -130,6 +130,26 @@ vertraut.
 
 ## Kommandozeilenschnittstelle UCI
 
+UCI erlaubt die Konfiguration von OpenWrt über die Kommandozeile.
+
+Es bietet eine einheitliche Syntax für die Konfiguration sämtlicher
+installierter Software.
+Alle Konfigurationseinstellungen werden in Konfigurationsdateien mit
+einheitlicher Syntax abgelegt.
+Das bietet den Vorteil, dass der Admin sich nicht an verschiedene Syntax für
+die eingesetzte Software gewöhnen muss.
+
+Im Gegenzug muss "neue" Software erst für die Konfiguration via UCI
+angepasst werden (bzw. UCI an die neue Software).
+
+Im Laufe des Buches wird die Konfiguration der Paketfilter via UCI
+vorgestellt und erläutert.
+
+UCI ist das Programm der Wahl für die Konfiguration eines OpenWrt-Systems
+von der Kommandozeile.
+Es bietet eine einheitliche Schnittstelle mit einheitlicher Syntax für alle
+installierte Software und erleichtert dadurch dem Sysadmin die Arbeit.
+
 ## Webinterface LuCI
 
 ## Testumgebungen
