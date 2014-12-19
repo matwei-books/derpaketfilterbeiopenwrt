@@ -174,4 +174,46 @@ administriert werden.
 
 ## Testumgebungen
 
+Alles theoretische Wissen ist nutzlos, wenn es nicht in der Praxis überprüft
+werden kann.
+
+In einer Testumgebung kann ich verifizieren, ob meine Überlegungen sich in
+der Praxis bewähren werden.
+Ich kann für alle Ziele, die ich mit dem Paketfilter erreichen will, Tests
+erarbeiten, die mir zeigen, ob das Ziel erreicht wird oder nicht.
+
+Bei komplexen Einsatzszenarien wird entsprechend die Testumgebung komplexer.
+Diese muss alle zu überprüfenden Testfälle abbilden können.
+
+Im Laufe des Buches wird gezeigt, wie ich eine Testumgebung zur
+Verifizierung der Firewalleinstellungen aufbauen kann und welche Werkzeuge
+ich für die einzelnen Tests einsetzen kann.
+
+Eine Testumgebung erlaubt es mir, die erworbenen Kenntnisse in der Praxis zu
+überprüfen, bevor ich mich in einem Produktivnetz darauf verlasse.
+Je nach Komplexität des Einsatzfalles am Paketfilter, muss die Testumgebung
+entsprechend komplex ausfallen um die benötigten Fälle überprüfen zu können.
+
 ## Hardware
+
+Die Hardware ist das Material, mit dem die Ideen in der Realität umgesetzt
+werden.
+
+Harware für OpenWrt kann ein kleiner Router für wenig Geld sein, ein PC oder
+nur eine virtuelle Maschine.
+Ich benötige mindestens ein Gerät, um das im Buch beschriebene
+auszuprobieren und nachzuvollziehen.
+
+Je nach verwendeter Hardware ergeben sich Beschränkungen hinsichtlich
+Hauptspeicher, Prozessorleistung und verfügbaren Schnittstellen.
+
+Im Laufe des Buches gehe ich auf einige allgemeine Aspekte der Hardware für
+OpenWrt ein.
+Aufgrund der Vielfalt an möglicher Hardware gebe ich mehr und konkretere
+Hinweise nur für die VMs, die ich bei den Tests verwende.
+
+Die Hardware ist das Wissen, mit der das in diesem Buch dargelegte Wissen in
+die Praxis überführt werden kann.
+Je nach eingesetzter Hardware kann es zu einigen Beschränkungen kommen.
+Im Buch gehe ich nur auf die zum Testen eingesetzte Hardware näher ein.
+
