@@ -1,10 +1,9 @@
 
-# Der Paketfilter bei OpenWrt
-
-Ich will den OpenWrt-Paketfilter mit allem, was dazu gehoert, verstehen.
-Das heisst ich will die Grundlagen kennen und die Bestandteile des Paketfilters.
-Ich will wissen, wie ich das konfigurieren kann und wie ich die Konfiguration
-ueberpruefen kann.
-Nicht zuletzt moechte ich fundiert entscheiden koennen, wie ich den Paketfilter
-in welchem Anwendungsfall einsetze.
+Ich will den OpenWrt-Paketfilter für Netzwerkdaten verstehen: was er kann,
+was er nicht kann, wie ich ihn verwende.
+Was muss ich dafür über aktuelle Netzwerkprotokolle wissen?
+Welche Möglichkeiten bieten mir Linux als Kernel und OpenWrt als
+Betriebssysem?
+Wie setze ich mein Wissen in einem realen System um?
+Wie kann ich das erworbene theroritische Wissen in der Praxis überprüfen?
 
