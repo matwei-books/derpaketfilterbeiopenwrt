@@ -80,7 +80,7 @@ Fast alle Stärken und Schwächen sind bekannt.
 
 Der Adressraum von IPv4 ist zu klein.
 Durch NAT, das helfen soll, den Adressraum besser auszunutzen werden die
-Administration und einige Protokolle (IPSEC) noch komplizierter.
+Administration und einige Protokolle noch komplizierter.
 NAT bricht das Paradigma aus der Anfangszeit des Internet vom "dummen Netz"
 und "intelligenten Endgeräten".
 
@@ -118,7 +118,7 @@ nicht so gut bekannt, wie bei IPv4.
 
 Im Laufe des Buches werden Grundlagen zum Verständnis von IPv6 angesprochen.
 
-IPv6 ist der vorgesehene Nachfolger von IPv4 für die weltweite
+IPv6 ist der Nachfolger von IPv4 für die weltweite
 Datenübertragung zwischen Rechnern.
 Es vergrößert den Adressraum enorm und löst damit die Adressierungsprobleme
 bei IPv4.
@@ -136,7 +136,7 @@ Es bietet eine einheitliche Syntax für die Konfiguration sämtlicher
 installierter Software.
 Alle Konfigurationseinstellungen werden in Konfigurationsdateien mit
 einheitlicher Syntax abgelegt.
-Das bietet den Vorteil, dass der Admin sich nicht an verschiedene Syntax für
+Das bietet den Vorteil, dass der Sysadmin sich nicht an verschiedene Syntax für
 die eingesetzte Software gewöhnen muss.
 
 Im Gegenzug muss "neue" Software erst für die Konfiguration via UCI
@@ -182,7 +182,7 @@ der Praxis bewähren werden.
 Ich kann für alle Ziele, die ich mit dem Paketfilter erreichen will, Tests
 erarbeiten, die mir zeigen, ob das Ziel erreicht wird oder nicht.
 
-Bei komplexen Einsatzszenarien wird entsprechend die Testumgebung komplexer.
+Bei komplexen Szenarien wird entsprechend die Testumgebung komplexer.
 Diese muss alle zu überprüfenden Testfälle abbilden können.
 
 Im Laufe des Buches wird gezeigt, wie ich eine Testumgebung zur
@@ -199,7 +199,7 @@ entsprechend komplex ausfallen um die benötigten Fälle überprüfen zu können
 Die Hardware ist das Material, mit dem die Ideen in der Realität umgesetzt
 werden.
 
-Harware für OpenWrt kann ein kleiner Router für wenig Geld sein, ein PC oder
+Hardware für OpenWrt kann ein kleiner Router für wenig Geld sein, ein PC oder
 nur eine virtuelle Maschine.
 Ich benötige mindestens ein Gerät, um das im Buch beschriebene
 auszuprobieren und nachzuvollziehen.

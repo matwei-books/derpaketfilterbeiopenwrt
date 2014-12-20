@@ -5,5 +5,5 @@ Was muss ich dafür über aktuelle Netzwerkprotokolle wissen?
 Welche Möglichkeiten bieten mir Linux als Kernel und OpenWrt als
 Betriebssysem?
 Wie setze ich mein Wissen in einem realen System um?
-Wie kann ich das erworbene theroritische Wissen in der Praxis überprüfen?
+Wie kann ich das erworbene theoretische Wissen in der Praxis überprüfen?
 
