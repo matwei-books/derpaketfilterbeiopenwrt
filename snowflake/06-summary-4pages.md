@@ -2,12 +2,9 @@
 # Der Paketfilter bei OpenWrt
 
 Ich will den OpenWrt-Paketfilter für Netzwerkdaten grundlegend verstehen.
-Weil ich einsetzen will: zu Hause und im Beruf, wo das sinnvoll ist.
-
-Ich will den OpenWrt-Paketfilter für Netzwerkdaten verstehen: was er kann,
-was er nicht kann, wie ich ihn verwende.
-
-Was kann der OpenWrt-Paketfilter?
+Weil ich einsetzen will: zu Hause und im Beruf, wo das sinnvoll erscheint.
+Ich will wissen was er kann, was er nicht kann, wie ich ihn verwende.
+Was kann der OpenWrt-Paketfilter leisten?
 Wofür kann ich ihn einsetzen?
 Was brauche ich, um ihn für verschiedene Zwecke einzusetzen?
 Welche Einsatzzwecke sind überhaupt denkbar?
@@ -17,9 +14,13 @@ Wie kann ich diese verschieben?
 Wann ist endgültig Schluß, so dass ich lieber etwas anderes nehme?
 Was gibt es anderes, dass ich anstelle von OpenWrt nehmen kann, wenn dieses
 meine Anforderungen nicht erfüllen kann?
+Gibt es andere Betriebssysteme, die ähnliches leisten, andere
+Linux-Distributionen?
+Welche anderen Produkte, Hardware, Betriebssysteme, Software?
 
-Welche Vor- und Nachteile hat der OpenWrt-Paketfilter gegenüber anderen
-Lösungen?
+Um fundiert entscheiden zu können, muss ich OpenWrt-Firewalls mit anderen
+Lösungen vergleichen.
+Welche Vor- und Nachteile hat der OpenWrt-Paketfilter gegenüber diesen?
 Welche Vorteile hat OpenWrt insgesamt gegenüber Systemen, die vielleicht
 besser als Paketfilter oder Firewall geeignet sind?
 Welche Schwächen hat es?
@@ -57,12 +58,9 @@ Wie unterstützen sie das Netfilter-Framework des Kernels?
 Welche Programme sind noch für mich interessant?
 Wie kann ich weitere Software unter OpenWrt verfügbar machen?
 
-Gibt es andere Betriebssysteme, die ähnliches leisten, andere
-Linux-Distributionen?
-
 Erst in der Praxis kann ich zeigen, dass meine Überlegungen zur
 Filterung von Datenpaketen Hand und Fuß haben.
-Wie aber kann ich das erworbene theoretische Wissen in der Praxis überprüfen?
+Wie kann ich das erworbene theoretische Wissen in der Praxis überprüfen?
 Wie überprüfe ich die Funktionsweise einer Firewall?
 Wie baue ich eine Testumgebung auf?
 Was benötige ich dafür?
@@ -74,8 +72,10 @@ Welche Funktionen überhaupt?
 Wie erstelle ich einen Testplan?
 Wie sieht überhaupt ein Testplan aus?
 
+Der beste Paketfilter nützt mir nichts, wenn ich nicht weiß, von welchen
+Gefahren und Risiken ich bedroht bin.
 Wie erkenne ich, wovor ich mich schützen will?
-Das ergibt sich aus dem Einsatzzweck des Paketfilters.
+Das bestimmt den Einsatzzweck des Paketfilters.
 Welche Angriffe gibt es überhaupt und vor welchen kann mich ein Paketfilter
 überhaupt schützen?
 Was ist Deep Packet Inspection?
