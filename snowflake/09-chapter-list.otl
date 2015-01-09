@@ -1,0 +1,103 @@
+Einleitung: Wofür ist dieses Buch?
+	Warum will ich den OpenWrt-Paketfilter verstehen?
+		: Ich mag Überaschungen, aber nur, wenn ich damit umgehen kann, wenn
+		: ich vorbereitet bin. Vorbereitet sein heißt nicht, auf jede Frage
+		: sofort eine Antwort parat zu haben, aber zu wissen, wie man in
+		: akzeptabler Zeit zu einer Antwort kommt.
+	Wo kann und will ich ihn einsetzen?
+		: Router mit Firewallfunktion
+		: Absicherung eines Servers
+		: WLAN-Accesspoint, -Repeater, -Router, -Client
+	Möglichkeiten und Grenzen des OpenWrt-Paketfilters
+		: Was kann er, was kann er nicht?
+		: Wo liegen die Grenzen, wie kann ich diese herausfinden und wie kann ich
+		: sie verschieben?
+		: Was sind die Stärken von OpenWrt?
+		: Welche Schwächen hat OpenWrt?
+		: Wie kann ich diese Schwäche kompensieren?
+	Welche Alternativen gibt es zum OpenWrt-Paketfilter
+		: Welche anderen Betriebssysteme?
+		: Welche andere Hardware?
+		: Welche Vor und Nachteile hat OpenWrt gegenüber diesen anderen Lösungen?
+Grundlagen Netzwerkprotokolle für Paketfilter
+	Aufgaben eines Paketfilters
+		: Filtern des Netzverkehrs anhand von Regeln für die verwendeten
+		: Protokolle.
+		: Schutz vor Angreifern von außen und innen
+		: http://de.wikipedia.org/wiki/Paketfilter
+	Wie weit kann mich ein Paketfilter überhaupt schützen?
+		: Was hat das ganze mit dem OSI-Modell zu tun?
+		: einfach zugängliche Daten aus den Paketheadern
+		: DPI für den Paketinhalt
+	Um welche Netzwerkprotokolle geht es?
+		: Woher bekomme ich Informationen zu diesen Protokollen?
+		: Wie ordne ich diese ein?
+		: Wieviel muss ich überhaupt von diesen Protokollen wissen, um eine
+		: Paketfilter-Firewall zu betreiben?
+		: Welche weiteren Protokolle muss ich kennen?
+	IPv4 für den Firewall-Administrator
+		: Wie spielt das alles zusammen?
+		: Was muss ich bei NAT beachten?
+	IPv6 für den Firewall-Administrator
+		: Wie funktioniert das?
+		: Was ist anders als bei IPv4?
+		: Gibt es hier NAT?
+	ICMP, IGMP und weiter
+		: Welche Aufgaben haben diese?
+		: Wie muss ich das an einem Paketfilter berücksichtigen?
+	Gleichzeitiger Betrieb von IPv4 und IPv6
+		: Worauf muss ich achten?
+Grundlagen OpenWrt Linux
+	Besonderheiten des Linux-Kernels
+		: Welche Möglichkeiten bietet der Linux-Kernel?
+		: Einstellungen über das proc-Dateisystem, sysctl
+		: Wie kann ich diese nutzen?
+		: Wie unter OpenWrt?
+	Netfilter-Framework - Kernelkomponenten
+		: Wie funktioniert das?
+		: Tabellen: filter, nat, mangle, raw, security (man iptables)
+		: Built-In Chains pro Tabelle
+	Netfilter-Framework - Userspace-Programme
+		: Welche gibt es?: iptables, ip6tables, arptables, ebtables
+		: Welche Funktionen erfüllen diese?
+		: Wie kann ich weitere Software verfügbar machen?
+	Modell der Paketfilterregeln bei OpenWrt
+		: bereits geschriebene Texte überarbeiten
+	Konfiguration via Kommandozeile
+		: bereits geschriebene Texte überarbeiten
+	Konfiguration via Weboberfläche
+		: bereits geschriebene Texte überarbeiten
+Praktische Fragen
+	Analyse von iptables-Filtern
+		: Wie mache ich mich mit unbekannten Paketfiltern vertraut?
+	Risikoanalyse
+		: Welche Gefahren gibt es überhaupt?
+		: Vor welchen kann mich ein Paketfilter schützen und vor welchen nicht?
+		: Wie beurteile ich meine persönlichen Risiken?
+	Wie ermittle ich meine ganz persönlichen Anforderungen?
+		: Risikoanalyse
+		: Erwarteter Durchsatz
+	Wie wähle ich mein System aus?
+		: Auswahl der Hardware und Software
+		: Tests
+	Wie überprüfe ich die Funktionsweise einer Paketfilter-Firewall?
+		: Wie baue ich eine Testumgebung auf?
+		: Was benötige ich dafür?
+		: Wie erstelle ich einen Testplan?
+	Monitoring
+		: Wie kontrolliere ich eine Firewall im laufenden Betrieb?
+		: Geht legitimer Verkehr durch? -> Monitoring
+		: Wird verbotener Verkehr gesperrt? -> Intrusion Detection Systeme
+	Kann ich Firewalls umgehen?
+		: Pentesting
+		: Und wenn ja, wie kann ich mich davor schützen?
+	Wie dokumentiere ich das System?
+		: Dokumentieren der Absicht und der Umsetzung
+		: Generieren der Dokumentation aus der Konfiguration, oder
+		: Generieren der Konfiguration aus der Dokumentation, oder
+		: Generieren von Konfiguration und Dokumentation aus einem Dritten?
+	Wie halte ich das System aktuell?
+		: Aktualisieren von OpenWrt allgemein
+		: Aktualisieren von produktiven Systemen
+	Wie erweitere ich das System?
+		: Zusätzliche Software für zusätzliche Anforderungen
