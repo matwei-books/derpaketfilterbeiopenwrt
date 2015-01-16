@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+#
+# otl2markdown - convert vimoutliner file to markdown
+#
+# vim: set sw=4 tw=78 ts=4 et si:
+
+use strict;
+use warnings;
+
+while (<>) {
+    s/^(\S.*)$/\n# $1\n/;       # level 1 header separated by empty lines
+    s/^\t(\S.*)$/\n## $1\n/;    # level 2 header separated by empty lines
+    s/^\t+[:>] (.*)$/$1/;       # normal text (wrapping)
+    s/^\t+[;<] (.*)$/    $1/;   # preformatted text (non-wrapping)
+    print;
+}

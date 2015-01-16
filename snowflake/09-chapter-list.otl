@@ -7,9 +7,9 @@ Einleitung: Warum dieses Buch?
 		: Wieviel muss ich verstehen, um den OpenWrt-Paketfilter mit
 		: größtmöglichem Nutzen einzusetzen?
 	Wo kann und will ich ihn einsetzen?
-		: Router mit Paketfilter
-		: Absicherung eines Servers
-		: WLAN-Access Point, -Repeater, -Router, -Client
+		; Router mit Paketfilter
+		; Absicherung eines Servers
+		; WLAN-Access Point, -Repeater, -Router, -Client
 	Möglichkeiten und Grenzen des OpenWrt-Paketfilters
 		: Was kann er, was kann er nicht?
 		: Wo liegen die Grenzen, wie kann ich diese herausfinden und wie kann ich
@@ -28,9 +28,9 @@ Grundlagen Netzwerkprotokolle für Paketfilter
 		: Schutz vor Angreifern von außen und innen im Rahmen der
 		: Möglichkeiten eines Paketfilters
 	Wie weit kann mich ein Paketfilter überhaupt schützen?
-		: einfach zugängliche Daten aus den Kopfdaten der Datagramme
-		: DPI für den Inhalt der Nutzdaten
-		: Was hat das ganze mit dem OSI-Modell zu tun?
+		; einfach zugängliche Daten aus den Kopfdaten der Datagramme
+		; DPI für den Inhalt der Nutzdaten
+		; Was hat das ganze mit dem OSI-Modell zu tun?
 	Um welche Netzwerkprotokolle geht es?
 		: Woher bekomme ich Informationen zu diesen Protokollen?
 		: Wie ordne ich diese ein?
@@ -51,18 +51,18 @@ Grundlagen Netzwerkprotokolle für Paketfilter
 		: Wie muss ich das an einem Paketfilter berücksichtigen?
 Grundlagen OpenWrt Linux
 	Besonderheiten des Linux-Kernels
-		: Welche Möglichkeiten bietet der Linux-Kernel?
-		: Einstellungen über das proc-Dateisystem, sysctl
-		: Wie kann ich diese nutzen?
-		: Wie unter OpenWrt?
+		; Welche Möglichkeiten bietet der Linux-Kernel?
+		; Einstellungen über das proc-Dateisystem, sysctl
+		; Wie kann ich diese nutzen?
+		; Wie unter OpenWrt?
 	Netfilter-Framework - Kernel-Komponenten
-		: Wie funktioniert das?
-		: Tabellen: filter, nat, mangle, raw, security (man iptables)
-		: Built-In Chains pro Tabelle
+		; Wie funktioniert das?
+		; Tabellen: filter, nat, mangle, raw, security (man iptables)
+		; Built-In Chains pro Tabelle
 	Netfilter-Framework - Userspace-Programme
-		: Welche gibt es?: iptables, ip6tables, arptables, ebtables
-		: Welche Funktionen erfüllen diese?
-		: Wie kann ich weitere Software verfügbar machen?
+		; Welche gibt es?: iptables, ip6tables, arptables, ebtables
+		; Welche Funktionen erfüllen diese?
+		; Wie kann ich weitere Software verfügbar machen?
 	Modell des Paketfilters bei OpenWrt
 		: Welche Ketten gibt es in den verschiedenen Tabellen und welchen
 		: Zweck erfüllen diese?
@@ -82,34 +82,34 @@ Grundlagen OpenWrt Linux
 		: überarbeiten)
 Praktische Fragen
 	Wie ermittle ich meine ganz persönlichen Anforderungen?
-		: Risikoanalyse
-		: Erwarteter Durchsatz
+		; Risikoanalyse
+		; Erwarteter Durchsatz
 	Wie wähle ich mein System aus?
-		: Auswahl der Hardware und Software
-		: Tests
+		; Auswahl der Hardware und Software
+		; Tests
 	Wie härte ich das System?
-		: Verschlüsselung
-		: Unbenutzte Dienste
-		: chroot
+		; Verschlüsselung
+		; Unbenutzte Dienste
+		; chroot
 	Wie überprüfe ich die Funktionsweise einer Paketfilter-Firewall?
 		: Wie baue ich eine Testumgebung auf?
 		: Was benötige ich dafür?
 		: Wie erstelle ich einen Testplan?
 	Monitoring
-		: Wie kontrolliere ich einen Paketfilter im laufenden Betrieb?
-		: Geht legitimer Verkehr durch? -> Monitoring
-		: Wird verbotener Verkehr gesperrt? -> Intrusion Detection Systeme
+		; Wie kontrolliere ich einen Paketfilter im laufenden Betrieb?
+		; Geht legitimer Verkehr durch? -> Monitoring
+		; Wird verbotener Verkehr gesperrt? -> Intrusion Detection Systeme
 	Kann ich Firewalls umgehen?
-		: Und wenn ja, wie kann ich mich davor schützen?
-		: Penetrationstests
+		; Und wenn ja, wie kann ich mich davor schützen?
+		; Penetrationstests
 	Wie dokumentiere ich das System?
-		: Dokumentieren der Absicht und der Umsetzung
-		: Generieren der Dokumentation aus der Konfiguration, oder
-		: Generieren der Konfiguration aus der Dokumentation, oder
+		; Dokumentieren der Absicht und der Umsetzung
+		; Generieren der Dokumentation aus der Konfiguration, oder
+		; Generieren der Konfiguration aus der Dokumentation, oder
 		: Generieren von Konfiguration und Dokumentation aus einem Dritten?
 	Wie halte ich das System aktuell?
-		: Aktualisieren von OpenWrt allgemein
-		: Aktualisieren von produktiven Systemen
+		; Aktualisieren von OpenWrt allgemein
+		; Aktualisieren von produktiven Systemen
 	Wie erweitere ich das System?
 		: Zusätzliche Software für zusätzliche Anforderungen
 Anhang
