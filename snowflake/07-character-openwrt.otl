@@ -1,0 +1,70 @@
+[_] % Was gehört von OpenWrt dazu?
+	[_] Einleitung
+		[_] Was ist OpenWrt?
+			: - Free und Open Source
+			: - angetrieben von der Community
+			: - anpassbar an die eigenen Bedürfnisse
+			: - ein Baukasten, um seine ganz persönliche Firmware zusammen zu
+			:   stellen
+			: - mehr als 2000 angepasste Softwarepakete
+			: - für Entwickler entworfen
+			: - "unerfahrene" Benutzer können es für ihre Firmware benutzen
+		[_] Was ist es nicht?
+			: - kein Produkt, aber macht es einfach ein Produkt zu bauen
+			: - niemals fertig, aber es folgt dem Fortschritt
+			: - nicht spezifisch, es bleibt generisch
+			: - kann nicht alles "Out of the Box", muss auf die eigenen
+			:   Bedürfnisse zugeschnitten werden.
+		[_] Was sind die Stärken von OpenWrt?
+			: - Free und Open Source
+			: - anpassbar an die eigenen Bedürfnisse
+		[_] Was sind die Schwächen von OpenWrt?
+			: - es muss auf die eigenen Bedürfnisse zugeschnitten werden
+	[_] Grundlagen OpenWrt Linux
+		[_] Wie nutze/konfigure ich bei OpenWrt sysctl, /proc etc.?
+			: http://wiki.openwrt.org/doc/howto/notuci.config
+			: - /etc/sysctl.conf (Package base-files)
+		[_] Das Webinterface LuCI
+			: http://wiki.openwrt.org/doc/techref/luci
+			: - Was ist das
+			: - Installation
+		[_] Das CLI UCI
+			: http://wiki.openwrt.org/doc/uci
+			: - allgemeine Prinzipien
+			: - Konfigurationsdateien
+			: - Dateisyntax
+			: - Kommandozeilenprogramm
+		[_] Modell des Paketfilters
+			: http://weidner.in-bad-schmiedeberg.de/archives/2012/02/ein-modell-fuer-iptables-bei-openwrt/
+			: - welche vordefinierten Ketten gibt es in den einzelnen Tabellen
+			: - welche Funktion haben diese
+			: http://unix.stackexchange.com/questions/56317/have-someone-ever-audited-the-default-openwrt-firewall-rules
+		[_] Konfiguration des Paketfilters
+			: - von der Kommandozeile
+			: - aus LuCI
+	[_] Praktische Fragen
+		[_] Wie wähle ich mein System aus?
+			: - Komponenten (SoC, Bus, spezielle Hardware, Debug-Ports,
+			:   Wireless, Leistungsaufnahme)
+			: - Knöpfe und Schalter
+			: - GPIO, die genutzt werden kann
+			: - unterstützte Hardware
+		[_] Härten von OpenWrt
+			: http://wiki.openwrt.org/doc/howto/secure.access
+			: https://forum.openwrt.org/viewtopic.php?id=50708
+			: http://blog.oldcomputerjunk.net/2014/experiments-with-hardening-openwrt-applying-the-grsecurity-patches/
+		[_] Aktualisieren von OpenWrt
+			: Failsave Mode
+			: Sysupgrade
+		[_] Ergänzen mit zusätzlicher Software
+			: opkg (http://wiki.openwrt.org/doc/techref/opkg)
+			: - ist Package ... verfügbar
+		[_] Installieren von OpenWrt
+			[_] Erstes Login
+			[_] auf einer VM
+			[_] auf ausgewählter Hardware
+		[_] Rezepte
+			[_] Passwort vergessen
+	[_] Anhang
+		[_] Erzeugen eines persönlichen Images
+			: http://wiki.openwrt.org/doc/howto/easy.build
