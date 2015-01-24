@@ -1,3 +1,10 @@
 
 # draft PDF files
 **/*-draft.pdf
+
+# snowflake files (these are in monotone repository)
+snowflake
+
+# monotone VCS files
+.mtn-ignore
+_MTN
