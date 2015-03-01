@@ -3,19 +3,25 @@ Ich will den OpenWrt-Paketfilter verstehen!
 ===========================================
 
 Warum?
+------
 
-Ich will ihn verstehen, damit ich darüber schreiben kann und ihn meine Leser
-dann auch verstehen können.
+Ich will den Paketfilter verwenden und damit ich ihn optimal verwenden kann,
+mmuss ich ihn kennen.
 
-Warum OpenWrt und warum nur den Paketfilter und nicht alles?
+Und ich will ihn verstehen, damit ich darüber schreiben kann und ihn meine
+Leser anschließend auch verstehen können.
 
-Das sind jetzt schon zwei Fragen.
+Warum OpenWrt?
+--------------
 
 OpenWrt läuft auf vielen kostengünstigen Geräten mit Netzanschluss.
-Etliche Projekte verwenden auf OpenWrt basierende Firmware in diesen
-Geräten.
-Freifunk verwendet es.
-Ich erkenne da einen gewissen Bedarf an fundiertem Wissen.
+Einige Firmen verwenden auf OpenWrt basierende Firmware in ihren Geräten.
+Freifunk verwendet es, einige andere Projekte auch.
+Die Chancen sind also gut, dass OpenWrt bereits an der einen oder anderen
+Stelle eingesetzt wird.
+
+Warum nur den Paketfilter und nicht alles?
+------------------------------------------
 
 Natürlich kann OpenWrt mehr als nur Pakete zustellen und zu filtern
 Aber das soll kein Gesamtwerk über OpenWrt werden, dass mindestens so
@@ -30,10 +36,11 @@ In der Tat ist dieses Buch so ausgelegt, dass man den OpenWrt-spezifischen
 Teil übergehen kann und den Rest auf andere Linux-Paketfilter anwendet.
 Oder man übergeht alles Linux-spezifische und verwendet den Rest um andere
 Paketfilter besser zu verstehen.
-Wie man sich die dann fehlenden Informationen beschaffen kann, ist zumindest
+Wie man sich die nötigen Informationen selbst beschaffen kann, ist zumindest
 teilweise im Anhang beschrieben.
 
 Warum mache ich mir die ganze Mühe?
+-----------------------------------
 
 Ein Paketfilter ist ein Werkzeug und die Entwicklung der letzten Jahre hat
 mir gezeigt, dass er ein ziemlich wichtiges Werkzeug ist.
@@ -58,7 +65,9 @@ Aber wenn OpenWrt sowieso schon eingesetzt wird, dann will ich auch alles,
 was geht, aus den Bordmitteln herausholen und den Paketfilter mit
 größtmöglichem Nutzen einsetzen.
 
-Zu diesem Zweck muss ich ein paar Grundlagen wissen, ich muss in der Lage
+Zu diesem Zweck muss ich ein paar Grundlagen wissen, über Netzwerk, Linux
+als Betriebssystem und das Netfilter-Framework.
+Ich muss in der Lage
 sein, meine Ziele klar zu definieren und ich muss ein paar Techniken
 beherrschen.
 Einmal um meine Ziele umzusetzen und dann, um mich zu vergewissern, dass ich
