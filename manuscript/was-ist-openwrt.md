@@ -30,12 +30,13 @@ Display bereitstellt.
 > SSH, HTTPS und X-Windows am lokalen Display.
 
 Das OpenWrt-Projekt startete 2004 mit dem "Stable Release".
-Diesem folgten die Ausgaben "White Russian", "Kamikaze", "Backfire" (2011),
-"Attitude Adjustment" (2013), "Barrier Breaker" (2014).
+Diesem folgten die Ausgaben "White Russian" (2007), "Kamikaze" (2007),
+"Backfire" (2010), "Attitude Adjustment" (2013), "Barrier Breaker" (2014).
 
-Der Entwicklungszweig, genannt "Chaos Calmer", enthält die jeweils neueste für
-OpenWrt verfügbare Software.
-Da dieser Zweig experimentellen Code enthalten kann, sollte er nicht für
-produktive Umgebungen eingesetzt werden.
+Der aktuelle Entwicklungszweig, genannt "Chaos Calmer", enthält die jeweils
+neueste für OpenWrt verfügbare Software.
+
+Da der Entwicklungszweig experimentellen Code enthalten kann, sollte er
+nicht für produktive Umgebungen eingesetzt werden.
 Dieser Zweig unterstützt zusätzliche Hardware, wird aber als instabil
 eingeschätzt und lässt sich manchmal nicht kompilieren.
