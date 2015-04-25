@@ -1,0 +1,369 @@
+
+RFC - Requests for Comment
+--------------------------
+
+RFCs bilden die Grundlage für die Internet-Standards.
+Traditionell werden RFC von der Internet Engineering Task Force (IETF)
+herausgegeben.
+
+Ein Verzeichnis aller RFC ist unter <http://tools.ietf.org/rfc/index> zu
+finden.
+
+RFC 768
+: User Datagram Protocol
+
+  Dieser RFC von 1980 ist die noch heute gültige Beschreibung dieses
+  Protokolls.
+
+RFC 791
+: INTERNET PROTOCOL  
+  DARPA INTERNET PROGRAM  
+  PROTOCOL SPECIFICATION
+
+  Die Beschreibung des heute als IPv4 bekannten Internet Standards wurde
+  durch die RFCs 2474 und 6864 aktualisiert und ergänzt.
+
+RFC 792
+: INTERNET CONTROL MESSAGE PROTOCOL  
+  DARPA INTERNET PROGRAM  
+  PROTOCOL SPECIFICATION
+
+  Dieser Internet Standard wurde durch die RFCs 950, 4884, 6633 und 6918
+  aktualisiert und ergänzt.
+
+RFC 793
+: TRANSMISSION CONTROL PROTOCOL  
+  DARPA INTERNET PROGRAM  
+  PROTOCOL SPECIFICATION
+
+  Dieser Internet Standard wurde unter anderem durch die RFCs 1122, 3168
+  und 6093 aktualisiert und ergänzt.
+
+RFC 826
+: An Ethernet Address Resolution Protocol  
+  -- or --  
+  Converting Network Protocol Addresses  
+  to 48.bit Ethernet Address  
+  for Transmission on  
+  Ethernet Hardware
+
+  Normalerweise muss ich mich bei einem Paketfilter nicht mit dem
+  ARP-Protokoll, das dieser RFC beschreibt, beschäftigen.
+  Ausnahmen sind Paketfilter, die nicht als Router sondern als Bridge
+  betrieben werden.
+
+RFC 894
+: A Standard for the Transmission of IP Datagrams over Ethernet Networks
+
+  Dieser RFC beschreibt, wie IP-Pakete in Ethernet-Frames eingekapselt
+  werden.
+
+RFC 950
+: Internet Standard Subnetting Procedure
+
+  Dieser Internet Standard beschreibt das Aufteilen von Netzen in Teilnetze.
+
+  RFC 6918 aktualisiert und ergänzt diesen RFC.
+
+RFC 1042
+: A Standard for the Transmission of IP Datagrams over IEEE 802 Networks
+
+  Dieser Internet Standard beschreibt, wie IP-Pakete in IEEE 802 Netzwerke
+  eingekapselt werden, ähnlich wie RFC 894 für Ethernet.
+  Die IEEE 802 Spezifikationen beschreiben eine Familie von LAN Protokollen,
+  die sich mit den OSI-Schichten 1 und 2 beschäftigen.
+
+RFC 1112
+: Host Extensions for IP Multicasting
+
+  Dieser Internet Standard die notwendigen Ergänzungen der IP-Implementation
+  eines Hosts, damit dieser am Multicasting teilnehmen kann.
+
+  RFC 2236 aktualisiert und ergänzt diesen RFC.
+
+RFC 1122
+: Requirements for Internet Hosts -- Communication Layers
+
+  Dieser Internet Standard beschreibt die Anforderungen an Internet Host
+  Software bezüglich der OSI-Schichten 1 bis 4. Die Anforderungen bezüglich
+  der OSI-Schichten 5 bis 7 behandelt RFC 1123.
+
+  Das Verständnis der Anforderungen dieses RFCs ist fundamental, wenn man
+  beim Betrieb einer Paketfilter-Firewall den erlaubten Datenverkehr nicht
+  behindern will.
+
+  Die RFCs 4379, 6093, 6633 und 6864 aktualisieren und ergänzen RFC 1122.
+
+RFC 1123
+: Requirements for Internet Hosts -- Application and Support
+
+  Dieser Internet Standard beschreibt einige Anwendungsprotokolle, wie zum
+  Beispiel FTP, TFTP, SMTP, DNS.
+
+  Für den Betrieb einer Paketfilter-Firewall ist deren Kenntnis nur dann
+  notwendig, wenn ihr Datenverkehr darüber läuft.
+  In diesem Fall kann dieses RFC als Einstieg in die Vertiefung mit dem
+  betreffenden Protokoll dienen.
+
+  Die RFCs 2181 und 5966 aktualisieren und ergänzen diesen RFC.
+
+RFC 1858
+: Security Considerations for IP Fragment Filtering
+
+  IP-Fragmentierung kann verwendet werden, um TCP-Pakete vor den
+  Paketfiltern in Routern und Hosts zu verschleiern.
+  Dieser RFC beschreibt zwei Angriffsmethoden und Abhilfen dagegen.
+
+  RFC 3128 aktualisiert und ergänzt diesen RFC.
+
+RFC 1883 (obsolet durch RFC 2460)
+: Internet Protocol, Version 6 (IPv6) Specification
+
+  Dieser ehemalige Proposed Standard von 1995 ist nur noch von
+  historischem Interesse.
+
+  RFC 2460 beschreibt den aktuellen Draft Standard für IPv6.
+
+RFC 1885 (obsolet durch RFC 2463 und 4443)
+: Internet Control Message Protocol (ICMPv6) for the Internet Protocol
+  Version 6 (IPv6) Specification
+
+  Dieser ehemalige Proposed Standard von 1995 ist nur noch von
+  historischem Interesse.
+
+  RFC 4443 beschreibt den aktuellen Draft Standard für ICMPv6.
+
+RFC 2181
+: Clarifications to the DNS Specification
+
+  Aus dem Blickwinkel der Paketfilter-Firewall ist an diesem RFC der Punkt 4
+  "Server Reply Source Address Selection" interessant.
+
+RFC 2236
+: Internet Group Management Protocol, Version 2
+
+  Dieser RFC interessiert nur, falls noch IGMP in Version 2 im Netz
+  verwendet wird.
+  Aus dem Blickwinkel der Paketfilter-Firewall sind an diesem RFC die Punkte
+  9. "Message destinations" und 10. "Security Considerations" interessant.
+
+  RFC 3376 beschreibt die Version 3 dieses Protokolls.
+
+RFC 2460
+: Internet Protocol, Version 6 (IPv6) Specification
+
+  Dieser Draft Standard von 1998 beschreibt IPv6.
+
+  Die RFCs 5095, 5722, 6437, 7045 und 7112
+  aktualisieren und ergänzen diesen RFC.
+
+RFC 2463 (obsolet durch RFC 4443)
+: Internet Control Message Protocol (ICMPv6) for the Internet Protocol
+  Version 6 (IPv6) Specification
+
+  Dieser ehemalige Draft Standard von 1998 ist nur noch von historischem
+  Interesse.
+
+  RFC 4443 beschreibt den aktuellen Draft Standard für ICMPv6.
+
+RFC 2464
+: Transmission of IPv6 Packets over Ethernet Networks
+
+  Dieser Proposed Standard beschreibt den Transport von IPv6 über Ethernet,
+  so wie RFC 894 für IPv4.
+  Neben dem Frame-Format geht er unter anderem auf Stateless
+  Autoconfiguration, link-lokale Adressen und Address Mapping für Multicast
+  ein.
+
+RFC 2474
+: Definition of the Differentiated Services Field (DS Field) in the IPv4 and
+  IPv6 Headers
+
+  Das Differentiated Services Field ist für Paketfilter wichtig, wenn diese
+  zur Unterstützung von QoS herangezogen werden.
+
+  Die RFCs 3168 und 3260 aktualisieren und ergänzen diesen RFC.
+
+RFC 3128
+: Protection Against a Variant of the Tiny Fragment Attack
+
+  Paketfilter, die konform zu RFC 1858 eingestellt sind, können für eine
+  Variante eines der dort beschriebenen Angriffes anfällig sein.
+  Dieses RFC beschreibt diese Angriffsvariante und empfiehlt Maßnahmen zur
+  Abhilfe.
+
+RFC 3168
+: The Addition of Explicit Congestion Notification (ECN) to IP
+
+  ECN ist ein Verfahren, dass die traditionellen Verfahren zur Bestimmung
+  der aktuell verfügbaren Bandbreite bei TCP auf dem Weg vom Sender zum
+  Empfänger unterstützen soll.
+
+  Dieses RFC liefert die nötigen Informationen, um einen Paketfilter so
+  aufzusetzen, dass er ECN nicht behindert.
+
+  Die RFCs 4301 und 6040 aktualisieren und ergänzen diesen RFC.
+
+RFC 3260
+: New Terminology and Clarifications for Diffserv
+
+  Die Diffserv Working Group beschäftigt sich mit Differentiated Services.
+  Dieses RFC klärt einige Begriffe und hilft beim Verständnis der anderen
+  RFCs.
+
+RFC 3376
+: Internet Group Management Protocol, Version 3
+
+  Aus dem Blickwinkel eines Paketfilters sind die Abschnitte 4. "Message
+  Formats" und 6. "Description of the Protocol for Multicast Routers"
+  interessant.
+  Neben diesen sind noch die Abschnitte 9 und 10 aus RFC 2236 (IGMP v2)
+  empfehlenswert.
+
+RFC 4301
+: Security Architecture for the Internet Protocol
+
+  Dieser RFC spezifiziert die grundlegende Architektur von IPsec-konformen
+  Systemen.
+  Wenn IPsec eingesetzt wird, bietet dieser RFC einen guten Einstieg.
+
+  RFC 6040 aktualisiert und ergänzt diesen RFC.
+
+RFC 4379
+: Detecting Multi-Protocol Label Switched (MPLS) Data Plane Failures
+
+  Dieser RFC ist eher interessant, wenn man MPLS einsetzt und die
+  Paketfilter darauf abstimmen will.
+
+RFC 4443
+: Internet Control Message Protocol (ICMPv6) for the Internet Protocol
+  Version 6 (IPv6) Specification
+
+  Dieser Draft Standard von 2006 beschreibt die aktuelle Version von ICMPv6.
+  Da dieses ICMPv6 mehr Aufgaben wahrnimmt, als ICMP bei IPv4 ist es für den
+  Betrieb eines Paketfilters für IPv6 unverzichtbar, sich damit vertraut zu
+  machen.
+
+  RFC 4884 aktualisiert und ergänzt diesen RFC.
+
+RFC 4884
+: Extended ICMP to Support Multi-Part Messages
+
+  Einige ICMP-Nachrichten, die sich auf andere Datenpakete beziehen, wie zum
+  Beispiel "Destination Unreachable", zitieren am Ende die ersten Bytes des
+  Datenpaketes, auf die sich die ICMP-Nachricht bezieht.
+  Es gibt kein Feld, das die Länge dieses zitierten Datenpakets angibt, so
+  dass man die ICMP-Nachricht nicht durch Anfügen weiterer Felder erweitern
+  kann.
+
+  Dieser Proposed Standard beschreibt ein Verfahren, mit dem man auch diese
+  ICMP-Nachrichten erweitern kann.
+
+RFC 5095
+: Deprecation of Type 0 Routing Headers in IPv6
+
+  IPv6 wird mit Extension Headers erweitert.
+  Einer dieser Extension Headers heißt "Routing Header".
+  Ein bestimmter Typ des Routing Headers (Type 0) kann zu DoS-Angriffen
+  verwendet werden.
+
+  Dieser Proposed Standard beschreibt das Problem ausführlich und erläutert,
+  wie man damit am besten - insbesondere bei einem Paketfilter - umgeht.
+
+RFC 5227
+: IPv4 Address Conflict Detection
+
+  Dieser Proposed Standard beschreibt, wie bei IPv4 Adresskonflikte entdeckt
+  werden können.
+  Das Verfahren macht extensiven Gebrauch von ARP.
+
+  Für Paketfilter, die als Router arbeiten, ist das eher nicht von Belang.
+  Bei Paketfiltern, die als Bridge arbeiten, ist es wichtig, den Mechanismus
+  zu verstehen, um die doppelte Vergabe von IP-Adressen zu entdecken.
+  Beziehungsweise, falls auf beiden Seiten der Bridge eine IP-Adresse von
+  unterschiedlichen Hosts bedient werden soll, kann man aus diesem RFC
+  ableiten, wie das ermöglicht werden kann.
+
+RFC 5722
+: Handling of Overlapping IPv6 Fragments
+
+  Die Empfehlungen aus RFC 1858 zu fragmentierten Datenpaketen bei IPv4
+  können leider nicht exakt für IPv6 übernommen werden.
+  Dieser Proposed Standard erläutert das Problem und verbietet überlappende
+  Fragmente bei IPv6.
+
+RFC 5966
+: DNS Transport over TCP - Implementation Requirements
+
+  Abschnitt 7. "Security Considerations" ist relevant für Paketfilter.
+
+RFC 6040
+: Tunnelling of Explicit Congestion Notification
+
+  Dieser Proposed Standard erläutert die Nutzung von ECN über
+  Tunnel-Verbindungen.
+
+RFC 6093
+: On the Implementation of the TCP Urgent Mechanism
+
+  Mit dem TCP Urgent Mechanism ist es möglich, in einer bestehenden
+  Datenverbindung Out-of-Band-Daten zu senden.
+  Die Protokolle Telnet und FTP zum Beispiel machen davon Gebrauch.
+  In einem Artikel des Magazins Phrack (Ausgabe 57, Datei 3) ist
+  beschrieben, wie man diesen Mechanismus nutzen kann um Network Intrusion
+  Detection Systems (NIDS) zu verwirren.
+
+  Dieser Proposed Standard erläutert das Problem und die Auswirkungen von
+  Lösungsansätzen.
+
+RFC 6437
+: IPv6 Flow Label Specification
+
+  Vom Standpunkt eines Paketfilters ist insbesondere Abschnitt 6. "Security
+  Considerations" interessant.
+  Zum Beispiel kann das Flow Label als verdeckter Datenkanal verwendet
+  werden.
+
+RFC 6633
+: Deprecation of ICMP Source Quench Messages
+
+  ICMP Source Quench Messages gehören zu den ICMP-Nachrichten, die
+  bedenkenlos an einem Paketfilter verworfen werden können, wenn sie
+  überhaupt noch auftauchen.
+  Dieser Proposed Standard lehnt sie formell ab.
+
+RFC 6864
+: Updated Specification of the IPv4 ID Field
+
+  Das IPv4-ID-Feld ermöglicht das Fragmentieren und Zusammensetzen von
+  Datenpaketen.
+
+  Dieser Proposed Standard erläutert Probleme mit der traditionellen
+  Definition und Verwendung dieses Feldes in modernen Netzen und schlägt
+  eine geänderte Nutzung vor.
+  Insbesondere Abschnitt 5.3 "Impact on Middleboxes" ist für Paketfilter mit
+  NAT von Belang.
+
+RFC 6918
+: Formally Deprecating Some ICMPv4 Message Types
+
+  Dieser Proposed Standard missbilligt einige ICMPv4 Nachrichten formell.
+  Für den Paketfilter heißt das, dass diese Nachrichten verworfen werden
+  können.
+
+RFC 7045
+: Transmission and Processing of IPv6 Extension Headers
+
+  Dieser Proposed Standard diskutiert das Verhalten von Hosts und
+  Middleboxes (zum Beispiel Paketfilter) gegenüber Standard Extension
+  Headers und gegenüber experimentellen oder kürzlich standardisierten
+  Extension Headers.
+
+RFC 7112
+: Implications of Oversized IPv6 Header Chains
+
+  IPv6 erlaubt Headerketten von beliebiger Größe.
+
+  Dieser Proposed Standard diskutiert die Interoperabilität und
+  Sicherheitsprobleme bei Datenpaketen mit übermäßig langen Headerketten.
+
