@@ -1,3 +1,5 @@
+# Projektname
+.project
 
 # draft PDF files
 **/*-draft.pdf
@@ -8,3 +10,6 @@ snowflake
 # monotone VCS files
 .mtn-ignore
 _MTN
+
+# research files (these are in monotone repository)
+recherche
