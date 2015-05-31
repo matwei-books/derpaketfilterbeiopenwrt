@@ -1,0 +1,348 @@
+
+ICMPv6 für den Firewall-Administrator
+=====================================
+
+ICMPv6 macht für IPv6, was ICMP für IPv4 macht und noch einiges mehr.
+So ist die Zuordnung von Link-Layer-Adressen (Adressen der OSI-Schicht 2),
+für die bei IPv4 die Protokolle ARP und RARP zuständig sind, Bestandteil
+von ICMPv6 und als Neighbor Discovery in RFC 4861 beschrieben.
+Die Verwaltung von Multicast-Gruppen, für die es bei IPv4 das Protokoll IGMP
+gibt, ist ebenfalls Aufgabe von ICMPv6.
+
+Das Protokoll selbst ist in RFC 4443 beschrieben.
+Für den Firewall-Administrator gibt es RFC 4890 "Recommendations for
+Filtering ICMPv6 Messages in Firewalls", das handfeste Empfehlungen für die
+Behandlung von ICMPv6 gibt.
+
+Konkret hat ICMPv6 die folgenden Aufgaben:
+
+*   Fehlermeldungen an den Absender von Datagrammen zurückschicken
+*   Verbindungen überprüfen
+*   Netzwerkumgebung erkunden
+    *   Nachbarn im gleichen Netzsegment finden und ihre IP- und
+	Link-Layer-Adresse bestimmen.
+    *   Die Erreichbarkeit von Nachbarn überwachen.
+    *   Router finden und die Netzwerk-Konfiguration von diesen übernehmen.
+    *   Informationen wie Netzwerkpräfixe und MTU von Routern an Hosts
+	senden.
+    *   Authentifizieren von Nachbarn mit SEND
+    *   Bestimmen der Path-MTU für Verbindungen
+    *   IPv6-Adressen für Link-Layer-Adressen bestimmen
+    *   Multicast-Gruppenmitgliedschaft verwalten
+    *   Multicast-Router finden
+*   Rekonfiguration
+    *   Weiterleitung zu anderen Routern mit Redirect-Nachrichten
+    *   Unterstützung der Umnummerierung von Netzen
+*   Unterstützung von Mobile IPv6
+*   experimentelle Erweiterungen
+
+Klassifizierung von ICMPv6-Nachrichten
+--------------------------------------
+
+ICMPv6-Nachrichten können nach verschiedenen Kriterien klassifiziert werden.
+In RFC 4890 finden sich die folgenden Klassifikationskriterien:
+
+*   Fehler- und Informations-Nachrichten
+
+    ICMPv6-Nachrichten mit Typ 0 bis 127 sind Fehlermeldungen, die in den
+    meisten Fällen erlaubt sein sollten.
+    Nachrichten mit Typ 128 bis 255 sind Informations-Nachrichten, die
+    eher einer Policy unterliegen sollten.
+
+*   Adressen
+    
+    Die Absenderadresse einer ICMPv6-Nachricht ist üblicherweise eine
+    Unicast-Adresse.
+    Während der Autokonfiguration des Interfaces und bevor eine gültige
+    IPv6-Adresse konfiguriert wurde, können ICMPv6-Nachrichten mit
+    unspezifizierter Adresse [::] gesendet werden.
+    Die Zieladresse ist bei Fehler-Nachrichten eine Unicast-Adresse,
+    bei Informations-Nachrichten kann es eine Unicast- oder
+    Multicast-Adresse sein.
+
+*   Netzwerktopologie und Geltungsbereich der Adresse
+
+    Einige ICMPv6-Nachrichten sind nur für den lokalen Link bestimmt, wie
+    zum Beispiel bei der Neighbor Discovery, während andere über mehrere
+    Links gesendet werden können, wie die meisten Fehlermeldungen.
+
+*   Rolle beim Aufbau und der Aufrechterhaltung von Kommunikation
+
+    Neighbor Discovery und Stateless Automatic Address Configuration
+    arbeiten mit ICMPv6 Paketen.
+    Die ICMPv6-Nachricht mit Type 2 "Packet Too Big" sind entscheidend für
+    eine erfolgreiche Verbindung über Pfade mit kürzerer MTU.
+
+Sicherheitsüberlegungen
+-----------------------
+
+Während es bei IPv6 generell möglich ist, Datenpakete kryptographisch
+abzusichern, trifft das auf ICMPv6 nur beding zu.
+Dadurch, dass legitime ICMPv6-Nachrichten von beliebigen Hosts oder Routern
+im Internet kommen können, ist es nicht möglich, zu allen Sendern von
+ICMPv6-Nachrichten Security Associations aufzubauen.
+
+Aus diesem Grund ist die Filterung von ICMPv6-Nachrichten der häufigste Weg,
+mit diesem Problem umzugehen.
+Dabei müssen wir eine Balance finden zwischen dem Verwerfen von Datagrammen
+um die Site zu schützen und dem Zulassen von Datagrammen um sicherzustellen,
+dass effiziente Kommunikation möglich ist.
+
+Wenn ich ICMPv6 mit einer Firewall überwache, habe ich dabei die folgenden
+Sicherheitsbedenken im Auge:
+
+### Denial of Service Attacken (DoS)
+
+ICMPv6 kann auf zwei Arten für DoS verwendet werden: es können einfach
+übermäßig viele ICMPv6-Nchrichten geschickt werden oder es wird versucht,
+durch Konfigurationsnachrichten legitime Adressen ungültig zu machen oder
+Interfaces zu deaktivieren.
+
+### Probing
+
+Sorgfältig fabrizierte Datagramme, die ICMPv6-Fehlermeldungen
+provozieren, können von Angreifern genutzt werden, um die Topologie des
+Netzes zu erkunden und so Ziele für weitere Attacken zu finden.
+Dieser Ansatz ist durch den riesigen Adressraum von IPv6 allerdings nicht so
+effektiv wie bei IPv4 in [SCAN-IMP RFC4890] wird dieses Thema weiter
+ausgeführt.
+
+### Redirection
+
+Durch Umleitung des Datenverkehrs kann ein Angreifer
+Man-in-the-middle-Angriffe aufsetzen.
+Diese Angriffe passieren im Allgemeinen lokal, das heißt, der Angreifer hat
+bereits Zugang zum Netz.
+
+Als Administrator muss ich einschätzen, ob die Effizienzverbesserung durch
+Redirect-Nachrichten das Risiko eines bösartigen Angriffes wert ist.
+Bei dieser Entscheidung ist die Sicherheit der Verkabelung, des Gebäudes und
+der anderen Hosts im Netzwerk ebenso zu berücksichtigen, wie die Komplexität
+der Adressen und Routen.
+
+### Renumbering
+
+Netzumnummerierungs-Nachrichten können ein ganzes Netzsegment unerreichbar
+machen.
+Diese Nachrichten sollten auf jeden Fall am Border-Router gefiltert werden.
+
+### Probleme durch ICMPv6-Transparenz
+
+Da ICMPv6-Nachrichten in beiden Richtungen zugelassen werden müssen, könnten
+diese für verdeckte Kommnikationskanäle benutzt werden.
+Diesem kann ich mit DPI-Techniken begegnen, die sicherstellen, dass eine
+ICMP-Nachricht zu legitimen Traffic gehört.
+
+Empfehlungen zur Filterung
+--------------------------
+
+RFC 4890 teilt Filter-Regeln für ICMPv6 in zwei Klassen ein:
+
+*   Regeln für Datenverkehr, der die Firewall passiert
+*   Regeln für Datenverkehr, der an die Firewall gerichtet ist.
+
+Innerhalb dieser Klassen werden die Regeln für ICMPv6 Datagramme kategorisiert
+in Regeln für Nachrichten, die
+
+*   nicht verworfen werden dürfen,
+*   nicht verworfen werden sollten, es sei denn, es gibt einen triftigen
+    Grund,
+*   verworfen werden können, aber aus anderen Gründen sowieso nicht
+    akzeptiert werden,
+*   entsprechend einer Policy verworfen werden können oder nicht,
+*   immer verworfen werdenn sollten.
+
+Generell müssen Firewalls, die als Bridge in einem Netzsegment arbeiten,
+link-lokale ICMPv6-Nachrichten eher durchlassen, während Firewall-Router
+diese einfach sperren können.
+
+Die Firewall eines Endhosts kann man sich als Spezialfall einer
+Firewall-Bridge vorstellen, die aus dem Netz nur Pakete für das eigene
+Interface durchläßt.
+
+### Empfehlungen für Transitverkehr
+
+#### Unbedingt durchgehen sollten die folgenden Fehlernachrichten:
+
+*   Destination Unreachable (Typ 1), alle Codes
+*   Packet Too Big (Typ 2)
+*   Time Exceeded (Typ 3), Code 0
+*   Parameter Problem (Typ 4), Codes 1 und 2
+
+Außerdem diese Nachrichten für Verbindungstests:
+
+*   Echo Request (Typ 128)
+*   Echo Reply (Typ 129)
+
+Bei IPv4 ist es üblich, die Nachrichten zur Verbindungstests generell zu
+sperren,, um einen Netzwerk-Scan zu verhindern.
+Bei IPv6 ist das Risiko eines Netzwerk-Scans sehr viel geringer, in 
+[SCAN-IMP RFC4890] wird das Thema ausführlich betrachtet.
+
+#### Die folgenden Fehlernachrichten sollten normalerweise nicht verworfen
+werden, wenn nicht gute Gründe für das Verwerfen sprechen:
+
+*   Time Exceeded (Typ 3), Code 1
+*   Parameter Problem (Typ 4), Code 0
+
+Außerdem die folgenden Nachrichten zur Unterstützung von mobile IP (RFC
+6275):
+
+*   Home Agent Address Discovery Request (Typ 144)
+*   Home Agent Address Discovery Reply (Typ 145)
+*   Mobile Prefix Solicitation (Typ 146)
+*   Mobile Prefix Advertisement (Typ 147)
+
+Hier kann ich auch selektivere Regeln verwenden, je nachdem, ob ich mobiles
+IP für eigene oder fremde Knoten anbieten will.
+
+#### Die folgenden Nachrichten werden sowieso verworfen, hier ist keine
+zusätzliche Maßnahme nötig.
+
+Das betrifft Nachrichten zur Konfiguration und Auswahl des Routers (RFC
+4620, 4861):
+
+*   Router Solicitation (Typ 133)
+*   Router Advertisement (Typ 134)
+*   Neighbor Solicitation (Typ 135)
+*   Neighbor Advertisement (Typ 136)
+*   Redirect (Typ 137)
+*   Inverse Neighbor Discovery Solicitation (Typ 141)
+*   Inverse Neighbor Discovery Advertisement (Typ 142)
+
+Nachrichten für link-lokale Multicast-Empfänger (RFC 2710):
+
+*   Multicast Listener Query (Typ 130)
+*   Multicast Listener Report (Typ 131)
+*   Multicast Listener Done (Typ 132)
+
+SEND Certificate Path Notification Messages (RFC 3791):
+
+*   Certification Path Solicitation (Typ 148)
+*   Certification Path Advertisement (Typ 149)
+
+Nachrichten für Multicast-Router (RFC 4286)
+
+*   Multicast Router Advertisement (Typ 151)
+*   Multicast Router Solicitation (Typ 152)
+*   Multicast Router Termination (Typ 153)
+
+#### Für den folgenden Verkehr sollte in einer Policy festgelegt werden, ob er
+durchgelassen oder verworfen wird:
+
+*   Seamoby Experimental (Typ 150), siehe RFC 4065
+*   momentan nicht verwendete Fehlernachrichten (Typ 5-99, 102-126)
+*   momentan nicht verwendete Informationsnachrichten (Typ 154-199, 202-254)
+
+#### Die folgenden Nachrichten sollten verworfen werden, wenn nicht triftige
+Gründe für das Weiterleiten sprechen:
+
+*   Node Information Query (Typ 139), siehe RFC 4620
+*   Node Information Response (Typ 140), siehe RFC 4620
+*   Router Renumbering (Typ 138), siehe RFC 2894
+*   Private Experimentation (Typ 100, 101, 200, 201), siehe RFC 4443
+*   Reserved for Expansion (Typ 127, 255), siehe RFC 4443
+
+### Empfehlungen für lokalen ICMPv6-Verkehr
+
+#### Die folgenden Datagramme dürfen nicht verworfen werden.
+
+Fehlermeldungen (RFC 4443):
+
+*   Destination Unreachable (Typ 1), alle Codes
+*   Packet Too Big (Typ 2)
+*   Time Exceeded (Typ 3), Code 0
+*   Parameter Problem (Typ 4), Code 1 und 2
+
+Nachrichten zur Verbindungsüberprüfung (RFC 4443):
+
+*   Echo Request (Typ 128)
+*   Echo Reply (Typ 129)
+
+Nachrichten zur Konfiguration und Routerauswahl (RFC 3122, 4861):
+
+*   Router Solicitation (Typ 133)
+*   Router Advertisement (Typ 134)
+*   Neighbor Solicitation (Typ 135)
+*   Neighbor Advertisement (Typ 136)
+*   Inverse Neighbor Detection Solicitation (Typ 141)
+*   Inverse Neighbor Detection Advertisement (Typ 142)
+
+Nachrichten für link-lokale Multicast-Empfänger (RFC 2710, 3810):
+
+*   Multicast Listener Query (Typ 130)
+*   Multicast Listener Report (Typ 131)
+*   Multicast Listener Done (Typ 132)
+*   Version 2 Multicast Listener Report (Typ 143)
+
+SEND Certification Path Notification (RFC 3971):
+
+*   Certification Path Solicitation (Typ 148)
+*   Certification Path Advertisement (Typ 149)
+
+Multicast Router Discovery (RFC 4286):
+
+*   Multicast Router Advertisement (Typ 151)
+*   Multicast Router Solicitation (Typ 152)
+*   Multicast Router Termination (Typ 153)
+
+#### Die folgenden Datagramme sollte normalerweise nicht verworfen werden.
+
+*   Time Exceeded (Typ 3), Code 1
+*   Parameter Problem (Typ 4), Code 0
+
+#### Die folgenden Datagramme werden sowieso verworfen, dafür ist keine besondere
+Aufmerksam nötig.
+
+*   Router Renumbering (Typ 138), RFC 2894
+
+Mobile IP-Nachrichten (RFC 6275):
+
+*   Home Agent Address Discovery Request (Typ 144)
+*   Home Agent Address Discovery Reply (Typ 145)
+*   Mobile Prefix Solicitation (Typ 146)
+*   Mobile Prefix Advertisement (Typ 147)
+
+Diese experimentelle Nachricht wird verworfen, wenn das Protokoll nicht
+unterstützt wird:
+
+*   Seamoby Experimental (Typ 150), siehe RFC 4065
+
+#### Die folgenden Datagramme sollten in einer Policy berücksichtigt werden.
+
+Redirect-Nachrichten (RFC 4861) stellen ein erhebliches Sicherheitsrisiko
+dar.
+Der Administrator sollte daher von Fall zu Fall entscheiden ob die Vorteile
+dieser Nachricht den potentiellen Schaden bei einem Missbrauch überwiegen.
+
+*   Redirect (Typ 137)
+
+Falls ein Knoten den Node Information Dienst (RFC 4620) unterstützt, muss
+der Administrator entscheiden ob und an welchen Schnittstellen er auf
+entsprechende Anfragen reagieren soll.
+Wenn der Dienst deaktiviert oder nicht vorhanden ist, werden die Anfragen
+ignoriert und es ist keine Filterung notwendig.
+
+*   Node Information Query (Typ 139)
+*   Node Information Response (Typ 140)
+
+Gegenwärtig nicht definierte Fehlermeldungen
+
+*   ICMPv6-Typ 5-99, 102-126
+
+Die Spezifikation von ICMPv6 besagt, dass unbekannte ICMPv6-Fehlermeldungen
+an das Protokoll der höheren Ebene weitergereicht werden soll.
+Dieses höherwertige Protokoll wird aus dem in der ICMP-Nachricht enthaltenen
+Anfang des auslösenden Datagramms bestimmt.
+Es besteht die Möglichkeit, dass diese Nachrichten für einen versteckten
+Datenkanal benutzt werden.
+Der Administrator sollte daher entscheiden, ob er diese Nachrichten zulassen
+will.
+
+#### Der folgende Datenverkehr sollte verworfen werden, wenn nicht triftige
+Gründe dafür gefunden werden.
+
+*   Private Experimentation (Typ 100, 101, 200, 201)
+*   Reserved for Expansion (Typ 127, 255), siehe RFC 4443
+*   momentan nicht verwendete Informationsnachrichten (Typ 154-199, 202-254)
+
