@@ -2,52 +2,58 @@
 Aufgaben eines Paketfilters
 ===========================
 
-In einem ersten Anlauf, den OpenWrt-Paketfilter zu verstehen, beginne ich
-damit, mir klar zu machen, welche Aufgaben ein Paketfilter allgemein zu
-erfüllen hat.
-Davon ausgehend kann ich die verschiedenen Bestandteile unter diesen
-Aspekten betrachten und so vielleicht einige Zusammenhänge besser verstehen.
+Im ersten Anlauf, den OpenWrt-Paketfilter zu verstehen, beginne ich
+damit, mir die Aufgaben eines Paketfilters klar zu machen.
+Davon ausgehend betrachte ich dann die verschiedenen Bestandteile unter diesen
+Aspekten und verstehe so vielleicht einige Zusammenhänge besser.
 
-Allgemein gesprochen ist die Hauptaufgabe eines Paketfilters das Filtern des
+Die Hauptaufgabe eines Paketfilters ist das Filtern des
 Datenverkehrs an Hand von vorgegebenen Regeln für die im Netz vorkommenden
 Protokolle.
 
-An Netzwerkgrenzen kann zusätzlich noch die Adressumsetzung,
-das heißt das Ändern von Quell- und oder Zieladresse kommen.
-Diese findet sich vorwiegend bei IPv4-Netzen, da bei diesen
+An den Grenzen von Netzwerken kommt oft zusätzlich noch die Adressumsetzung,
+das heißt das Ändern von Quell- und / oder Zieladresse als Aufgabe dazu.
+Diese Umsetzung findet sich vorwiegend bei IPv4-Netzen, weil bei diesen
 die Anzahl der frei verfügbaren global eindeutigen Adressen schon seit
-längerem nicht mehr den Bedarf decken kann und somit zwei Zwecken dient.
-Der eine ist das Verbergen ganzer Netze hinter einzelnen Adressen
+langem nicht mehr den Bedarf decken kann und daher Adressen mehrfach
+verwendet werden.
+Die Adressumsetzung dient dabei zwei Zwecken:
+der eine ist das Verbergen ganzer Netze hinter einzelnen Adressen
 (Masquerading), der andere ist das Ermöglichen der Kommunikation von
 Rechnern in verschiedenen Netzen, die den gleichen Präfix verwenden.
 
 Kommen wir zurück auf das Filtern des Datenverkehrs, so dient dieses dem
 Schutz vor Angreifern im Rahmen der Möglichkeiten eines Paketfilters, die
 ich in einem späteren Kapitel genauer beleuchten werde.
+Ich kann einzelnen Geräten eingeschränkten Zugang zu anderen Netzen gewähren
+oder Port-Scans verhindern, mit Port-Knocking auch für verfügbare Dienste.
 
 Formal dient die Filterung des Datenverkehrs der Durchsetzung einer Policy,
-welche den erlaubten und verbotenen Datenverkehr in einem Netzwerk festlegt.
+welche den erlaubten und verbotenen Datenverkehr in einem Netzwerk definiert.
 Da die Policy relativ abstrakt die Ziele beschreibt, die ich mit dem
-Paketfilter erreichen will, muss ich diese übersetzen in die entsprechenden
-Netzwerkadressen und Protokolle.
+Paketfilter erreichen will, muss ich diese in die entsprechenden
+Netzwerkadressen und Protokolle übersetzen.
 
-Die Policy sollte zunächst festlegen, ob ich grundsätzlich alles erlauben
-will und nur bestimmten Datenverkehr unterbinden oder ob ich nur bestimmten
-Datenverkehr erlauben will und alles andere unterbinden.
-Die Antwort hierauf kann in verschiedenen Bereichen unterschiedlich
-ausfallen.
-Anschließend sollte sie den erlaubten und/oder verbotenen Datenverkehr
+Als erstes sollte die Policy festlegen, ob ich grundsätzlich alles erlauben
+will und nur bestimmten Datenverkehr verbieten oder ob ich nur bestimmten
+Datenverkehr erlauben will und alles andere verbieten.
+Die Antwort hierauf kann in verschiedenen Bereichen meines Netzwerks
+unterschiedlich ausfallen.
+Anschließend sollte die Policy den erlaubten und/oder verbotenen Datenverkehr
 beschreiben.
 
-Habe ich eine vollständige Policy, ermittele ich die Protokolle und
-Netzwerkadressen, die ich zulassen oder sperren muss.
+Habe ich eine vollständige Policy erstellt, ermittele ich im nächsten
+Schritt die Protokolle und Netzwerkadressen, die ich zulassen oder sperren
+muss.
 
-Eine weitere Aufgabe eines Paketfilters ist der zumindest rudimentäre Schutz
-vor Datenabfluss.
+Eine weitere mögliche Aufgabe eines Paketfilters ist der zumindest
+rudimentäre Schutz vor unerwünschtem Datenabfluss.
 Natürlich kann ein Paketfilter nicht davor schützen, dass Daten durch
 Ausnutzen der erlaubten Verbindungen das Netz verlassen.
 Er kann jedoch mit einer geeigneten Policy den Datenverkehr in Bahnen
 lenken, auf denen ich mit anderen Mitteln - Stichwort Data Loss Prevention
 beziehungsweise Data Leakage Prevention - dem Abfluss von Daten
 entgegenwirken kann.
+Das ist aber nicht Thema dieses Buches, der Paketfilter hat hier lediglich
+unterstützende Funktion.
 
