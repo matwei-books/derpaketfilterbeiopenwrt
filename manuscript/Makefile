@@ -1,5 +1,6 @@
 
-DRAFTS = ich-will-den-openwrt-paketfilter-verstehen-draft.pdf
+DRAFTS = 1-ich-will-den-openwrt-paketfilter-verstehen-draft.pdf \
+         2-aufgaben-eines-paketfilters-draft.pdf \
 #
 PANDOCDIR = ../pandoc
 
@@ -7,5 +8,8 @@ PANDOCDIR = ../pandoc
 	pandoc -o $@ -H $(PANDOCDIR)/draft.tex $<
 
 all:
+
+clean:
+	rm -f *.pdf
 
 drafts: $(DRAFTS)
