@@ -1,2 +1,29 @@
 
-# Vorwort
+Vorwort
+=======
+
+%% Wie kam ich dazu dieses Buch zu schreiben?
+
+Wie ist das Buch aufgebaut
+--------------------------
+
+Das Buch besteht aus vier Hauptteilen.
+
+Der erste Teil geht darauf ein, warum ich das Buch schrieb, was ich mit dem
+OpenWrt-Paketfilter machen will und kann und welche Alternativen es gibt.
+
+Im zweiten Teil gehe ich auf die Grundlagen der Netzwerkprotokolle aus der
+Sicht eines Paketfilters ein.
+Dieser Teil ist nicht beschränkt auf den Paketfilter von OpenWrt.
+
+Der dritte Teil beschäftigt sich mit den Besonderheiten des
+Paketfiltersystems von Linux und insbesondere von OpenWrt ein.
+Dieser Teil ist sehr spezifisch auf das Zielsystem zugeschnitten.
+
+Im vierten Teil schließlich geht es um praktische Fragen und Rezepte für
+spezielle Probleme.
+Dieser Teil enthält schnell nachzuschlagende Lösungen für spezifische
+Probleme und ist auch ohne die Kenntnis der anderen Teile verwendbar.
+Um die Rezepte an geänderte Aufgabenstellungen oder Umgebungen anzupassen
+sind die Informationen aus den Teilen zwei und drei jedoch nützlich.
+
