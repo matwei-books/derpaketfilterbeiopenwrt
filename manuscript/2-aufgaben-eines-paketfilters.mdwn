@@ -4,57 +4,197 @@ Aufgaben eines Paketfilters
 
 Im ersten Anlauf, den OpenWrt-Paketfilter zu verstehen, beginne ich
 damit, mir die Aufgaben eines Paketfilters klar zu machen.
-Davon ausgehend betrachte ich dann die verschiedenen Bestandteile unter diesen
-Aspekten und verstehe so vielleicht einige Zusammenhänge besser.
+Davon ausgehend betrachte ich die verschiedenen Bestandteile unter diesen
+Aspekten.
 
 Die Hauptaufgabe eines Paketfilters ist das Filtern des
 Datenverkehrs an Hand von vorgegebenen Regeln für die im Netz vorkommenden
 Protokolle.
 
 An den Grenzen von Netzwerken kommt oft zusätzlich noch die Adressumsetzung,
-das heißt das Ändern von Quell- und / oder Zieladresse als Aufgabe dazu.
+das heißt das Ändern von Quell- und / oder Zieladresse sowie der Ports bei
+TCP und UDP als Aufgabe dazu.
 Diese Umsetzung findet sich vorwiegend bei IPv4-Netzen, weil bei diesen
-die Anzahl der frei verfügbaren global eindeutigen Adressen schon seit
+die Anzahl der frei verfügbaren global eindeutigen Adressen seit
 langem nicht mehr den Bedarf decken kann und daher Adressen mehrfach
 verwendet werden.
-Die Adressumsetzung dient dabei zwei Zielen:
+Die Adressumsetzung dient zwei Zielen:
 das eine ist das Verbergen ganzer Netze hinter einzelnen Adressen
-(Masquerading), das andere ist das Ermöglichen der Kommunikation von
+(Masquerading), das andere das Ermöglichen der Kommunikation von
 Rechnern in verschiedenen Netzen, die den gleichen Präfix verwenden.
 
 Kommen wir zurück auf das Filtern des Datenverkehrs, so dient dieses dem
-Schutz vor Angreifern im Rahmen der Möglichkeiten eines Paketfilters, die
-ich in einem späteren Kapitel genauer beleuchten werde.
+Schutz vor Angreifern im Rahmen der Möglichkeiten eines Paketfilters.
 Ich kann einzelnen Geräten eingeschränkten Zugang zu anderen Netzen gewähren
 oder Port-Scans verhindern, mit Port-Knocking auch für verfügbare Dienste.
 
 Formal dient die Filterung des Datenverkehrs der Durchsetzung einer Policy,
 welche den erlaubten und den verbotenen Datenverkehr in einem Netzwerk
 definiert.
-Da die Policy relativ abstrakt die Ziele beschreibt, die ich mit dem
-Paketfilter erreichen will, muss ich diese vor der Durchsetzung in die
+Da die Policy relativ abstrakt die Ziele beschreibt, die ich mit einer
+Firewall erreichen will, muss ich diese vor der Durchsetzung in die
 entsprechenden Netzwerkadressen und Protokolle übersetzen.
 
-Als erstes sollte die Policy festlegen, ob ich grundsätzlich alles erlauben
-will und nur bestimmten Datenverkehr verbieten oder ob ich nur bestimmten
-Datenverkehr erlauben will und alles andere verbieten.
-Die Antwort hierauf kann in verschiedenen Bereichen meines Netzwerks
+Eine weitere Aufgabe eines Paketfilters ist der zumindest
+rudimentäre Schutz vor unerwünschtem Datenabfluss.
+Natürlich kann ein Paketfilter nicht davor schützen, dass Daten durch
+Ausnutzen der erlaubten Verbindungen das Netz verlassen.
+Er kann jedoch den Datenverkehr in Bahnen lenken, auf denen ich mit anderen
+Mitteln - Stichwort Data Loss Prevention beziehungsweise Data Leakage
+Prevention - dem Abfluss von Daten entgegenwirken kann.
+Der Paketfilter hat dabei lediglich unterstützende Funktion.
+
+Neben dem absichtlichen Datenabfluss kann mich ein Paketfilter auch vor
+unbeabsichtigter, versehentlicher Preisgabe von sensiblen Informationen
+schützen.
+Dazu muss ich die Schwächen der in meinem Netz verwendeten Protokolle kennen
+und in manchen Fällen die Reichweite dieser Protokolle einschränken.
+So sendet beispielsweise MS Windows unter Umständen den NTLM-Hash des
+angemeldeten Nutzers an einen beliebigen SMB-Server.
+Diese Information genügt, um sich in Windows-Netzen auszuweisen und Dienste
+zu nutzen.
+Um mich vor der versehentlichen Preisgabe dieser Information zu schützen,
+muss ich die Ports 139 und 445 für UDP und TCP abgehend sperren, auch wenn
+ich auf Grund einer permissiven Policy abgehenden Datenverkehr eigentlich
+eher erlauben würde.
+
+Policy - Firewall - Paketfilter
+-------------------------------
+
+Bevor ich mich weiter in Details verliere, will ich kurz auf ein paar
+Begriffe und Zusammenhänge eingehen.
+
+Habe ich ein System, zum Beispiel mein Rechnernetz zu Hause oder in der
+Firma, das ich schützen will, dann ermittle ich zunächst so genau wie
+möglich, was daran für mich den größten Wert hat, wie hoch der Wert ist und
+was die Wiederbeschaffung kosten würde, falls sie möglich ist.
+
+Damit weiß ich, welchen Aufwand ich sinnvollerweise betreiben kann, um dieses
+System zu schützen.
+
+Als nächstes ermittle ich die Schwachstellen des Systems und wie diese
+ausgenutzt werden können.
+Davon ausgehend lege ich Richtlinien - eine Policy - fest, die das Ausnutzen
+dieser Schwachstellen im besten Fall verhindert, zumindest aber erschwert.
+Das heißt, die Policy legt dem Gesamtsystem Beschränkungen auf, die
+einerseits die Ausnutzung von vorhandenen Schwachstellen verhindern,
+andererseits aber immer noch die Nutzung des Systems für seinen eigentlichen
+Zweck zulassen sollen.
+Hier muss ich eine Balance finden.
+
+Um die Policy durchzusetzen, verwende ich eine Firewall.
+Diese besteht aus verschiedenen Komponenten: Paketfiltern, die den
+Datenverkehr auf den unteren Ebenen des OSI-Modells regulieren, Application
+Gateways, die sich um die oberen Ebenen des OSI-Modells kümmern und
+Intrusion Detection Systeme, die überwachen, ob die Policy eingehalten wird.
+Intrusion Prevention Systeme schließlich können bei einer erkannten
+Verletzung der Policy weitere Maßnahmen einleiten.
+In diesem Buch geht es vor allem um Paketfilter.
+
+Die Policy sollte als erstes festlegen, ob ich grundsätzlich alles erlaube
+und nur bestimmten Datenverkehr verbiete - ein permissiver Ansatz -
+oder ob ich nur bestimmten Datenverkehr erlaube und alles andere verbiete
+- ein prohibitiver Ansatz.
+Die Antwort darauf kann in verschiedenen Bereichen eines Netzwerks
 unterschiedlich ausfallen.
 Anschließend sollte die Policy den erlaubten und / oder den verbotenen
 Datenverkehr beschreiben.
 
-Habe ich eine vollständige Policy erstellt, ermittele ich im nächsten
-Schritt die Protokolle und Netzwerkadressen, die ich zulassen oder sperren
-muss um die Ziele der Policy zu erreichen.
+Habe ich meine Policy, ermittele ich im nächsten Schritt die Protokolle und
+Netzwerkadressen, die ich zulassen oder sperren muss und die Art von
+Application Gateways, die ich einsetzen muss, um die Ziele der Policy zu
+erreichen.
 
-Eine weitere mögliche Aufgabe eines Paketfilters ist der zumindest
-rudimentäre Schutz vor unerwünschtem Datenabfluss.
-Natürlich kann ein Paketfilter nicht davor schützen, dass Daten durch
-Ausnutzen der erlaubten Verbindungen das Netz verlassen.
-Er kann jedoch mit einer geeigneten Policy den Datenverkehr in Bahnen
-lenken, auf denen ich mit anderen Mitteln - Stichwort Data Loss Prevention
-beziehungsweise Data Leakage Prevention - dem Abfluss von Daten
-entgegenwirken kann.
-Das ist aber nicht Thema dieses Buches, der Paketfilter hat hierbei lediglich
-unterstützende Funktion.
+OSI Modell
+----------
+
+Um den Paketfilter und die Application Gateways richtig einzuordnen,
+greife ich auf das Open Systems Interconnection (OSI) Modell zurück.
+Dieses Modell dient seit vielen Jahren als Referenzmodell für
+Netzwerkprotokolle.
+
+Es ist als Schichtenmodell ausgeführt, bei dem jede Schicht genau definierte
+Aufgaben hat, die Dienste der darunterliegenden nutzt und seine
+Dienste den darüber liegenden zur Verfügung stellt.
+Es gibt in diesem Modell die folgenden sieben Schichten:
+
+|   | deutsche Bezeichnung   | englische Bezeichnung |
+|---|------------------------|-----------------------|
+| 7 | Anwendungsschicht      | application layer     |
+| 6 | Darstellungsschicht    | presentation layer    |
+| 5 | Sitzungsschicht        | session layer         |
+| 4 | Transportschicht       | transport layer       |
+| 3 | Vermittlungsschicht    | network layer         |
+| 2 | Sicherungsschicht      | data link layer       |
+| 1 | Bitübertragungsschicht | physical layer        |
+
+Für das OSI Modell selbst gibt es keine Implementierung, es wird nur für die
+Einordnung und den Vergleich realer Protokolle verwendet.
+Dabei können diese mehrere Schichten des OSI Modells abbilden, zum Beispiel:
+
+*   Ethernet die Schichten 1 und 2
+*   IP, ICMP, IGMP die Schicht 3
+*   TCP, UDP die Schicht 4
+*   HTTP, SMTP die Schichten 5, 6 und 7
+
+Paketfilter arbeiten auf den OSI Schichten 1 bis 4.
+Habe ich verschlüsselten Datenverkehr, kann der Paketfilter nur bis zur
+Schicht 3, den IP-Adressen, arbeiten.
+
+Für Protokolle der Ebenen 5 bis 7 muss ich entweder auf Application Gateways
+setzen und mit Paketfiltern erzwingen, dass diese genutzt werden.
+Oder ich untersuche den Datenverkehr mittels Deep Packet Inspection (DPI)
+und steuere mit den gewonnenen Erkenntnissen den Paketfilter und damit den
+Datenverkehr.
+
+Reaktive Schutzmaßnahmen
+------------------------
+
+Eine Möglichkeit, einen Server mittels Paketfilter zu schützen, besteht darin,
+die Log-Nachrichten des Servers auszuwerten und unerwünschten Datenverkehr
+zu unterbinden.
+
+Fail2ban ist eine Software, die so etwas macht: sie wertet die Systemprotokolle
+aus und sperrt nach einer bestimmten Anzahl von Fehlversuchen die IP-Adresse
+über den Paketfilter.
+Damit kann ich Brute-Force-Attacken auf Login-Dienste verlangsamen und so
+unbrauchbar machen.
+
+Das funktioniert jedoch nur, wenn der fail2ban-Dämon die benötigten
+Log-Nachrichten erhält und der Datenstrom über diesen Rechner läuft.
+Für lokale Dienste ist das leicht zu realisieren.
+
+Auf einem separaten Paketfilter benötige ich dafür ein komplexes System, das
+die Log-Nachrichten zentral auswertet und die Paketfilter steuert.
+Intrusion Prevention Systeme können so etwas leisten.
+
+Port-Knocking und TCP-Stealth
+-----------------------------
+
+Eine weitere Möglichkeit, bei der ein Paketfilter einen Server schützt,
+ist Port-Knocking.
+Bei diesem Verfahren unterbindet der Paketfilter zunächst jeglichen
+Datenverkehr.
+Erst wenn die Software auf dem Server, die den Datenverkehr beobachtet, eine
+bestimmte Signatur in den Datenpaketen erkennt, veranlasst sie den
+Paketfilter, den Datenverkehr vom Sender der Signatur zuzulassen.
+
+Damit lassen sich Zugänge zu einem System so verbergen, dass ein Angreifer
+den kompletten Datenverkehr des Systems beobachten und
+analysieren müsste, um den geschützten Dienst zu finden und die Signatur zu
+ermitteln.
+Dieses Verfahren ist sicherer als das nachträgliche Sperren bei
+Fehlversuchen, aber nur für einen begrenzten Personenkreis geeignet, dem die
+Signatur bekannt sein und die Software zur ihrer Erzeugung zur Verfügung
+stehen muss.
+
+TCP-Stealth funktioniert, oberflächlich betrachtet, ähnlich.
+Es ist aber direkt im TCP-Stack implementiert und arbeitet ohne den
+Paketfilter.
+Die Signatur befindet sich hier direkt in den Datagrammen, welche die
+TCP-Verbindung aufbauen.
+Damit ist TCP-Stealth noch schwerer zu entdecken, als Port-Knocking, welches
+für die Signatur zusätzliche Datagramme verwendet, die nichts mit der
+eigentlichen Verbindungsaufnahme zu tun haben und dadurch einem aufmerksamen
+Beobachter auffallen können.
 
