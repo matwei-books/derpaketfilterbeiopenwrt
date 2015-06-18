@@ -1,0 +1,162 @@
+
+Besonderheiten des Linux-Kernels
+================================
+
+Der Linux-Kernel bietet viele Einstellmöglichkeiten über das *proc*
+Dateisystem.
+Dieses spezielle Dateisystem, dass im Verzeichnisbaum unter `/proc`
+eingehängt wird enthält viele Pseudo-Dateien, aus denen Kernelparameter
+ausgelesen werden können.
+Durch Schreiben in diese Dateien können Kernelparameter gesetzt werden.
+
+Die für das Netzwerk und damit für Paketfilter und Firewalls interessanten
+Parameter sind im Verzeichnis */proc/sys/net/* zu finden.
+
+Diese Parameter kann ich mit `cat` oder `less` auslesen und mit
+`echo $wert > /proc/sys/net/parameter` setzen.
+
+Einfacher geht das mit dem Programm `sysctl`, dem ich den Namen der
+Parameters und den Wert in der Kommandozeile mitgeben kann, oder in der
+Datei */etc/sysctl.conf*.
+Dabei gilt die Besonderheit beim Namen des Parameters, dass dieser dem
+vollständigen Pfadnamen der Datei unterhalb von */proc/sys/* entspricht,
+wobei statt der '/' im Dateisystem '.' im Namen des Parameters gesetzt wird.
+
+So entspricht die Datei */proc/sys/net/ipv4/ip_forward* dem Parameter
+`net.ipv4.ip_forward` in der Kommandozeile von `sysctl` beziehungsweise in
+der Datei */etc/sysctl.conf*.
+
+Die Dokumentation zu den Variablen findet sich bei den Linux Kernelquellen
+im Verzeichnis *Documentation*.
+Die für das Netzwerk und Paketfilter wichtigen Parameter sind dort in der
+Datei *sysctl/net.txt* sowie in den Dateien im Verzeichnis *networking*
+beschrieben.
+
+Damit genug der Vorrede, kommen wir zu den für Paketfilter interessanten
+Variablen.
+
+*net.core.bpf_jit_enable*
+: Für die Architektur *x86_64* gibt es ein Framework, dass die
+  Paketfilterung beschleunigen kann. Das wird mit diesem Parameter
+  aktiviert.
+
+*net.ipv4.ip_forward*
+: Diese Variable entscheidet, ob eine Maschine mit mehreren
+  Netzwerkschnittstellen als Router arbeitet und Pakete zwischen den
+  Schnittstellen weiterleitet.
+  Üblicherweise setzt man diesen Parameter auf 0 zurück, bevor die Regeln
+  des Paketfilters gesetzt werden und aktiviert die Weiterleitung mit einem
+  von 0 verschiedenen Wert nach dem Setzen der Regeln.
+
+*net.ipv4.ipfrag_* *
+: Diese Gruppe von Variablen steuert das Zusammensetzen von IP-Fragmenten.
+  Setze ich auf dem Paketfilter ankommende Fragmente zusammen, muss ich
+  diese Variablen näher anschauen.
+
+*net.ipv4.tcp_mtu_probing*
+: Damit kann ich Path-MTU-Probing, wie in RFC 4821 beschrieben, für TCP
+  einstellen. Drei Werte sind möglich: 0 deaktiviert PMTU-Probing, 1
+  aktiviert es, wenn ein ICMP-Blackhole entdeckt wird und 2 aktiviert es
+  ständig und nutzt die MSS von *net.ipv4.tcp_bas_mss*.
+
+*net.ipv4.icmp_echo_ignore_all*
+: Wenn diese Option ungleich 0 gesetzt ist, ignoriert der Kernel alle
+  ICMP-Echo-Requests, die an ihn gerichtet sind.
+
+*net.ipv4.icmp_echo_ignore_broadcasts*
+: Wenn diese Option ungleich 0 gesetzt ist, ignoriert der Kernel alle
+  ICMP-Echo-Requests, die an ihn via Multicast oder Broadcast gesendet
+  werden.
+
+*net.ipv4.icmp_errors_use_inbound_ifaddr*
+: Ist diese Option auf 0 gesetzt, sendet der Kernel eines Routers
+  ICMP-Fehlermeldungen mit der primären Adresse der abgehenden Schnittstelle.
+  Mit dem Wert 1 nimmt er die primäre Adresse der ankommenden Schnittstelle,
+  wie es viele Netzwerk-Administratoren erwarten.
+
+*net.ipv4.icmp_ratelimit*
+: Diese Variable bestimmt die Rate, mit der bestimmte ICMP-Nachrichten
+  gesendet werden.
+  Der Wert gibt den minimalen Abstand in Millisekunden zwischen zwei
+  ICMP-Nachrichten an, 0 bedeutet dementsprechend keine Beschränkung.
+  Welche ICMP-Nachrichten limitiert werden, steht in
+  *net.ipv4.icmp_ratemask*.
+
+*net.ipv4.icmp_ratemask*
+: Diese Variable legt in einer Bitmap fest, welche ICMP-Nachrichten von der
+  Beschränkung durch *net.ipv4.icmp_ratelimit* betroffen sind.
+  Die Default-Bitmap ist 6168, bei der die Nachrichten "Destination
+  Unreachable", "Source Quench", "Time Exceeded" und "Parameter Problem"
+  beschränkt werden.
+
+Unter */proc/sys/net/ipv4/conf/* gibt es die Unterverzeichnisse *all* und
+*default* sowie je ein Unterverzeichnis für jede Netzwerk-Schnittstelle.
+Darin werden Parameter gesetzt, die für alle Schnittstellen gelten (unter
+*all*), für einzelne Schnittstellen (unter den
+Schnittstellen-Verzeichnissen) oder für alle Schnittstellen, für die nichts
+explizit eingestellt ist (unter *default*).
+Nachfolgend nenne ich die Variablen unter *net.ipv4.conf.default*, die
+exemplarisch für die anderen Verzeichnisse gelten.
+
+*net.ipv4.conf.default.accept_redirects*
+: Damit kann ich festlegen, ob der Rechner ICMP-Redirect-Nachrichten
+  akzeptiert oder ignoriert.
+  In den meisten Fällen sollten diese von Hosts akzeptiert und von Routern
+  ignoriert werden.
+
+*net.ipv4.conf.default.accept_source_route*
+: Diese Variable legt fest, ob Pakete mit Source-Route-Option akzeptiert
+  oder ignoriert werden.
+  Per Default werden diese von Routern akzeptiert und von Hosts ignoriert.
+
+*net.ipv4.conf.default.arp_accept*
+: Diese Variable steuert das Verhalten bei Gratuitous-ARP-Paketen, konkret
+  für IP-Adressen, die noch nicht in der ARP-Tabelle sind.
+  Mit dem Wert 0 werden keine neuen Einträge erzeugt, mit dem Wert 1 wird
+  die ARP-Tabelle sowohl für ARP-Requests als auch für ARP-Replies
+  aktualisiert.
+
+*net.ipv4.conf.default.forwarding*
+: Aktiviert die Weiterleitung von Datagrammen für die betreffende Schnittstelle.
+
+%% log_martians scheint nicht zu funktionieren
+
+*net.ipv4.conf.default.log_martians*
+: Ein Wert ungleich 0 aktiviert die Protokollierung von IP-Paketen mit
+  nichtroutbarer Absenderadresse.
+
+*net.ipv4.conf.default.rp_filter*
+: Dieser Integerwert steuert die Reverse-Path-Validierung entsprechend
+  RFC 3704.
+  Mit Wert 0 wird die Absenderadresse eines Datagramms nicht validiert.
+  Der Wert 1 entspricht der Strict Mode nach RFC 3704: wenn die ankommende
+  Schnittstelle nicht die beste Route zur Absenderadresse hat, wird das
+  Datagramm verworfen.
+  Der Wert 2 entspricht der Loose Mode nach RFC 3704: nur wenn es überhaupt
+  keine Route zurück zur Absenderadresse gibt, wird das Datagramm verworfen.
+  Loose Mode empfiehlt sich bei asymmetrischem Routing oder anderen
+  komplizierten Routen
+
+Für IPv6 gilt das gleiche, wie für IPv4: die Dateien und Verzeichnisse unter
+*/proc/sys/net/ipv6/conf* erlauben Einstellungen für einzelne oder alle
+Schnittstellen.
+
+*net.ipv6.conf.default.disable_ipv6*
+: Damit kann ich IPv6 selektiv an einzelnen Schnittstellen abschalten.
+
+*net.ipv6.conf.default.forwarding*
+: Auch das Weiterleiten von Datagrammen kann ich für einzelne Schnittstellen
+  an- oder abschalten.
+
+*net.ipv6.conf.default.suppress_frag_ndisc*
+: Damit kann das Verhalten nach RFC 6980 steuern.
+  Mit dem Defaultwert von 1 verwirft der Kernel fragmentierte
+  Neighbor-Discovery-Datagramme, mit dem Wert 0 erlaubt er sie.
+
+*net.ipv6.conf.default.use_tempaddr*
+: Mit dieser Variable kann ich die Privacy Extensions für IPv6 einschalten.
+
+*net.ipv6.icmp.ratelimit*
+: Diese Variable bestimmt die Rate, mit der ICMPv6-Datagramme gesendet
+  werden.
+
