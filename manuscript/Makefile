@@ -1,6 +1,7 @@
 
 DRAFTS = 1-ich-will-den-openwrt-paketfilter-verstehen-draft.pdf \
          2-aufgaben-eines-paketfilters-draft.pdf \
+	 3-netfilter-kernel-draft.pdf \
 #
 PANDOCDIR = ../pandoc
 
