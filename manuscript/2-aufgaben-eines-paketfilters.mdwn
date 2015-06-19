@@ -11,6 +11,8 @@ Die Hauptaufgabe eines Paketfilters ist das Filtern des
 Datenverkehrs an Hand von vorgegebenen Regeln für die im Netz vorkommenden
 Protokolle.
 
+%% Paketfilter trifft Entscheidung basierend auf Paketheader, nicht Inhalt
+
 An den Grenzen von Netzwerken kommt oft zusätzlich noch die Adressumsetzung,
 das heißt das Ändern von Quell- und / oder Zieladresse sowie der Ports bei
 TCP und UDP als Aufgabe dazu.
@@ -28,6 +30,10 @@ Schutz vor Angreifern im Rahmen der Möglichkeiten eines Paketfilters.
 Ich kann einzelnen Geräten eingeschränkten Zugang zu anderen Netzen gewähren
 oder Port-Scans verhindern, mit Port-Knocking auch für verfügbare Dienste.
 
+%% Abwehr von DoS, gefährlichen Datenpaketen wie Ping-of-Death
+
+%% Schutz vor TCP-Syn-Flood
+
 Formal dient die Filterung des Datenverkehrs der Durchsetzung einer Policy,
 welche den erlaubten und den verbotenen Datenverkehr in einem Netzwerk
 definiert.
@@ -43,6 +49,8 @@ Er kann jedoch den Datenverkehr in Bahnen lenken, auf denen ich mit anderen
 Mitteln - Stichwort Data Loss Prevention beziehungsweise Data Leakage
 Prevention - dem Abfluss von Daten entgegenwirken kann.
 Der Paketfilter hat dabei lediglich unterstützende Funktion.
+
+%% Pakete umleiten zu Proxy -> transparenter Proxy, Captive Portal
 
 Neben dem absichtlichen Datenabfluss kann mich ein Paketfilter auch vor
 unbeabsichtigter, versehentlicher Preisgabe von sensiblen Informationen

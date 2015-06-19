@@ -159,3 +159,9 @@ Dementsprechend muss man hier auf IPsec hinter NAT ausweichen.
 Da das Thema NAT sehr komplex ist und sehr viele Facetten enthält, werde ich
 in einem späteren Kapitel noch einmal ausführlich darauf eingehen.
 
+%% Fragmentierung
+%% erstes Fragment filtern, weitere durchlassen
+%% zu kleines erstes Fragment verwerfen
+%% abhängig von Protokoll nach IP-Header, was zu klein
+
+%% bei Connection Tracking Fragmente zusammensetzen
