@@ -1,0 +1,128 @@
+
+Das Netfilter-Framework: Userspace-Programme
+============================================
+
+%% Welche gibt es?
+
+Im Netfilter-Framework gibt es vier Gruppen von Userspace-Programmen, die
+sich um verschiedene Belange bei der Paketfilterung kümmern:
+
+*   **iptables** ist zuständig für die Filterung und Manipulation von
+    IPv4-Traffic,
+
+*   **ip6tables** kümmert sich um IPv6,
+
+*   **ebtables** ist für die die Filterung und Manipulation von Datagrammen
+    auf OSI-Schicht 2, also bei Netzwerk-Bridges zuständig, und
+
+*   **arptables** kümmert sich um ARP, das heißt die Zuordnung von
+    Ethernet-Adressen zu IPv4-Adressen.
+
+Auf alle vier gehe ich im folgenden kurz ein.
+
+%% Welche Funktionen erfüllen diese?
+
+iptables
+--------
+
+Hier habe ich es mit insgesamt vier Programmen zu tun:
+
+*   `iptables` ist das Programm, mit dem ich Regeln und Regelketten anlegen
+    und löschen sowie Zählerstände abfragen und rücksetzen kann.
+    Dieses Programm verwende ich, wenn ich einzelne Paketfilterregeln von
+    Hand oder in einem Skript explizit ändern will.
+
+*   Mit `iptables-save` und `iptables-restore` kann ich komplette Regelsätze
+    sichern und wiederherstellen.
+    Die Programme werden in den Skripts für den Systemstart verwendet, um
+    Netfilter-Regelsätze über einen Neustart des Rechners zu erhalten.
+
+    Durch die kompakte Form als Textdatei mit jeweils allen Optionen von
+    `iptables` für die betreffende Regel in einer Zeile eignet sich die
+    Ausgabe von `iptables-save` sehr gut zur Analyse eines Paketfilters.
+    Darauf komme ich in einem späteren Kapitel zurück.
+
+*   `iptables-save-xml` nimmt die Ausgabe von `iptables-save` und wandelt
+    sie in XML für die weitere maschinelle Verarbeitung um.
+
+    Lesbarer wird die Ausgabe dadurch nicht, aber sie kann mit Werkzeugen,
+    die mit XML umgehen können, weiter bearbeitet werden.
+
+%% Verwalten von Regelketten
+
+%% Verwalten von Regeln
+
+%% MATCH-Erweiterungen
+
+ip6tables
+---------
+
+Hier gilt im wesentlichen das für *iptables* gesagte.
+Es gibt die drei Programme
+
+*   `ip6tables` zur Manipulation von einzelnen Regeln,
+
+*   `ip6tables-save` zum Speichern des gesamten IPv6-Regelsatzes und
+
+*   `ip6tables-restore` zum Wiederherstellen des Regelsatzes mit einem
+    Befehl.
+
+ebtables
+--------
+
+Für die Administration der Ethernet Bridging Tables gibt es das Programm
+`ebtables`.
+
+Dementsprechend verwende ich es nur, wenn ich eine Ethernet-Bridge betreibe.
+Diese kann echte Ethernet-Adapter verbinden oder virtuelle Maschinen.
+Die detaillierten Optionen spare ich mir an dieser Stelle, diese stehen in
+den Handbuchseiten.
+
+Ein wichtiger Einsatzfall, für den ich `ebtables` benötige, ist für eine
+Bridge, die zusätzlich als Router, zum Beispiel für ein VPN arbeiten soll.
+Will ich in einem bestehenden Netzwerk minimal invasiv nachträglich einen
+VPN-Router einsetzen, ohne die Rechner oder den alten Router
+neu zu konfigurieren, dann kann ich den VPN-Router als Bridge zwischen dem
+alten Router und den Rechnern im Netz platzieren.
+Damit die Datagramme, die durch das VPN geleitet werden sollen, auch
+wirklich dort ankommen, muss der IP-Stack des VPN-Routers sie zu "sehen"
+bekommen.
+Dafür muss ich mit `ebtables` diese Datagramme von der Weiterleitung durch
+die Bridge ausnehmen und dem IP-Stack zuführen.
+Das konkrete Vorgehen dazu ist in Teil 4 beschrieben.
+
+arptables
+---------
+
+Hier habe ich es wieder mit drei Programmen zu tun:
+
+*   `arptables` setzt die Regeln zum Inspizieren und Manipulieren von
+    Datagrammen des Adress Resolution Protocol (ARP),
+
+*   `arptables-save` sichert alle Regeln und
+
+*   `arptables-restore` stellt alle auf einmal wieder her.
+
+Zwar kann ich mit `arptables` auch einen einzelnen Rechner schützen, doch
+werde ich dieses vorwiegend bei einer Bridge einsetzen.
+Die Regeln und Optionen von `arptables` sind auf das Protokoll ARP
+abgestimmt, Details finden sich in den Handbuchseiten.
+
+Netfilter erweitern
+-------------------
+
+Falls mir die Funktionalität des Netfilter-Frameworks nicht ausreicht, kann
+ich dieses um eigene Funktionen ergänzen.
+
+Dafür gibt es verschiedene Wege.
+Ich kann ein Kernel-Modul schreiben, dass an den nötigen Hooks eingehängt
+und von einem Userspace-Programm gesteuert wird.
+
+Alternativ kann ich mit *libipq* die entsprechende Funktionalität auch
+gleich im Userspace selbst realisieren.
+
+Für Experimente und Tests würde ich die Filterung im Userspace vorziehen,
+bei hohen Anforderungen an die Performance den Weg über das Kernel-Modul.
+
+Einen Einstieg in das Thema bietet das
+[Linux netfilter hacking HOWTO](http://www.netfilter.org/documentation/HOWTO/de/netfilter-hacking-HOWTO.html)
