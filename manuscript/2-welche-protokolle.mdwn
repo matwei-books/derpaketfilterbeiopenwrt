@@ -2,96 +2,123 @@
 Um welche Netzwerk-Protokolle geht es?
 ======================================
 
-Welche Netzwerkprotokolle sind für mich überhaupt interessant, wenn ich eine
+Welche Netzwerkprotokolle sind für mich interessant, wenn ich eine
 Paketfilter-Firewall betreiben will?
 Auf einer Seite gehen Datenpakete hinein, auf der anderen Seite sollen sie
 herauskommen oder auch nicht.
-Das kann doch gar nicht so viel sein, könnte man meinen.
-Es sind erstaunlicherweise recht viele Protokolle, von denen ich mehr wissen
-muss, als nur den Namen und wofür es verwendet wird.
+Das kann doch nicht so viel sein, könnte man meinen.
+Erstaunlicherweise sind es doch recht viele Protokolle,
+von denen ich mehr wissen muss,
+als nur den Namen und wofür es verwendet wird.
 
-Betrachten wir den Bereich IPv4, dan haben wir IPv4 selbst, ICMP, TCP und
-UDP als die beiden wohl am häufigsten Protokolle, sowie IGMP.
+Betrachten wir den Bereich IPv4, dann haben wir IPv4 selbst, ICMP und IGMP.
+Dazu kommen TCP und UDP auf denen die meisten Protokolle der höheren
+OSI-Schichten aufsetzen.
 
-Bei IPv4 wird für die Zuordnung von Ethernet- und IP-Adressen das
-ARP-Protokoll verwendet, von dem ich aber tunlichst die Finger lassen sollte.
-Ethernet-Adressen selbst kann ich als Filterkriterium verwenden.
-Das Programm, welches die Zuordnung anzeigt, heißt `arp`.
+Mit ARP werden bei IPv4 die Ethernet- und IP-Adressen zugeordnet.
+Dieses Protokoll interessiert mich vor allem dann, wenn ich meinen
+Paketfilter als Ethernet-Bridge betreibe.
 
 Im Bereich IPv6 muss ich das Protokoll IPv6 selbst und ICMPv6 kennen.
 Bei TCP und UDP muss ich nicht viel gegenüber IPv4 dazu lernen.
 Die Funktionen von ARP und IGMP übernimmt ICMPv6.
 
-Das wären die wichtigsten Protokolle der OSI-Schichten 1 bis 4.
+Das sind die wichtigsten Protokolle der OSI-Schichten 1-4.
 
-Die meisten Protokolle der Schichten 5-7 setzen auf TCP oder UDP auf.
-Bei diesen muss ich mindestens wissen, welche Ports verwendet werden und
+Die Protokolle der Schichten 5-7 setzen oft auf TCP oder UDP auf.
+Bei diesen muss ich meist nur wissen, welche Ports verwendet werden und
 welche Seite die Verbindung aufbaut.
 
 Es gibt unter diesen Protokollen jedoch einige, wie zum Beispiel FTP, die
 mit mehr als einer Verbindung arbeiten.
-Andere, wie zum Beispiel TFTP verwenden im Laufe einer Sitzung verschiedene
+Andere, wie zum Beispiel TFTP, verwenden im Laufe einer Sitzung verschiedene
 Ports.
 
 Werde ich mit solchen Protokollen konfrontiert, muss ich deren Eigenheiten
-genauer kennen.
-Für einige dieser Protokolle hilft mir das Connection Tracking Module von
-Netfilter, zusammengehörige Datenströme automatisch zu erkennen.
+kennen.
+Für einige dieser Protokolle hilft mir das Connection Tracking Modul von
+Netfilter, zusammengehörige Datenströme automatisch zuzuordnen.
 
-Die meisten Protokolle sind in RFCs beschrieben, die ich im Internet von
-<http://tools.ietf.org/> beziehen kann.
+Die meisten dieser Protokolle sind in RFCs beschrieben, welche ich im
+Internet von <http://tools.ietf.org/> beziehen kann.
+Nachfolgend gehe ich kurz auf einige dieser RFCs ein.
 
 Ethernet
 --------
 
 Die RFCs 894, 1042 und 2464 beschreiben, wie IPv4 und IPv6 Datenpakete in
-Ethernet- und 802.3-Frames eingebettet werden können.
-In den meisten Fällen interessieren mich für das Filtern lediglich die
-MAC-Adressen.
+Ethernet- und 802.3-Frames eingebettet werden.
+In den meisten Fällen interessieren mich für das Filtern nur die MAC-Adressen.
 Arbeitet der Paketfilter jedoch als Ethernet-Bridge und nicht als Router,
-kann es interessant sein, sich mit anderen als IP-Protokollen auseinander zu
-setzen.
+muss ich mich auch mit diesen Protokollen auseinandersetzen.
 
-ARP, das Address Resolution Protocol ist in RFC 826 beschrieben, welches in
-den RFCs 5227 und 5494 aktualisiert wurde.
+ARP, das Address Resolution Protocol ist in RFC 826 beschrieben, und in
+RFC 5227 zum Thema Erkennung von Adresskonflikten aktualisiert.
+
+RFC 3927 beschreibt die automatische Konfiguration von link-lokalen
+IPv4-Adressen.
+Dabei wird ARP verwendet, um zu ermitteln, ob eine Adresse bereits
+belegt ist oder um eine IP-Adresse für sich zu reklamieren.
+Auf diese Art konfigurierte IP-Adressen erkenne ich am Prefix 169.254/16.
+Datagramme mit dieser Absenderadresse dürfen nicht geroutet werden,
+da sie nur lokal gültig sind.
 
 IPv4
 ----
 
-Das Internet Protokoll wurde in RFC 791 beschrieben und in den RFCs 1349,
-2474 und 6864 aktualisiert.
+RFC 791 beschreibt das Internet Protokoll in Version 4.
+RFC 1349 ändert und erläutert dazu einige Aspekte des Type of Service
+(TOS) Felds im IP-Header.
+RFC 2474 definiert das Differentiated Services (DS) Feld und
+RFC 6864 aktualisiert die Definition des ID-Feldes.
 
 ICMP
 ----
 
-Das Internet Control Message Protocol ist in RFC 792 beschrieben, welches in
-den RFCs 950, 4884, 6633 und 6918 aktualisiert wurde.
+Das Internet Control Message Protocol ist in RFC 792 beschrieben.
+RFC 4884 erweitert ICMP für Multipart-Nachrichten.
+
+RFC 6633 liefert die förmliche Ablehnung der ICMP Source Quench Nachrichten
+und RFC 6918 begründet die Ablehnung weiterer wenig genutzter
+ICMP-Nachrichten.
 
 TCP
 ---
 
-Das Transmission Control Protocol ist in RFC 793 beschrieben und in den RFCs
-1122, 3168, 6093 und 6528 aktualisiert und ergänzt.
+RFC 793 beschreibt das Transmission Control Protocol.
+RFC 1122 erläutert die Anforderungen für Internet-Hosts und geht dabei auch
+näher auf TCP, UDP, ICMP und IP ein.
+Explicit Congestion Notification (ECN) und deren Anwendung bei TCP ist in
+RFC 3168 beschrieben.
 
 UDP
 ---
 
-Das User Datagram Protocol ist im RFC 768 beschrieben.
+RFC 768 beschrieb das User Datagram Protocol bereits 1980.
+Das Protokoll ist so simpel, dass drei Seiten für die Beschreibung und
+weiterführende Referenzen ausreichen.
+
+Für IPv6 ergab sich lediglich die Notwendigkeit, die UDP-Checksumme
+obligatorisch zu machen, da im IPv6-Header keine Checksumme enthalten ist.
+RFC 768 erlaubt noch das Senden von UDP-Datagrammen ohne Checksumme.
 
 IGMP
 ----
 
-Version 2 des Internet Group Management Protocols ist in RFC 2236
+RFC 1112 beschreibt die Host Extensions for Multicasting und in seinem
+Anhang Version 1 dieses Protokolls.
+
+Version 2 des Internet Group Management Protocol ist in RFC 2236
 beschrieben, Version 3 in RFC 3376.
-RFC 1112 beschreibt die Host Extensions for Multicasting.
 
 IPv6
 ----
 
 IPv6 wurde erstmals 1995 in RFC 1883 beschrieben.
-Diese inzwischen veraltete Beschreibung wurde 1998 durch RFC 2460 abgelöst.
-Die RFCs 5095, 5722, 5871, 6437, 6564, 6935, 6946, 7045 und 7112
-aktualisieren und ergänzen diesen Draft Standard.
+1998 löste RFC 2460 diese inzwischen veraltete Beschreibung ab.
+
+RFC 4303 "IP Encapsulation Security Payload (ESP)" beschreibt die IPv6
+Header Extensions für IPsec.
 
 
 ICMPv6
@@ -101,5 +128,33 @@ Das Internet Control Message Protocol for IPv6 wurde erstmals 1995 in RFC
 1885 beschrieben.
 Im Jahr 1998 wurde dieses RFC durch RFC 2463 obsolet, welches selbst wiederum
 im Jahr 2006 durch RFC 4443 abgelöst wurde.
-RFC 4884 aktualisiert diesen Draft Standard.
+RFC 4884 aktualisiert und ergänzt diesen Draft Standard.
+
+Für mich als Firewall-Administrator ist RFC 4890 "Recommendations for
+Filtering ICMPv6 Messages in Firewalls" interessant, welches begründete
+Empfehlungen für die Behandlung von ICMPv6 gibt.
+
+Tunnelprotokolle
+----------------
+
+Für die Übergangszeit, in der sowohl IPv4 als auch IPv6 nebeneinander
+existieren, gibt es verschiedene Protokolle, mit denen IPv6-Datagramme über
+IPv4-Netze übertragen werden können und umgekehrt.
+Diese muss ich kennen, wenn ich sie im Paketfilter regulieren will.
+
+**6to4** ist ein Protokoll, bei dem IPv6-Datagramme in einem Tunnel durch
+IPv4-Netze übertragen werden. Es ist in RFC 3056 beschrieben.
+
+**6rd** (IPv6 Rapid Deployment on IPv4 Infrastructures) baut auf 6to4 auf
+und ist in RFC 5569 und RFC 5969 beschrieben.
+
+**ISATAP** (Intra-Site Automatic Tunnel Addressing Protocol) ist in RFC 5214
+beschrieben.
+
+**Teredo** tunnelt Pakete via UDP und funktioniert damit auch via NAT.
+Es ist in RFC 4380 beschrieben.
+
+**GRE** (Generic Routing Encapsulation) erlaubt es, beliebige Protokolle in
+beliebigen anderen Protokollen zu kapseln.
+Es ist in RFC 2748 beschrieben.
 
