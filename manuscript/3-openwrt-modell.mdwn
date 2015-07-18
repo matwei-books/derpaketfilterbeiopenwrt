@@ -1,0 +1,218 @@
+
+Ein Modell der Firewall-Regeln bei OpenWrt
+==========================================
+
+Um den Paketfilter bei OpenWrt zu verstehen, rufe ich mir das allgemeine
+Modell für das Netfilter Framework bei Linux, wie in Kapitel XXX
+beschrieben, in das Gedächtnis zurück.
+Dieses Modell liefert mir die Einsprungspunkte in die Paketfilter-Tabellen
+beim Weg eines Datagramms durch den Netzwerkcode des Kernel.
+Die Einsprungspunkte in dem Modell liefern die Reihenfolge, in der die
+Tabellen des Netfilter-Frameworks befragt werden.
+
+Habe ich ein Datagramm, das auf einem Interface ankommt und auf Grund seiner
+Zieladresse auf einem anderen Interface versendet werden soll, dann
+durchläuft es nacheinander die folgenden Stationen:
+
+*   Tabelle *raw*, Kette *PREROUTING*
+*   Connection Tracking Module
+*   Tabelle *mangle*, Kette *PREROUTING*
+*   Tabelle *nat*, Kette *PREROUTING*
+*   Entscheidung über das Routing
+*   Tabelle *mangle*, Kette *FORWARD*
+*   Tabelle *filter*, Kette *FORWARD*
+*   Tabelle *mangle*, Kette *POSTROUTING*
+*   Tabelle *nat*, Kette *POSTROUTING*
+
+Damit weiß ich, in welcher Reihenfolge ich die genannten Regelketten
+konsultieren, um zu analysieren, was das Netfilter-Framework mit diesem
+Datagramm macht.
+
+Nun erlaubt das Netfilter-Framework beliebige Regelketten anzulegen, die aus
+den Einsprungsketten über Jump-Aktionen erreicht werden.
+Diese Regelketten können das Arbeiten effizienter und übersichtlicher
+machen, sie können mich aber auch verwirren, wenn ich die zugrundeliegende
+Struktur nicht kenne.
+
+Dazu begebe ich mich auf eine andere Abstraktionsebene und betrachte die
+Regelketten der Tabellen, um zu einer Aussage zu kommen, was mit einem
+Datagramm passiert, das bei einer Regelkette ankommt.
+
+Mit `iptables-save` beziehungsweise `ip6tables-save` bekomme ich alle
+Regelketten und Tabellen in einer Textdatei mit einer Regel pro Zeile.
+
+Diese Textdatei ohne weitere Hilfsmittel auszuwerten, ist mühsam, da ich
+ohne weiteres Vorwissen immer bei den Standard-Regelketten anfangen muss,
+diese nacheinander betrachte und bei einer Jump-Aktion in einer anderen
+Regelkette weiter mache, bis ich zu einer endgültigen Aktion komme, oder das
+Ende der vordefinierten Regelkette erreiche.
+
+Hier hilft es mir, die Regelketten als gerichteten Graphen zu betrachten,
+dessen Knoten die Regelketten sind und dessen Kanten die Sprunganweisungen.
+Das funktioniert für einfache Firewalls mit wenigen Regeln und Regelketten
+recht gut, da kann ich dem Verlauf mit dem Finger auf einem entsprechend
+großen Ausdruck folgen.
+
+Bei etwas komplexeren Paketfiltern wird aber auch dass schon zu
+unübersichtlich.
+Hier betrachte ich nur die Regelketten und die zwischen ihnen existierenden
+oder möglichen Sprünge.
+Dann muss ich die Regelketten sorgfältig strukturieren und den Zweck der
+benutzerdefinierten Ketten genau abgrenzen und dokumentieren.
+
+Die benutzerdefinierten Regelketten sind bei OpenWrt gut strukturiert, das
+Modell dafür hatte ich in XXX bereits für die damals aktuelle Version grob
+beschrieben.
+Inzwischen hat sich OpenWrt weiterentwickelt und auch das Modell der
+Regelketten geändert.
+Darum gehe ich hier noch einmal detailliert auf die verschiedenen Tabellen
+der momentan aktuellen Version Barrier Breaker ein.
+
+Im Anhang XXX beschreibe ich, wie sich aus jeder strukturierten
+Iptables-Paketfilter ein grafisches Modell der Regelketten erzeugen lässt.
+
+Tabelle filter
+--------------
+
+Das Bild zeigt ein allgemeines Modell der Regelketten dieser Tabelle.
+Ganz links stehen die vordefinierten Regelketten, die den Einsprungspunkten
+in Kapitel XXX entsprechen.
+Die namen der Regelketten folgen einem festen Schema, dem die Namen der
+Knoten im Graphen folgen.
+
+Dabei steht der Wortteil *bereich* in einem Namen für die entsprechende Zone
+bei der Netzkonfiguration des Routers.
+Das heißt, wenn zwei Zonen (zum Beispiel LAN und WAN) definiert
+sind, dann gibt es entsprechend dem Knoten *zone_bereich_forward* im Modell,
+die beiden Regelketten *zone_lan_forward* und *zone_wan_forward* in der
+Tabelle *filter*, die die gleiche Funktion, wie im Modell haben, deren
+Regeln aber nur für die betreffende Zone gelten.
+
+Mit diesem Kunstgriff konnte ich das Modell überschaubar halten, mit 15
+Knoten im Graphen für die Tabelle *filter*, statt 23 bei zwei Zonen und 30
+bei drei Zonen.
+
+Gehen wir die einzelnen Ketten und deren Funktion durch.
+
+Ich beginne bei der Kette **INPUT**.
+Von dieser Kette aus kommen wir zu den Ketten *syn_flood*, *input_rule* und
+*input*.
+
+Zur Kette *syn_flood* geht es nicht immer, sondern nur, wenn in der
+Konfiguration "SYN flood protection" aktiviert wurde.
+Genau dann wird in INPUT eine Regel eingefügt, die für alle TCP-Pakete mit
+gesetztem SYN-Flag zu dieser Kette springt.
+In der Kette sind zwei Regeln: eine, die ein Limit prüft und zur aufrufenden
+Regelkette zurückspringt und eine, die alle Datagramme, welche über dem
+Limit liegen, verwirft.
+
+Die nächste mögliche Kette ist *input_rule*. XXX (noch erkunden)
+
+Die letzte Kette, die von INPUT aus angesprungen wird, ist *input*.
+In dieser Kette verzweigen die Regeln entsprechend den in den
+Einstellungen für das Netzwerk definierten Zonen.
+Wenn zum Beispiel Schnittstelle eth0 der Zone WAN zugeordnet ist und eth1
+der Zone LAN, dann finde ich hier eine Regel `-A input -i eth0 -j zone_wan`
+und eine Regel `-A input -i eth1 -j zone_lan`.
+Kurz gesagt: in dieser Regelkette wird entschieden, zu welcher Zone ein
+ankommendes Datagramm gehört.
+Von hier geht es weiter zur Kette *zone_bereich*.
+
+Die Kette *zone_bereich* hat zwei Regeln: einen Sprung zu *input_bereich*,
+in der ich die Input-Regeln für den Bereich finde und einen Sprung zu einer
+der Policy-Ketten für den Bereich. Zu welcher Policy-Kette es geht, wird bei
+den Policy-Einstellungen für den Bereich in der Konfiguration festgelegt.
+
+Die Kette *input_bereich* enthält die Regeln, die in einer Zone ankommen
+und für den Router selbst bestimmt sind.
+
+Policy-Ketten sind die Ketten *zone_bereich_ACCEPT*, *zone_bereich_DROP* und
+*zone_bereich_REJECT*. Diese werden sowohl für ankommende, als auch für
+abgehende Datagramme in der betreffenden Zone genutzt.
+Dementsprechend enthalten sie sowohl Regeln für ankommende Schnittstellen
+(-i), als auch für abgehende Schnittstellen (-o) mit der entsprechenden
+Aktion.
+
+Auf den ersten Blick mag das recht willkürlich erscheinen, es offenbart
+jedoch ein grundlegendes Design-Prinzip:
+Jede Regelkette hat einen ganz speziellen Zweck, auf den sich die darin
+enthaltenen Regeln konzentrieren.
+
+Damit muss ich mir beim Hinzufügen von Regeln weniger Gedanken machen und
+kann mich ganz auf den Zweck der Regeln konzentrieren.
+Wenn ich die Policy für einen Bereich auswähle und damit den entsprechenden
+Sprung in der Kette *input_bereich* festlege, muss ich nicht wissen, welche
+Interfaces dazugehören.
+Diese stehen in der entsprechenden Policy-Kette.
+Das gleiche gilt für die Input-Regeln zu der betreffenden Zone.
+Hier werden die ankommenden Schnittstellen in der Kette *input* den Zonen
+zugeordnet.
+
+Schauen wir uns als nächstes die **OUTPUT** Regeln an.
+Von der vordefinierten Kette OUTPUT geht es zunächst zur Regelkette
+*output_rule* und danach zu *output*.
+
+In der Regelkette *output_rule* XXX (noch erkunden)
+
+Die Regelkette *output* enthält lediglich Sprünge zu den Policy-Ketten für
+die Bereiche, die ich weiter oben bereits erläutert habe.
+
+Bleibt als drittes die Regeln für zu routenden Verkehr.
+
+Ich beginne in der Regelkette **FORWARD**.
+In dieser gib es zunächst einen Sprung zu Kette *forwarding_rule*, gefolgt
+von einem Sprung zur Kette *forward*.
+
+Die Kette *forwarding_rule* enthält XXX (noch erkunden) 
+
+Die Regelkette *forward* enthält, ähnlich der Kette *input* für ankommende
+Datagramme die Zuordnung der Datagramme zu einem Bereich über die
+Weiterleitung zur Kette *zone_bereich_forward*.
+Die Datagramme werden den Bereichen entsprechend dem ankommenden Interface
+zugeordnet.
+
+In der Kette *zone_bereich_forward* gibt es Sprünge zu anderen Bereichen,
+als dem, über den das Datagramm angekommen ist.
+Damit kann ich Datenverkehr zwischen verschiedenen Zonen ganz verbieten
+oder erlauben.
+Darauf folgt ein Sprung zur Kette *forwarding_bereich*, welche die Regeln
+für den Bereich enthält und schließlich ein Sprung zur Policy-Kette der Zone.
+
+Tabelle nat
+-----------
+
+Für die Tabelle *nat* ist das Modell erheblich einfacher.
+Hier haben wir im Netfilter-Framework die drei Einsprungspunkte PREROUTING,
+OUTPUT und POSTROUTING, von denen OpenWrt nur PREROUTING und POSTROUTING
+verwendet.
+
+> Die Tatsache, dass OUTPUT nicht verwendet wird, deutet daraufhin, dass bei
+> Datenpaketen, die im Router erzeugt werden, kein DNAT vorgesehen ist.
+> Ich kann mir im Moment auch keinen Einsatzfall vorstellen, bei dem das
+> notwendig wäre.
+
+Von **PREROUTING** aus geht es in die Kette *delegate_prerouting*, in der
+anhand des ankommenden Interfaces die Kette *zone_bereich_prerouting*
+ausgewählt wird, die die DNAT-Regeln für den betreffenden Bereich aufnimmt.
+
+Analog geht es von **POSTROUTING** aus über die Kette *delegate_postrouting*
+zu *zone_bereich_postrouting* mit den Regeln für SNAT und MASQUERADE.
+
+Tabelle mangle
+--------------
+
+In dieser Tabelle gibt es nur zwei benutzerdefinierte Ketten.
+
+Von **PREROUTING** aus geht es zur Kette *fwmark*. XXX (wofür ist die)
+
+Von **FORWARD** aus geht es zur Kette *mssfix*.
+In dieser Kette sind Regeln, die bei Datagrammen, welche eine neue
+TCP-Verbindung aufbauen (mit gesetztem SYN-Bit) die TCP-Option MSS (Maximum
+Segment Size) auf die MTU der abgehenden Schnittstelle beschränkt.
+Damit wird die PMTU für TCP bei Verbindungen zu Netzen mit kleinerer MTU
+(zum Beispiel PPPoE-Verbindungen) automatisch angepasst.
+
+Tabelle raw
+-----------
+
+Hier gibt es nur die Kette *delegate_notrack*. XXX (wofür ist das)
