@@ -1,0 +1,125 @@
+
+Die Webschnittstelle LuCI
+=========================
+
+Ein Vorteil der browserbasierten Konfiguration ist, dass sie Leuten, die die
+Kommandozeile eher scheuen, die Administration von OpenWrt akzeptabel machen
+kann.
+Insbesondere, wenn ich längere Zeit keine Router konfiguriert habe, liefert
+die Webschnittstelle genügend Kontext, um eine kleine Änderung mal eben
+schnell einzustellen.
+
+Mit der Programmiersprache Lua kann ich die Schnittstelle für meine Zwecke
+erweitern.
+
+In den meisten Fällen wird die Webschnittstelle auf Englisch eingestellt
+sein.
+Will ich die Konfiguration in deutscher Sprache, muss ich gegebenenfalls
+unter **System -> Software** das Paket *luci-i18n-german* installieren.
+Danach sollte sich die Webschnittstelle automatisch auf die in den
+Spracheinstellungen des Browser gemachten Vorgaben einstellen.
+Tut sie das nicht, kann ich unter **System -> System** im Reiter *Sprache
+und Aussehen* die Einstellungen anpassen.
+
+An manchen Stellen merkt sich LuCI Änderungen, die ich noch nicht
+gespeichert habe.
+Dann zeigt sie oben rechts einen anklickbaren Hinweistext
+"Ungespeicherte Änderungen".
+Klicke ich darauf, zeigt mir LuCI die noch nicht gespeicherten Änderungen
+für die Kommandozeilenoberfläche UCI.
+Dann kann ich diese anwenden, speichern und anwenden oder verwerfen.
+
+Damit genug des Vorgeplänkels, kommen wir zur Konfiguration der Firewall mit
+LuCI.
+
+Zuordnung der Netzwerke und Schnittstellen
+------------------------------------------
+
+**Netzwerk -> Schnittstellen**
+
+*   Auswahl einer Schnittstelle über Bearbeiten oder "Neue Schnittstelle
+    hinzufügen"
+
+*   Allgemeine Einstellungen
+
+    *   Protokoll der Schnittstelle
+    *   Adressen
+
+*   Erweiterte Einstellungen
+
+    *   Während des Bootvorgangs starten
+    *   MAC-Adresse, MTU, Metrik
+
+*   Physikalische Einstellungen
+
+    *   Netzwerkbrücke, zugehörige Schnittstellen
+
+*   Firewall Einstellungen
+
+    *   Firewallzone anlegen / zuweisen
+
+**Netzwerk -> Statische Routen**
+
+falls das notwendig ist.
+
+Allgemeine Firewall-Einstellungen
+---------------------------------
+
+**Netzwerk -> Firewall**, Reiter *Allgemeine Einstellungen*
+
+*   Schutz vor SYN-Flood Attacken
+
+*   Ungültige Pakete verwerfen
+
+*   Richtlinien (Policies) für Eingang, Ausgang, Weiterleitung
+
+*   Zonen
+
+    *   Tabelle der Weiterleitungen
+    *   Button "Hinzufügen" um neue zu definieren
+    *   Richtlinien (Policies) für die Zonen: Eingang, Ausgang,
+	Weiterleitung
+    *   Masquerading (NAT)
+    *   MSS Korrektur
+    *   von Zone abgedeckte Netzwerke (vgl. Netzwerkeinstellungen)
+    *   Weiterleitung zwischen den Zonen
+    *   Erweiterte Einstellungen
+
+        *   Beschränkung auf Adressfamilie
+	*   NAT beschränken auf Quell- oder Zielnetze
+	*   Connection Tracking erzwingen (sonst nur bei NAT)
+	*   Protokollierung innerhalb der Zone (Logging)
+
+Portweiterleitungen
+-------------------
+
+*   Name
+*   Protokoll (TCP+UDP, TCP, UDP, anderes)
+*   extern: Zone, Port
+*   intern: Zone, Adresse, Port
+
+Verkehrsregeln
+--------------
+
+*   Liste von Regeln, sortierbar
+*   vordefinierte Regeln
+    *   Allow-DHCP-Renew
+    *   Allow-Ping
+    *   Allow-DHCPv6
+    *   Allow-ICMPv6-Input
+    *   Allow-ICMPv6-Forward
+*   Ports auf dem Router öffnen
+*   Weiterleitungsregeln
+*   Sorce-NAT Regeln
+    *   volle Kontrolle über Quelladresse bei mehreren WAN-Adressen
+
+Benutzerdefinierte Regeln
+-------------------------
+
+Beliebige `iptables` Befehle, die das Framework von OpenWrt nicht
+unterstützt.
+Die Befehle werden mit jedem Neustart der Firewall, direkt nach dem
+Abarbeiten der Basis-Regeln abgearbeitet.
+
+Das ist ein Shell-Skript.
+
