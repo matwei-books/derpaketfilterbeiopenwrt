@@ -35,91 +35,152 @@ LuCI.
 Zuordnung der Netzwerke und Schnittstellen
 ------------------------------------------
 
-**Netzwerk -> Schnittstellen**
+Ich beginne, indem ich die Schnittstellen, die mein Gerät besitzt, den
+Netzwerken respektive Firewall-Zonen meiner Policy zuordne.
 
-*   Auswahl einer Schnittstelle über Bearbeiten oder "Neue Schnittstelle
-    hinzufügen"
+Bei OpenWrt habe ich verschiedene Möglichkeiten, die Schnittstellen
+zuzuordnen: eine Zone kann eine Schnittstelle umfassen oder mehrere
+Schnittstellen, die in einer Bridge zusammengefasst sind.
 
-*   Allgemeine Einstellungen
+Für diese Einstellungen gehe ich in den Menüpunkt
+**Netzwerk -> Schnittstellen** und wähle eine Schnittstelle über den
+Schalter *Bearbeiten* aus, oder füge eine neue Schnittstelle mit dem
+Schalter *Neue Schnittstelle hinzufügen* hinzu.
 
-    *   Protokoll der Schnittstelle
-    *   Adressen
+Beim Reiter  *Allgemeinen Einstellungen* stelle ich bei *Protokoll* ein, wie
+die Adressen konfiguriert werden (Statische Adresse, DHCP-Client, Ignoriert,
+...) und stelle nötigenfalls die Netzwerk-Konfiguration selbst ein.
 
-*   Erweiterte Einstellungen
+Beim Reiter *Erweiterten Einstellungen* vergewissere ich mich, dass die
+Schnittstelle während des Bootvorgangs aktiviert wird.
+Hier kann ich bei Bedarf die MAC-Adresse, die MTU und die Gateway-Metrik
+vorgeben.
 
-    *   Während des Bootvorgangs starten
-    *   MAC-Adresse, MTU, Metrik
+Beim Reiter *Physikalische Einstellungen* kann ich die zu einer Bridge
+gehörenden Schnittstellen festlegen oder eine Schnittstelle auswählen, wenn
+ich keine Bridge in der Zone betreibe.
 
-*   Physikalische Einstellungen
+Beim Reiter*Firewall Einstellungen* weise ich die Zonen für die Firewall zu
+oder lege eine neue Firewallzone an.
+Diese Zonen sind die Zonen im Modell aus dem vorigen Kapitel, die im Graphen
+unter dem Namen "bereich" zusammengefasst sind.
 
-    *   Netzwerkbrücke, zugehörige Schnittstellen
+Habe ich Netzwerke, die nicht direkt mit dem Gerät verbunden sind und
+verwende kein Routing-Protokoll, kann ich über den Menüpunkt
+**Netzwerk -> Statische Routen** das Gateway dorthin angeben.
 
-*   Firewall Einstellungen
+Damit habe ich die grundlegenden Netzwerkeinstellungen und kann mich nun der
+eigentlichen Konfiguration der Firewall widmen.
 
-    *   Firewallzone anlegen / zuweisen
-
-**Netzwerk -> Statische Routen**
-
-falls das notwendig ist.
 
 Allgemeine Firewall-Einstellungen
 ---------------------------------
 
-**Netzwerk -> Firewall**, Reiter *Allgemeine Einstellungen*
+Ich beginne beim Menü
+**Netzwerk -> Firewall** im Reiter *Allgemeine Einstellungen*.
 
-*   Schutz vor SYN-Flood Attacken
+Mit einem Haken kann ich den Schutz vor SYN-Flood-Attacken aktivieren, was
+mir für TCP-Datagramme beim Verbindungsaufbau in der Iptables-Tabelle
+*filter* einen Sprung von der Regelkette *delegate_input* zur Kette
+*syn_flood* beschert.
+Das heißt, dieser Schutz gilt nur für Datagramme direkt an das Gerät.
 
-*   Ungültige Pakete verwerfen
+Mit dem Haken *Ungültige Pakete verwerfen* kommt in jede der Regelketten
+*delegate_forward*, *delegate_input* und *delegate_output* eine Regel, die
+Datagramme, die keiner bekannten Verbindung zugeordnet werden können,
+verwirft.
 
-*   Richtlinien (Policies) für Eingang, Ausgang, Weiterleitung
+Bei den Richtlinien für Eingang, Ausgang und Weiterleitung lege ich fest,
+wie mit Datagrammen verfahren wird, für die es keine explizite Regel gibt.
 
-*   Zonen
+Im Abschnitt *Zonen* kann ich detaillierte Vorgaben machen.
+Hier finde ich die Zonen aus den Netzwerkeinstellungen.
 
-    *   Tabelle der Weiterleitungen
-    *   Button "Hinzufügen" um neue zu definieren
-    *   Richtlinien (Policies) für die Zonen: Eingang, Ausgang,
-	Weiterleitung
-    *   Masquerading (NAT)
-    *   MSS Korrektur
-    *   von Zone abgedeckte Netzwerke (vgl. Netzwerkeinstellungen)
-    *   Weiterleitung zwischen den Zonen
-    *   Erweiterte Einstellungen
+In der Tabelle der Weiterleitungen gebe ich generell vor, zwischen welchen
+Zonen Daten ausgetauscht werden dürfen.
+Mit dem Schalter *Hinzufügen* kann ich weitere Weiterleitungen definieren.
+Über den Schalter *Bearbeiten* kann ich bestehende Weiterleitungen
+modifizieren.
 
-        *   Beschränkung auf Adressfamilie
-	*   NAT beschränken auf Quell- oder Zielnetze
-	*   Connection Tracking erzwingen (sonst nur bei NAT)
-	*   Protokollierung innerhalb der Zone (Logging)
+Hier kann ich - analog zu den globalen Richtlinien - festlegen, wie mit
+Datagrammen zwischen zwei Zonen verfahren wird, für die es keine explizite
+Regel gibt.
+
+Mit dem Haken bei *NAT aktivieren* stelle ich Masquerading für abgehende
+Datagramme in dieser Zone ein.
+
+Der Haken bei *MSS Korrektur* erzeugt in Iptables-Tabelle *mangle* eine
+Regel in der Kette *mssfix*, mit der beim Aufbau von TCP-Verbindungen die
+Maximum Segment Size (MSS) an die MTU der Zone anpasst.
+
+Die von der Zone abgedeckten Netzwerke entsprechen denen in den
+Netzwerkeinstellungen
+
+Bei *Weiterleitungen zwischen Zonen* stelle ich ein, zu beziehungsweise von
+welchen Zonen ich weiterleiten möchte.
+Dabei erzeugt ein Haken bei den entsprechenden Zonen, dass ein Sprung in der
+Kette *zone_quellbereich_forward* zur Kette *zone_zielbereich_dest_ACCEPT*
+angelegt wird.
+
+In den *Erweiterten Einstellungen* kann ich die Zonen auf eine Adressfamilie
+(IPv4, IPv6) beschränken.
+
+Weiterhin kann ich NAT auf bestimmte Quell- oder Zielnetze beschränken.
+
+Connection Tracking ist nur bei NAT automatisch aktiv.
+Hier kann ich es gezielt einschalten, genauso wie das Logging für die Zone.
 
 Portweiterleitungen
 -------------------
 
-*   Name
-*   Protokoll (TCP+UDP, TCP, UDP, anderes)
-*   extern: Zone, Port
-*   intern: Zone, Adresse, Port
+Insbesondere bei NAT, wie ich es in SOHO-Routern oft finde, habe ich keine
+Möglichkeit, von der externen Seite aus, einen Rechner auf der internen
+Seite zu erreichen, da der Router das einzige Gerät ist, dessen Adresse im
+externen Netz bekannt ist.
+
+Hier helfe ich mir mit Port-Weiterleitungen zumindest für TCP und UDP
+weiter.
+Dabei gebe ich einen frei wählbaren Namen für die Weiterleitung an, das
+Protokoll, die externe Zone und den Port, sowie die interne Zone, Adresse
+und Port, an die das Datagramm weitergeleitet werden soll.
+
+Beim Protokoll habe ich die Auswahl zwischen:
+
+*   TCP+UDP: die Portweiterleitung gilt gleichermaßen für beide Protokolle
+*   TCP: nur für TCP
+*   UDP: nur für UDP
+*   Anderes: für andere Protokolle, zum Beispiel ICMP
+
+Die Weiterleitung für andere Protokolle ist etwas kompliziert.
+Diese lassen sich am ehesten über den Schalter "Bearbeiten" einer
+bestehenden Weiterleitung einstellen.
+Auf jeden Fall muss ich die erzeugte Regel kontrollieren und am Besten auch
+ausprobieren.
 
 Verkehrsregeln
 --------------
 
-*   Liste von Regeln, sortierbar
-*   vordefinierte Regeln
-    *   Allow-DHCP-Renew
-    *   Allow-Ping
-    *   Allow-DHCPv6
-    *   Allow-ICMPv6-Input
-    *   Allow-ICMPv6-Forward
-*   Ports auf dem Router öffnen
-*   Weiterleitungsregeln
-*   Sorce-NAT Regeln
-    *   volle Kontrolle über Quelladresse bei mehreren WAN-Adressen
+Beim Reiter *Verkehrsregeln* finde ich eine sortierte Liste von Regeln, in
+die ich meine eigenen Regeln einfügen kann.
+
+Einige Regeln sind bereits vordefiniert, wie zum Beispiel
+
+*   Allow-DHCP-Renew
+*   Allow-Ping
+*   Allow-DHCPv6
+*   Allow-ICMPv6-Input
+*   Allow-ICMPv6-Forward
+
+Hier kann ich Ports öffnen, falls ich lokale Dienste auf dem Router
+betreibe, Regeln für die Weiterleitung vorgeben oder mit *Source NAT* die
+volle Kontrolle über die Quelladressen auszuüben.
 
 Benutzerdefinierte Regeln
 -------------------------
 
-Beliebige `iptables` Befehle, die das Framework von OpenWrt nicht
-unterstützt.
-Die Befehle werden mit jedem Neustart der Firewall, direkt nach dem
+Habe ich ein Problem, das ich mit LuCI nicht in entsprechende Regeln fassen
+kann, besteht die Möglichkeit, beliebige Iptables-Befehle in einem
+Shell-Skript aufzurufen.
+Dieses Skript wird mit jedem Neustart der Firewall, direkt nach dem
 Abarbeiten der Basis-Regeln abgearbeitet.
-
-Das ist ein Shell-Skript.
 
