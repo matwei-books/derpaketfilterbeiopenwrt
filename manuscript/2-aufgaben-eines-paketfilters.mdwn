@@ -46,7 +46,6 @@ oder Port-Scans verhindern, mit Port-Knocking auch für verfügbare Dienste.
 
 %% UR: erklaerst Du Port-Knocking spaeter?
 
-####### Ancestor
 ======= end
 Formal dient die Filterung des Datenverkehrs der Durchsetzung einer Policy,
 welche den erlaubten und den verbotenen Datenverkehr in einem Netzwerk
