@@ -40,12 +40,10 @@ Schutz vor Angreifern im Rahmen der Möglichkeiten eines Paketfilters.
 Ich kann einzelnen Geräten eingeschränkten Zugang zu anderen Netzen gewähren
 oder Port-Scans verhindern, mit Port-Knocking auch für verfügbare Dienste.
 
-<<<<<<< variant A
 %% Abwehr von DoS, gefährlichen Datenpaketen wie Ping-of-Death
 
 %% Schutz vor TCP-Syn-Flood
 
->>>>>>> variant B
 %% UR: erklaerst Du Port-Knocking spaeter?
 
 ####### Ancestor
