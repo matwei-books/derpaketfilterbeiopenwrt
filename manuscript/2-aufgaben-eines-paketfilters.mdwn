@@ -2,85 +2,76 @@
 Aufgaben eines Paketfilters
 ===========================
 
-Im ersten Anlauf, den OpenWrt-Paketfilter zu verstehen, beginne ich
-damit, mir die Aufgaben eines Paketfilters klar zu machen.
-Davon ausgehend betrachte ich die verschiedenen Bestandteile unter diesen
-Aspekten.
-
-%% UR: Bestandteile von was?
+Ich mache mir als erstes die Aufgaben eines Paketfilters klar, um dann seine
+Bestandteile unter diesen Aspekten - den Aufgaben - zu betrachten und so
+besser zu verstehen.
 
 Die Hauptaufgabe eines Paketfilters ist das Filtern des
 Datenverkehrs an Hand von vorgegebenen Regeln für die im Netz vorkommenden
 Protokolle.
-
-%% Paketfilter trifft Entscheidung basierend auf Paketheader, nicht Inhalt
+Dabei trifft der Paketfilter seine Entscheidungen normalerweise basierend
+auf den Kopfdaten der Datagramme und nicht ihrem Inhalt.
+Eine Ausnahme bilden einige Connection-Tracking-Module, wie zum Beispiel für
+FTP, die aus dem Datenstrom der Steuerverbindung die Ports der zugehörigen
+Datenverbindungen ermitteln.
 
 An den Grenzen von Netzwerken kommt oft zusätzlich noch die Adressumsetzung,
 das heißt das Ändern von Quell- und / oder Zieladresse sowie der Ports bei
-
-%% UR: hier stehe ich mir der neuen Rechtschreibung auf Kriegsfuss - das "das"
-%% nach dem Komma wuerde ich mit zwei "s" schreiben, aber vermutlich
-%% sagt die neue Rechtschreibung da etwas anderes
-
 TCP und UDP als Aufgabe dazu.
 Diese Umsetzung findet sich vorwiegend bei IPv4-Netzen, weil bei diesen
 die Anzahl der frei verfügbaren global eindeutigen Adressen seit
 langem nicht mehr den Bedarf decken kann und daher Adressen mehrfach
 verwendet werden.
+
 Die Adressumsetzung dient zwei Zielen:
 das eine ist das Verbergen ganzer Netze hinter einzelnen Adressen
 (Masquerading), das andere das Ermöglichen der Kommunikation von
 Rechnern in verschiedenen Netzen, die den gleichen Präfix verwenden.
 
-%% UR: dem Leser wird hier vermutlich noch nicht klar warum die beiden
-%% sich stark unterscheiden
+Masquerading finde ich häufig bei SOHO-Umgebungen, die von ISP eine
+IP-Adresse bekommen haben und hinter dieser verschiedene Endgeräte
+verbergen, die alle eine Verbindung in das Internet benötigen.
+Da mehrere interne Adressen auf eine externe Adresse gebündelt werden, geht
+es nicht ohne Änderung der TCP- und UDP-Ports ab.
+Von der externen Seite sind die internen Rechner nicht direkt adressierbar,
+da extern nur eine IP-Adresse ansprechbar ist.
+
+Das Paradebeispiel für die Adressumsetzung ganzer Netzwerkpräfixe ist ein
+Zusammenschluß zweier Firmennetze, die bisher die gleichen privaten
+Netzwerkadressen verwendet haben.
+Da ich hier für die Umsetzung mit gleich großen Netzwerkpräfixen arbeiten
+kann, müssen die Ports nicht zwingend geändert werden und außerdem sind alle
+internen Rechner von extern - über die umgesetzte Adresse - direkt
+adressierbar.
 
 Kommen wir zurück auf das Filtern des Datenverkehrs, so dient dieses dem
 Schutz vor Angreifern im Rahmen der Möglichkeiten eines Paketfilters.
 Ich kann einzelnen Geräten eingeschränkten Zugang zu anderen Netzen gewähren
 oder Port-Scans verhindern, mit Port-Knocking auch für verfügbare Dienste.
+Unter bestimmten Voraussetzungen kann ich mit Rate-Limiting DoS-Angriffe
+entschärfen und gefährliche Datenpakete blockieren.
 
-%% Abwehr von DoS, gefährlichen Datenpaketen wie Ping-of-Death
-
-%% Schutz vor TCP-Syn-Flood
-
-%% UR: erklaerst Du Port-Knocking spaeter?
-
-======= end
 Formal dient die Filterung des Datenverkehrs der Durchsetzung einer Policy,
 welche den erlaubten und den verbotenen Datenverkehr in einem Netzwerk
 definiert.
 
-%% UR: diese Beschreibung ist recht "lazy". Konkreter Datenverkehr
-%% sollte von einer Policy nicht definiert werden weil sie recht
-%% abstrakt ist. Die Beschreibung der entsprechenden Datenverkehre
-%% sollte sich aus der Policy ableiten lassen.
-
-%% UR: Du verwendest in zwei aufeinander folgenden Abschnitten das
-%% konstrukt "etwas dient ...".
-
-Da die Policy relativ abstrakt die Ziele beschreibt, die ich mit einer
-Firewall erreichen will, muss ich diese vor der Durchsetzung in die
-entsprechenden Netzwerkadressen und Protokolle übersetzen.
+Natürlich beschreibt eine Policy nicht direkt, welcher Datenverkehr erlaubt
+oder verboten ist.
+Dann müsste sie bei jeder Änderung im Netzwerk angepasst werden.
+Stattdessen drückt die Policy abstrakt die Ziele aus, aus denen ich, mit
+Kenntnis der im Netz eingesetzten Adressen und Protokolle, Regeln für den
+Paketfilter ableiten muss.
 
 Eine weitere Aufgabe eines Paketfilters ist der zumindest
 rudimentäre Schutz vor unerwünschtem Datenabfluss.
 Natürlich kann ein Paketfilter nicht davor schützen, dass Daten durch
 Ausnutzen der erlaubten Verbindungen das Netz verlassen.
 Er kann jedoch den Datenverkehr in Bahnen lenken, auf denen ich mit anderen
-Mitteln - Stichwort Data Loss Prevention beziehungsweise Data Leakage
-Prevention - dem Abfluss von Daten entgegenwirken kann.
+Mitteln dem Abfluss von Daten entgegenwirken kann.
 
-%% UR: Stichwort Data Loss Prevention/Data Leakage Prevention als
-%% Mittel zu bezeichnen suggeriert, dass der Leser eine Vorstellung
-%% davon hat was da passiert. Ich glaube aber nicht, dass dies der
-%% Fall ist.
-
-Der Paketfilter hat dabei lediglich unterstützende Funktion.
-
-%% Pakete umleiten zu Proxy -> transparenter Proxy, Captive Portal
-
-%% UR: Gut!
+Der Paketfilter hat dabei lediglich unterstützende Funktion, indem er den
+Datenverkehr umleitet zu einem Proxy, welcher den Datenverkehr entsprechend
+bewertet und eigene Entscheidungen trifft..
 
 Neben dem absichtlichen Datenabfluss kann mich ein Paketfilter auch vor
 unbeabsichtigter, versehentlicher Preisgabe von sensiblen Informationen
@@ -96,25 +87,37 @@ muss ich die Ports 139 und 445 für UDP und TCP abgehend sperren, auch wenn
 ich auf Grund einer permissiven Policy abgehenden Datenverkehr eigentlich
 eher erlauben würde.
 
-Policy - Firewall - Paketfilter
--------------------------------
+Schließlich kann der Paketfilter noch die Authentisierung und Authorisierung
+von Netzwerkgeräten unterstützen, indem er HTTP-Anfragen zunächst zu einem
+Captive Portal umleitet und den Datenverkehr erst nach Anmeldung am Portal
+freigibt.
+
+Chance - Risiko - Policy - Firewall - Paketfilter
+-------------------------------------------------
 
 Bevor ich mich weiter in Details verliere, will ich kurz auf ein paar
 Begriffe und Zusammenhänge eingehen.
 
-Habe ich ein System, zum Beispiel mein Rechnernetz zu Hause oder in der
-Firma, das ich schützen will, dann ermittle ich zunächst so genau wie
-möglich, was daran für mich den größten Wert hat, wie hoch der Wert ist und
-was die Wiederbeschaffung kosten würde, falls sie möglich ist.
+Vom wirtschaftlichen Standpunkt ausgehend, wäge ich die Chancen eines Systems
+(den Gewinn, den ich damit erziele) ab gegen die Risiken (die Verluste, die
+ich damit erleide).
+Ist das betrachtete System die IT-Infrastruktur einer Firma, wende ich mich
+wegen dieser Zahlen an die Geschäftsführung.
+Ist es mein persönliches Netz zu Hause, muss ich die Zahlen selbst
+bestimmen.
+Konkret geht es um den Nutzen oder Gewinn, den ich mit Hilfe des
+betrachteten Systems erreiche und die Verluste, die bei der Benutzung des
+Systems entstehen.
+Das Ermitteln dieser Zahlen benötigt betriebswirtschaftliche Kenntnisse.
 
-%% UR: ein Netzwerk als System zu bezeichnen koennte zu Irritationen
-%% fuehren
-
+Mit einer Security Policy (Sicherheitsrichtlinie) kann ich nur die
+Verluste direkt reduzieren.
+Die ermittelten finanziellen Werte geben den finanziellen Rahmen vor,
+innerhalb dessen sich meine Security Policy und die von ihr abgeleiteten
+Maßnahmen bewegen müssen, wenn ich mich nicht langfristig zugrunde richten
+will.
 Damit weiß ich, welchen Aufwand ich sinnvollerweise betreiben kann, um dieses
 System zu schützen.
-
-%% UR: geht es um "betreiben kann" oder eher um "betreiben will,
-%% weil es mir den Aufwand wert ist"?
 
 Als nächstes ermittle ich die Schwachstellen des Systems und wie diese
 ausgenutzt werden können.
@@ -124,9 +127,11 @@ Das heißt, die Policy legt dem Gesamtsystem Beschränkungen auf, die
 einerseits die Ausnutzung von vorhandenen Schwachstellen verhindern,
 andererseits aber immer noch die Nutzung des Systems für seinen eigentlichen
 Zweck zulassen sollen.
-Hier muss ich eine Balance finden.
+Hier muss ich eine Balance finden, wobei mir der oben erwähnte finanzielle
+Rahmen hilft.
 
-Um die Policy durchzusetzen, verwende ich eine Firewall.
+Um die Policy durchzusetzen, kann ich - neben anderen Maßnahmen - für
+Rechnernetze eine Firewall verwenden.
 Diese besteht aus verschiedenen Komponenten: Paketfiltern, die den
 Datenverkehr auf den unteren Ebenen des OSI-Modells regulieren, Application
 Gateways, die sich um die oberen Ebenen des OSI-Modells kümmern und
@@ -143,13 +148,6 @@ Die Antwort darauf kann in verschiedenen Bereichen eines Netzwerks
 unterschiedlich ausfallen.
 Anschließend sollte die Policy den erlaubten und / oder den verbotenen
 Datenverkehr beschreiben.
-
-%% UR: in den obigen vier Abschnitten wiederholst Du recht viele Punkte
-%% welche Du frueher bereits erwaehnt hast. Die Abschnitte hier unten
-%% erscheinen mir aber strukturierter.
-%% Einige Punkte aus den frueheren Abschnitten fehlen dann definitiv
-%% noch, aber mir scheint eine deutliche Ueberarbeitung des bisherigen
-%% Textes fuer das Verstaendnis sehr hilfreich zu sein.
 
 Habe ich meine Policy, ermittele ich im nächsten Schritt die Protokolle und
 Netzwerkadressen, die ich zulassen oder sperren muss und die Art von
@@ -179,13 +177,9 @@ Es gibt in diesem Modell die folgenden sieben Schichten:
 | 2 | Sicherungsschicht      | data link layer       |
 | 1 | Bitübertragungsschicht | physical layer        |
 
-Für das OSI Modell selbst gibt es keine Implementierung, es wird nur für die
-Einordnung und den Vergleich realer Protokolle verwendet.
 
-%% UR: da waere ich sehr vorsichtig - basierte die ganze X.nnn Welt nicht
-%% auf dem OSI-Modell?
-
-Dabei können diese mehrere Schichten des OSI Modells abbilden, zum Beispiel:
+Reale Protokolle können mehrere Schichten des OSI Modells abbilden,
+zum Beispiel:
 
 *   Ethernet die Schichten 1 und 2
 *   IP, ICMP, IGMP die Schicht 3
@@ -221,11 +215,6 @@ Für lokale Dienste ist das leicht zu realisieren.
 
 Auf einem separaten Paketfilter benötige ich dafür ein komplexes System, das
 die Log-Nachrichten zentral auswertet und die Paketfilter steuert.
-Intrusion Prevention Systeme können so etwas leisten.
-
-%% UR: ja, aber ... IPSe sind eigentlich dedizierte eigenstaendige
-%% Systeme welche absichtlich nicht in Kontakt mit anderen Komponenten
-%% des Netzwerks stehen sondern ihre Entscheidungen eigenstaendig treffen
 
 Port-Knocking und TCP-Stealth
 -----------------------------
