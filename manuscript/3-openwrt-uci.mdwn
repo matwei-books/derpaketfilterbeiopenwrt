@@ -1,0 +1,208 @@
+
+Die zentrale Konfigurationsschnittstelle UCI
+============================================
+
+UCI steht für Unified Configuration Interface, die zentrale Schnittstelle
+für die Konfiguration von OpenWrt.
+
+Die Konfigurationsdaten sind über mehrere Dateien im Verzeichnis */etc/config*
+verteilt.
+Diese Dateien unterliegen alle den gleichen Syntax-Regeln und konzentrieren
+sich jeweils auf einen bestimmten Bereich der Konfiguration.
+
+Es gibt ein Kommandozeilenprogramm (`uci`) sowie API-Bindungen für
+verschiedene Programmiersprachen.
+Das im vorigen Kapitel besprochene Webinterface LuCI verwendet UCI als
+Backend für die Konfiguration.
+
+Ich verwende UCI direkt über das Kommandozeilenprogramm,
+
+*   wenn kein Webinterface installiert ist,
+
+*   für die automatisierte Konfiguration und
+
+*   wenn ich sowieso via SSH angemeldet bin und eben schnell etwas anpassen
+    will.
+
+Allgemeine Prinzipien
+---------------------
+
+UCI arbeitet mit verschiedenen Konfigurationsdateien im Verzeichnis
+*/etc/config*.
+Jede Datei deckt einen Bereich der Konfiguration ab, wie zum Beispiel
+*network* für die Netzwerkeinstellungen und *firewall* für die
+Firewalleinstellungen.
+
+Ich kann die Dateien mit einem beliebigen Texteditor bearbeiten oder mit dem
+Kommandozeilenprogramm `uci`.
+In selbstgeschriebenen Programmen kann ich auf die API für verschiedene
+Programmiersprachen (C, Lua, Shell) zurückgreifen.
+
+Damit eine Änderung in der Konfiguration wirksam wird, muss der
+entsprechende Dienst neu gestartet werden, zum Beispiel für die Firewall:
+
+    # /etc/init.d/firewall restart
+
+Manchmal heißen die Skripts zum Neustart eines Dienstes unter */etc/init.d/*
+genau wie die Konfigurationsdatei in */etc/config/*.
+In einigen Fällen muss ich andere Skripts zum Neustart des Dienstes
+verwenden.
+Einen Hinweis, welches Skript zu welcher Konfiguration gehört, liefert die
+Datei */etc/config/lucitrack* aus dem Paket *luci-base*.
+
+> ## Wer die Init-Skripts genauer anschauen will
+> 
+> Die erste Zeile in den Skripts lautet
+>
+>     #!/bin/sh /etc/rc.common
+> 
+> Das bedeutet, das in dem Beispiel mit dem Neustart der Firewall die Shell
+> das Skript `/etc/rc.common` mit den Argumenten */etc/init.d/firewall* und
+> *restart* aufruft.
+> Will ich also eines der Startup-Skripts analysieren, fange ich bei
+> */etc/rc.common* an um die in den Skripts verwendeten Funktionen zu
+> verstehen.
+
+Syntax der Konfigurationsdateien
+--------------------------------
+
+Die Syntax der Dateien unter */etc/config/* ist recht einfach.
+Die Anweisungen stehen auf jeweils einer Zeile und beginnen mit einer
+Direktive auf die spezifische Argumente folgen.
+
+Es gibt die folgenden Direktiven:
+
+*   `package $name` - leitet einen Konfigurationsbereich ein.
+    
+    Fehlt diese Direktive, dient der Dateiname als Name für den Bereich.
+
+    Beispiel:
+
+        package network
+
+*   `config $styp [ $sname ]` - leitet eine neue Sektion in einem Bereich
+    ein.
+    Alle folgenden Direktiven bis zum nächsten `config` gelten für
+    diese Sektion. 
+    Zur besseren Lesbarkeit sind diese oft eingerückt, das ist aber nicht
+    notwendig.
+
+    Beispiel:
+
+        config interface 'lan'
+
+*   `option $oname $ovalue` - weist in einer Sektion einem Bezeichner einen
+    Wert zu.
+    Die Bedeutung des Bezeichners und des Wertes hängt von der Sektion ab.
+
+    Beispiel:
+
+        option ipaddr '192.168.1.1'
+
+*   `list $lname $lvalue` - weist einer Liste einen weiteren Wert zu.
+    Ähnlich der Direktive `option` ist die Bedeutung vom Bereich und der
+    Sektion abhängig.
+
+    Beispiel:
+
+        list network 'wan1'
+	list network 'wan2'
+
+Als Boolesche Werte können '1', 'on', 'yes' beziehungsweise '0', 'off', 'no'
+verwendet werden.
+
+Alle anderen Werte können beliebige Zeichenketten sein.
+Enthalten diese Leerzeichen oder Tabulatoren, müssen sie mit einfachen oder
+doppelten Anführungszeichen begrenzt werden.
+
+Die Bezeichner und Dateinamen dürfen nur die Zeichen A-Z, a-z, 0-9 und _
+enthalten.
+
+Das Kommandozeilenprogramm uci
+-----------------------------
+
+An dieser Stelle gebe ich nur eine kurze Einführung in das
+Kommandozeilenprogramm.
+Dieses zeigt alle unterstützte Optionen und Befehle an, wenn man es ganz
+ohne Argumente aufruft.
+
+Die wichtigsten Befehle sind für mich:
+
+*   `uci show [$config[.$section[.$option]]]`
+
+    Damit zeigt `uci` die spezifizierten Daten (oder alles) in der Form an,
+    in der ich es mit `uci add` oder `uci set` konfigurieren kann.
+
+*   `uci get $config.$section[.$option]
+
+    Das liefert nur den entsprechenden Wert, der dann zum Beispiel in einem
+    Skript weiter verwendet werden kann.
+
+*   `uci export [$config]`
+
+    Dieser Aufruf zeigt die Konfiguration in der Form, wie sie in den
+    Konfigurationsdateien steht.
+    Mit `uci import` kann das wieder importiert werden, so dass sich diese
+    beiden Befehle für Backup und Restore der Konfiguration eignen.
+
+*   `uci import`
+
+    Liest den mit `uci export` erstellten Text wieder ein.
+
+*   `uci changes`
+
+    listet Änderungen, die noch nicht mit `uci commit` bestätigt wurden.
+
+*   `uci revert $config[.$section[.$option]]`
+
+    macht unbestätigte Änderungen rückgängig.
+
+*   `uci commit [$config]
+
+    bestätigt die Änderungen, indem es sie in die Konfigurationsdatei unter
+    */etc/config/* schreibt.
+
+*   `uci add|delete|add_list|del_list|set ...`
+
+    sind für einzelne Änderungen.
+
+Neben den genannten Befehlen interessiert mich noch die Option `-p`, mit
+der ich einen Suchpfad für die variablen Konfigurationsdaten vorgeben kann.
+So finden sich in */var/state/network* Laufzeitinformation zur
+Netzkonfiguration, die `uci` mir nur anzeigt, wenn ich den Suchpfad auf
+*/var/state* lege:
+
+    # uci -p /var/state network
+    network.lan.up=1
+    network.lan.device=eth0 eth1 eth2
+    network.lan.ifname=br-lan
+    network.loopback.up=1
+    network.loopback.device=lo
+
+Zum Abschluß noch ein Hinweis zur Konfiguration von Listenoptionen.
+Habe ich eine neue Listenoption angelegt, kann ich diese mit dem Index `-1`
+referenzieren und muss mich nicht um die aktuelle Position in der Liste
+kümmern:
+
+    # uci add firewall rule
+    # uci set firewall.@rule[-1].src = wan
+    # uci set firewall.@rule[-1].target = ACCEPT
+    # uci set firewall.@rule[-1].proto = tcp
+    # uci set firewall.@rule[-1].dest_port = 22
+    # uci commit
+    # /etc/init.d/firewall restart
+
+Konfiguration der Firewall
+--------------------------
+
+XXX konkrete Firewallkonfiguration hier beschreiben:
+
+Sektionen
+
+*   defaults
+*   zone
+*   rule
+*   include
+*   forwarding
+*   redirect
+
