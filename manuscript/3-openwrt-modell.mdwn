@@ -126,12 +126,20 @@ den Policy-Einstellungen für den Bereich in der Konfiguration festgelegt.
 Die Kette *input_bereich* enthält die Regeln, die in einer Zone ankommen
 und für den Router selbst bestimmt sind.
 
-Policy-Ketten sind die Ketten *zone_bereich_ACCEPT*, *zone_bereich_DROP* und
-*zone_bereich_REJECT*. Diese werden sowohl für ankommende, als auch für
+Policy-Ketten sind die Ketten *zone_bereich_ACCEPT*, *zone_bereich_DROP*,
+*zone_bereich_src_REJECT* und *zone_bereich_dest_REJECT*.
+Diese werden sowohl für ankommende, als auch für
 abgehende Datagramme in der betreffenden Zone genutzt.
+
 Dementsprechend enthalten sie sowohl Regeln für ankommende Schnittstellen
 (-i), als auch für abgehende Schnittstellen (-o) mit der entsprechenden
 Aktion.
+
+Die Ketten *zone_bereich_dest_REJECT* und *zone_bereich_src_REJECT*
+enthalten jeweils am Ende einen Sprung zur Kette *reject*.
+Diese Kette dient nur dazu, ein Datagramm zurückzuweisen.
+Und zwar mit TCP-Reset für TCP-Pakete und mit ICMP-Port-Unreachable für alle
+anderen.
 
 Auf den ersten Blick mag das recht willkürlich erscheinen, es offenbart
 jedoch ein grundlegendes Design-Prinzip:
