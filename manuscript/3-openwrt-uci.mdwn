@@ -195,11 +195,52 @@ kümmern:
 Konfiguration der Firewall
 --------------------------
 
+Bei der Firewall kennt UCI die folgenden Sektionen:
+
+*   defaults
+*   zone
+*   rule
+*   include
+*   forwarding
+*   redirect
+
+Alle Sektionen sind Listeneinträge, das heißt ich greife darauf mit der
+Notation `firewall.@sektion[$index]' zu.
+
+### Sektion defaults
+
+Ich kann mir die Einstellungen anzeigen lassen mit:
+
+    uci show firewall.@default[0]
+
+Es gibt nur einen Listeneintrag.
+
+Hier kann ich die globalen Einstellungen treffen, die ich in LuCI bei der
+Startseite für die Firewall finde.
+
+Den Schutz vor SYN-Floos-Atacken aktiviere ich mit
+
+    # uci set firewall.@defaults[0].syn_flood=1
+
+Um ungültige Datenpakete zu verwerfen gebe ich das folgende ein:
+
+    # uci set firewall.@defaults[0].drop_invalid=1
+
+Entsprechend gebe ich die Policies für die drei Einsprungsketten vor:
+
+    # uci set firewall.@defaults[0].input=DROP
+    # uci set firewall.@defaults[0].output=ACCEPT
+    # uci set firewall.@defaults[0].forward=REJECT
+
+Da iptables an sich keine REJECT Policy kennt, landet in diesem Fall ein
+Sprung zur Kette *reject* in der Kette *delegate_forward*.
+
+### Sektion zone
+
 XXX konkrete Firewallkonfiguration hier beschreiben:
 
 Sektionen
 
-*   defaults
 *   zone
 *   rule
 *   include
