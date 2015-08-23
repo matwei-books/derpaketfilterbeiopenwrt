@@ -237,13 +237,112 @@ Sprung zur Kette *reject* in der Kette *delegate_forward*.
 
 ### Sektion zone
 
-XXX konkrete Firewallkonfiguration hier beschreiben:
+Diese Liste enthält so viele Elemente, wie Zonen definiert sind.
 
-Sektionen
+Eine Übersicht über die Einstellungen aller Zonen bekomme ich mit
 
-*   zone
-*   rule
-*   include
-*   forwarding
-*   redirect
+    # uci show firewall|grep zone
+
+In dieser Sektion kann ich die allgemeinen Einstellungen für eine Zone
+vorgeben.
+
+Um beispielsweise eine neue Zone für die WAN-Schnittstelle zu definieren
+würde ich das folgende eingeben:
+
+    # uci add firewall.zone
+    # uci set firewall.@zone[-1].name=wan
+    # uci set firewall.@zone[-1].input=DROP
+    # uci set firewall.@zone[-1].output=DROP
+    # uci set firewall.@zone[-1].forward=DROP
+    # uci set firewall.@zone[-1].forward=DROP
+    # uci set firewall.@zone[-1].masq=1
+    # uci set firewall.@zone[-1].mtu_fix=1
+    # uci set firewall.@zone[-1].network=ppp0
+
+Der erste Aufruf legt eine neue Zone an und der zweite benennt diese.
+
+Die Optionen *input*, *output* und *forward* bestimmen die Policies für
+diese Zone.
+Diese Einträge bestimmen die Regeln in Kette (XXX noch ergänzen).
+
+Mit der Option *masq* kann ich bestimmen, dass alle Datagramme zu dieser
+Zone mit derselben Absenderadresse hinausgehen sollen.
+
+Die Option *mtu_fix* sorgt dafür, dass die MSS beim
+TCP-Verbindungsaufbau an die MTU der Verbindung angepasst wird.
+
+Die Option *network* schließlich bezeichnet die Interfaces in den
+Netzwerkeinstellungen, die dieser Firewall-Zone zugeordnet werden.
+
+### Sektion rule
+
+In LuCI wird bei den Firewallregeln unterschieden nach
+
+*   Regeln, die einen Port am Router öffnen,
+*   Weiterleitungsregeln und
+
+Diese gebe ich auf unterschiedliche Art ein.
+
+#### Regeln, die einen Port am Router öffnen
+
+Um beispielsweise den SSH-Port auf der WAN-Seite zu öffnen, gebe ich
+folgendes ein:
+
+    # uci add firewall.rule
+    # uci set firewall.@rule[-1].name=Allow-SSH
+    # uci set firewall.@rule[-1].target=ACCEPT
+    # uci set firewall.@rule[-1].src=wan
+    # uci set firewall.@rule[-1].proto=tcp
+    # uci set firewall.@rule[-1].dest_port=22
+
+Der erste Aufruf legt die Regel an und der zweite benennt sie.
+
+Die Option *target* gibt an, wie mit den zutreffenden Datagrammen zu
+verfahren ist, ACCEPT heißt zulassen.
+
+Die Option *src* legt die Zone (wan) fest, *proto* (tcp) und *dest_port*
+(22) sind spezifisch für SSH.
+
+#### Regeln für das Weiterleiten von Traffic
+
+    # uci add firewall.rule
+    # uci set firewall.@rule[-1].name=Allow-LAN-WAN
+    # uci set firewall.@rule[-1].enabled=1
+    # uci set firewall.@rule[-1].target=ACCEPT
+    # uci set firewall.@rule[-1].src=lan
+    # uci set firewall.@rule[-1].dest=wan
+
+### Sektion include
+
+Diese Sektion enthält nur einen Eintrag: den Namen der Datei, in der ich
+zusätzliche Regeln ablege, die ich mit UCI oder LuCI nicht einstellen kann.
+
+Voreingestellt ist der Name auf */etc/firewall.user*.
+
+Normalerweise will ich das nicht verwenden und darum auch nicht ändern.
+
+Habe ich jedoch eine experimentelle Konfiguration, zu der ich schnell
+umschalten will, dann kann ich das mit den folgenden Befehlen:
+
+    # uci set firewall.@include[0].path=/etc/firewall.other
+    # /etc/init.d/firewall restart
+
+Dabei gehe ich davon aus, dass die experimentelle Firewall-Konfiguration in
+der Datei */etc/firewall.other* abgelegt ist.
+
+### Sektion forwarding
+
+### Sektion redirect
+
+In dieser Sektion landen die Regeln für die Adressumsetzung.
+
+    # uci add firewall.redirect
+    # uci set firewall.@redirect[-1].name=Masquerade
+    # uci set firewall.@redirect[-1].enabled=1
+    # uci set firewall.@redirect[-1].target=SNAT
+    # uci set firewall.@redirect[-1].src=lan
+    # uci set firewall.@redirect[-1].dest=wan
+    # uci set firewall.@redirect[-1].proto=all
+    # uci set firewall.@redirect[-1].src_dip=192.168.1.1
+
 
