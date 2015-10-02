@@ -1,0 +1,131 @@
+
+Auswahl von Hardware und Software
+=================================
+
+Nachdem ich mir über meine Anforderungen an das Projekt klar geworden bin,
+ist der nächste Schritt, die geeignete Hardware und Software auszuwählen.
+
+Hardware
+--------
+
+Ein erster Anlaufpunkt für die Auswahl der Hardware ist der
+[Buyer's Guide][obg] von OpenWrt.
+In diesem finde gleich am Anfang drei Hinweise, die den Auswahlprozess kurz
+und prägnant zusammenfassen:
+
+*   Es gibt keine *beste Hardware*, kaufe das, was Deinen Anforderungen
+    genügt.
+*   Informiere Dich selbst über den aktuellen Hardware-Support und frag
+    andere Benutzer nach Empfehlungen.
+*   Meide überteuerte Produkte, Hardware für OpenWrt kann sehr billig sein.
+
+Mit diesen Ratschlägen im Hinterkopf kann ich mich auf die wichtigsten
+Kenndaten der Hardware konzentrieren.
+
+### LAN - Ethernet
+
+Üblicherweise - und insbesondere bei Projekten, die starken Gebrauch vom
+Linux-Paketfilter machen - arbeite ich mit IP-Netzwerken und dementsprechend
+mit Ethernet.
+
+So gut wie alle Hardware, auf die OpenWrt portiert ist, hat Anschlüsse für
+Ethernet.
+Hier interessiert mich zum Einen die Anzahl dieser Anschlüsse und zum Anderen,
+wie schnell diese arbeiten können.
+
+### WLAN - drahtlose Netze
+
+Bei WLAN interessiert mich natürlich ebenfalls die Anzahl der Anschlüsse,
+wobei für die meisten Anwendungen einer ausreichen dürfte.
+
+Außerdem schaue ich nach, welche Substandards aus der IEEE-802.11-Familie
+die Adapter unterstützen.
+
+Hier ist besonders wichtig, wie gut die Adapter mit Treibern unterstützt
+werden.
+Wenn es gute quelloffene Treiber gibt, ziehe ich diese proprietären Treibern
+vor.
+Allzuoft halten proprietäre Treiber nicht mit der Entwicklung des Kernels
+Schritt und werden dann von neueren Kernel nicht mehr unterstützt.
+Damit wäre mein Projekt auf eine bestimmte Version des Kernels festgenagelt und
+könnte nicht von einem neueren Kernel profitieren.
+
+Eine weitere wichtige Frage könnte die Möglichkeit sein, externe Antennen
+anzuschließen.
+
+### Prozessor und Speicher
+
+Die Leistung des Prozessors und der Speicherplatz sind zwei Kriterien, die
+ich vor alle bei ambitionierten Projekten berücksichtigen muss, bei denen
+noch weitere Dienste auf dem Gerät laufen sollen.
+
+Beim Speicher geht es dabei einerseits um den für die Prozesse zur Verfügung
+stehenden RAM sowie andererseits um den Platz auf dem Flash-Speicher für die
+Programme und Daten.
+Letzterer lässt sich möglicherweise über USB-Anschlüsse oder eingebaute
+Kartenleser erweitern, falls diese eingebaut sind.
+
+Der Prozessor sollte auf jeden Fall schnell genug sein, um sämtliche
+Netzwerkschnittstellen zu bedienen.
+Für zusätzliche Dienste und / oder kryptographische Anwendungen wie VPNs
+oder TLS-Server sollte noch genügend Reserve da sein.
+
+### Anschlüsse
+
+Je nach Einsatzfall benötige ich vielleicht zusätzliche Anschlüsse am Gerät.
+
+Mit einem USB-Anschluss kann ich es universell erweitern und sowohl
+zusätzlichen Speicherplatz wie auch weitere Netzwerkkarten und andere
+Peripherie anschließen.
+
+Einen seriellen Anschluss kann ich als Konsole nutzen oder zur Ansteuerung
+von externen Geräten.
+
+### Knöpfe, Schalter, Anzeigen
+
+Bedienelemente erlauben das Gerät auch ohne Netzanschluss zu manipulieren,
+zum Beispiel um in den OpenWrt Failsave Modus zu starten.
+
+Eine Anzeige kann mir Auskunft über aktuelle Betriebszustände geben.
+
+### Preis
+
+Ein wichtiges Kriterium für die Auswahl der Hardware ist der Preis.
+Insbesondere, wenn ich mir noch nicht klar über die genauen Anforderungen
+bin, kann ich zunächst zu billigerer Hardware greifen, um über Monitoring
+die entsprechenden Parameter zu ermitteln und dann gezielt meine Kriterien
+anzupassen.
+
+Der [OpenWrt Buyer's Guide][obg]  verlinkt für einige Länder auf spezielle
+Filter bei Preisvergleichsportalen, die helfen, preiswerte aktuelle Hardware
+für OpenWrt zu finden.
+
+Software
+--------
+
+Ein Hauptkriterium bei der Auswahl der Software ist ihre Eignung für den
+Einsatzzweck.
+
+OpenWrt verfügt zur Zeit über ein Repository mit etwa 2000 Softwarepaketen.
+Bei der Auswahl daraus lasse ich mich vom Einsatzzweck und dem
+Ressourcenbedarf der Software leiten.
+
+Finde ich nicht das Richtige für mich, muss ich mich daran setzen und eine
+geeignete Software selbst schreiben oder anpassen.
+Dabei hilft mir die Dokumentation zu OpenWrt und eine Suche im Internet zum
+Thema.
+
+Wenn ich für mein Projekt kein Standard-Image für die verwendete Hardware
+einsetze, habe ich die Möglichkeit, zusätzliche Software gleich im
+Image des Betriebssystems zu integrieren anstatt sie nachträglich mit dem
+Software-Paketmanager *opkg* zu installieren.
+
+Das hat den Vorteil, dass der Platz besser ausgenutzt wird.
+Außerdem benötigt das Gerät keine Verbindung zu einem Software-Repository,
+bevor es für den Einsatzzweck konfiguriert werden kann.
+
+Andererseits muss ich dann das komplette Image des Betriebssystems
+auswechseln, wenn ich nur eine der installierten Komponenten auswechseln
+will.
+
+[obg]: http://wiki.openwrt.org/toh/buyerguide
