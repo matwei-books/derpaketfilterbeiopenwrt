@@ -1,0 +1,58 @@
+
+Monitoring
+==========
+
+Bei der Überwachung eines Paketfilters bin ich an zwei Aussagen
+interessiert:
+
+1.  Kein unerwünschter Datenverkehr soll den Paketfilter passieren.
+2.  Kein erwünschter Datenverkehr soll durch den Paketfilter blockiert
+    werden.
+
+Was erwünschter und unerwünschter Datenverkehr ist, sollte inzwischen
+hinreichend klar sein.
+
+Blockieren von unerwünschtem Datenverkehr
+-----------------------------------------
+
+Habe ich die Funktion des Paketfilters vor der Inbetriebnahme in einer
+Testumgebung geprüft, dann verfüge ich bereits über die Informationen, mit
+denen ich ein IDS konfigurieren muss, damit es mir anzeigt, falls
+unerwünschter Datenverkehr durchkommt.
+
+Passieren von erwünschtem Datenverkehr
+--------------------------------------
+
+Schwieriger ist das Monitoring für den erwünschten Datenverkehr.
+Das Hauptproblem ist, dass ich nicht vorhersagen kann, wann erwünschter
+Datenverkehr auftritt, um mich dann hinter dem Paketfilter zu überzeugen,
+dass er nicht blockiert wird.
+Ein weiteres Problem ist, dass der erwünschte Datenverkehr von verschiedenen
+Stellen im Netz kommen kann, was das gezielte Hervorbringen nicht
+erleichtert.
+
+Typischerweise kann ich nur bei abgehendem Verkehr beeinflussen, wann dieser
+auftritt.
+Bei ankommendem Verkehr kann ich das nicht vorhersagen.
+
+Hier habe ich zwei Möglichkeiten:
+
+*   Ich kann an repräsentativen Stellen außerhalb meines Netzes Sonden
+    platzieren, mit denen ich regulären Datenverkehr gezielt hervorrufen
+    kann.
+    Dazu muss ich genügend Rechner außerhalb meines Netzes beinflussen
+    können.
+
+*   Alternativ könnte ich einen Paketgenerator unmittelbar außerhalb des
+    Paketfilters platzieren, der den gewünschten Datenverkehr simulieret,
+    wie im Testnetz.
+    Das Hauptproblem bei diesem Ansatz ist, dass die Antwortdaten bei
+    bidirektionalem Datenverkehr zum einen den Paketgenerator erreichen
+    sollten und zum anderen nicht darüber hinausgehen sollten, um andere
+    Netze und Rechner nicht zu stören.
+    Daher ist dieser Ansatz nur in Ausnahmefällen geeignet.
+
+Beim Monitoring-System muss ich den letzten Zeitpunkt des erwünschten
+Datenverkehrs registrieren und einen Fehlerfall generieren, wenn der letzte
+Zeitpunkt zu weit in der Vergangenheit liegt.
+
