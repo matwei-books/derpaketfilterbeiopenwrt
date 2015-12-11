@@ -1,0 +1,128 @@
+
+Wie halte ich das System aktuell?
+=================================
+
+Auch bei OpenWrt muss ich mir Gedanken machen, wie ich mein System aktuell
+halte.
+Habe ich die Firmware aus dem Entwicklerzweig (Snapshot) genommen, kommt das
+häufiger vor, bei einem stabilen Zweig eher selten.
+
+Grundsätzlich muss ich dabei zwei Seiten betrachten: das Firmware-Image
+selbst und nachträglich mit `opkg` installierte Software.
+Hier gehe ich kurz auf beide ein.
+
+Firmware-Image aktualisieren
+----------------------------
+
+Zum Aktualisieren der Firmware gibt es das Skript `sysupgrade`, welches die
+notwendigen Schritte ausführt.
+Im [Wiki][wiki-sysupgrade-generic] gibt es eine Anleitung, die beschreibt,
+wie man das System von der Kommandozeile oder von der Webschnittstelle LuCI
+aktualisiert.
+
+`sysupgrade` sichert Konfigurationsdateien über die Aktualisierung, wenn
+diese in der Textdatei */etc/sysupgrade.conf* aufgeführt sind.
+Ich muss mich allerdings selbst informieren, ob die alten
+Konfigurationsdateien noch mit der neuen Version der Firmware funktionieren.
+
+Bei LuCI bekomme ich eine Liste mit Vorschlägen, welche Dateien gesichert
+werden sollten. Auf der Kommandozeile muss ich mir diese Liste selbst
+zusammenstellen.
+
+Ein Blick in den Lua-Source-Code von LuCI verrät, woher es diese Vorschläge
+bezieht:
+
+*   die Dateien, die bereits in /etc/sysupgrade.conf aufgeführt sind,
+*   Dateien, die in den Textdateien unter /lib/upgrade/keep.d/ verzeichnet
+    sind,
+*   die Ausgabe von `opkg list-changed-conffiles`.
+
+Damit kann ich mir selbst eine aktuelle Liste zusammenstellen.
+Konkret verwendet LuCI bei der Version *Chaos Calmer* die folgenden
+Shell-Befehle, um die Vorschlagsliste zu erstellen:
+
+    (
+      find $(sed -ne '/^[[:space:]]*$/d; /^#/d; p' \
+             /etc/sysupgrade.conf /lib/upgrade/keep.d/* \
+             2>/dev/null) -type f 2>/dev/null; \
+      opkg list-changed-conffiles
+    ) | sort -u
+
+Um die Zeilen zu erschließen, kann man von außen nach innen gehen. Die
+Klammern in der ersten und letzten Zeile umfassen eine Subshell, deren
+Ausgabe an `sort` geschickt wird, welches die Ausgabe sortiert und dabei
+Duplikate entfernt.
+In der Subshell haben wir einen `find` Befehl in den Zeilen 2-4 und den
+Befehl `opkg list-changed-conffiles`, die die zu sortierenden Zeilen
+bereitstellen.
+Der `find` Befehl gibt nur gefundene Dateien aus (`-type f`).
+Wo `find` nach den Dateien sucht, bestimmt der Ausdruck `$(sed ...)` in den
+Zeilen 2-4, der als Dateiliste an `find` übergeben wird.
+Der dabei aufgerufene `sed` Befehl gibt den Inhalt der in Zeile 3
+angegebenen Dateien Zeile für Zeile aus, wobei leere Zeilen und Zeilen, die
+mit `#` beginnen, ausgelassen werden.
+
+Der Ablauf bei `sysupgrade` ist wie folgt:
+
+1.  Ich prüfe, ob genügend Speicher (RAM) zur Verfügung steht und schaffe
+    gegebenenfalls Platz.
+2.  Ich kopiere das Upgrade-Image nach /tmp und prüfe die Integrität der
+    Datei.
+3.  Ich starte `sysupgrade` mit dem Namen der heruntergeladenen Datei als
+    Argument.
+
+Sollte `sysupgrade` mein Gerät noch nicht unterstützen, kann ich auf das
+Programm `mtd` (Memory Technology Device) zurückgreifen, um das neue Image in
+die Firmware zu schreiben.
+Die Details dazu stehen im Wiki von OpenWrt.
+
+Mit dem Programm `mtd` kann ich, bei extremem Speichermangel auch das Image
+via Netzwerk mit netcat (`nc`) bereitstellen.
+Diese Methode ist jedoch sehr riskant, weil hierbei sehr viel mehr
+Störstellen vorhanden sind (Netzkabel, Switch, Rechner, der das Image
+sendet), so dass die Gefahr, ein defektes Image zu schreiben, sehr viel
+höher ist.
+
+### Speicher frei räumen
+
+Etwas Speicher kann ich freigeben, indem ich die Listen von `opkg` lösche:
+
+    # rm -rf /tmp/opkg-lists
+
+Da Linux automatisch verfügbaren Speicher als Cache verwendet, kann ich
+saubere Cache-Seiten freigeben um noch etwas Speicher zu bekommen:
+
+    # echo 3 > /proc/sys/vm/drop-caches
+
+Bei einem normalen Linux-System, kann ich vorher `sync` aufrufen, so dass
+weitere Cache-Seiten freigegeben werden können.
+Ob das bei OpenWrt wirksam ist, hängt davon ab, ob ich Dateisysteme
+read-write eingehängt habe (zum Beispiel USB-Sticks).
+Details dazu finden sich in der Kernel-Dokumentation, konkret in der Datei
+*Documentation/sysctl/vm.txt*.
+
+Zusätzlich installierte Software aktualisieren
+----------------------------------------------
+
+Mit `opkg` kann ich zusätzliche Software auf einem OpenWrt-System
+installieren.
+Diese Software ist nicht Bestandteil des Firmware-Images und belegt
+zusätzlichen Platz auf dem Gerät.
+
+Um sie zu aktualisieren, muss ich als erstes die Paketlisten von `opkg`
+aktualisieren:
+
+    # opkg update
+
+Danach kann ich mir anzeigen lassen, welche Pakete aktualisiert werden
+können:
+
+    # opkg list-upgradable
+
+Und genau diese schließlich aktualisieren:
+
+    # opkg upgrade $(opkg list-upgradable|cut -d\  -f1)
+
+Alternativ kann ich die Pakete natürlich auch einzeln aktualisieren.
+
+[wiki-sysupgrade-generic]: http://wiki.openwrt.org/de/doc/howto/generic.sysupgrade

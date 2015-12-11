@@ -1,0 +1,178 @@
+
+Wie dokumentiere ich das System?
+================================
+
+In gewissem Sinne dokumentiert sich eine Firewall selbst in ihren Regeln.
+Um den Paketfilter konfigurieren zu können, muss ich wissen, welche Regel
+was bewirkt.
+Also kann ich aus den Regeln und Kerneleinstellungen ableiten, was diese und
+damit die Firewall für einen Zweck haben.
+Diese Einstellung ist bei manchen Leuten schwer zu widerlegen.
+Sie ähnelt der Einstellung einiger Autoren von Open Source Software, dass
+der Quellcode die ultimative und leider mitunter auch die einzige
+Dokumentation ist.
+
+Bitte versteht mich nicht falsch, die Liste der Regeln, die `iptables-save`
+ausgibt, dokumentiert tatsächlich die Firewall.
+Und wenn ich Zweifel daran habe oder gar nicht weiß, wie UCIs Konfiguration
+in Paketfilterregeln umgesetzt wird, bin ich mit `iptables-save` tatsächlich
+besser aufgehoben.
+
+Aber eine Firewall-Dokumentation ist das nicht.
+
+Ich will dazu etwas ausholen und zunächst darauf eingehen, welche
+Informationen überhaupt in eine Firewall-Dokumentation gehören, dann ein
+paar allgemeine Vorgehensweisen ansprechen um schließlich auf ein paar
+konkrete Techniken zu kommen, die ich bei der OpenWrt-Firewall verwenden
+kann.
+
+Informationen in einer Firewall-Dokumentation
+---------------------------------------------
+
+So, wie es bei einem Artikel, einem Buch und anderen Texten eine Einleitung
+gibt, die den Rahmen vorgibt, für das, was folgt, bin ich bei jeder
+Dokumentation gut beraten, wenn ich den Kontext dessen angebe, was
+dokumentiert wird.
+
+Der Kontext einer Firewall sind einerseits die angeschlossenen Netze und
+Endgeräte von denen Datagramme durch die und zur Firewall geschickt werden.
+Diesen Kontext kann ich der Netzwerk-Dokumentation entnehmen, wenn ich
+solche vorliegen habe.
+Dabei interessieren mich L1/L2-Netzpläne für die unmittelbar angeschlossenen
+Kabel.
+L3-Netzpläne benötige ich nur ausschnittsweise insoweit, dass ich weiß,
+welche Netze sich hinter welchen Gateways verbergen.
+
+Idealerweise habe ich diese Pläne bereits vorliegen.
+Falls nicht, kann ich diese Informationen aus den ARP-Tabellen,
+Neighbor-Caches und Routing-Tabellen auslesen und aufbereiten.
+In diesem Fall kann ich zumindest bei den ARP-Tabellen und Neighbor-Caches
+aber nicht sicher sein, alle Geräte erfasst zu haben.
+Dann helfen mir die Informationen von Manageable Switches weiter.
+
+Außer diesen Netzplänen hilft mir eine Inventarliste der beteiligten Systeme
+bei der Dokumentation der Firewall.
+Idealerweise enthält diese Liste die Namen und Adressen der Systeme ihren
+Einsatzzweck und Hinweise auf ihre Klassifizierung in der
+Sicherheitsrichtlinie.
+
+Die Sicherheitsrichtlinie selbst bestimmt ebenfalls den Kontext der Firewall
+und ist damit Bestandteil der Dokumentation, legt sie doch fest, warum
+bestimmte Regeln in der Firewall überhaupt vorhanden sind.
+
+Das sind die globalen oder Kontextinformationen, die ich in einer
+Firewall-Dokumentation zu finden hoffe.
+
+In einer ausführlichen Dokumentation finde ich noch weitere Informationen zu
+jeder einzelnen Regel:
+
+*   Warum wurde diese Regel eingefügt.
+    Zum Beispiel, weil ein Netz wegfiel oder hinzukam oder weil die
+    Sicherheitsrichtlinie geändert wurde.
+
+*   Wer hat die Regel eingefügt, wer ist der technische Kontakt und
+    vielleicht der geschäftliche Ansprechpartner, wenn die Regel einen
+    Bereich der Sicherheitsrichtlinie mit konkretem geschäftlichen
+    Hintergrund berührt.
+
+*   Was bewirkt die konkrete Regel oder Gruppe von Regeln, um die es geht.
+
+*   Wann wurde die Regel eingefügt?
+    Wie lange soll die Regel enthalten sein?
+    Gibt es ein konkretes Verfallsdatum?
+    Damit kann ich bei den hoffentlich regelmäßig stattfindenden Audits
+    einfach prüfen, ob eine Regel entfernt werden kann.
+
+Allgemeine Verfahren
+--------------------
+
+Nachdem wir nun geklärt haben, was in einer Firewall-Dokumentation für
+Informationen wünschenswert sind, komme ich nun zum allgemeinen Umgang mit
+der Dokumentation.
+
+Stand der Technik, wenn auch noch lange nicht von jedem angewandt ist ein
+Change Management, das zum einen Konfigurationsänderungen abdeckt und zum
+anderen die Anpassungen der zugehörigen Dokumentation.
+
+Ich will an dieser Stelle nicht auf einzelne Verfahren eingehen, wichtig ist
+nur, dass eines etabliert wird, bei dem sich Änderungen in der Konfiguration
+zeitnah in der Dokumentation niederschlagen.
+Idealerweise wird die Änderung erst dokumentiert, dann umgesetzt, geprüft
+und schließlich das Prüfergebnis dokumentiert.
+
+Das kann sehr schnell sehr aufwendig werden, darum muss jeder für sich
+selbst entscheiden, wieviel Bürokratie er haben will und wie hoch der Nutzen
+daraus für ihn ist.
+
+Ein weiteres Verfahren sind periodische Reviews.
+Das heißt, in regelmäßigen Abständen kontrolliert man, ob die
+Firewall-Konfiguration mit der Dokumentation übereinstimmt.
+
+Hat man etwas mehr Aufwand in das Change Management gesteckt, kann der
+Review recht schnell vor sich gehen, weil kaum Abweichungen zu finden sind.
+
+Sind Abweichungen da, gilt es zu entscheiden, ob die Dokumentation an die
+Firewall angepasst wird, die Firewall an die Dokumentation oder beides
+aneinander.
+
+Danach muss ich prüfen, ob die Firewall noch korrekt im Sinne der
+Sicherheitsrichtlinie ist.
+
+Egal, wie man die Firewall dokumentiert, ob nur die Regeln als solches oder
+weitere Informationen, wie am Anfang des Kapitels beschrieben, auf eines
+sollte man nie verzichten: ein Versionsverwaltungssystem, dass alle
+Änderungen erfassen und bei Bedarf einen vergangenen Stand wieder herstellen
+kann.
+
+Schließlich halte ich es für sinnvoll, technische Hilfsmittel zu benutzen,
+die entweder die Regeln automatisch aus der Dokumentation oder
+automatisch aus den Regeln eine gut lesbare Dokumentation erzeugen.
+
+Erstere Systeme halte ich für besser um meine eigene Infrastruktur zu
+verwalten.
+Wenn alles korrekt eingestellt ist, liegt der größte mentale Aufwand im
+Bestimmen und Dokumentieren der Regeln, während die Umsetzung halb- oder
+vollautomatisiert erfolgen kann.
+Ich muss mich allerdings daran gewöhnen, dass Ad-hoc-Änderungen der Regeln
+im nächsten Zyklus verschwinden, wenn sie nicht dokumentiert sind.
+
+Systeme der zweiten Art sind nützlich, wenn ich eine Firewall, die nicht
+oder schlecht dokumentiert ist, analysieren will.
+
+Hilfsmittel zur Firewall-Dokumentation bei OpenWrt
+--------------------------------------------------
+
+Generell habe ich drei Wege, um auf die Firewall-Konfiguration bei OpenWrt
+für die Dokumentation zuzugreifen:
+
+*   das Web-Interface LuCI,
+*   das CLI-Interface UCI und
+*   `iptables-save`.
+
+LuCI, das Web-Interface, ist am besten für Ad-Hoc-Konfiguration geeignet.
+Leider will ich diese im Rahmen eines Change Managements gerade vermeiden.
+
+Zwar ist es möglich, mit Webbots einen OpenWrt-Rechner automatisch über das
+Web-Interface zu konfigurieren, doch halte ich solche Lösungen für zu
+komplex und vor allem zu anfällig im Hinblick auf Änderungen am
+Web-Interface.
+
+Besser geeignet für die automatisierte Erfassung der Konfiguration sowie die
+Konfiguration selbst halte ich das CLI UCI.
+Mit `uci export` kann ich eine vorhandene Konfiguration auslesen, mit `uci
+import` eine neue einlesen.
+
+Der Vorteil gegenüber LuCI ist, dass ich damit eine Softwareschich
+ausgeschaltet habe, denn letztendlich verwendet auch LuCI im Hintergrund für
+die Konfiguration UCI.
+
+Daher wäre UCI mein Favorit für eine automatisierte Konfiguration.
+
+Die dritte Möglichkeit, `iptables-save` eignet sich nur für eine Analyse der
+Paketfilterregeln selbst.
+Hier fehlen bereits die Informationen zur Konfiguration der Schnittstellen,
+die `uci export` mitliefert.
+
+Der einzige Vorteil von `iptables-save` ist, dass die Firewall-Regeln sehr
+einfach aufbereitet werden können.
+
