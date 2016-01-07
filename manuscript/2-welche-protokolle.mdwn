@@ -7,7 +7,7 @@ Paketfilter-Firewall betreiben will?
 Auf einer Seite gehen Datenpakete hinein, auf der anderen Seite sollen sie
 herauskommen oder auch nicht.
 Das kann doch nicht so viel sein, könnte man meinen.
-Erstaunlicherweise sind es doch recht viele Protokolle,
+Erstaunlicherweise sind es recht viele Protokolle,
 von denen ich mehr wissen muss,
 als nur den Namen und wofür es verwendet wird.
 
@@ -16,7 +16,7 @@ Dazu kommen TCP und UDP auf denen die meisten Protokolle der höheren
 OSI-Schichten aufsetzen.
 
 Mit ARP werden bei IPv4 die Ethernet- und IP-Adressen zugeordnet.
-Dieses Protokoll interessiert mich vor allem dann, wenn ich meinen
+Dieses Protokoll interessiert mich, wenn ich meinen
 Paketfilter als Ethernet-Bridge betreibe.
 
 Im Bereich IPv6 muss ich das Protokoll IPv6 selbst und ICMPv6 kennen.
@@ -36,21 +36,21 @@ Ports.
 Werde ich mit solchen Protokollen konfrontiert, muss ich deren Eigenheiten
 kennen.
 
-Die meisten dieser Protokolle sind in RFCs beschrieben, welche ich im
+Die meisten dieser Protokolle werden in RFCs beschrieben, welche ich im
 Internet von <http://tools.ietf.org/> beziehen kann.
-Nachfolgend gehe ich kurz auf einige dieser RFCs ein.
+Nachfolgend gehe ich kurz auf einige von diesen ein.
 
 Ethernet
 --------
 
 Die RFCs 894, 1042 und 2464 beschreiben, wie IPv4 und IPv6 Datenpakete in
 Ethernet- und 802.3-Frames eingebettet werden.
-In den meisten Fällen interessieren mich für das Filtern nur die MAC-Adressen.
+In den meisten Fällen interessieren mich zum Filtern nur die MAC-Adressen.
 Arbeitet der Paketfilter jedoch als Ethernet-Bridge und nicht als Router,
 muss ich mich auch mit diesen Protokollen auseinandersetzen.
 
-ARP, das Address Resolution Protocol ist in RFC 826 beschrieben, und in
-RFC 5227 zum Thema Erkennung von Adresskonflikten aktualisiert.
+ARP, das Address Resolution Protocol finde ich in RFC 826 beschrieben.
+RFC 5227 aktualisiert es beim Thema Erkennung von Adresskonflikten.
 
 RFC 3927 beschreibt die automatische Konfiguration von link-lokalen
 IPv4-Adressen.
@@ -60,9 +60,9 @@ Auf diese Art konfigurierte IP-Adressen erkenne ich am Prefix 169.254/16.
 Datagramme mit dieser Absenderadresse dürfen nicht geroutet werden,
 da sie nur im lokalen Netzwerksegment gültig sind.
 
-Bei IPv6 übernimmt die Neighbor Discovery via ICMPv6 diese Funktion.
-Sie ist in RFC 4861 beschrieben.
-RFC 5942 aktualisiert es in Bezug auf das IPv6-Subnetz-Modell, speziell
+Bei IPv6 übernimmt Neighbor Discovery (ND) via ICMPv6 diese Funktion.
+RFC 4861 beschreibt diese.
+RFC 5942 aktualisiert ND in Bezug auf das IPv6-Subnetz-Modell, speziell
 für das Verhältnis zwischen Links und Subnetz-Präfixen.
 RFC 6980 geht auf die Auswirkungen von IPv6-Fragmentierung
 auf Neighbor Discovery ein.
@@ -93,13 +93,15 @@ RFC 4884 erweitert ICMP für Multipart-Nachrichten.
 
 RFC 6633 und RFC 6918 begründen die Ablehnung von wenig genutzten
 ICMP-Nachrichten.
+Damit helfen mir diese beiden RFCs bei der Entscheidung für oder gegen
+diese Datagramme.
 
 ICMPv6
 ------
 
 Das Internet Control Message Protocol for IPv6 wurde erstmals 1995 in RFC
 1885 beschrieben.
-Im Jahr 1998 wurde dieses RFC durch RFC 2463 obsolet, welches selbst wiederum
+1998 wurde dieses RFC durch RFC 2463 obsolet, welches selbst wiederum
 im Jahr 2006 durch RFC 4443 abgelöst wurde.
 RFC 4884 aktualisiert und ergänzt diesen Draft Standard.
 
@@ -110,11 +112,11 @@ Empfehlungen für die Behandlung von ICMPv6 gibt.
 IGMP
 ----
 
-RFC 1112 beschreibt die Host Extensions for Multicasting und in seinem
-Anhang Version 1 dieses Protokolls.
+RFC 1112 beschreibt Host Extensions for Multicasting und in seinem
+Anhang Version 1 von IGMP.
 
 Version 2 des Internet Group Management Protocol ist in RFC 2236
-beschrieben, es erlaubt es, dem Router die Beendigung der
+beschrieben, es erlaubt, dem Router die Beendigung der
 Gruppenmitgliedschaft mitzuteilen, was Vorteile bei Multicast-Gruppen mit
 hoher Bandbreite bringt.
 
@@ -163,9 +165,9 @@ und ist in RFC 5569 und RFC 5969 beschrieben.
 beschrieben.
 
 **Teredo** tunnelt Pakete via UDP und funktioniert damit auch via NAT.
-Es ist in RFC 4380 beschrieben.
+RFC 4380 beschreibt dieses Protokoll.
 
 **GRE** (Generic Routing Encapsulation) erlaubt es, beinahe beliebige
 Protokolle in beliebigen anderen Protokollen zu kapseln.
-Es ist in RFC 2748 beschrieben.
+In RFC 2748 finde ich Informationen dazu.
 
