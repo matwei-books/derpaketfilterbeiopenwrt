@@ -3,13 +3,12 @@ IPv4 für den Firewall-Administrator
 ===================================
 
 IPv4 wird auf längere Zeit noch eine große Rolle spielen.
-Dementsprechend werde ich als Firewall-Administrator damit noch häufig
-konfrontiert.
-In diesem Kapitel gehe ich daher auf wichtige Aspekte dieses und damit
-verbundener Protokolle ein.
+Dementsprechend wird ein Firewall-Administrator häufig damit konfrontiert.
+In diesem Kapitel gehe ich auf wichtige Aspekte dieses und der damit
+verbundenen Protokolle ein.
 
-RFC 791 beschreibt IPv4.
-In seinem Header transportiert die folgenden, für den Firewall-Betrieb
+RFC 791 beschreibt das Protokoll.
+In seinem Header transportiert IPv4 die folgenden, für den Firewall-Betrieb
 relevanten Informationen:
 
 *   ToS (Type of Service)  
@@ -17,63 +16,66 @@ relevanten Informationen:
     Bedeutung dieses Feldes in den RFCs 2474 (DCSP) und 3168 (ECN).
 
 *   Flags  
-    Diese zeigen an, ob das IP-Paket fragmentiert werden darf und
-    gegebenenfalls bereits ist.
-    Da Fragmentierung absichtlich oder unabsichtlich die Filterung
-    erschweren kann, wird man bei einem Paketfilter fragmentierte Pakete
-    entweder verwerfen oder zusammenbauen.
+    Diese zeigen an, ob das IP-Paket fragmentiert werden darf oder bereits ist.
+    Da Fragmentierung das Filtern erschweren kann, ist es ratsam, bei einem
+    Paketfilter fragmentierte Pakete entweder zu verwerfen oder vor der
+    Entscheidung zusammenzubauen.
 
 *   Protocol  
     Dieses Feld gibt an, welches Protokoll im IP-Datagramm eingebettet ist.
     Seit RFC 3232 führt die IANA eine Online-Datenbank unter
     <http://www.iana.org/>.
-    In der Datei */etc/protocols* finden sich die Namen dieser Protokolle
-    auf einem Linux-Rechner, wie zum Beispiel 1 für ICMP, 2 für IGMP, 6 für
+    Auf einem Linux-Rechner finden sich die Nummern dieser Protokolle in der
+    Datei */etc/protocols*: so zum Beispiel 1 für ICMP, 2 für IGMP, 6 für
     TCP und 17 für UDP.
     Will ich am Paketfilter nach Protokollen diskriminieren, muss ich dieses
     Feld beachten.
 
-*   Quell- und Zieladresse mit je 32 Bit dienen in den meisten Regeln als
-    Merkmale für die Entscheidung.
+*   Quell- und Zieladresse  
+    Mit je 32 Bit dienen diese in den meisten Regeln als Merkmale für die
+    Entscheidung.
     Verwende ich NAT bei der Firewall, muss ich beachten, an welcher Stelle
     im Netfilter-Code die Regel greift und an welcher NAT, um dann entweder
-    die originale oder die umgesetzte Adresse zu regulieren.
+    die originale oder die umgesetzte Adresse zu filtern.
 
 ICMP
 ----
 
-ICMP ist für viele Firewall-Administratoren eine Problemzone.
+Das Internet Control Message Protocol ist für viele Firewall-Administratoren
+eine Problemzone.
 Um 2000 herum brachte Ofir Arkin seine Untersuchungsergebnisse über den
 Gebrauch von ICMP für das Scannen von Netzwerken heraus.
-Wurden zuvor in den meisten Firewalls ICMP-Pakete freizügig durchgelassen,
-so wurden sie danach in vielen Konfiguration rigoros gesperrt.
+Konnten zuvor in den meisten Firewalls ICMP-Pakete freizügig passieren,
+so wurden sie danach in vielen Konfigurationen rigoros gesperrt.
 Leider gibt es einige ICMP-Datagramme, die keinesfalls gesperrt werden
-sollen, um den regulären Netzbetrieb nicht zu behindern.
-Hier muss ich als Firewall-Administrator sehr gut Bescheid wissen, so dass
-ich ICMP in einem eigenen Kapitel bespreche.
+sollten, um den regulären Netzbetrieb nicht zu behindern.
+Hier muss ein Firewall-Administrator sehr gut Bescheid wissen, so dass
+ich ICMP in einem eigenen Kapitel intensiver behandle.
 
 TCP
 ---
 
-Das Transmission Control Protocol, beschrieben in RFC 793 ist eines der
-häufigsten Protokolle im Internet.
-Es sorgt für eine zuverlässige Verbindung und ist zustandsbehaftet.
+Das Transmission Control Protocol, beschrieben in RFC 793, ist eines der
+am häufigsten verwendeten Protokolle im Internet.
 
-Eine TCP-Sitzung wird durch folgende fünf Angaben eindeutig identifiziert:
+Eine TCP-Verbindung wird durch folgende fünf Angaben eindeutig identifiziert:
 
-*   Quell- und Zieladresse sowie das Protokollfeld im IP-Header
+*   Quell- und Zieladresse sowie Protokollfeld im IP-Header
 *   Quell- und Zielport im TCP-Header
 
-Da TCP-Verbindungen bidirektional sind, können Quell- und Zieladresse sowie
-Quell- und Zielport von Datagrammen einer Sitzung paarweise vertauscht sein.
+TCP-Verbindungen sind bidirektional, Quell- und Zieladresse sowie Quell-
+und Zielport von Datagrammen einer Sitzung sind paarweise vertauscht, je
+nach der Richtung, in der sie gesendet werden.
 
-Jede TCP-Sitzung befindet sich in einem Zustand, der für eine Firewall im
-TCP-Header zu erkennen ist, an den Flags, der Sequenz- und
+Jede TCP-Sitzung befindet sich in einem Zustand, den eine Firewall am
+TCP-Header erkennen kann: an den Flags, der Sequenz- und
 Acknowledge-Nummer sowie am Receive-Window.
+
 Bei einer stateless Regel kann die Firewall den Zustand nur an Hand des
 aktuellen Datenpakets erraten und entsprechend reagieren.
-Es ist bei einer bestehenden Verbindung nicht mehr möglich, zu erkennen,
+Dann ist es bei einer bestehenden Verbindung nicht mehr möglich, zu erkennen,
 welche Seite die Verbindung ursprünglich initiiert hatte.
+
 Demgegenüber verfolgt die Firewall bei stateful Regeln die Sitzung und ist
 auf diese Weise in der Lage, gefälschte Datenpakete zu erkennen und zu
 unterdrücken.
@@ -85,12 +87,12 @@ Dafür setzt es das *Don't Fragment* Bit im IP-Header und ist darauf
 angewiesen, dass ICMP-Unreachable-Pakete zurückkommen können, die dem Sender
 sagen, wann ein Datagramm zu groß ist.
 
-Wenn Datenpakete verloren gehen, wiederholt TCP automatisch bereits
+Gehen Datenpakete verloren, wiederholt TCP automatisch bereits
 gesendete Datagramme.
 Diese wiederholt gesendeten Datagramme sollten problemlos durch die Firewall
 gehen, wenn die Verbindung legitim ist.
 Bei stateful Regeln kann die Firewall Replay-Attacken erkennen, wenn die
-Sequenznummer eines Datagramms kleiner ist, als die letzte
+Sequenznummer eines Datagramms wesentlich kleiner ist, als die letzte
 Acknowledge-Nummer der Gegenrichtung.
 
 UDP
@@ -99,13 +101,7 @@ UDP
 Das Universal Datagram Protocol, beschrieben in RFC 768, ist ein
 zustandsloses Protokoll.
 
-Will ich dieses Protokoll mit stateful Regeln überwachen, muss die Firewall
-mit Timern arbeiten.
-Das bedeutet dementsprechend für die Anwendungen, dass sie regelmäßig Daten
-senden müssen, bevor der Timer abläuft, wenn sie den Zustand aktiv halten
-wollen.
-
-Eine UDP-Sitzung wird, ähnlich wie eine TCP-Sitzung, durch folgende
+Eine UDP-Verbindung wird, genau wie bei TCP, durch folgende
 Informationen identifiziert:
 
 *   Quell- und Zieladresse sowie Protokollfeld im IP-Header
@@ -116,17 +112,22 @@ UDP-IDs in einer Sitzung, zum Beispiel TFTP.
 Das muss ich als Firewall-Administrator berücksichtigen, wenn diese
 Protokolle über die Firewall laufen.
 
+Will ich UDP mit stateful Regeln überwachen, muss die Firewall
+mit Timern arbeiten.
+Das bedeutet für die Anwendungen, dass sie regelmäßig Daten senden müssen,
+bevor der Timer abläuft, wenn sie die Verbindung für die Firewall aktiv
+halten wollen.
+Alternativ kann ich auch den Timeout bei der Firewall etwas größer
+ansetzen, wenn die Firewall Probleme mit einzelnen Verbindungen
+bereitet.
+
 NAT
 ---
 
-Network Address Translation ist ein Verfahren mit dem man bei IPv4 die
-mittlerweile nicht mehr ausreichenden eindeutigen Adressen mehrfach
-verwenden kann.
+Mit Network Address Translation kann man die bei IPv4 mittlerweile
+nicht mehr ausreichenden eindeutigen Adressen mehrfach verwenden.
 Bei IPv4-Firewalls muss ich jederzeit damit rechnen, mit NAT konfrontiert
 zu werden.
-
-Da NAT sehr häufig an Perimeter-Routern eingesetzt wird, bezeichnet man die
-beiden Seiten des Routers dementsprechend oft mit *innen* und *außen*.
 
 Es gibt verschiedene Einteilungen von NAT, je nachdem, welchen Aspekt ich
 betrachte.
@@ -137,31 +138,51 @@ So gibt es NAT bei dem
 
 *   mehrere Adressen eines Netzes auf weniger - im Extremfall genau eine -
     Adresse umgesetzt werden.
-    Letzteres wird häufig als Masquerading bezeichnet.
+    Letzteres wird auch als Masquerading bezeichnet.
 
-Dementsprechend ist es bei NAT im ersten Fall möglich, Verbindungen gezielt
-von der äußeren zur inneren Seite aufzubauen, wenn die Adresszuordnung
-feststehend ist.
+Da NAT sehr häufig an Perimeter-Routern eingesetzt wird, bezeichnet man die
+beiden Seiten des Routers oft mit *innen* und *außen*.
+Werden die Adressen eins-zu-eins zwischen verschiedenen Adressbereichen
+umgesetzt, ist es möglich, Verbindungen gezielt von der äußeren zur inneren
+Seite aufzubauen, wenn die Adresszuordnung feststehend ist.
 
+Insbesondere im SOHO-Bereich stehen auf der äußeren Seite oft weniger
+Adressen zur Verfügung als auf der inneren Seite verwendet werden.
 Bei einer Umsetzung von vielen inneren Adressen auf wenige äußere ist es
 ohne explizite Konfiguration schwierig, eine Verbindung von außen nach innen
 aufzubauen.
-Das ist genau dann von Belang, wenn zwei Rechner hinter zwei solchen
+Das ist genau dann problematisch, wenn zwei Rechner hinter zwei solchen
 NAT-Routern ein direkte Verbindung wünschen, zum Beispiel für VoIP oder
-Videokonferenzen
-Mittels eines Rendezvous-Server kann einen direkte Verbindung auch ohne
-explizite Konfiguration des NAT-Routers aufgebaut werden.
+Videokonferenzen.
+In diesem Fall ist es ratsam sich mit dem Thema NAT-Traversal
+auseinander zu setzen.
+NATBlaster und STUN sind zwei Verfahren, mit denen direkte
+Verbindungen über zwei NAT-Router hinweg etabliert werden können.
 
-Schließlich behindert NAT IPsec, da letzteres die IP-Adressen authentisiert
-und durch das NAT die Datagramme ungültig werden.
-Dementsprechend muss man hier auf IPsec hinter NAT ausweichen.
+Schließlich behindert NAT IPsec, da letzteres die IP-Adressen
+verifiziert und durch die Änderung der Adressen die Datagramme ungültig
+werden.
+Hier muss man auf UDP Encapsulation of IPsec ESP Packets, beschrieben in
+RFC 3948 ausweichen.
 
-Da das Thema NAT sehr komplex ist und sehr viele Facetten enthält, werde ich
-in einem späteren Kapitel noch einmal ausführlich darauf eingehen.
+Da das Thema NAT sehr komplex ist und sehr viele Facetten enthält, gehe ich
+in einem späteren Kapitel noch einmal ausführlich darauf ein.
 
-%% Fragmentierung
-%% erstes Fragment filtern, weitere durchlassen
-%% zu kleines erstes Fragment verwerfen
-%% abhängig von Protokoll nach IP-Header, was zu klein
+Fragmentierung
+--------------
 
-%% bei Connection Tracking Fragmente zusammensetzen
+Prinzipiell kann ich auch fragmentierte Datagramme filtern, ohne sie
+vorher zusammen zu setzen.
+In diesem Fall müsste ich alle Fragmente ohne Header-Informationen
+durchlassen und die Filterregeln nur auf die ersten Fragmente mit den
+Header-Informationen anwenden.
+
+Sind die ersten Fragmente zu klein, so dass sie nicht genügend
+Informationen enthalten, verwerfe ich sie.
+Was zu klein ist, ist abhängig von den Regeln und den Protokollen,
+nach denen ich filtere.
+
+Bei Connection Tracking muss ich fragmentierte Datagramme auf jeden Fall
+zusammensetzen, da die benötigten Informationen, zum Beispiel für FTP,
+in den Nutzdaten stehen.
+
