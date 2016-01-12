@@ -8,7 +8,7 @@ Die Adoption verlief anfangs sehr schleppend, hat in den letzten Jahren aber
 an Fahrt aufgenommen.
 Inzwischen kann man IPv6 als Firewall-Administrator nicht mehr ignorieren.
 
-Obwohl inzwischen alle weitverbreiteten Betriebssystem IPv6 gut
+Obwohl mittlerweile alle weitverbreiteten Betriebssystem IPv6 gut
 unterstützen, ist es noch notwendig, IPv6-Projekte vor dem produktiven
 Einsatz gründlich zu testen.
 
