@@ -4,6 +4,7 @@ DRAFTS = 1-ich-will-den-openwrt-paketfilter-verstehen-draft.pdf \
          2-welche-protokolle-draft.pdf \
 	 2-ipv4-fuer-firewall-draft.pdf \
 	 2-ipv6-fuer-firewall-draft.pdf \
+	 2-gleichzeitig-ipv4-ipv6-draft.pdf \
 	 3-netfilter-kernel-draft.pdf \
 	 3-openwrt-luci-draft.pdf \
 #
