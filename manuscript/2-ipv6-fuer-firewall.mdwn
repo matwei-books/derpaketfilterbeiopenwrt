@@ -6,33 +6,34 @@ Mit IPv6 ist 1998 ein weiterer Akteur auf die Bühne der Transport-Protokolle
 getreten.
 Die Adoption verlief anfangs sehr schleppend, hat in den letzten Jahren aber
 an Fahrt aufgenommen.
-Inzwischen kann man IPv6 als Firewall-Administrator nicht mehr einfach ignorieren.
+Inzwischen kann man IPv6 als Firewall-Administrator nicht mehr ignorieren.
 
-Obwohl mittlerweile alle weitverbreiteten Betriebssystem IPv6 ganz gut
-unterstützen, ist es noch notwendig IPv6-Projekte vor dem produktiven
-Einsatz besonders gründlich zu testen.
+Obwohl inzwischen alle weitverbreiteten Betriebssystem IPv6 gut
+unterstützen, ist es noch notwendig, IPv6-Projekte vor dem produktiven
+Einsatz gründlich zu testen.
 
-Einer der Hauptvorteile von IPv6 ist er riesige Adressraum, der NAT
-prinzipiell überflüssig macht.
-Was nicht heißen soll, dass es bei IPv6 unmöglich wäre.
+Einer der Hauptvorteile von IPv6 ist der riesige Adressraum, der NAT
+überflüssig macht.
+Was nicht heißen soll, dass NAT bei IPv6 unmöglich wäre.
 
-Zwar hat man bei IPv6 nicht völlig am grünen Tisch angefangen,, sondern
-bewährte Dinge von IPv4 übernommen.
-Doch sind etliche Dinge neu hinzugekommen und andere weggefallen.
+Zwar hat man beim Entwurf von IPv6 nicht am grünen Tisch angefangen,
+sondern bewährte Dinge von IPv4 übernommen.
+Doch sind viele Dinge hinzugekommen und andere weggefallen.
 
-TCP und UDP verhalten sich hier, wie bei IPv4 gewohnt, daher füge ich dem
-dort genannten nichts weiter hinzu als dass UDP bei IPv6 zwingend eine
-Prüfsumme berechnen muss, denn der IPv6-Header hat keine Prüfsumme.
+TCP und UDP verhalten sich hier wie bei IPv4 gewohnt, daher füge ich dem
+dort genannten nichts weiter hinzu, als dass UDP bei IPv6 zwingend eine
+Prüfsumme berechnen muss.
+Der IPv6-Header hat keine Prüfsumme.
 
 Paket-Header
 ------------
 
-Auch sonst ist der IPv6-Header recht knapp mit 40 Byte, von denen 32 Byte
+Der IPv6-Header ist recht klein, mit 40 Byte, von denen 32 Byte
 für die Adressen von Sender und Empfänger draufgehen.
 Alle zusätzlich benötigten Informationen gehen in Extension-Header, die
 zwischen dem IP-Header und dem Header des höheren Protokolls (zum Beispiel
-TCP oder UDP) platziert werden.
-Durch Extension-Header kann der IPv6-Header auf maximal 60 Byte anwachsen.
+TCP oder UDP) Platz finden.
+Durch die Extension-Header kann der IPv6-Header auf maximal 60 Byte anwachsen.
 
 Zur Zeit sind sechs Extension Header spezifiziert, die von allen IPv6-Knoten
 unterstützt werden müssen:
@@ -45,8 +46,6 @@ unterstützt werden müssen:
 *   Encapsulating Security Payload Header, RFC 4303
 
 Es können kein, einer oder mehrere Header in einem IPv6-Paket vorkommen.
-Diese werden zwischen dem IPv6-Header und dem Header des Protokolls der
-nächsthöheren Schicht platziert.
 RFC 2460 gibt eine Reihenfolge vor, die bei mehreren Extension Headern in
 einem Datenpaket eingehalten werden soll.
 Jeder Header wird durch das Next-Header-Feld des vorherigen identifiziert.
@@ -58,22 +57,22 @@ mit der Zieladresse verarbeitet.
 Adressierung
 ------------
 
-Aufgrund des riesigen Adressraums und wegen der einfacheren Handhabbarkeit
-werden in einer Layer-2-Domain, früher als Broadcast-Domain bezeichnet, 64
-Bit als Netzmaske verwendet, so dass 2 hoch 64 Adressen für die Knoten in
+Aufgrund des riesigen Adressraums, und um es einfacher zu handhaben, verwendet
+man in einer Layer-2-Domain (früher als Broadcast-Domain bezeichnet) 64
+Bit als Netzmaske, so dass 2 hoch 64 Adressen für die Knoten in
 diesem Segment verbleiben.
 
-Broadcast selbst wurde abgeschafft und die Funktionen, die Broadcast
-verwendeten, müssen nun mit Multicast arbeiten.
+Broadcast selbst wurde abgeschafft.
+Die Funktionen, die Broadcast verwendeten, müssen nun mit Multicast arbeiten.
 Dementsprechend muss jeder IPv6-Knoten Multicast beherrschen.
 
 IGMP, das bei IPv4 für die Verwaltung der Multicast-Gruppen zuständig ist,
 entfällt ebenfalls.
-Seine Aufgaben nimmt ICMPv6 wahr.
+Seine Aufgaben übernimmt ICMPv6.
 
 Ebenfalls entfallen ist ARP, mit dem bei IPv4 Ethernet-Adressen und
 IP-Adressen verknüpft werden.
-Auch diese Aufgaben übernimmt ICMPv6.
+Auch diese Aufgabe übernimmt ICMPv6.
 
 Neu gegenüber IPv4 ist Stateless Address Autoconfiguration (SLAAC).
 Diese erspart dem Netzwerk-Administrator einiges an Arbeit.
@@ -85,11 +84,10 @@ diese statt der alten Adresse für neue Verbindungen verwendet.
 Für Server machen diese Extensions keinen Sinn, denn der Server soll ja
 gefunden werden.
 Für den Firewall-Administrator bedeutet das, dass er nicht mit festen IP-Adressen
-für diese Client-Rechner arbeiten kann, sondern nur mit ganzen
-Netzbereichen.
-Dem muss er in den Richtlinien Rechnung tragen.
+für diese Client-Rechner arbeiten kann, sondern nur mit ganzen Netzbereichen.
+Dem muss er in den Richtlinien und Regeln Rechnung tragen.
 
-Aber auch Server mit festen IP-Adressen haben immer mehrere Adressen.
+Aber auch Server mit festen IP-Adressen haben mehrere Adressen.
 So hat jeder IPv6-Knoten mindestens eine link-lokale Adresse an jedem
 Interface.
 Über diese link-lokalen Adressen kommunizieren die Knoten in einer
@@ -106,29 +104,31 @@ Vereinfachungen für Router
 
 Für Router gibt es einige Vereinfachungen bei IPv6.
 
-So können die großen Adressbereiche großzügig an ISPs un deren Kunden
-aufgeteilt werden, so dass die Routingtabellen der Core-Router relativ klein
+So können die Adressbereiche großzügig an ISPs und deren Kunden
+aufgeteilt werden, so dass die Routingtabellen der Core-Router klein
 bleiben können.
 
 Router dürfen IPv6-Pakete grundsätzlich nicht fragmentieren.
-Ist Fragmentierung notwendig, muss der sendende Host das machen und der
-empfangende Host baut das Datagramm wieder zusammen.
+Ist Fragmentierung notwendig, muss der sendende Host fragmentieren und erst
+der empfangende Host baut das Datagramm wieder zusammen.
 Natürlich wird jede DPI-Firewall, die etwas auf sich hält, das auch machen.
 Da aber die MTU für IPv6 auf allen Segmenten mindestens 1280 Bytes beträgt,
-ist das für eine einfache Firewall nicht nötig, denn im ersten Datagramm
-sind alle Informationen für die Entscheidung an Hand der Headerdaten
-enthalten.
+ist das für eine simple Firewall nicht nötig, denn im ersten Datagramm
+sind alle Informationen für die Entscheidung an Hand der Informationen
+aus dem Header enthalten.
 
 Gleichzeitiger Betrieb von IPv4 und IPv6
 ----------------------------------------
 
-Ein Problem für Firewall-Administratoren kann sein, dass auf absehbare Zeit
-IPv4 und IPv6 gleichzeitig betrieben werden.
+Ein mögliches Problem für Firewall-Administratoren ist, dass auf absehbare
+Zeit IPv4 und IPv6 gleichzeitig betrieben werden.
 Je nach Anbindung und gewünschter Verbindung kann das eine Protokoll im
-anderen getunnelt werden und umgekehrt.
+Tunnel über das andere weiter geleitet werden und umgekehrt.
 
-Habe ich eine stabile Verbindung für beide Protokolle kann ich generell alle
-Tunnel unterbinden und mit Firewall-Regeln für beide Protokolle arbeiten.
+Erst wenn ich eine stabile Verbindung für beide Protokolle habe, kann ich
+alle Tunnel unterbinden und direkt mit Firewall-Regeln für beide Protokolle
+arbeiten.
 
-Habe ich nur ein Protokoll von meinem ISP, kann ich selbst einen Tunnel am
-Firewall betreiben und dann genauso am Eingang dieses Tunnels filtern.
+Habe ich nur ein Protokoll von meinem ISP, kann ich selbst einen Tunnel an
+der Firewall betreiben und am Eingang dieses Tunnels filtern.
+
