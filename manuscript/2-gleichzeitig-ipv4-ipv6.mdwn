@@ -4,11 +4,11 @@ Gleichzeitiger Betrieb von IPv4 und IPv6
 
 Wenn ich in meinem Netz gleichzeitig IPv4 und IPv6 betreibe, kommen
 zusätzliche Herausforderungen auf mich als Firewall-Administrator zu.
-Darauf geht dieses Kapitel ein.
+Auf diese gehe ich in diesem Kapitel ein.
+Zunächst betrachte ich die Arten des gleichzeitigen Betriebs von
+IPv4 und IPv6, dann gehe ich auf einige Aspekte zur Sicherheit ein.
 
-Zunächst betrachte ich die möglichen Arten des gleichzeitigen Betriebs von
-IPv4 und IPv6.
-Das sind die folgenden drei:
+Ich unterscheide drei Arten, IPv4 und IPv6 gleichzeitig zu betreiben:
 
 *   Dual-Stack-Betrieb, bei dem im Netz und bei den Rechnern beide
     Protokolle gleichzeitig verwendet werden.
@@ -20,53 +20,53 @@ Das sind die folgenden drei:
 Dual-Stack-Betrieb
 ------------------
 
-Dieser erlaubt es, in einem Netzwerk sowohl IPv4 als auch IPv6 gleichzeitig
-zu betreiben.
+Beim Dual-Stack-Betrieb verwende ich IPv4 und IPv6 gleichberechtigt.
 
-Dual-Stack-Knoten sind Rechner, die beide Protokolle verwenden können.
-Diese können in drei verschiedenen Modi arbeiten: nur IPv4, nur IPv6 und
-beide Protokolle gleichzeitig.
+Die Rechner müssen beide Protokolle vollständig benutzen können und
+verwenden je nach Kommunikationspartner oder Voreinstellung das eine
+oder das andere Protokoll.
 
-Bei Dual-Stack-Networks müssen alle Switche, Router und Paketfilter beide
-Protokolle unterstützen.
+Alle Switche, Router und Paketfilter müssen beide Protokolle unterstützen,
+damit das reibungslos funktioniert.
 
 Der Dual-Stack-Betrieb ist einfach zu benutzen und flexibel.
-Er ist die beste Option für den gleichzeitigen Betrieb.
+Er ist die beste Option für den gleichzeitigen Betrieb von IPv4 und IPv6.
 
 Vom Standpunkt der Firewall habe ich zwei Zugänge zum Netzwerk, für die ich
 zwei - dem jeweiligen Protokoll angepasste - Sicherheitskonzepte benötige.
 
 Natürlich hat der Dual-Stack-Betrieb auch Nachteile.
 
-So benötigt das Equipment, welches im Dual-Stack-Modus betrieben wird, mehr
-RAM und Programmspeicher, da die Funktionen und Status-Informationen für
-zwei Protokolle vorgehalten werden müssen.
+So benötigt das Equipment, welches im Dual-Stack-Modus läuft, mehr RAM und
+aktiven Programmcode, da es die Funktionen und Status-Informationen für
+zwei Protokolle vorhalten muss.
 
-Ich benötige für beide Protokolle Routing-Informationen und gegebenenfalls
+Ich benötige sowohl für IPv4 als auch für IPv6 Routing-Informationen und
 zwei Routing-Protokolle.
 
 Auch die Fehlersuche wird komplizierter, weil ich zusätzlich in Betracht
 ziehen muss, das ein Host versucht, einen Dienst mit dem falschen Protokoll
-zu erreichen.
+zu erreichen, oder dass IPv4- und IPv6-Datagramme unterschiedliche Wege
+gehen.
 
 Tunnel
 ------
 
-Beim Tunneln kann ich IPv6-Pakete über IPv4-Netze weiterleiten oder
+Bei einem Tunnel leite ich IPv6-Pakete über IPv4-Netze weiter oder
 umgekehrt.
 
-Dabei muss ich drei Elemente betrachten:
+Dabei muss ich drei Punkte betrachten:
 
 *   das Verpacken der Pakete am Eingang des Tunnels,
 *   das Auspacken der Pakete am Ausgang des Tunnels und
 *   die Verwaltung des Tunnels.
 
 Es gibt manuell und automatisch konfigurierte Tunnel.
-Außerdem unterscheidet man Tunnel nach der Art der gekapselten Daten und des
-Transports.
+Außerdem unterscheiden sich die Tunnel nach der Art der gekapselten Daten
+und des Transports.
 
-Tunnel erlauben es mir genau so von IPv4 zu IPv6 zu migrieren, wie ich es
-gerade benötige.
+Tunnel erlauben es mir, genau in dem Tempo IPv4 zu IPv6 zu migrieren,
+dass ich gerade benötige.
 Habe ich kein Dual-Stack-Netzwerk und möchte zwei IPv6-Inseln über ein
 IPv4-Netzwerk verbinden, kann ich das sofort machen und muss nicht warten,
 bis der Backbone IPv6 übertragen kann.
@@ -74,16 +74,15 @@ Ich kann einzelne Hosts oder ganze Netzsegmente umstellen und muss mich
 nicht an eine bestimmte Reihenfolge halten.
 
 Natürlich haben auch Tunnel Nachteile.
+
 Sie erzeugen zusätzliche Last auf dem Router, der als Endpunkt für den
 Tunnel arbeitet.
-Darum sind zustandslose Tunnel vorteilhafter als zustandsbehaftete.
 
 Die Endpunkte des Tunnels benötigen Zeit um die Daten ein- und
 auszupacken, wodurch sich die Latenz erhöht.
 
 Selbst wenn die Datenpakete den gleichen Weg nehmen wie ungetunnelte, geht
-etwas Bandbreite für die zusätzlichen Kopfdaten des Tunnelprotokolls
-verloren.
+etwas Bandbreite für die Header des Tunnelprotokolls verloren.
 Durch die zusätzlichen Header verringert sich die MTU des Datenpfades.
 
 Auch die Fehlersuche wird komplexer, da Probleme mit dem Hop-Count, der
@@ -96,15 +95,14 @@ Tunnel problematisch sein, da ich sicherstellen muss, dass auch getunnelte
 Daten von einem Paketfilter gefiltert werden, der unter meiner Kontrolle
 steht.
 Falls durch meinen Paketfilter getunnelte Daten laufen, trage ich dafür
-Sorge, dass nur solche getunnelte Daten durchgehen, die von einem
-zugelassenen Tunnel-Endpunkt kommen und dass an diesem Endpunkt ebenfalls
-gefiltert wird.
+Sorge, dass da nur Daten durchgehen, die von einem zugelassenen
+Tunnel-Endpunkt kommen und dass an diesem Endpunkt ebenfalls gefiltert wird.
 
-Als Firewall-Administrator muss ich mich daher kundig machen, welche Tunnel
-in meinem Netzwerk zugelassen und verwendet werden und gegebenenfalls
-unerwünschte Tunnel erkennen und sperren.
+Als Firewall-Administrator muss ich mich kundig machen, welche Tunnel in
+meinem Netzwerk zugelassen sind.
+Gegebenenfalls muss ich unerwünschte Tunnel erkennen und sperren.
 
-Nachfolgend zeige ich noch einige gängige Techniken für Tunnel und Quellen
+Hier folgt eine Liste von gängigen Techniken für Tunnel und Quellen
 für Informationen dazu.
 
 ### 6to4
@@ -113,7 +111,7 @@ ist im RFC 3056 beschrieben.
 
 ### 6rd (IPv6 Rapid Deployment)
 
-wird in den RFCs 5569 und 5969 beschrieben.
+ist in den RFCs 5569 und 5969 beschrieben.
 
 ### ISATAP (Intra-Site Automatic Tunnel Addressing Protocol)
 
@@ -126,20 +124,19 @@ Es ist in RFC 4380 beschrieben.
 
 ### Tunnel Broker
 
-sind wie IPv6 Provider für jemand, der nur eine IPv4-Verbindung zum Internet
-hat.
+sind IPv6 Provider für jemand, der nur eine IPv4-Verbindung zum Internet hat.
 Diese sind in RFC 3053 beschrieben.
 
 ### GRE (Generic Routing Encapsulation)
 
-erlaubt es, beliebige Protokolle in beliebigen Protokollen zu kapseln.
+erlaubt es, beliebige Protokolle in beliebigen anderen Protokollen zu kapseln.
 Es ist in RFC 2784 beschrieben.
 
 Netzwerk Adress- und Protokollumsetzung (NAPT)
 ----------------------------------------------
 
-Diese setze ich nur ein, wenn keine andere Lösung verfügbar ist und
-betrachte sie nur als temporäre Lösung.
+Diese Lösung setze ich nur ein, wenn keine andere verfügbar ist und
+verwende sie nur temporär.
 Sie unterstützt nicht die fortgeschrittenen Möglichkeiten von IPv6.
 
 Der Vorteil von NAPT ist die damit mögliche "direkte" Kommunikation eines
@@ -147,23 +144,22 @@ IPv4-Hosts mit einem IPv6-Hosts.
 Bei allen anderen Lösungen müssen beide Rechner das gleiche
 Protokoll verwenden.
 
-Nachteile sind limitierte Topologie-Optionen, da ich einen NAPT-Router im
-Pfad benötige, der die Protokolle umsetzt.
+Nachteile sind begrenzte Topologie-Optionen, da ich einen NAPT-Router, der
+die Protokolle umsetzt, im Netzwerk-Pfad benötige
 Anwendungen, die in den Datenpaketen gesendete IP-Adressen verwenden, werden
-vermutlich durcheinander kommen.
+dabei durcheinander kommen.
 
 ### Secure Shell (SSH)
 
-erlaubt mit Portweiterleitungen einen verschlüsselten Tunnel für die
+erlaubt über Portweiterleitungen einen verschlüsselten Tunnel für die
 Datenpakete und kann dabei das Protokoll umsetzen, wenn der SSH-Rechner im
 Dual-Stack-Betrieb arbeitet.
 
 Sicherheitserwägungen
 ---------------------
 
-Beim gleichzeitigen Betrieb von IPv4 und IPv6 muss ich berücksichtigen, dass
-es dann mehrere Zugänge zum Netz gibt, die ich entsprechend meinen
-Richtlinien berücksichtigen muss.
+Beim gleichzeitigen Betrieb von IPv4 und IPv6 muss ich mehrere Zugänge zum
+Netz in meinen Richtlinien berücksichtigen.
 
 Ich muss dafür Sorge tragen, dass Datenpakete, die mein Netzwerk über einen
 Tunnel erreichen oder verlassen, ebenfalls gefiltert werden.
