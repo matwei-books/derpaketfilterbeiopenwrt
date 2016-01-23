@@ -4,9 +4,9 @@ Gleichzeitiger Betrieb von IPv4 und IPv6
 
 Wenn ich in meinem Netz gleichzeitig IPv4 und IPv6 betreibe, kommen
 zusätzliche Herausforderungen auf mich als Firewall-Administrator zu.
-Auf diese gehe ich in diesem Kapitel ein.
+Davon handelt dieses Kapitel.
 Zunächst betrachte ich die Arten des gleichzeitigen Betriebs von
-IPv4 und IPv6, dann gehe ich auf einige Aspekte zur Sicherheit ein.
+IPv4 und IPv6, dann gehe ich kurz auf einige Aspekte zur Sicherheit ein.
 
 Ich unterscheide drei Arten, IPv4 und IPv6 gleichzeitig zu betreiben:
 
@@ -42,7 +42,7 @@ aktiven Programmcode, da es die Funktionen und Status-Informationen für
 zwei Protokolle vorhalten muss.
 
 Ich benötige sowohl für IPv4 als auch für IPv6 Routing-Informationen und
-zwei Routing-Protokolle.
+gegebenenfalls zwei Routing-Protokolle.
 
 Auch die Fehlersuche wird komplizierter, weil ich zusätzlich in Betracht
 ziehen muss, das ein Host versucht, einen Dienst mit dem falschen Protokoll
@@ -66,7 +66,7 @@ Außerdem unterscheiden sich die Tunnel nach der Art der gekapselten Daten
 und des Transports.
 
 Tunnel erlauben es mir, genau in dem Tempo IPv4 zu IPv6 zu migrieren,
-dass ich gerade benötige.
+dass ich gerade gehen kann.
 Habe ich kein Dual-Stack-Netzwerk und möchte zwei IPv6-Inseln über ein
 IPv4-Netzwerk verbinden, kann ich das sofort machen und muss nicht warten,
 bis der Backbone IPv6 übertragen kann.
@@ -92,30 +92,43 @@ auch das getunnelte Protokoll untersuchen.
 
 Vom Standpunkt der Sicherheit können insbesondere automatisch aufgebaute
 Tunnel problematisch sein, da ich sicherstellen muss, dass auch getunnelte
-Daten von einem Paketfilter gefiltert werden, der unter meiner Kontrolle
+Daten von einer Firewall gefiltert werden, die unter meiner Kontrolle
 steht.
 Falls durch meinen Paketfilter getunnelte Daten laufen, trage ich dafür
-Sorge, dass da nur Daten durchgehen, die von einem zugelassenen
+Sorge, dass nur Daten durchgehen, die von einem zugelassenen
 Tunnel-Endpunkt kommen und dass an diesem Endpunkt ebenfalls gefiltert wird.
 
 Als Firewall-Administrator muss ich mich kundig machen, welche Tunnel in
 meinem Netzwerk zugelassen sind.
 Gegebenenfalls muss ich unerwünschte Tunnel erkennen und sperren.
 
-Hier folgt eine Liste von gängigen Techniken für Tunnel und Quellen
+Hier folgt noch eine Liste von gängigen Techniken für Tunnel und Quellen
 für Informationen dazu.
 
 ### 6to4
 
-ist im RFC 3056 beschrieben.
+ist ein Verfahren, bei dem jede IPv4-Adresse auf ein /48 großes IPv6-Netz
+abgebildet wird.
+Die IPv6-Adresse setzt sich aus dem Präfix 2002 und der hexadezimal
+notierten IPv4-Adresse zusammen
+
+Das Verfahren ist in RFC 3056 beschrieben.
 
 ### 6rd (IPv6 Rapid Deployment)
 
-ist in den RFCs 5569 und 5969 beschrieben.
+erlaubt einem Provider seinen Kunden bereits IPv6 anbieten, auch wenn
+seine eigene Infrastruktur noch nicht vollständig auf IPv6 umgestellt ist.
+Es basiert auf den Ideen von 6to4 nutzt im Gegensatz zu diesem jedoch
+keinen speziellen Adressbereich sondern den des Providers.
+
+6rd ist in den RFCs 5569 und 5969 beschrieben.
 
 ### ISATAP (Intra-Site Automatic Tunnel Addressing Protocol)
 
-ist in RFC 5214 beschrieben.
+ist eine Variante des 6to4-Verfahrens, bei der ein automatischer
+Tunnel aufgebaut wird.
+
+Das Verfahren ist in RFC 5214 beschrieben.
 
 ### Teredo
 
@@ -140,14 +153,14 @@ verwende sie nur temporär.
 Sie unterstützt nicht die fortgeschrittenen Möglichkeiten von IPv6.
 
 Der Vorteil von NAPT ist die damit mögliche "direkte" Kommunikation eines
-IPv4-Hosts mit einem IPv6-Hosts.
+IPv4-Hosts mit einem IPv6-Host.
 Bei allen anderen Lösungen müssen beide Rechner das gleiche
 Protokoll verwenden.
 
 Nachteile sind begrenzte Topologie-Optionen, da ich einen NAPT-Router, der
-die Protokolle umsetzt, im Netzwerk-Pfad benötige
-Anwendungen, die in den Datenpaketen gesendete IP-Adressen verwenden, werden
-dabei durcheinander kommen.
+die Protokolle umsetzt, im Netzwerk-Pfad benötige.
+Protokolle, die in den Datenpaketen gesendete IP-Adressen verwenden, werden
+dabei vermutlich durcheinander kommen.
 
 ### Secure Shell (SSH)
 
@@ -170,6 +183,6 @@ dieses Thema ein.
 RFC 3964 "Security Considerations for 6to4" geht auf den Tunnelbetrieb ein.
 
 Auch die anderen RFCs zu den verschiedenen Verfahren muss ich studieren,
-wenn ich die Verfahren einsetzen will oder erkennen will, ob sie bereits
+wenn ich diese einsetzen will oder erkennen will, ob sie bereits
 eingesetzt werden.
 
