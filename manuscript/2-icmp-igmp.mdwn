@@ -24,7 +24,7 @@ Da viele ICMP-Nachrichten als Reaktion auf Probleme mit bestimmten
 Datagrammen generiert werden, enthalten sie oft den Anfang des Datagramms,
 auf das sich die ICMP-Nachricht bezieht.
 
-Die Daten am Ende der ICMP-Nachricht können für die versteckte Kommunikation
+Die Daten am Ende der ICMP-Nachricht können für versteckte Kommunikation
 verwendet werden.
 Das ist ein Grund, warum ich diese nicht wahllos durchlassen sollte.
 Ein anderer Grund liegt darin, dass die ICMP-Nachrichten selbst sehr viele
