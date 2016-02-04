@@ -2,64 +2,47 @@
 Network Address Translation
 ===========================
 
-Ein Phänomen, das durch seine einschneidende Art sehr stark in das Verhalten
-von IP-Netzwerken eingreift, ist NAT - Network Address Translation.
-
-Es gibt verschiedene Kriterien, nach denen man NAT einteilen kann.
-So kann ich die IP-Adressen oder die Ports ändern.
-Betrachte ich nur eine Richtung, dann kann ich zwischen Source-NAT (SNAT)
-und Destination-NAT (DNAT) unterscheiden.
-Eine weitere Unterscheidung berücksichtigt, ob Adressen eineindeutig
-umgesetzt werden oder mehrere Adressen auf eine andere Adresse
-(Masquerading).
-Beim Masquerading macht es mitunter einen Unterschied, ob der gleiche Port
-bei verschiedenen Verbindungen desselben Netzknotens auf den selben oder
-einen anderen Port umgesetzt wird.
-
-Der ursprüngliche Entwurf der Internet-Protokolle sah NAT nicht vor.
-Er ging von intelligenten Endgeräten und einem "dummen" Netz aus, das
+Der ursprüngliche Entwurf der Internet-Protokolle sah kein NAT vor.
+Er ging von "intelligenten" Endgeräten und einem "dummen" Netz aus, das
 lediglich wusste, wie es Datenpakete von A nach B transportieren kann.
 Die Endgeräte kümmerten sich um die Kontrolle der Datenströme und alle
 anderen Aspekte bis auf die Auswahl der Transportwege.
 
-Diese strikte Trennung der Zuständigkeiten trug einen wesentlichen Teil zur
+Diese Trennung der Zuständigkeiten trug einen wesentlichen Teil zur
 Entwicklung des Internet bei, weil sich Netz und Endgeräte auf ihren Teil
-der Zuständigkeiten konzentrieren und davon ausgehen konnten, dass der
+konzentrieren und davon ausgehen konnten, dass der
 jeweils andere Teil seine Aufgabe erfüllt.
 Durch die globale Adressierung war gewährleistet, dass prinzipiell jedes
 Endgerät mit jedem anderen kommunizieren konnte.
 
-Im Laufe der Zeit wurde dieses Prinzip der Trennung von "dummem" Netz und
-"intelligenten" Endgeräten (deren Intelligenz bezüglich des Netzes im
-IP-Protokoll-Stack liegt) auf verschiedene Art mehr oder weniger erfolgreich
-aufgebrochen.
-Während die Versuche seitens der Endgeräte, Kontrolle über die Datenpfade
-durch sogenanntes Source-Routing keine große Verbreitung fanden, sind im
+Dieses Prinzip der Trennung von "dummem" Netz und "intelligenten"
+Endgeräten wurde im Laufe der Zeit auf verschiedene Art aufgebrochen.
+Während die Versuche seitens der Endgeräte, die Datenpfade durch
+Source-Routing zu kontrollieren, keine große Verbreitung fanden, sind im
 Netz immer mehr Funktionen dazugekommen, die das Netz "intelligenter" und
-daher schlechter vorhersehbar für die Endgeräte machen.
+damit schlechter vorhersehbar für die Endgeräte machen.
 
-Eine Art das Netz "intelligenter" zu machen sind Middle-Boxes, üblicherweise
-Paketfilter, die den Datenverkehr inspizieren, manipulieren und aussondern.
-
-Eine andere Art ist die Netzwerk Adressumsetzung, die einen schwerwiegenden
+Eine Art das Netz "intelligenter" zu machen sind Middle-Boxes, die den
+Datenverkehr inspizieren, manipulieren und aussondern.
+Dazu zählt die Netzwerk Adressumsetzung, die einen schwerwiegenden
 Eingriff in die Datagramme darstellt.
 
 Sende ich in einem Netz ohne Middle-Boxes ein Datagramm von Rechner A nach
-Rechner B, so rechne ich damit, dass dieses Datagramm genauso beim Ziel
+Rechner B, so kann ich damit rechnen, dass dieses Datagramm genauso beim Ziel
 ankommt, wie ich es abschicke.
-Lediglich die TTL wird herunter gezählt und bei IPv4 die Prüfsumme mit jeder
-TTL neu berechnet.
+Lediglich die TTL wird vermindert und bei IPv4 die Prüfsumme mit der
+geänderten TTL neu berechnet.
 
 Der Empfänger des Datagramms kann aus diesem selbst den Absender erkennen
-und somit seine Antwort an diesen senden.
+und somit seine Antwort an direkt diesen adressieren.
 Damit ist bei einer Zwei-Wege-Kommunikation immer klar, wer mit wem
 kommuniziert.
 
 Sobald NAT dazu kommt, weiss manchmal die eine Seite, manchmal die
-andere und manchmal sogar beide nicht, mit wem sie da kommuniziert.
+andere und manchmal beide nicht, mit wem sie kommunizieren.
 
 Das ist bei einer einfachen TCP-Verbindung, wie zum Beispiel beim Übertragen
-einer E-Mail via SMTP vielleicht unkritisch.
+einer E-Mail via SMTP, unkritisch.
 
 Es gibt jedoch Protokolle, die die Adressinformationen auswerten und
 verwenden.
@@ -74,63 +57,70 @@ sich auf die unveränderten Adressen und Ports beziehen.
 In diesem Fall musste nachträglich einen Variante für IPsec via NAT
 geschaffen werden.
 
-Somit ist klar, dass NAT die Transparenz des Internet bricht.
-
-Damit erschwert NT dem Netzwerk-Administrator die Arbeit, weil er die
-umgesetzten Adressen bei seinen Analysen in Betracht ziehen muss.
-
-ICMP-Fehlermeldungen gelangen bei einer unsachgemäßen NAT-Box nicht zum
+ICMP-Fehlermeldungen gelangen bei manchen NAT-Boxen nicht zum
 Absender der ursprünglichen Nachricht.
 
+Damit erschwert NAT dem Netzwerk-Administrator die Arbeit, weil er die
+umgesetzten Adressen bei seinen Analysen in Betracht ziehen muss.
+
 Dem Nutzer des Endknotens erschwert es die Arbeit im Fehlerfall dadurch,
-dass er nicht weiß, an wen er sich wenden soll beziehungsweise dadurch, dass
+dass er nicht weiß, an wen er sich wenden soll, beziehungsweise dadurch, dass
 er dem Mitarbeiter beim Support Adressen nennt, mit denen dieser nichts
 anfangen kann.
+
+NAT wird nach verschiedene Kriterien unterschieden.
+Ändere ich nur IP-Adressen oder die Ports oder beides?
+Betrachte ich nur die Richtung, dann kann ich zwischen Source-NAT (SNAT)
+und Destination-NAT (DNAT) unterscheiden.
+Eine weitere Unterscheidung berücksichtigt, ob Adressen eineindeutig
+umgesetzt werden oder mehrere Adressen auf eine andere Adresse
+(Masquerading).
+Beim Masquerading macht es einen Unterschied, ob der gleiche Port
+bei verschiedenen Verbindungen desselben Netzknotens auf den selben oder
+einen anderen Port umgesetzt wird.
 
 Insbesondere Masquerading verhindert die direkte Adressierbarkeit von
 Endgeräten.
 Während das in vielen Fällen gewünscht ist, weil zum Beispiel interne
-Rechner nicht von extern angegriffen werden können, erschwert es erheblich
+Rechner nicht direkt von extern angegriffen werden können, erschwert es
 die Arbeit mit Peer-to-Peer-Protokollen, zum Beispiel für VoIP oder
-Videotelefonie, die auf möglichst geringe Latenzen angewiesen sind.
+Videotelefonie, die auf geringe Latenzen angewiesen sind.
 
 In diesem Bereich haben sich daher verschiedene Verfahren etabliert, die
 sich mit dem Hole-Punching bei NAT-Boxen beschäftigen, dem automatischen
 Öffnen von Verbindungen zur direkten Kommunikation von zwei Rechnern, die
 sich beide hinter NAT-Boxen befinden.
 
-Diese Verfahren benötigen mindestens einen Rendezvous-Server, über den die
+Diese Verfahren benötigen einen Rendezvous-Server, über den die
 Endgeräte die nötigen Informationen zum Partner bekommen und natürlich
 kooperierende NAT-Boxen.
 
-Nun mag man einwenden, dass die beiden Endgeräte gleich über den
-Rendezvous-Server kommunizieren können, anstelle sich mit den Eigenarten
+Zwar könnten die beiden Endgeräte gleich über den
+Rendezvous-Server kommunizieren, anstelle sich mit den Eigenarten
 der beteiligten NAT-Boxen herumzuschlagen.
-Für die direkte Verbindung spricht jedoch zum einen die Latenz, da die
-direkte Verbindung in den meisten Fällen kürzer ist als die beiden
-Verbindungen zum Rendezvous-Server, der alle Datagramme umsetzen müsste und
-sie somit zweimal in seinem Netzwerk hätte.
-Und schließlich kann es eine Frage der Vertraulichkeit sein, ob ich alle
-meine Daten immer über einen Server schicken will, oder lieber direkt.
+Für die direkte Verbindung spricht jedoch zum einen die Latenz, da diese
+bei der direkten Verbindung in den meisten Fällen kürzer ist als die beiden
+Verbindungen zum Rendezvous-Server, der alle Datagramme umsetzen müsste.
+Außerdem ist es eine Frage der Vertraulichkeit, ob ich alle
+meine Daten immer über den Server schicken will, oder lieber direkt.
 
 Ein weiteres Problem beim Hole-Punching stellt das sogenannte Hair-Pinning
 dar, das auftritt, wenn zwei Rechner hinter derselben NAT-Box eine direkte
 Verbindung aufnehmen wollen.
 
-Für diesen Fall teilt der Rendezvous-Server beiden Clients die gleiche
+In diesem Fall teilt der Rendezvous-Server beiden Clients die gleiche
 NAT-Adresse mit und diese versuchen über die NAT-Box eine Verbindung in das
 private Netz zurück aufzubauen.
 Damit das funktioniert, muss es die NAT-Box unterstützen.
 
-Der Rendezvous-Server teilt den Clients gegenseitig die lokalen Adressen
-mit, die sie ihm bei der Anmeldung mitgeteilt haben.
+Der Rendezvous-Server kann den Clients gegenseitig die lokalen Adressen
+mitteilen, die sie ihm bei der Anmeldung angaben.
 Auf diese Art können die Clients zunächst eine direkte Verbindung mit ihren
 lokalen Adressen versuchen, bevor sie mittels Hole-Punching über die NAT-Box
 gehen.
-So ist man in diesem Fall eigentlich nicht auf die Unterstützung der NAT-Box
-angewiesen.
+So ist man in diesem Fall nicht auf die Unterstützung der NAT-Box angewiesen.
 
-Sollten allerdings mehrere NAT-Boxen kaskadiert sein, muss zumindest die dem
+Sollten mehrere NAT-Boxen kaskadiert sein, muss zumindest die dem
 Rendezvous-Server zunächst gelegene NAT-Box Hair-Pinning unterstützen.
 
 RFC 2663, RFC 3022 und RFC 3303 gehen auf diese Aspekte ein.
@@ -139,21 +129,19 @@ Aus dem vorgenannten ist sicher zu erkennen, das ich NAT eher für ein Übel
 als für einen Segen halte.
 Wenn es sich beim Entwurf des Netzes vermeiden lässt, würde ich auf jeden Fall
 darauf verzichten.
-
-Es gibt nur einen triftigen Grund für mich, der für NAT spricht: die
+Es gibt für mich nur einen triftigen Grund, der für NAT spricht: die
 Knappheit der Adressen bei IPv4.
 
 Zwar gibt es einige, die den Standpunkt vertreten, dass NAT einen gewissen
-Schutz bietet, da das Netz dahinter nicht von außen adressiert und somit
-auch bei fehlerhaftem Regelsatz des Paketfilters nicht angegriffen werden
-kann.
+Schutz bietet, weil das Netz dahinter nicht von außen adressiert und somit
+das Netz auch ohne Firewall geschützt wäre.
 
-Dem setze ich entgegen, dass das komplette Sperren von Zugriffen aus
+Dem halte ich entgegen, dass das Sperren von Zugriffen aus
 externen Netzen eine derart triviale Paketfilterregel ist, dass bei dieser
-schwer etwas falsch gemacht werden kann und außerdem NAT nicht vor Angriffen
-aus dem inneren Netz schützt, die über Browserfehler durch bösartige
-Webseiten recht schnell ausgeführt werden können.
+kaum etwas falsch gemacht werden kann und weiterhin NAT nicht vor Angriffen
+aus dem inneren Netz schützt, die zum Beispiel über Browserfehler durch
+bösartige Webseiten ausgeführt werden können.
 
-Bei wirklich sensiblen Daten würde ich überlegen, ob diese überhaupt mit
+Bei sensiblen Daten würde ich generell überlegen, ob diese mit
 fremden Netzen verbunden werden müssen.
 
