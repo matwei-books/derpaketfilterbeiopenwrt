@@ -34,7 +34,7 @@ Lediglich die TTL wird vermindert und bei IPv4 die Prüfsumme mit der
 geänderten TTL neu berechnet.
 
 Der Empfänger des Datagramms kann aus diesem selbst den Absender erkennen
-und somit seine Antwort an direkt diesen adressieren.
+und somit seine Antwort direkt an diesen adressieren.
 Damit ist bei einer Zwei-Wege-Kommunikation immer klar, wer mit wem
 kommuniziert.
 
@@ -54,12 +54,11 @@ Im ersten Fall kann die NAT-Box durch Beobachten des Datenstroms die nötigen
 Umsetzungen für die zusätzliche Verbindung einrichten.
 IPsec hingegen funktioniert nicht über NAT, da die verschlüsselten Daten
 sich auf die unveränderten Adressen und Ports beziehen.
-In diesem Fall musste nachträglich einen Variante für IPsec via NAT
+In diesem Fall musste nachträglich eine Variante für IPsec via NAT
 geschaffen werden.
 
 ICMP-Fehlermeldungen gelangen bei manchen NAT-Boxen nicht zum
 Absender der ursprünglichen Nachricht.
-
 Damit erschwert NAT dem Netzwerk-Administrator die Arbeit, weil er die
 umgesetzten Adressen bei seinen Analysen in Betracht ziehen muss.
 
@@ -69,7 +68,7 @@ er dem Mitarbeiter beim Support Adressen nennt, mit denen dieser nichts
 anfangen kann.
 
 NAT wird nach verschiedene Kriterien unterschieden.
-Ändere ich nur IP-Adressen oder die Ports oder beides?
+Ändere ich nur die IP-Adressen oder die Ports oder beides?
 Betrachte ich nur die Richtung, dann kann ich zwischen Source-NAT (SNAT)
 und Destination-NAT (DNAT) unterscheiden.
 Eine weitere Unterscheidung berücksichtigt, ob Adressen eineindeutig
@@ -99,7 +98,7 @@ Zwar könnten die beiden Endgeräte gleich über den
 Rendezvous-Server kommunizieren, anstelle sich mit den Eigenarten
 der beteiligten NAT-Boxen herumzuschlagen.
 Für die direkte Verbindung spricht jedoch zum einen die Latenz, da diese
-bei der direkten Verbindung in den meisten Fällen kürzer ist als die beiden
+in den meisten Fällen kleiner ist als über die beiden
 Verbindungen zum Rendezvous-Server, der alle Datagramme umsetzen müsste.
 Außerdem ist es eine Frage der Vertraulichkeit, ob ich alle
 meine Daten immer über den Server schicken will, oder lieber direkt.
@@ -137,11 +136,8 @@ Schutz bietet, weil das Netz dahinter nicht von außen adressiert und somit
 das Netz auch ohne Firewall geschützt wäre.
 
 Dem halte ich entgegen, dass das Sperren von Zugriffen aus
-externen Netzen eine derart triviale Paketfilterregel ist, dass bei dieser
+externen Netzen eine derart triviale Firewalleinstellung ist, dass dabei
 kaum etwas falsch gemacht werden kann und weiterhin NAT nicht vor Angriffen
 aus dem inneren Netz schützt, die zum Beispiel über Browserfehler durch
 bösartige Webseiten ausgeführt werden können.
-
-Bei sensiblen Daten würde ich generell überlegen, ob diese mit
-fremden Netzen verbunden werden müssen.
 
