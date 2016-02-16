@@ -84,12 +84,12 @@ jeder einzelnen Regel:
     einfach prüfen, ob eine Regel entfernt werden kann.
 
 Diese Informationen können zum Beispiel in einem Ticketsystem oder einer
-CMDB gepflegt sein.
+Configuration Management Database (CMDB) gepflegt werden.
 
 Allgemeine Verfahren
 --------------------
 
-Stand der Technik, wenn auch noch lange nicht von jedem angewandt ist ein
+Stand der Technik, wenn auch noch lange nicht von jedem angewendet ist ein
 Change Management, das zum einen Konfigurationsänderungen abdeckt und zum
 anderen die Anpassungen der zugehörigen Dokumentation.
 
@@ -112,7 +112,7 @@ Review schnell vor sich gehen, weil kaum Abweichungen zu finden sein
 werden.
 
 Sind Abweichungen da, muss ich entscheiden, ob ich die Dokumentation an die
-Firewall angepasse, die Firewall an die Dokumentation oder beides aneinander.
+Firewall anpasse, die Firewall an die Dokumentation oder beides aneinander.
 
 Dabei muss ich prüfen, ob die Firewall noch korrekt im Sinne der
 Sicherheitsrichtlinie arbeitet.
@@ -137,14 +137,14 @@ im nächsten Zyklus verschwinden, wenn sie nicht dokumentiert sind.
 Systeme der zweiten Art sind nützlich, wenn ich eine Firewall, die nicht
 oder schlecht dokumentiert ist, analysieren will.
 
-Hilfsmittel zur Firewall-Dokumentation bei OpenWrt
---------------------------------------------------
+Wege zur Firewall-Dokumentation bei OpenWrt
+-------------------------------------------
 
 Generell habe ich drei Wege, um auf die Firewall-Konfiguration bei OpenWrt
 für die Dokumentation zuzugreifen:
 
 *   das Web-Interface LuCI,
-*   das CLI-Interface UCI und
+*   das Kommandozeilen-Interface UCI und
 *   `iptables-save`.
 
 LuCI, das Web-Interface, ist am besten für Ad-Hoc-Konfiguration geeignet.
@@ -156,7 +156,7 @@ komplex und vor allem zu anfällig im Hinblick auf Änderungen am
 Web-Interface.
 
 Besser geeignet für die automatisierte Erfassung der Konfiguration sowie die
-Konfiguration selbst ist das CLI UCI.
+Konfiguration selbst ist UCI.
 Mit `uci export` kann ich eine vorhandene Konfiguration auslesen, mit `uci
 import` eine neue einlesen.
 
