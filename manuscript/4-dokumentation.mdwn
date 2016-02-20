@@ -98,47 +98,42 @@ nur, dass eines etabliert wird, bei dem sich Änderungen in der Konfiguration
 zeitnah in der Dokumentation niederschlagen.
 Idealerweise wird die Änderung erst dokumentiert, dann umgesetzt, geprüft
 und schließlich das Prüfergebnis dokumentiert.
-
 Das kann schnell sehr aufwendig werden, darum muss jeder für sich
 selbst entscheiden, wieviel Bürokratie er haben will und wie hoch der Nutzen
 daraus für ihn ist.
 
 Ein weiterer wichtiger Baustein sind periodische Reviews.
-Das heißt, in regelmäßigen Abständen wird kontrolliert, ob die
+Das bedeutet, in regelmäßigen Abständen kontrolliere ich, ob die
 Firewall-Konfiguration mit der Dokumentation übereinstimmt.
-
 Habe ich mehr Aufwand in das Change Management gesteckt, kann der
-Review schnell vor sich gehen, weil kaum Abweichungen zu finden sein
-werden.
-
+Review schnell vor sich gehen, weil kaum Abweichungen zu finden sein werden.
 Sind Abweichungen da, muss ich entscheiden, ob ich die Dokumentation an die
 Firewall anpasse, die Firewall an die Dokumentation oder beides aneinander.
-
 Dabei muss ich prüfen, ob die Firewall noch korrekt im Sinne der
 Sicherheitsrichtlinie arbeitet.
 
 Egal, wie ich die Firewall dokumentiere, ob nur die Regeln als solches oder
 weitere Informationen, wie am Anfang des Kapitels beschrieben, auf eines
-werde ich nicht verzichten: ein Versionsverwaltungssystem, mit dem ich alle
-Änderungen erfassen und bei Bedarf einen vergangenen Stand wieder herstellen
+würde ich nicht verzichten: ein Versionsverwaltungssystem, mit dem ich alle
+Änderungen erfassen und bei Bedarf einen älteren Stand wieder herstellen
 kann.
 
-Schließlich halte ich es für sinnvoll, technische Hilfsmittel zu benutzen,
+Schließlich halte ich technische Hilfsmittel für sinnvoll,
 die automatisch entweder die Regeln aus der Dokumentation oder
 aus den Regeln eine gut lesbare Dokumentation erzeugen.
 
-Systeme der ersten Art sind besser um die eigene Infrastruktur zu verwalten.
+Werkzeuge der ersten Art sind besser um die eigene Infrastruktur zu verwalten.
 Wenn alles korrekt eingestellt ist, liegt dann der größte mentale Aufwand im
 Bestimmen und Dokumentieren der Regeln, während die Umsetzung halb- oder
 vollautomatisiert erfolgen kann.
 Ich muss allerdings daran denken, dass Ad-hoc-Änderungen der Regeln
 im nächsten Zyklus verschwinden, wenn sie nicht dokumentiert sind.
 
-Systeme der zweiten Art sind nützlich, wenn ich eine Firewall, die nicht
+Werkzeuge der zweiten Art sind nützlich, wenn ich eine Firewall, die nicht
 oder schlecht dokumentiert ist, analysieren will.
 
-Wege zur Firewall-Dokumentation bei OpenWrt
--------------------------------------------
+Firewall-Dokumentation bei OpenWrt
+----------------------------------
 
 Generell habe ich drei Wege, um auf die Firewall-Konfiguration bei OpenWrt
 für die Dokumentation zuzugreifen:
