@@ -2,12 +2,12 @@
 Testen der Firewall
 ===================
 
-All das schöne Wissen um die Paketfilter-Firewall nützt mir recht wenig, wenn
-ich mich nicht überzeugen kann, dass meine Kenntnisse nützlich sind und
+All das Wissen um die Paketfilter-Firewall nützt mir recht wenig, wenn ich
+ mich nicht überzeugen kann, dass meine Kenntnisse zutreffend sind und
 meine damit getroffenen Einstellungen ihren Zweck erfüllen.
-Genau diesem Zweck dienen Tests des Paketfilters.
+Diesem Zweck dienen die Tests des Paketfilters.
 
-Generell kann man sich auf verschiedene Arten an Firewalltests herantasten:
+Generell kann ich mich auf verschiedene Arten an Firewalltests herantasten:
 
 *   mit Penetrationstests,
 
@@ -15,32 +15,38 @@ Generell kann man sich auf verschiedene Arten an Firewalltests herantasten:
 
 *   durch Tests der Paketfilter-Regeln.
 
-Mit Penetrationstests sucht man im Allgemeinen nach Sicherheitsproblemen in
-ganzen Netzwerken, indem man diese attackiert.
-Dabei wird unter anderem der Paketfilter mit getestet.
-Probleme, die hierbei aufgedeckt werden, haben nicht notwendigerweise mit dem
+Mit Penetrationstests suche ich nach Sicherheitsproblemen in produktiven
+Netzwerken, indem ich diese attackiere.
+Dabei wird unter anderem auch der Paketfilter getestet.
+Probleme, die ich hierbei aufdecke, haben nicht notwendigerweise mit dem
 Paketfilter zu tun.
+Da die untersuchten Netzwerke produktiv verwendet werden, muss ich
+besonders verantwortungsbewusst vorgehen und mir vor allem die
+Zustimmung des Besitzers der betroffenen Netzwerke holen.
+Das ist keine Arbeit für jemand, der sich erst in die Materie
+einarbeiten will.
 
-Bei Tests der Firewall-Implementierung geht es vor allem um Fehler im
+Bei Tests der Firewall-Implementierung geht es um Fehler im
 Betriebssystem und der Paketfilter-Software.
 Probleme, die hierbei aufgedeckt werden, betreffen alle Paketfilter des
-betreffenden Typs, dass heißt in unserem Fall von OpenWrt in der
-entsprechenden Version.
-In diesem Fall ist es sinnvoll, eine Fehlermeldung in den Bug-Tracker zu
-stellen, damit das Problem, falls möglich, für alle gelöst werden kann.
+betreffenden Typs, dass heißt in unserem Fall OpenWrt in der
+getesteten Version.
+Dann ist es sinnvoll, eine Fehlermeldung in den Bug-Tracker zu
+stellen, damit das Problem für alle gelöst werden kann.
+Manchmal will ich mich auch direkt an die Entwickler wenden, wenn das
+entdeckte Problem sensible Bereiche betrifft.
 
 Tests der Firewallregeln sollen nachweisen, dass die Paketfilter-Regeln die
 Sicherheitsrichtlinie korrekt umsetzen.
-Probleme, die hierbei aufgedeckt werden, betreffen den konkreten Paketfilter
-an einer bestimmten Stelle im Netz und die dafür geltende
-Sicherheitsrichtlinie.
+Probleme, die ich hierbei aufdecke, betreffen den konkreten Paketfilter
+an dieser Stelle im Netz und die dafür geltende Sicherheitsrichtlinie.
 
 In diesem Kapitel konzentriere ich mich auf Tests der Implementierung und
 der Regeln.
 Diese Tests kann ich abseits des produktiven Netzes in einer sicheren
-Testumgebung ausführen und muss mir dann keine Gedanken darüber machen, dass
-die Tests die produktive Umgebung nicht stören dürfen beziehungsweise, dass
-letztere die Tests beeinflussen könnten.
+Testumgebung ausführen und muss mir keine Gedanken darüber machen, dass
+die Tests die Umgebung nicht stören dürfen beziehungsweise, dass
+letztere die Tests beeinflussen kann.
 
 Testumgebung
 ------------
@@ -49,31 +55,24 @@ Testumgebung
 
 Die Testumgebung besteht im einfachsten Fall aus dem zu testenden
 Paketfilter und je einem Rechner an jedem Anschluß dieses Paketfilters.
-Das heißt, ich benötige minimal drei Geräte.
+Das heißt, ich benötige mindestens drei Geräte.
 
-Mit einem x86-Image von OpenWrt kann ich alle drei Geräte als virtuelle
-Maschinen (VM) betreiben, die passend miteinander verbunden sind.
+Mit einem X86-Image von OpenWrt kann ich alle drei Geräte als virtuelle
+Maschinen (VM) betreiben, die miteinander verbunden sind.
 Dann kann ich die gesamte Testumgebung auf meiner Arbeitsstation oder in
-einer anderen geeigneten virtuellen Umgebung vorhalten und benötige keine
-zusätzliche Hardware für die Tests.
+vorhalten und benötige keine zusätzliche Hardware für die Tests.
+GNS3 ist ein dafür geeigneter Simulator für Netzwerke, mit dem ich
+verschiedene Konstellationen testen kann.
 
-Will ich die in einer virtuellen Hardware gewonnenen Erkenntnisse auf ein
-OpenWrt-System mit anderer Hardware übertragen, benötige ich allerdings
-zumindest für einige der Tests die entsprechende Hardware.
-
-Wichtig ist, dass die Uhrzeit auf allen Systemen hinreichend genau
-übereinstimmt.
-Bei virtuellen Maschinen wird das möglicherweise vom Hostsystem
-synchronisiert, ansonsten kann ich die Systemzeit mit NTP hinreichend genau
-abgleichen.
+Will ich die mit der virtuellen Maschine gewonnenen Erkenntnisse auf ein
+OpenWrt-System mit anderer Hardware übertragen, benötige ich vielleicht
+für einige Tests die entsprechende Hardware.
+Ein WLAN-Netzwerk, zum Beispiel, lässt sich nicht einfach simulieren.
 
 ### Software
 
-Neben den Testmaschinen benötige ich auf jedem der beteiligten Rechner
-geeignete Software um die Testdaten zu erzeugen sowie weitere Software um
-die Datenpakete mitzuschneiden.
-
-#### Paketgeneratoren
+Neben den Testmaschinen benötige ich geeignete Software um die Testdaten
+zu erzeugen und um die Datenpakete mitzuschneiden.
 
 Zum Erzeugen von Datenpaketen stehen mir etliche Programme und Bibliotheken
 zur Verfügung:
@@ -81,75 +80,70 @@ zur Verfügung:
 *   **Nmap** (Network Mapper) ist ein freies Werkzeug, um Netzwerke zu
     erkunden.
 
-*   **Hping** ist ähnlich dem Ping-Befehl, unterstützt allerdings auch TCP,
+*   **Hping** ist dem Ping-Befehl ähnlich, unterstützt auch TCP,
     UDP, ICMP und andere IP-Protokolle, so dass ich die Reaktion des
-    Paketfilters auf diese Daten unmittelbar testen kann.
+    Paketfilters auf diese Datagramme testen kann.
 
-*   **Tcpreplay** erlaubt es aufgezeichneten Datenverkehr erneut in das
-    Netzwerk einzuspeisen. Damit kann ich zum Beispiel Datenverkehr aus dem
+*   **Tcpreplay** erlaubt es, aufgezeichneten Datenverkehr erneut in das
+    Netzwerk einzuspeisen. Damit kann ich Datenverkehr aus dem
     Produktivnetz in das Testnetz einspielen und sehen, wie der Paketfilter
     reagiert.
 
-*   **Scapy** ist ein nützliches Werkzeug, für den, der mit der
-    Programmiersprache Python vertraut ist.
-
-*   **Network Expect** ist ein Framework, das stark vom Expect-Programm von
+*   **Network Expect** ist ein Framework, das vom Programm Expect von
     Don Libes beeinflusst wurde.
-    Damit kann ich "interaktive" Netzwerkprogramme mit entsprechenden
+    Damit kann ich "interaktive" Netzwerkprogramme mit
     Skripts schreiben, ohne zum Compiler greifen zu müssen.
 
-*   **libnet** ist eine Bibliothek, mit der ich relativ einfach Anwendungen
-    schreiben kann, die Datenpakete erzeugen.
-    Diese verwende ich, wenn ich mit all den anderen Werkzeugen nicht mehr
+*   Mit **libnet** kann ich relativ einfach Anwendungen in C schreiben,
+    die Datenpakete erzeugen.
+    Diese verwende ich, wenn ich mit allen anderen Werkzeugen nicht mehr
     weiterkomme.
-
-#### Paket-Sniffer
 
 Auch für das Mitschneiden des Datenverkehrs und die spätere Analyse kann ich
 unter mehreren Werkzeugen auswählen:
 
-*   **Tcpdump** ist sehr weit verbreitet und daher oft das Mittel der Wahl,
+*   **Tcpdump** ist weit verbreitet und für mich oft das Mittel der Wahl,
     um Datenverkehr mitzuschneiden.
 
 *   **Snort** basiert, wie *tcpdump*, auf der Bibliothek *libpcap* und kann
     als leichtgewichtiges IDS verwendet werden.
     Beim Testen von Firewalls kann es als Indikator dienen, ob bestimmte
     Datenpakete vorkommen.
-    Das ist insbesondere dann von Vorteil, wenn diese Datenpakete in einer
+    Das ist von Vorteil, wenn die mich interessierenden Daten in einer
     großen Menge anderer Datenpakete versteckt sind.
 
-*   **Libpcap** ist eine Bibliothek, auf der viele Sniffer-Programme
-    aufsetzen und mit der ich eigene Werkzeuge programmieren kann, wenn ich
-    etwas ganz spezielles benötige.
+*   Mit **Libpcap** kann ich wiederum eigene Werkzeuge in C
+    programmieren, wenn ich kein geeignetes Werkzeug für meine
+    Fragestellung finde.
 
-*   **Libtrace** ist eine Bibliothek ähnlich *libpcap*.
+*   **Libtrace** ist eine Bibliothek wie *libpcap*.
     Ein Vorteil gegenüber letzterer ist, dass *libtrace* sehr viele
     Datenformate von fremden Paketsniffern lesen kann.
 
 *   **Wireshark** ist ein GUI-Programm zum Mitschneiden von Datenverkehr und
-    zum bequemen Auswerten von Mitschnitten.
-    Beim Testen von Paketfiltern werde ich Wireshark höchstens an einer
-    Seite des Paketfilters einsetzen.
+    zum bequemen Auswerten der Mitschnitte.
+    Der GNS3 Netzwerk Simulator erlaubt das bequeme Protokollieren und
+    Auswerten der zwischen den Knoten gesendeten Datagramme mit
+    Wireshark.
 
 Vorgehen
 --------
 
 ### Testplan
 
-Habe ich nun mein Testsystem und die benötigte Software, wird es Zeit, einen
+Habe ich mein Testsystem und die benötigte Software, wird es Zeit, einen
 Testplan aufzustellen.
 Dafür gibt es mindestens zwei Methoden: Ich kann nach einer Checkliste
 testen, oder ich erstelle meinen Testplan entsprechend dem Entwurf der
 Paketfilterregeln (designorientiert).
 
-Tests nach Checkliste haben den Vorteil, dass sie relativ schnell erstellt
-werden können und nichts vergessen bleibt, was auf der Checkliste steht.
-Sie sind geeignet, wenn ich die Software der Firewall testen will zum
+Tests nach Checkliste haben den Vorteil, dass sie schnell erstellt
+werden können und nichts vergessen wird, was auf der Checkliste steht.
+Sie sind geeignet, wenn ich die Software der Firewall testen will, zum
 Beispiel zwischen zwei Versionen einer Firewall, als Regressionstest nach
-einer Fehlermeldung oder, wenn ich ein Firewall-Produkt auswählen will und
+einer Fehlermeldung oder wenn ich ein Firewall-Produkt auswählen und
 vor dem Einsatz testen will, ob es überhaupt geeignet ist.
-Auch für Tests von vorgegebenen Firewall-Regeln kann ich nach Checkliste
-vorgehen.
+Auch bei Tests von vorgegebenen Firewall-Regeln eignen sich Checklisten.
 
 Was Tests nach Checkliste nicht berücksichtigen, sind die Beziehungen
 zwischen den Firewall-Regeln und der Sicherheitsrichtlinie.
@@ -159,60 +153,58 @@ Sicherheitsrichtlinie aus.
 Ich überlege, warum eine bestimmte Firewall-Konfiguration die
 Sicherheitsrichtlinie umsetzt und entwickle daraus die entsprechenden
 Testfälle, die mir diese Überlegungen bestätigen oder widerlegen.
-Nur damit gelange ich zu Tests die relevant für den konkreten Paketfilter am
-konkreten (späteren) Einsatzort sind.
+Damit gelange ich zu Tests die relevant für den konkreten Paketfilter am
+späteren Einsatzort sind.
 
-Das Problem beim designorientierten Entwurf ist, dass es schwierig ist.
-Es ist schwieriger, wie der Entwurf von Firewall-Regeln für einen konkreten
-Paketfilter aus der Sicherheitsrichtlinie heraus.
-Mit dem Entwurf der Paketfilter-Regeln stelle ich eine Behauptung auf, und
-zwar dass diese Paketfilter-Regeln die Sicherheitsrichtlinie erfüllen.
-Beim Entwurf der Tests für die Überprüfung der Firewall versuche ich diese
-Behauptung zu widerlegen.
+Das Problem beim designorientierten Entwurf der Tests ist, dass es
+schwierig ist, schwieriger als der Entwurf von Firewall-Regeln für einen
+konkreten Paketfilter aus der Sicherheitsrichtlinie.
+Mit dem Entwurf der Paketfilter-Regeln stelle ich eine Behauptung auf:
+dass diese Paketfilter-Regeln die Sicherheitsrichtlinie erfüllen.
+Beim Entwurf der Tests für die Überprüfung der Firewall versuche ich,
+diese Behauptung zu widerlegen.
 
-Da es mir (und ich glaube den meisten Menschen) schwer fällt, eine eigene
+Da es mir - und ich glaube den meisten Menschen - schwer fällt, eine eigene
 Behauptung zu widerlegen, ist es sinnvoll, wenn die Tests nicht von der
 gleichen Person entworfen werden, wie die Paketfilter-Regeln.
-Geht das nicht, hilft es vielleicht, wenn die Tests und die Regeln im
-Abstand von einigen Wochen entwickelt werden.
+Geht das nicht, hilft es, wenn ich die Regeln und die Tests im
+Abstand von einigen Wochen entwickle.
 
 ### Tests durchführen
 
-Neben den konzeptionellen Problemen überhaupt einen Testplan zu erstellen,
-gibt es noch das Problem, dass ich beim Umsetzen des Testplans Fehler mache.
+Neben den konzeptionellen Problemen beim Erstellen eines Testplan gibt es
+noch das Problem, dass ich beim Umsetzen des Testplans Fehler machen kann.
 
-Das heißt, im Laufe der Tests will ich nicht nur mit den Tests nachweisen,
+Das bedeutet, ich will nicht nur mit den Tests nachweisen,
 ob eine Filterregel korrekt ist oder nicht.
-Zusätzlich muss ich auch sicher sein können, dass mein Test auch wirklich
-funktioniert.
+Zusätzlich will ich auch sicher sein können, dass die Tests wirklich
+funktionieren.
 
 Dazu führe ich die Tests mindestens zweimal durch: einmal mit deaktivierten
 Regeln, die der Test prüfen soll und einmal mit aktiven Paketfilter-Regeln.
-Dabei sollte ich in einem Fall die zugehörigen Datenpakete sehen und im
-anderen Fall nicht.
+Dabei sollte ich normalerweise in einem Fall die zugehörigen Datenpakete
+sehen und im anderen Fall nicht.
 
-Nur so kann ich einigermaßen sicher sein, dass die getesteten Datenpakete
-durch die Firewall-Regeln blockiert werden und nicht auf Grund von anderen
+Nur so kann ich sicher sein, dass die betrachteten Datenpakete durch die
+Firewall-Regeln blockiert werden und nicht auf Grund von anderen
 Phänomenen im Netz.
-
-#### Performance-Tests
 
 Neben der rein funktionalen Überprüfung des Paketfilters, ob die Regeln den
 Anforderungen der Sicherheitsrichtlinie für den konkreten Einsatzzweck
 genügen, steht als weiterer Aspekt die Leistungsfähigkeit des Paketfilters.
 
-Diese hängt zwar überwiegend von der eingesetzten Hardware und dem
+Diese hängt überwiegend von der eingesetzten Hardware und dem
 Betriebssystem ab, kann aber durch die Konfiguration des Paketfilters und
 der Regeln beeinflusst werden.
 
-So kann zum Beispiel durch zu großzügige Freigaben für ganze Netze die
-ARP-Tabelle bzw.  der Neighbor-Cache des Paketfilters überlaufen, was zu
-zusätzlichem Aufwand für reguläre Verbindungen führen kann.
+So kann durch zu großzügige Freigaben für ganze Netze die ARP-Tabelle
+bzw.  der Neighbor-Cache des Paketfilters überlaufen, was dann zu
+erhöhtem Aufwand für reguläre Verbindungen führen kann.
 
-Bestimmte Regel-Konfigurationen können sich nachteilig auf die Performance
-des Paketfilters auswirken.
+Auch können sich bestimmte Regel-Konfigurationen nachteilig auf die
+Performance des Paketfilters auswirken.
 Hier kann ich mit *tcpreplay* die Auswirkungen verschiedener Konfigurationen
-auf die Performance testen und anschließend mit einem vollen Test
+auf die Performance testen und anschließend mit einem funktionalen Test
 verifizieren, dass die performantere Konfiguration noch der
 Sicherheitsrichtlinie genügt.
 
@@ -223,10 +215,10 @@ Einen allgemeinen Einblick in die Vorgehensweise beim Test von
 Firewall-Paketfiltern gibt die Diplomarbeit von Gerhard Zaugg an der ETH
 Zürich von 2004.
 An den dort und in der referenzierten Literatur dargelegten Konzepten hat
-sich nichts wesentliches geändert.
+sich nichts Wesentliches geändert.
 
 Für IPv6 verweise ich auf das Forschungsprojekt IPv6 Intrusion Detection
-im Rahmen dessen die Testsuite *ft6* entstanden ist.
+im Rahmen dessen die Test-Suite *ft6* entstanden ist.
 
 Weitere Werkzeuge für IPv6 sind
 
