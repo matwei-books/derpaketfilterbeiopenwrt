@@ -39,11 +39,10 @@ Gibt es benutzerdefinierte Ketten und ist mir deren Zusammenspiel nicht
 klar, beginne ich damit, die Zusammenhänge zwischen den Regelketten zu
 analysieren.
 
-Die Frage nach der Sicherheitsrichtlinie hilft mir bei der
-Interpretation der einzelnen Regeln.
-
-Ist mir die Sicherheitsrichtlinie bekannt, kann ich jede Regel danach
-bewerten, ob sie zur Durchsetzung der Richtlinie beiträgt und notieren,
+Die Sicherheitsrichtlinie kann mir bei der
+Interpretation der einzelnen Regeln helfen.
+Ist mir die Richtlinie bekannt, kann ich jede Regel danach
+bewerten, ob sie zu ihrer Durchsetzung beiträgt und notieren,
 welchen Teil der Richtlinie sie unterstützt.
 
 Kenne ich die Sicherheitsrichtlinie nicht, muss ich mir bei der Analyse
@@ -62,7 +61,7 @@ Struktur von Regelketten
 Benutzerdefinierte Regelketten können sich als zweischneidiges Schwert
 erweisen: sie können Paketfilterregeln vereinfachen und übersichtlicher
 machen und andererseits die Analyse des Paketfilters erschweren, wenn
-der Zusammenhang zwischen ihnen nicht klar ist.
+mir der Zusammenhang zwischen ihnen nicht klar ist.
 
 Für OpenWrt habe ich den Zusammenhang zwischen den Regelketten im Kapitel
 "Modell der Firewall-Regeln bei OpenWrt" erläutert.

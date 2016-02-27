@@ -58,15 +58,15 @@ Paketfilter und je einem Rechner an jedem Anschluß dieses Paketfilters.
 Das heißt, ich benötige mindestens drei Geräte.
 
 Mit einem X86-Image von OpenWrt kann ich alle drei Geräte als virtuelle
-Maschinen (VM) betreiben, die miteinander verbunden sind.
-Dann kann ich die gesamte Testumgebung auf meiner Arbeitsstation oder in
+Maschinen, die miteinander verbunden sind, betreiben.
+Dann kann ich die gesamte Testumgebung auf meiner Arbeitsstation
 vorhalten und benötige keine zusätzliche Hardware für die Tests.
 GNS3 ist ein dafür geeigneter Simulator für Netzwerke, mit dem ich
 verschiedene Konstellationen testen kann.
 
 Will ich die mit der virtuellen Maschine gewonnenen Erkenntnisse auf ein
 OpenWrt-System mit anderer Hardware übertragen, benötige ich vielleicht
-für einige Tests die entsprechende Hardware.
+für einige Tests trotzdem diese Hardware.
 Ein WLAN-Netzwerk, zum Beispiel, lässt sich nicht einfach simulieren.
 
 ### Software
@@ -80,7 +80,7 @@ zur Verfügung:
 *   **Nmap** (Network Mapper) ist ein freies Werkzeug, um Netzwerke zu
     erkunden.
 
-*   **Hping** ist dem Ping-Befehl ähnlich, unterstützt auch TCP,
+*   **Hping** ist dem Ping-Befehl ähnlich, unterstützt aber auch TCP,
     UDP, ICMP und andere IP-Protokolle, so dass ich die Reaktion des
     Paketfilters auf diese Datagramme testen kann.
 
@@ -150,14 +150,15 @@ zwischen den Firewall-Regeln und der Sicherheitsrichtlinie.
 
 Beim designorientierten Entwurf des Testplans gehe ich von der
 Sicherheitsrichtlinie aus.
-Ich überlege, warum eine bestimmte Firewall-Konfiguration die
-Sicherheitsrichtlinie umsetzt und entwickle daraus die entsprechenden
+Ich überlege, wie eine bestimmte Firewall-Konfiguration die
+Sicherheitsrichtlinie umsetzen könnte und entwickle daraus die entsprechenden
 Testfälle, die mir diese Überlegungen bestätigen oder widerlegen.
 Damit gelange ich zu Tests die relevant für den konkreten Paketfilter am
 späteren Einsatzort sind.
 
 Das Problem beim designorientierten Entwurf der Tests ist, dass es
-schwierig ist, schwieriger als der Entwurf von Firewall-Regeln für einen
+schwierig ist.
+Schwieriger als der Entwurf von Firewall-Regeln für einen
 konkreten Paketfilter aus der Sicherheitsrichtlinie.
 Mit dem Entwurf der Paketfilter-Regeln stelle ich eine Behauptung auf:
 dass diese Paketfilter-Regeln die Sicherheitsrichtlinie erfüllen.

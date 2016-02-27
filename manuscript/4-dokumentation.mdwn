@@ -84,7 +84,7 @@ jeder einzelnen Regel:
     einfach prüfen, ob eine Regel entfernt werden kann.
 
 Diese Informationen können zum Beispiel in einem Ticketsystem oder einer
-Configuration Management Database (CMDB) gepflegt werden.
+Configuration Management Database gepflegt werden.
 
 Allgemeine Verfahren
 --------------------
@@ -97,7 +97,7 @@ Ich will hier nicht auf einzelne Verfahren eingehen, wichtig ist
 nur, dass eines etabliert wird, bei dem sich Änderungen in der Konfiguration
 zeitnah in der Dokumentation niederschlagen.
 Idealerweise wird die Änderung erst dokumentiert, dann umgesetzt, geprüft
-und schließlich das Prüfergebnis dokumentiert.
+und schließlich auch das Prüfergebnis dokumentiert.
 Das kann schnell sehr aufwendig werden, darum muss jeder für sich
 selbst entscheiden, wieviel Bürokratie er haben will und wie hoch der Nutzen
 daraus für ihn ist.
@@ -127,7 +127,7 @@ Wenn alles korrekt eingestellt ist, liegt dann der größte mentale Aufwand im
 Bestimmen und Dokumentieren der Regeln, während die Umsetzung halb- oder
 vollautomatisiert erfolgen kann.
 Ich muss allerdings daran denken, dass Ad-hoc-Änderungen der Regeln
-im nächsten Zyklus verschwinden, wenn sie nicht dokumentiert sind.
+im nächsten Zyklus verschwinden, wenn sie nicht dokumentiert werden.
 
 Werkzeuge der zweiten Art sind nützlich, wenn ich eine Firewall, die nicht
 oder schlecht dokumentiert ist, analysieren will.
@@ -146,8 +146,8 @@ LuCI, das Web-Interface, ist am besten für Ad-Hoc-Konfiguration geeignet.
 Diese will ich im Rahmen eines Change Managements gerade vermeiden.
 
 Zwar ist es möglich, mit Webbots einen OpenWrt-Rechner automatisch über das
-Web-Interface zu konfigurieren, doch sind solche Lösungen zu
-komplex und vor allem zu anfällig im Hinblick auf Änderungen am
+Web-Interface zu konfigurieren und dokumentieren, doch sind solche Lösungen
+zu komplex und vor allem zu anfällig im Hinblick auf Änderungen am
 Web-Interface.
 
 Besser geeignet für die automatisierte Erfassung der Konfiguration sowie die
