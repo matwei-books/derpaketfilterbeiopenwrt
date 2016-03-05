@@ -25,7 +25,7 @@ Dem geht die Ermittlung meines Schutzbedarfs voraus, die Risikoanalyse.
 Bei der Risikoanalyse und auch bei der Festlegung der Sicherheitsrichtlinie
 ist es wichtig, dass ich die Grenzen des Systems bestimme.
 Sinnvollerweise liegen diese in meinem Verantwortungsbereich, da eine
-Sicherheitsrichtlinie nur dann ihren Zweck erfüllen kann, wenn ich sie auch
+Sicherheitsrichtlinie nur dann ihren Zweck erfüllt, wenn ich sie auch
 durchsetzen kann.
 
 Bei der Risikoanalyse identifiziere und bewerte ich Risiken, um dann im
@@ -84,7 +84,7 @@ Reputation zu bewerten.
 Zu jedem der Aktivposten ermittle ich die Anforderungen bezüglich
 Vertraulichkeit, Integrität und Verfügbarkeit.
 
-Wenn ich zum Beispiel Internet-Banking betreibe, dann hat der dieser
+Wenn ich zum Beispiel Internet-Banking betreibe, dann hat dieser
 Aktivposten sehr hohe Anforderungen bezüglich Vertraulichkeit (die
 Kennworte und TANs) und Integrität (die eingegebenen Beträge und
 Kontonummern) aber meist relativ geringe Anforderungen an die
@@ -104,13 +104,14 @@ Bei IT-Systemen, die für mehrere der Aktivposten genutzt werden, nehme ich
 die höchste Anforderung bezüglich Vertraulichkeit, Integrität und
 Verfügbarkeit.
 
-Es gibt keine allgemeine Angaben, welche Anforderungen an die drei Kriterien
-eine IT-Systemkomponente erfüllen muss.
+Zwar gibt es keine allgemeine Angaben, welche Anforderungen an die drei
+Kriterien eine IT-Systemkomponente erfüllen muss.
 Mit der Analyse der Infrastruktur und der Aktivposten kann ich diese
 jedoch für jede einzelne Komponente konkret abschätzen.
 
-Als nächstes benötige ich eine Analyse der konkreten Bedrohungen der
-Komponente und der möglichen Maßnahmen die mich davor schützen können.
+Nachdem ich so den Schutzbedarf aller Systemkomponenten bestimmt habe,
+betrachte ich als nächstes die konkreten Bedrohungen der Komponente und
+wähle aus den möglichen Maßnahmen, die mich davor schützen können.
 Hierbei kann ich die IT-Komponenten nach ihrem Typ betrachten.
 
 Ein Arbeitsplatzrechner ist immer auf die gleiche Art und Weise angreifbar
@@ -118,7 +119,7 @@ und kann auf die gleiche Art und Weise geschützt werden.
 Egal, ob er zum Lesen von E-Mail, zum Abschließen von Geldgeschäften oder
 als öffentliches Internet-Terminal in einer Bibliothek verwendet wird.
 Die IT-Grundschutzkataloge des BSI kann ich als Ausgangspunkt für eigene
-Analysen verwenden.
+Überlegungen verwenden.
 
 Um meine Risikoanalyse abzuschließen, betrachte ich für jede IT-Komponente
 im System alle Aktivposten, die diese Komponente verwenden und bestimme damit
