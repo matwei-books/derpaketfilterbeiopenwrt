@@ -14,7 +14,7 @@ Ich kann
 *   transparente Proxies und Captive Portals betreiben
 *   Datenpakete, insbesondere deren Header, manipulieren.
 
-Natürlich hat ein OpenWrt-Paketfilter auch Grenzen.
+Natürlich hat der OpenWrt-Paketfilter auch Grenzen.
 
 Diese ergeben sich zum einen aus der eingesetzten Software durch
 Programmfehler und Sicherheitslücken sowie Fehler in der Konfiguration,
@@ -31,31 +31,31 @@ Wie kann ich die Grenzen herausfinden?
 Die Grenzen der Hardware finde ich durch Lasttests heraus.
 Ich sende soviel Traffic zum Gerät wie möglich und beobachte, wie viel davon
 durchkommt.
-Da ich hier am Paketfilter interessiert bin, kombiniere ich den gesendeten
-Traffic aus zulässigen und unzulässigen Datenpaketen um zu sehen, wie weit
-letztere die ersteren beeinträchtigen.
+Da ich hier am Paketfilter interessiert bin, kombiniere ich
+zulässigen und unzulässigen Traffic, um zu sehen wie weit
+letzterer ersteren beeinträchtigt.
 
 Softwarefehler und Sicherheitslücken kann ich durch Penetrationstests
 entdecken.
-Dabei neue Fehler zu finden erfordert einiges an Erfahrung und meist auch
+Dabei neue Fehler zu finden erfordert Erfahrung und meist auch
 Einblick in die inneren Abläufe aus dem Quelltext der Software heraus.
 Diese Ressourcen haben die wenigsten Anwender von OpenWrt.
 
 Einfacher ist es, Sicherheitsmailinglisten und ähnliche Quellen zu verfolgen
 und bei neu entdeckten Schwachstellen zu prüfen, ob mein System dafür
 anfällig ist.
-Zu diesem Zweck gibt es Exploit-Frameworks, die diese Tests vereinfachen
-können.
+Zu diesem Zweck gibt es Exploit-Frameworks, die diese Tests
+vereinfachen.
 
 Wie kann ich die Grenzen verschieben?
 -------------------------------------
 
 In manchen Fällen, speziell bei Leistungsproblemen, bleibt mir nur, auf
 leistungsfähigere Hardware auszuweichen.
-In dringenden Fällen kann ich bestimmte Funktionen abschalten oder den
+In dringenden Fällen kann ich Funktionen abschalten oder den
 Durchsatz begrenzen.
 
-Gibt es Workarounds, kann ich diese mindestens temporär nutzen.
+Gibt es Workarounds, kann ich diese zumindest temporär nutzen.
 Vielleicht sogar selbst welche entwickeln.
 
 Bei Softwareproblemen gibt es mitunter neue Versionen oder Patches, die
@@ -65,7 +65,7 @@ System nur zu aktualisieren.
 
 Gibt es noch keine Version, in der das Problem behoben ist, im Repository,
 kann ich die Software selbst übersetzen.
-Dafür brauche ich eine Entwicklungsumgebung.
+Dafür brauche ich eine Entwicklungsumgebung für OpenWrt.
 
 Stärken von OpenWrt
 -------------------
@@ -85,7 +85,7 @@ Schwächen von OpenWrt
 Ein Kritikpunkt ist die Vielzahl von möglichen Erweiterungen in Form von
 Softwarepaketen, die gerade Einsteiger verwirren kann.
 
-Je nach vorhandener Hardware ist die Unterstützung verschieden gut.
+Je nach Hardware ist die Unterstützung verschieden gut.
 Vor dem Kauf eines Gerätes ist auf jeden Fall ein Blick in die Liste der
 unterstützen Hardware angebracht.
 
@@ -95,8 +95,8 @@ bestimmten Einsatzfall.
 Wie kann ich die Schwächen kompensieren?
 ----------------------------------------
 
-Wenn ich sowenig Softwarepakete wie möglich, als nur die für den Einsatz
-nötige Software installiere, umgehe ich alle Probleme mit Softwarepaketen,
+Wenn ich sowenig Softwarepakete wie möglich, also nur die für den Einsatz
+nötige Software installiere, umgehe ich Probleme mit Softwarepaketen,
 die nicht auf meinem Gerät sind.
 Natürlich muss ich mir trotzdem einen Überblick verschaffen, was vorhanden
 ist.
@@ -110,12 +110,12 @@ Wenn ich sie einsetze ist es unter Umständen vorteilhaft, wenn ich ein Gerät
 zusätzlich - als Reserve - besorge, um im Fehlerfall nicht auf andere
 Hardware ausweichen zu müssen.
 Anderseits kann die Hardware zu einem späteren Zeitpunkt aus zweiter Hand
-noch preisgünstiger zu bekommen sein.
+preisgünstiger zu bekommen sein.
 
 Bei Softwareproblemen kann es nötig sein, eine neue Version selbst zu
 übersetzen.
-Das erfordert dann eine entsprechende Entwicklungsumgebung und Einarbeitung
-in dieselbe.
-Dafür kann ich dann gleich die Firmware an meine Wünsche anpassen und
-brauche nicht nachträglich zusätzliche Software zu installieren.
+Dafür benötige ich die Entwicklungsumgebung und muss mich in diese
+einarbeiten.
+Dann kann ich auch die Firmware an meine Wünsche anpassen und
+brauche nicht nachträglich zusätzliche Software installieren.
 
