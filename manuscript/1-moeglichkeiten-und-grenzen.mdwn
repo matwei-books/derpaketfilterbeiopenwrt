@@ -11,7 +11,7 @@ Ich kann
     erlaubt,
 *   IP-Adressen mit NAT umsetzen oder mit Masquerading verstecken,
 *   Traffic-Shaping mit dem Programm `tc` unterstützen,
-*   transparente Proxies und Captive Portals betreiben
+*   transparente Proxies und Captive Portals betreiben und
 *   Datenpakete, insbesondere deren Header, manipulieren.
 
 Natürlich hat der OpenWrt-Paketfilter auch Grenzen.
@@ -63,7 +63,7 @@ das Problem beheben.
 Sind diese über die Software-Paketverwaltung erhältlich, brauche ich das
 System nur zu aktualisieren.
 
-Gibt es noch keine Version, in der das Problem behoben ist, im Repository,
+Gibt es noch keine Version im Repository, in der das Problem behoben ist,
 kann ich die Software selbst übersetzen.
 Dafür brauche ich eine Entwicklungsumgebung für OpenWrt.
 
@@ -116,6 +116,6 @@ Bei Softwareproblemen kann es nötig sein, eine neue Version selbst zu
 übersetzen.
 Dafür benötige ich die Entwicklungsumgebung und muss mich in diese
 einarbeiten.
-Dann kann ich auch die Firmware an meine Wünsche anpassen und
+Dann kann ich aber auch die Firmware an meine Wünsche anpassen und
 brauche nicht nachträglich zusätzliche Software installieren.
 

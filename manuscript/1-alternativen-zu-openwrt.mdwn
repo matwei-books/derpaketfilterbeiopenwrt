@@ -11,7 +11,7 @@ die Wahl aus anderen Gründen auf OpenWrt, dann muss dessen
 Paketfilter reichen.
 
 Bei erhöhten Sicherheitsanforderungen weiche ich für die Netzwerkfilterung
-vielleicht auf andere Systeme aus und verwende gegebenenfalls andere
+vielleicht auf andere Systeme aus und verwende, wenn nötig, andere
 Hardware.
 
 Ein weiterer Aspekt ist das zur Verfügung stehende Budget.
@@ -83,10 +83,10 @@ erzeugen sowie aus der Konfiguration automatisch eine verständliche
 Dokumentation zu generieren.
 
 Bei der Konfiguration über Webinterface ist die Lernkurve am Anfang sehr
-flach und kleinere Konfigurationsänderungen sind schnell gemacht.
+flach und kleine Konfigurationsänderungen sind schnell gemacht.
 Dafür sind komplexe Konfigurationen nur mühsam und fehlerträchtig zu
 pflegen.
-Versionskontrolle ist ohne weiteren Aufwand auch nicht möglich.
+Versionskontrolle ist ohne weiteren Aufwand nicht möglich.
 Automatisierung über das Webinterface ist zwar möglich, aber sehr aufwendig
 und fragil gegenüber Änderungen am Webinterface.
 
@@ -105,12 +105,12 @@ ist oft bei proprietären Programmen zu finden.
 Dabei bin ich an das Betriebssytem gebunden, auf dem das
 Konfigurationsprogramm läuft.
 
-Die letzte Form der Konfiguration ist direkt am Gerät.
+Als letzte Form der Konfiguration kann ich direkt am Gerät arbeiten.
 Damit ist in den meisten Fällen nur eine minimale Grundkonfiguration
-möglich sowie das Rücksetzen auf Werkseinstellungen.
+möglich, sowie das Rücksetzen auf Werkseinstellungen.
 
-Bleibt als Unterscheidungsmerkmal für Alternativen die benötigte
-Hardware, beziehungsweise das Virtualisierungssystem, falls ich den
+Schließlich kann ich Alternativen nach der benötigten Hardware einteilen,
+beziehungsweise nach dem Virtualisierungssystem, falls ich den
 Paketfilter in einem Software Defined Network als virtuelle Maschine
 betreiben will.
 
