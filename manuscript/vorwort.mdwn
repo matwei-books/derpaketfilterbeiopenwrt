@@ -2,7 +2,36 @@
 Vorwort
 =======
 
-%% Wie kam ich dazu dieses Buch zu schreiben?
+2012 schrieb ich an einem Buch über Einplatinenrechner und was man mit
+diesen und Linux anstellen kann.
+
+Dafür beschäftigte ich mich unter anderem auch mit OpenWrt und stellte
+fest, dass ich mit dem Paketfilter von OpenWrt nichts anfangen konnte,
+weil ich durch die Vielzahl der Regelketten verwirrt war.
+
+Ich fand damals auch keine geeignete Dokumentation, die mir die
+Zusammenhänge darlegte.
+Kurzerhand beschloss ich, es selbst herauszufinden und meine
+Erkenntnisse in einem Kapitel des Buches, an dem ich gerade schrieb,
+festzuhalten.
+
+Außerdem veröffentlichte ich meine Erkenntnisse auf meiner Website und
+stellte im Laufe der Zeit fest, dass diese Seiten zu den am häufigsten
+besuchten gehören.
+
+Auch aus Anfragen auf Stack Exchange konnte ich entnehmen, dass immer
+noch Interesse an diesem Thema besteht.
+
+Also beschloß ich, mich diesem Thema erneut zu widmen, wobei ich dieses
+mal mehr Gewicht auf den Aspekt Firewall und weniger auf Betriebssystem
+und Hardware lege.
+
+Bei meinen Recherchen stellte ich fest, dass meine damaligen
+Erkenntnisse bei der aktuellen Version von OpenWrt nur noch bedingt von
+Nutzen sind.
+Aus diesem Grund beschreibe ich im Anhang, wie ich mir die Kenntnisse
+erarbeitet habe, so dass dieses Buch hoffentlich nicht so schnell
+veraltet.
 
 Wie ist das Buch aufgebaut
 --------------------------
