@@ -1,6 +1,5 @@
 
 DRAFTS = vorwort-draft.pdf \
-         1-ich-will-den-openwrt-paketfilter-verstehen-draft.pdf \
 	 1-was-ist-openwrt-draft.pdf \
 	 1-moeglichkeiten-und-grenzen-draft.pdf \
 	 1-alternativen-zu-openwrt-draft.pdf \
