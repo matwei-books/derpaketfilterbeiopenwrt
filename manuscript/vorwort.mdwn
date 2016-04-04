@@ -18,7 +18,6 @@ festzuhalten.
 Außerdem veröffentlichte ich meine Erkenntnisse auf meiner Website und
 stellte im Laufe der Zeit fest, dass diese Seiten zu den am häufigsten
 besuchten gehören.
-
 Auch aus Anfragen auf Stack Exchange konnte ich entnehmen, dass immer
 noch Interesse an diesem Thema besteht.
 
@@ -38,21 +37,60 @@ Wie ist das Buch aufgebaut
 
 Das Buch besteht aus vier Hauptteilen.
 
-Der erste Teil geht darauf ein, warum ich das Buch schrieb, was ich mit dem
-OpenWrt-Paketfilter machen will und kann und welche Alternativen es gibt.
+Im ersten Teil widme ich mich allgemeinen Fragen.
+Was kann ich mit OpenWrt machen und was nicht?
+Welche Vor- und Nachteile hat OpenWrt gegenüber anderen Systemen?
+Im wesentlichen also Fragen, die interessant sind, bevor ich mich für
+OpenWrt entscheide.
 
-Im zweiten Teil gehe ich auf die Grundlagen der Netzwerkprotokolle aus der
-Sicht eines Paketfilters ein.
-Dieser Teil ist nicht beschränkt auf den Paketfilter von OpenWrt.
+Im zweiten Teil wird es spezieller.
+Das Buch behandelt Netzwerk-Paketfilter und um diese effektiv
+einzusetzen, muss ich einige Grundlagen über IP-Netzwerke wissen.
+Die wichtigsten Netzwerkthemen, wie IPv4, IPv6, ICMP und NAT betrachte
+ich aus dem Blickwinkel des Firewall-Administrators.
+Die Themen dieses Teiles sind relevant für jede Art von
+Paketfilter-Firewall, nicht nur für Linux und OpenWrt.
 
-Der dritte Teil beschäftigt sich mit den Besonderheiten des
-Paketfiltersystems von Linux und insbesondere von OpenWrt ein.
-Dieser Teil ist sehr spezifisch auf das Zielsystem zugeschnitten.
+Im dritten Teil geht es mitten hinein in das Thema des Buches.
+Die Beschreibung des Netfilter-Systems, der weiteren
+Kernel-Unterstützung für Firewalls und der zugehörigen
+Userspace-Programme ist noch übertragbar auf andere Linux-Systeme mit
+*iptables*.
+Die neue *nftables* Firewall bleibt noch außen vor.
 
-Im vierten Teil schließlich geht es um praktische Fragen und Rezepte für
-spezielle Probleme.
+Ganz spezifisch auf OpenWrt zugeschnitten sind die Kapitel über das
+Modell der Regelketten sowie die Konfiguration mit LuCI und UCI.
+
+Im vierten Teil geht es um praktische Fragen und Rezepte für spezielle
+Probleme.
+Wie ermittle ich überhaupt meine persönlichen Anforderungen?
+Wie wähle ich die Hardware und Software aus?
+Wie härte und aktualisiere ich das System?
+Wie teste, überwache und dokumentiere ich die Firewall?
 Dieser Teil enthält schnell nachzuschlagende Lösungen für spezifische
 Probleme und ist auch ohne die Kenntnis der anderen Teile verwendbar.
 Um die Rezepte an geänderte Aufgabenstellungen oder Umgebungen anzupassen
 sind die Informationen aus den Teilen zwei und drei jedoch nützlich.
+
+Bei der Arbeit an diesem Buch habe ich festgestellt, dass das im anderen
+Buch vorgestellte Modell der Regelketten nicht mehr auf die aktuelle
+Version von OpenWrt zutrifft.
+Aus diesem Grund habe ich im Anhang dargelegt, wie ich das Modell aus
+den Paketfilterregeln herausgearbeitet habe.
+Damit, so hoffe ich, bleibt das Buch noch aktuell, wenn sich die
+Regelketten bei OpenWrt wieder geändert haben.
+Außerdem lassen sich auf diese Art auch andere Paketfilter, die Linux
+und *iptables* nutzen, analysieren.
+
+Zur Schreibweise
+----------------
+
+Für Eingaben auf der Kommandozeile sowie für Auszüge aus
+Konfigurationsdateien verwende ich eine `dicktengleiche Schrift`.
+Diese verwende ich auch im Fließtext, wenn ich Optionen oder Befehle
+wortgetreu schreibe.
+Begriffe, die mit `$` eingeleitet werden, wie zum Beispiel `$addr`
+stehen für variable Angaben, die je nach Kontext ersetzt werden müssen.
+
+Ansonsten verwende ich *kursive Schrift* für Hervorhebungen.
 
