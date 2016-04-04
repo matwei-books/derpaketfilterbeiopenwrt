@@ -3,7 +3,7 @@ DRAFTS = vorwort-draft.pdf \
 	 1-was-ist-openwrt-draft.pdf \
 	 1-moeglichkeiten-und-grenzen-draft.pdf \
 	 1-alternativen-zu-openwrt-draft.pdf \
-         2-aufgaben-eines-paketfilters-draft.pdf \
+         2-aufgaben-paketfilter-draft.pdf \
          2-welche-protokolle-draft.pdf \
 	 2-ipv4-fuer-firewall-draft.pdf \
 	 2-ipv6-fuer-firewall-draft.pdf \
