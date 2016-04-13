@@ -11,8 +11,10 @@ DRAFTS = vorwort-draft.pdf \
 	 2-icmp-igmp-draft.pdf \
 	 2-icmpv6-draft.pdf \
 	 2-nat-draft.pdf \
+	 3-sysctl-draft.pdf \
 	 3-netfilter-kernel-draft.pdf \
 	 3-openwrt-luci-draft.pdf \
+	 4-anforderungen-draft.pdf \
 	 4-testen-draft.pdf \
 	 4-dokumentation-draft.pdf \
 	 A-analyse-iptables-draft.pdf \
