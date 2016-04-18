@@ -9,13 +9,11 @@ Dafür beschäftigte ich mich unter anderem auch mit OpenWrt und stellte
 fest, dass ich mit dem Paketfilter von OpenWrt nichts anfangen konnte,
 weil ich durch die Vielzahl der Regelketten verwirrt war.
 
-Ich fand damals auch keine geeignete Dokumentation, die mir die
-Zusammenhänge darlegte.
-Kurzerhand beschloss ich, es selbst herauszufinden und meine
-Erkenntnisse in einem Kapitel des Buches, an dem ich gerade schrieb,
-festzuhalten.
-
-Außerdem veröffentlichte ich meine Erkenntnisse auf meiner Website und
+Ich fand damals keine geeignete Dokumentation, die mir die
+Zusammenhänge darlegte und beschloss kurzerhand, es selbst herauszufinden.
+Meine Erkenntnisse hielt ich in einem Kapitel des Buches, an dem ich gerade
+schrieb, fest.
+Außerdem veröffentlichte ich die Erkenntnisse auf meiner Website und
 stellte im Laufe der Zeit fest, dass diese Seiten zu den am häufigsten
 besuchten gehören.
 Auch aus Anfragen auf Stack Exchange konnte ich entnehmen, dass immer
@@ -25,17 +23,16 @@ Also beschloß ich, mich diesem Thema erneut zu widmen, wobei ich dieses
 mal mehr Gewicht auf den Aspekt Firewall und weniger auf Betriebssystem
 und Hardware lege.
 
-Bei meinen Recherchen stellte ich fest, dass meine damaligen
-Erkenntnisse bei der aktuellen Version von OpenWrt nur noch bedingt von
-Nutzen sind.
-Aus diesem Grund beschreibe ich im Anhang, wie ich mir die Kenntnisse
-erarbeitet habe, so dass dieses Buch hoffentlich nicht so schnell
-veraltet.
+Dabei stellte ich fest, dass meine damaligen Erkenntnisse bei der
+aktuellen Version von OpenWrt nur noch bedingt von Nutzen sind.
+Deshalb beschreibe ich im Anhang, wie ich mir die Kenntnisse
+erarbeitet habe, so dass dieses Buch auch in ein paar Jahren hoffentlich
+noch nützlich ist.
 
 Wie ist das Buch aufgebaut
 --------------------------
 
-Das Buch besteht aus vier Hauptteilen.
+Es gibt vier Hauptteile.
 
 Im ersten Teil widme ich mich allgemeinen Fragen.
 Was kann ich mit OpenWrt machen und was nicht?
@@ -57,7 +54,6 @@ Kernel-Unterstützung für Firewalls und der zugehörigen
 Userspace-Programme ist noch übertragbar auf andere Linux-Systeme mit
 *iptables*.
 Die neue *nftables* Firewall bleibt noch außen vor.
-
 Ganz spezifisch auf OpenWrt zugeschnitten sind die Kapitel über das
 Modell der Regelketten sowie die Konfiguration mit LuCI und UCI.
 
