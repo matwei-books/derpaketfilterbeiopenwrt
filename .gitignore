@@ -16,3 +16,6 @@ recherche
 artifacts
 tmp
 TODO.otl*
+
+# helpers
+manuscript/Book-*.txt
