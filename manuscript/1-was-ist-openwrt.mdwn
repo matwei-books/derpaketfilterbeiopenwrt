@@ -8,10 +8,11 @@ eingebettete Systeme.
 Oder - laut eigener Aussage - ein beschreibbares Dateisystem mit
 Paketverwaltung.
 
-Diese Distribution bietet ein beschreibbares Dateisystem, einen Paketmanager
-namens *opkg* zur Verwaltung der installierten Software und out-of-the-box
-Netzwerkunterstützung, einen WLAN-Access-Point, DNS-Service und PPP.
-Also fast alles, was man für einen Zugangsrouter braucht.
+Diese Linux-Distribution bietet ein beschreibbares Dateisystem, einen
+Paketmanager namens *opkg* zur Verwaltung der installierten Software und
+out-of-the-box Netzwerkunterstützung, einen WLAN-Access-Point, DNS-Service
+und PPP.
+Also fast alles, was ich für einen Zugangsrouter brauche.
 
 Was fehlt, kann ich mit dem Paketmanager nachträglich installieren.
 Alternativ kann ich mir ein eigenes Firmware-Image für meine Hardware
@@ -22,12 +23,12 @@ Schnittstelle, Telnet, SSH,
 Weboberfläche oder X-Windows-System, falls die Hardware ein geeignetes
 Display bereitstellt.
 
-> Inzwischen sollte auch der letzte mitbekommen haben, dass es keine gute
-> Idee ist Konfigurationsdaten ungeschützt über ein Netzwerk zu schicken.
-> So bleibt als sinnvolle Option für die Konfiguration die serielle
-> Schnittstelle, SSH, HTTPS oder X-Windows am lokalen Display.
+W> Inzwischen sollte auch der letzte mitbekommen haben, dass es keine gute
+W> Idee ist Konfigurationsdaten ungeschützt über ein Netzwerk zu schicken.
+W> So bleibt als sinnvolle Option für die Konfiguration die serielle
+W> Schnittstelle, SSH, HTTPS oder X-Windows am lokalen Display.
 
-Das OpenWrt-Projekt startete 2004 mit dem "Stable Release".
+2004 startete das OpenWrt-Projekt mit dem "Stable Release".
 Diesem folgten die Ausgaben "White Russian" (2007), "Kamikaze" (2007),
 "Backfire" (2010), "Attitude Adjustment" (2013), "Barrier Breaker" (2014).
 
