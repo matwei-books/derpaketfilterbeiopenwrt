@@ -2,7 +2,7 @@
 Aufgaben eines Paketfilters
 ===========================
 
-Ich mache mir als erstes die Aufgaben eines Paketfilters klar, um dann seine
+Ich mache mir zunächst die Aufgaben eines Paketfilters klar, um dann seine
 Bestandteile unter diesen Aspekten - den Aufgaben - zu betrachten und so
 besser zu verstehen.
 
@@ -12,18 +12,18 @@ Protokolle.
 Dabei trifft der Paketfilter seine Entscheidungen normalerweise basierend
 auf den Kopfdaten der Datagramme und nicht ihrem Inhalt.
 Eine Ausnahme bilden einige Connection-Tracking-Module, wie zum Beispiel für
-FTP, die aus dem Datenstrom der Steuerverbindung die Ports der zugehörigen
+FTP, die aus dem Datenstrom der Verbindung zu Port 21 die Ports der zugehörigen
 Datenverbindungen ermitteln.
 
-An den Grenzen von Netzwerken kommt oft zusätzlich noch die Adressumsetzung,
-das heißt das Ändern von Quell- und / oder Zieladresse sowie der Ports bei
-TCP und UDP als Aufgabe dazu.
+An den Grenzen von Netzwerken kommt oft zusätzlich noch die
+Adressenübersetzung, das heißt das Ändern von Quell- und / oder Zieladresse
+sowie der Ports bei TCP und UDP als Aufgabe dazu.
 Diese Umsetzung findet sich vorwiegend bei IPv4-Netzen, weil bei diesen
 die Anzahl der frei verfügbaren global eindeutigen Adressen seit
 langem nicht mehr den Bedarf decken kann und daher Adressen mehrfach
 verwendet werden.
 
-Die Adressumsetzung dient zwei Zielen:
+Die Adressenübersetzung dient zwei Zielen:
 das eine ist das Verbergen ganzer Netze hinter einzelnen Adressen
 (Masquerading), das andere das Ermöglichen der Kommunikation von
 Rechnern in verschiedenen Netzen, die den gleichen Präfix verwenden.
@@ -34,18 +34,18 @@ verbergen, die alle eine Verbindung in das Internet benötigen.
 Da mehrere interne Adressen auf eine externe Adresse gebündelt werden, geht
 es nicht ohne Änderung der TCP- und UDP-Ports ab.
 Von der externen Seite sind die internen Rechner nicht direkt adressierbar,
-da extern nur eine IP-Adresse ansprechbar ist.
+da von außen nur eine IP-Adresse sichtbar ist.
 
-Das Paradebeispiel für die Adressumsetzung ganzer Netzwerkpräfixe ist ein
-Zusammenschluß zweier Firmennetze, die bisher die gleichen privaten
+Ein Beispiel für die Adressenübersetzung ganzer Netzwerk-Präfixe ist ein
+Zusammenschluß zweier Netze, die bisher die gleichen privaten
 Netzwerkadressen verwendet haben.
-Da ich hier für die Umsetzung mit gleich großen Netzwerkpräfixen arbeiten
+Da ich hier für die Umsetzung mit gleich großen Netzwerk-Präfixen arbeiten
 kann, müssen die Ports nicht zwingend geändert werden und außerdem sind alle
 internen Rechner von extern - über die umgesetzte Adresse - direkt
 adressierbar.
 
-Kommen wir zurück auf das Filtern des Datenverkehrs, so dient dieses dem
-Schutz vor Angreifern im Rahmen der Möglichkeiten eines Paketfilters.
+Kommen wir zurück auf das Filtern des Datenverkehrs,
+das dem Schutz vor Angreifern dient.
 Ich kann einzelnen Geräten eingeschränkten Zugang zu anderen Netzen gewähren
 oder Port-Scans verhindern, mit Port-Knocking auch für verfügbare Dienste.
 Unter bestimmten Voraussetzungen kann ich mit Rate-Limiting DoS-Angriffe
@@ -58,20 +58,20 @@ definiert.
 Natürlich beschreibt eine Policy nicht direkt, welcher Datenverkehr erlaubt
 oder verboten ist.
 Dann müsste sie bei jeder Änderung im Netzwerk angepasst werden.
-Stattdessen drückt die Policy abstrakt die Ziele aus, aus denen ich, mit
-Kenntnis der im Netz eingesetzten Adressen und Protokolle, Regeln für den
-Paketfilter ableiten muss.
+Stattdessen drückt die Policy abstrakt die Ziele aus, von denen
+ausgehend ich, mit Kenntnis der im Netz eingesetzten Adressen und Protokolle,
+Regeln für den Paketfilter ableiten muss.
 
-Eine weitere Aufgabe eines Paketfilters ist der zumindest
-rudimentäre Schutz vor unerwünschtem Datenabfluss.
+Eine weitere Aufgabe eines Paketfilters ist der Schutz vor unerwünschtem
+Datenabfluss.
 Natürlich kann ein Paketfilter nicht davor schützen, dass Daten durch
 Ausnutzen der erlaubten Verbindungen das Netz verlassen.
 Er kann jedoch den Datenverkehr in Bahnen lenken, auf denen ich mit anderen
 Mitteln dem Abfluss von Daten entgegenwirken kann.
 
 Der Paketfilter hat dabei lediglich unterstützende Funktion, indem er den
-Datenverkehr umleitet zu einem Proxy, welcher den Datenverkehr entsprechend
-bewertet und eigene Entscheidungen trifft..
+Datenverkehr umleitet zu einem Proxy, welcher den Datenverkehr bewertet und
+geeignete Entscheidungen trifft.
 
 Neben dem absichtlichen Datenabfluss kann mich ein Paketfilter auch vor
 unbeabsichtigter, versehentlicher Preisgabe von sensiblen Informationen
@@ -85,10 +85,10 @@ zu nutzen.
 Um mich vor der versehentlichen Preisgabe dieser Information zu schützen,
 muss ich die Ports 139 und 445 für UDP und TCP abgehend sperren, auch wenn
 ich auf Grund einer permissiven Policy abgehenden Datenverkehr eigentlich
-eher erlauben würde.
+erlauben würde.
 
 Schließlich kann der Paketfilter noch die Authentisierung und Authorisierung
-von Netzwerkgeräten unterstützen, indem er HTTP-Anfragen zunächst zu einem
+von Netzwerk-Geräten unterstützen, indem er HTTP-Anfragen zunächst zu einem
 Captive Portal umleitet und den Datenverkehr erst nach Anmeldung am Portal
 freigibt.
 
@@ -114,10 +114,9 @@ Mit einer Security Policy (Sicherheitsrichtlinie) kann ich nur die
 Verluste direkt reduzieren.
 Die ermittelten finanziellen Werte geben den finanziellen Rahmen vor,
 innerhalb dessen sich meine Security Policy und die von ihr abgeleiteten
-Maßnahmen bewegen müssen, wenn ich mich nicht langfristig zugrunde richten
-will.
-Damit weiß ich, welchen Aufwand ich sinnvollerweise betreiben kann, um dieses
-System zu schützen.
+Maßnahmen bewegen müssen, damit ich mich nicht langfristig zugrunde richte.
+So kann ich den Aufwand schätzen, den ich sinnvollerweise betreibe, um
+das System zu schützen.
 
 Als nächstes ermittle ich die Schwachstellen des Systems und wie diese
 ausgenutzt werden können.
@@ -149,7 +148,7 @@ unterschiedlich ausfallen.
 Anschließend sollte die Policy den erlaubten und / oder den verbotenen
 Datenverkehr beschreiben.
 
-Habe ich meine Policy, ermittele ich im nächsten Schritt die Protokolle und
+Habe ich meine Policy, ermittle ich im nächsten Schritt die Protokolle und
 Netzwerkadressen, die ich zulassen oder sperren muss und die Art von
 Application Gateways, die ich einsetzen muss, um die Ziele der Policy zu
 erreichen.
@@ -167,7 +166,7 @@ Aufgaben hat, die Dienste der darunterliegenden nutzt und seine
 Dienste den darüber liegenden zur Verfügung stellt.
 Es gibt in diesem Modell die folgenden sieben Schichten:
 
-|   | deutsche Bezeichnung   | englische Bezeichnung |
+|   | deutsch                | englisch              |
 |---|------------------------|-----------------------|
 | 7 | Anwendungsschicht      | application layer     |
 | 6 | Darstellungsschicht    | presentation layer    |
