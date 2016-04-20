@@ -2,7 +2,7 @@
 DRAFTS = \
 	 1-wofuer-einsetzen-draft.pdf \
 	 1-moeglichkeiten-grenzen-draft.pdf \
-	 1-alternativen-zu-openwrt-draft.pdf \
+	 1-alternativen-draft.pdf \
          2-welche-protokolle-draft.pdf \
 	 2-ipv4-fuer-firewall-draft.pdf \
 	 2-ipv6-fuer-firewall-draft.pdf \
