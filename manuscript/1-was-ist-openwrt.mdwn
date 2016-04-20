@@ -24,7 +24,7 @@ Weboberfläche oder X-Windows-System, falls die Hardware ein geeignetes
 Display bereitstellt.
 
 W> Inzwischen sollte auch der letzte mitbekommen haben, dass es keine gute
-W> Idee ist Konfigurationsdaten ungeschützt über ein Netzwerk zu schicken.
+W> Idee ist, Konfigurationsdaten ungeschützt über ein Netzwerk zu schicken.
 W> So bleibt als sinnvolle Option für die Konfiguration die serielle
 W> Schnittstelle, SSH, HTTPS oder X-Windows am lokalen Display.
 
