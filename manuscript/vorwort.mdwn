@@ -90,3 +90,5 @@ stehen für variable Angaben, die je nach Kontext ersetzt werden müssen.
 
 Ansonsten verwende ich *kursive Schrift* für Hervorhebungen.
 
+W> Warnungen sind mit diesem Symbol am Rand gekennzeichnet.
+
