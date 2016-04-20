@@ -1,7 +1,7 @@
 vorwort.mdwn
 part1.mdwn
 1-was-ist-openwrt.mdwn
-1-wofuer-kann-ich-openwrt-einsetzen.mdwn
+1-wofuer-einsetzen.mdwn
 1-moeglichkeiten-grenzen.mdwn
 1-alternativen-zu-openwrt.mdwn
 part2.mdwn

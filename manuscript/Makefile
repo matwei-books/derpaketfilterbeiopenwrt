@@ -1,5 +1,6 @@
 
 DRAFTS = \
+	 1-wofuer-einsetzen-draft.pdf \
 	 1-moeglichkeiten-grenzen-draft.pdf \
 	 1-alternativen-zu-openwrt-draft.pdf \
          2-welche-protokolle-draft.pdf \
