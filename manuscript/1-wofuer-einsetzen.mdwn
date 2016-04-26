@@ -2,12 +2,11 @@
 Wofür kann ich OpenWrt einsetzen?
 =================================
 
-Nachdem ich nun geklärt habe, was OpenWrt ist, ist meine nächste Frage:
-wofür ich das einsetzen kann.
-Dazu kann ich hier nur einen kurzen Ausschnitt geben, ich beschränke mich
+Die nächste Frage ist: wofür kann ich OpenWrt einsetzen.
+Dazu will ich hier nur einen kurzen Ausschnitt geben und beschränke mich
 auf Einsatzfälle, bei denen der Paketfilter eine Rolle spielt.
 
-OpenWrt kann ich einsetzen
+OpenWrt kann ich einsetzen:
 
 *   als Internet-Zugangsrouter für kleine Büros oder zuhause,
 *   als VPN-Router,
@@ -15,22 +14,22 @@ OpenWrt kann ich einsetzen
 *   als IPv6-Tunnel-Endpunkt, wenn mein Provider nur IPv4 anbietet,
 *   als WLAN-Basisstation, -Mesh-Router, -Client.
 
-Das sind nur Anwendungsfälle, bei denen ich den Paketfilter auf jeden Fall
-nutzen will.
+Bei diesen Einsatzfällen will ich den Paketfilter auf jeden Fall nutzen.
 
 Internet-Zugangsrouter
 ----------------------
 
-Hierbei nutze ich meist einfache, stromsparende Hardware, wie zum Beispiel
-einen billigen SOHO-Router, auf dem ich OpenWrt installiert habe.
+Als Internet-Zugangsrouter nutze ich meist einfache, stromsparende Hardware,
+wie zum Beispiel einen billigen SOHO-Router, auf dem ich OpenWrt installiert
+habe.
 Die Liste der unterstützten Geräte finde ich unter
 <http://wiki.openwrt.org/toh/start>.
 
 Hier muss ich bei IPv4 meistens Masquerading zum Uplink einstellen, um meine
 internen Adressen zu verbergen.
-Will ich dann Dienste nach außen anbieten oder bestimmte Spiele spielen,
-welche Verbindungen vom Server zum Client benötigen, muss ich auch
-das Weiterleiten bestimmter Ports konfigurieren.
+Will ich dann Dienste nach außen anbieten oder Spiele nutzen,
+die Verbindungen vom Server zum Client benötigen, muss ich
+das Weiterleiten von Ports konfigurieren.
 
 Bei IPv6 will ich zumindest den Verbindungsaufbau aus dem Internet in mein
 lokales Netz reglementieren.
@@ -43,7 +42,7 @@ vom Routing über das Internet erreichen will.
 Das kann sein, weil ich eine zentrale Geschäftsstelle aus einem kleinen Büro
 erreichen will, oder weil ich bestimmte Adressen mit einer anderen
 Absenderadresse erreichen will, um geographische Beschränkungen auf Grund
-meiner Absenderadresse umgehen will.
+meiner Absenderadresse zu umgehen.
 
 Ich kann den Tunnel direkt auf dem Internet-Zugangsrouter einrichten oder
 ich verwende einen separaten Router nur für diesen Zweck.
@@ -53,8 +52,8 @@ Im zweiten Fall muss ich entweder beim Zugangsrouter oder beim
 Client-Rechner die Route zu den Netzen hinter dem Tunnel eintragen.
 
 Den Paketfilter benötige ich hier nur, wenn ich den Zugang zum Tunnel
-beschränken will oder Masquerading gegenüber dem anderen Tunnel-Endpunkt
-einsetzen will.
+beschränken will oder wenn ich Masquerading gegenüber dem anderen
+Tunnel-Endpunkt einsetzen will.
 
 Kurzfristiger Ersatz für einen anderen Router
 ---------------------------------------------
@@ -65,7 +64,7 @@ geschlossen werden kann.
 
 Dann ist es praktisch, wenn ich einen alten PC mit zwei Netzwerkadaptern übrig
 habe.
-Möglicherweise kann ich hier auch OpenWrt in einer VM verwenden.
+Möglicherweise kann ich auch OpenWrt in einer VM verwenden.
 Für den Paketfilter gilt das gleiche wie für einen normalen Zugangsrouter.
 
 IPv6-Tunnel-Endpunkt
@@ -75,10 +74,10 @@ Habe ich einen Internet-Provider, der nur IPv4 anbietet, kann ich mir über
 einen der IPv6-Tunnel-Provider ein Subnetz geben lassen und eine
 IPv6-Verbindung damit bekommen.
 
-Den Tunnel-Endpunkt kann ich wieder beim Internet-Zugangsrouter einrichten
+Den Tunnel-Endpunkt kann ich ebenfalls beim Internet-Zugangsrouter einrichten
 oder in einem separaten System, welches in meinem Netz dann als IPv6-Router
 fungiert.
-Dieses benötigt dann ebenfalls nur einen Netzwerkadapter.
+Dieses benötigt nur einen Netzwerkadapter.
 Im Gegensatz zum IPv4-VPN-Router brauche ich aber keine Route explizit bei
 den Clients oder beim Zugangsrouter eintragen.
 
@@ -89,7 +88,6 @@ WLAN-Basisstation, -Client, -Mesh-Router
 ----------------------------------------
 
 Bei all diesen Einsatzfällen nutze ich die Möglichkeiten der eingesetzten
-Hardware aus.
-Der Paketfilter hilft mir hier den Datenverkehr in geordnete Bahnen zu
-lenken.
+Hardware.
+Der Paketfilter hilft mir den Datenverkehr in geordnete Bahnen zu lenken.
 
