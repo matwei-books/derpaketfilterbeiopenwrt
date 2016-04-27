@@ -4,10 +4,10 @@ Möglichkeiten und Grenzen des OpenWrt-Paketfilters
 
 Der Paketfilter von OpenWrt bietet mir alle Möglichkeiten des Linux
 Netfilter-Frameworks.
-Ich kann
+Ich kann:
 
 *   zustandsbehaftete (stateful) und zustandslose (stateless) Firewalls bauen,
-*   hoch verfügbare Firewall-Cluster einrichten, wenn die Hardware das
+*   hochverfügbare Firewall-Cluster einrichten, wenn die Hardware das
     erlaubt,
 *   IP-Adressen mit NAT umsetzen oder mit Masquerading verstecken,
 *   Traffic-Shaping mit dem Programm `tc` unterstützen,
@@ -28,8 +28,8 @@ ergeben.
 Wie kann ich die Grenzen herausfinden?
 --------------------------------------
 
-Die Grenzen der Hardware finde ich durch Lasttests heraus.
-Ich sende soviel Traffic zum Gerät wie möglich und beobachte, wie viel davon
+Die Grenzen der Hardware kann ich durch Lasttests herausfinden.
+Ich sende so viel Traffic zum Gerät wie möglich und beobachte, wie viel
 durchkommt.
 Da ich hier am Paketfilter interessiert bin, kombiniere ich
 zulässigen und unzulässigen Traffic, um zu sehen wie weit
@@ -37,14 +37,14 @@ letzterer ersteren beeinträchtigt.
 
 Softwarefehler und Sicherheitslücken kann ich durch Penetrationstests
 entdecken.
-Dabei neue Fehler zu finden erfordert Erfahrung und meist auch
-Einblick in die inneren Abläufe aus dem Quelltext der Software heraus.
-Diese Ressourcen haben die wenigsten Anwender von OpenWrt.
+Dabei neue Fehler zu finden, erfordert Erfahrung und Einblick in die inneren
+Abläufe, zum Beispiel aus dem Quelltext der Software heraus.
+Darauf können die wenigsten Anwender von OpenWrt zurückgreifen.
 
-Einfacher ist es, Sicherheitsmailinglisten und ähnliche Quellen zu verfolgen
+Einfacher ist es, Security-Mailinglisten und ähnliche Quellen zu verfolgen
 und bei neu entdeckten Schwachstellen zu prüfen, ob mein System dafür
 anfällig ist.
-Zu diesem Zweck gibt es Exploit-Frameworks, die diese Tests
+Zu diesem Zweck gibt es Exploit-Frameworks, die solche Tests
 vereinfachen.
 
 Wie kann ich die Grenzen verschieben?
@@ -52,8 +52,8 @@ Wie kann ich die Grenzen verschieben?
 
 In manchen Fällen, speziell bei Leistungsproblemen, bleibt mir nur, auf
 leistungsfähigere Hardware auszuweichen.
-In dringenden Fällen kann ich Funktionen abschalten oder den
-Durchsatz begrenzen.
+In dringenden Fällen kann ich den Durchsatz begrenzen oder vielleicht
+Funktionen abschalten.
 
 Gibt es Workarounds, kann ich diese zumindest temporär nutzen.
 Vielleicht sogar selbst welche entwickeln.
@@ -86,11 +86,14 @@ Ein Kritikpunkt ist die Vielzahl von möglichen Erweiterungen in Form von
 Softwarepaketen, die gerade Einsteiger verwirren kann.
 
 Je nach Hardware ist die Unterstützung verschieden gut.
-Vor dem Kauf eines Gerätes ist auf jeden Fall ein Blick in die Liste der
-unterstützen Hardware angebracht.
+Vor dem Kauf eines Gerätes muss ich auf jeden Fall ein Blick in die Liste
+der unterstützen Hardware werfen.
 
-Die Software in den Repositories ist manchmal nicht aktuell genug für einen
-bestimmten Einsatzfall.
+Die Software in den Repositories ist manchmal nicht aktuell genug für meinen
+Einsatzfall.
+Dann muss ich eine neuere Version selbst übersetzen.
+Das kann sich über Abhängigkeiten von Versionen anderer Software zu
+einem eigenen Projekt entwickeln.
 
 Wie kann ich die Schwächen kompensieren?
 ----------------------------------------
