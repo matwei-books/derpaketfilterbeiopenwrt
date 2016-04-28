@@ -1,6 +1,6 @@
 
-Um welche Netzwerk-Protokolle geht es?
-======================================
+Um welche Protokolle geht es?
+=============================
 
 Welche Netzwerkprotokolle sind für mich interessant, wenn ich eine
 Paketfilter-Firewall betreiben will?
