@@ -15,7 +15,7 @@ Betrachten wir den Bereich IPv4, dann haben wir IPv4 selbst, ICMP und IGMP.
 Dazu kommen TCP und UDP auf denen die meisten Protokolle der höheren
 OSI-Schichten aufsetzen.
 
-Mit ARP werden bei IPv4 die Ethernet- und IP-Adressen zugeordnet.
+Mit ARP werden bei IPv4 die Ethernet-Adressen den IP-Adressen zugeordnet.
 Dieses Protokoll interessiert mich, wenn ich meinen
 Paketfilter als Ethernet-Bridge betreibe.
 
@@ -23,10 +23,11 @@ Im Bereich IPv6 muss ich das Protokoll IPv6 selbst und ICMPv6 kennen.
 Bei TCP und UDP muss ich nicht viel gegenüber IPv4 dazu lernen.
 Die Funktionen von ARP und IGMP übernimmt ICMPv6.
 
-Das sind die wichtigsten Protokolle der OSI-Schichten 1-4.
+Das sind die wichtigsten Protokolle der OSI-Schichten 1-4, die ich beim
+Paketfilter beachten muss.
 
 Die Protokolle der Schichten 5-7 setzen oft auf TCP oder UDP auf.
-Bei diesen muss ich meist nur wissen, welche Ports verwendet werden und
+Bei diesen muss ich oft nur wissen, welche Ports verwendet werden und
 welche Seite die Verbindung aufbaut.
 
 Es gibt unter diesen Protokollen jedoch einige, wie zum Beispiel FTP, die
@@ -38,14 +39,14 @@ kennen.
 
 Die meisten dieser Protokolle werden in RFCs beschrieben, welche ich im
 Internet von <http://tools.ietf.org/> beziehen kann.
-Nachfolgend gehe ich kurz auf einige von diesen ein.
+Nachfolgend gehe ich kurz auf einige davon ein.
 
 Ethernet
 --------
 
 Die RFCs 894, 1042 und 2464 beschreiben, wie IPv4 und IPv6 Datenpakete in
 Ethernet- und 802.3-Frames eingebettet werden.
-In den meisten Fällen interessieren mich zum Filtern nur die MAC-Adressen.
+Oft interessieren mich zum Filtern nur die MAC-Adressen.
 Arbeitet der Paketfilter jedoch als Ethernet-Bridge und nicht als Router,
 muss ich mich auch mit diesen Protokollen auseinandersetzen.
 
@@ -55,13 +56,13 @@ RFC 5227 aktualisiert es beim Thema Erkennung von Adresskonflikten.
 RFC 3927 beschreibt die automatische Konfiguration von link-lokalen
 IPv4-Adressen.
 Dabei wird ARP verwendet, um zu ermitteln, ob eine Adresse bereits
-belegt ist oder um eine IP-Adresse für sich zu reklamieren.
+belegt ist oder um eine IP-Adresse zu reklamieren.
 Auf diese Art konfigurierte IP-Adressen erkenne ich am Prefix 169.254/16.
 Datagramme mit dieser Absenderadresse dürfen nicht geroutet werden,
 da sie nur im lokalen Netzwerksegment gültig sind.
 
 Bei IPv6 übernimmt Neighbor Discovery (ND) via ICMPv6 diese Funktion.
-RFC 4861 beschreibt diese.
+Diese ist in RFC 4861 beschrieben.
 RFC 5942 aktualisiert ND in Bezug auf das IPv6-Subnetz-Modell, speziell
 für das Verhältnis zwischen Links und Subnetz-Präfixen.
 RFC 6980 geht auf die Auswirkungen von IPv6-Fragmentierung
@@ -71,7 +72,7 @@ IPv4
 ----
 
 RFC 791 beschreibt das Internet Protokoll in Version 4.
-RFC 1349 ändert und erläutert dazu einige Aspekte des Type of Service
+RFC 1349 ändert und erläutert einige Aspekte des Type of Service
 (TOS) Felds im IP-Header.
 RFC 2474 definiert das Differentiated Services (DS) Feld und
 RFC 6864 aktualisiert die Definition des ID-Feldes.
@@ -116,7 +117,8 @@ RFC 1112 beschreibt Host Extensions for Multicasting und in seinem
 Anhang Version 1 von IGMP.
 
 Version 2 des Internet Group Management Protocol ist in RFC 2236
-beschrieben, es erlaubt, dem Router die Beendigung der
+beschrieben.
+Diese Version erlaubt es, dem Router die Beendigung der
 Gruppenmitgliedschaft mitzuteilen, was Vorteile bei Multicast-Gruppen mit
 hoher Bandbreite bringt.
 
