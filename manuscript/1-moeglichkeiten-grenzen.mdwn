@@ -1,6 +1,6 @@
 
-Möglichkeiten und Grenzen des OpenWrt-Paketfilters
-==================================================
+Möglichkeiten und Grenzen
+=========================
 
 Der Paketfilter von OpenWrt bietet mir alle Möglichkeiten des Linux
 Netfilter-Frameworks.
@@ -31,8 +31,8 @@ Wie kann ich die Grenzen herausfinden?
 Die Grenzen der Hardware kann ich durch Lasttests herausfinden.
 Ich sende so viel Traffic zum Gerät wie möglich und beobachte, wie viel
 durchkommt.
-Da ich hier am Paketfilter interessiert bin, kombiniere ich
-zulässigen und unzulässigen Traffic, um zu sehen wie weit
+Da ich am Paketfilter interessiert bin, kombiniere ich
+zulässigen und unzulässigen Traffic, um zu sehen, wie weit
 letzterer ersteren beeinträchtigt.
 
 Softwarefehler und Sicherheitslücken kann ich durch Penetrationstests
@@ -109,11 +109,11 @@ machen.
 
 Die Hardware kann ich vor dem Einsatz prüfen, ob sie die benötigte Leistung
 bringen kann.
-Wenn ich sie einsetze ist es unter Umständen vorteilhaft, wenn ich ein Gerät
+Setze ich sie ein, ist es unter Umständen vorteilhaft, wenn ich ein Gerät
 zusätzlich - als Reserve - besorge, um im Fehlerfall nicht auf andere
 Hardware ausweichen zu müssen.
-Anderseits kann die Hardware zu einem späteren Zeitpunkt aus zweiter Hand
-preisgünstiger zu bekommen sein.
+Anderseits kann die gleiche Hardware zu einem späteren Zeitpunkt aus zweiter
+Hand preisgünstiger zu bekommen sein.
 
 Bei Softwareproblemen kann es nötig sein, eine neue Version selbst zu
 übersetzen.
