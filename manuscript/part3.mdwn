@@ -1,2 +1,2 @@
 
--# Grundlagen OpenWrt Linux Paketfilter
+-# Grundlagen OpenWrt Paketfilter
