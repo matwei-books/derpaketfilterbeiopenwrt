@@ -8,65 +8,147 @@ arptables.
 Iptables
 --------
 
-Iptables ist der Teil des Netfilter-Frameworks, der sich mit der Filterung
-und Manipulation von IPv4-Datagrammen befasst.
+Der Teil des Netfilter-Frameworks, der sich mit der Filterung und
+Manipulation von IPv4-Datagrammen befasst ist Iptables.
+Sein Pendant für IPv6 ist Ip6tables.
 
-Er enthält vier Tabellen mit Regelketten, in welchen die Paketfilter-Regeln
-gruppiert sind.
-Diese vier Tabellen haben verschiedene Aufgaben.
+Iptables enthält mehrere unabhängige Tabellen mit Regelketten, in welchen
+die Paketfilter-Regeln gruppiert sind.
+Jede Tabelle enthält fest eingebaute Regelketten und kann zusätzlich
+benutzerdefinierte Regelketten aufnehmen.
 
-*   Die Tabelle *filter* ist für die Entscheidung, ob ein Datagramm
-    weitergeleitet oder verworfen wird, zuständig.
+Jede Regelkette ist eine Liste von Regeln, die jeweils für bestimmte
+Datagramme gelten und festlegen, was mit diesen Datagrammen passieren soll.
+Eingebaute Regelketten besitzen darüber hinaus eine Policy, die bestimmt,
+was mit einem Datagramm passieren soll, auf das keine Regel passt.
+Wenn keine Regel in einer benutzerdefinierten Kette passt, geht es mit
+der nächsten Regel derjenigen Kette weiter, aus der die benutzerdefinierte
+Kette angesprungen wurde.
+
+Jede Regel besteht aus zwei Teilen: einer Beschreibung der Datagramme,
+für die diese Regel zuständig ist (*Match*) und einer Aktion, die auf diese
+Datagramme anzuwenden ist (*Target*).
+
+### Netfilter-Tabellen
+
+Die Tabellen haben verschiedene Aufgaben.
+
+*   Die Tabelle *filter* ist zuständig für die Entscheidung, ob ein
+    Datagramm weitergeleitet oder verworfen wird.
+    Wenn ich keine Tabelle explizit angebe, arbeiten die Benutzerprogramme
+    mit dieser.
+    Hier gibt es die eingebauten Ketten **INPUT**, **FORWARD** und
+    **OUTPUT**.
+
 *   Die Tabelle *nat* ist für die Adressumsetzung zuständig.
-*   Die Tabelle *mangle* ist für weitere Manipulationen der Datagramme
+    Sie wird konsultiert, wenn ein Datagramm eine neue Verbindung
+    aufbaut.
+    Hier gibt es die eingebauten Ketten **PREROUTING**, **OUTPUT** und
+    **POSTROUTING**.
+
+*   Die Tabelle *mangle* ist für spezielle Manipulationen der Datagramme
     zuständig.
-*   Mit der Tabelle *raw* ist es möglich, Datagramme von der Verarbeitung
-    durch die anderen Tabellen auszunehmen.
+    Hier gibt es die eingebauten Ketten **PREROUTING**, **OUTPUT**,
+    **INPUT**, **FORWARD** und **POSTROUTING**.
+
+*   Mit der Tabelle *raw* kann ich Datagramme von der Verarbeitung
+    durch die anderen Tabellen ausnehmen.
+    Diese Tabelle wird vor *ip_conntrack* konsultiert.
+    Hier gibt es die eingebauten Ketten **PREROUTING** und **OUTPUT**.
+
+*   Die Tabelle *security* ist für Mandatory Access Control (MAC)
+    Netzwerk-Regeln zuständig.
+    Hier gibt es die eingebauten Ketten **INPUT**, **FORWARD** und
+    **OUTPUT**.
+
+Welche der genannten Tabellen zur Verfügung stehen, hängt von den
+Optionen bei der Konfiguration des Kernels ab und welche Kernel-Module
+geladen sind.
+
+### Targets
+
+Die Aktionen für Datagramme, auf die eine Paketfilter-Regel zutrifft,
+werden Target genannt.
+Beim Programm `iptables` werden sie mit der Option `-j` beziehungsweise
+`--jump` angegeben.
+
+Wenn eine Regel nicht auf ein Datagramm passt, wird die nächste Regel
+derselben Kette untersucht.
+Passt eine Regel auf ein Datagramm, bestimmt das Target, welche Regel
+als nächstes angewendet wird.
+
+Target kann eines der folgenden sein:
+
+*   der Name einer benutzerdefinierten Regelkette: dann werden als
+    nächstes die Regeln dieser Kette angewendet,
+*   **ACCEPT**: das Datagramm wird durchgelassen und keine weitere Regel
+    mehr angewendet,
+*   **DROP**: das Datagramm wird verworfen und keine weitere Regel
+    angewendet,
+*   **QUEUE**: das Datagramm wird an ein Programm im Userspace zur
+    Begutachtung übergeben
+*   **RETURN**: in einer benutzerdefinierten Regelkette geht es zurück
+    zur Kette, aus der diese angesprungen wurde, in einer eingebauten
+    Kette wird die Policy auf das Datagramm angewendet.
+
+Ist das Ende der eingebauten Regelkette erreicht und passte keine Regel
+mit endgültigem Target, wird die Policy der Kette auf das Datagramm
+angewendet.
+Die Policy darf kein Sprung zu einer anderen Regelkette und nicht
+**RETURN** sein.
+
+Die Iptables-Extension-Module stellen weitere Targets sowie zusätzliche
+Match-Optionen für die Regeln bereit.
+
+### Einsprungspunkte für Paketfilterregeln
 
 Die Kernel-Komponenten des Netfilter-Frameworks bestehen aus verschiedenen
-Einsprungspunkten im Kernelcode zur Verarbeitung und Weiterleitung von
+Einsprungspunkten im Kernel-Code zur Verarbeitung und Weiterleitung von
 Datagrammen, verschiedenen Regelketten nebst in ihnen enthaltenen Regeln
 sowie Kernel-Modulen mit dem Code für die Aktionen, die sich aus den Regeln
 ergeben.
-Um die Einsprungspunkte zuordnen zu können, betrachte ich abstrakt den Weg,
-den ein Datagramm durch den Kernel zurücklegt.
-Ein Datagramm kann auf zwei Möglichkeiten in den Netzwerkcode gelangen: über
-ein Netzwerkinterface kommt ein Datagramm an oder ein lokaler Prozess
-erzeugt ein neues Datagramm.
-
-Bei einem Datagramm, das über einen Netzwerkadapter angekommen ist, wird
-eine Routingentscheidung getroffen und dann das Datagramm an einen lokalen
-Prozess ausgeliefert, oder über einen meist anderen Netzwerkadapter versendet.
-
-Ein lokal erzeugtes Datagramm wird lediglich nach der Routingentscheidung
-über den ermittelten Netzwerkadapter versendet.
 
 ![Weg eines Datagramms durch den Kernel](images/w1100-weg-datenpaket.png)
 
+Um die Einsprungspunkte zuordnen zu können, betrachte ich zunächst abstrakt
+den Weg, den ein Datagramm durch den Kernel zurücklegt.
+Dieses kann auf zwei Möglichkeiten in den Netzwerk-Code gelangen: über
+ein Netzwerkinterface (IN) oder wenn ein lokaler Prozess ein neues Datagramm
+erzeugt.
+
+Bei einem Datagramm, das über einen Netzwerkadapter angekommen ist, wird
+eine Routing-Entscheidung getroffen und dann das Datagramm an einen lokalen
+Prozess ausgeliefert, oder über einen - meist anderen - Netzwerkadapter
+(OUT) versendet.
+
+Ein lokal erzeugtes Datagramm wird nach der Routing-Entscheidung
+über den ermittelten Netzwerkadapter (OUT) versendet oder, falls es an
+einen anderen lokalen Prozess geht, an diesen ausgeliefert.
+
 Es gibt fünf Einsprungspunkte für das Netfilter-Framework, deren Name im
-nachfolgenden Bild deren Namen der entsprechenden Regelkette des Paketfilters
+nachfolgenden Bild der entsprechenden Regelkette des Paketfilters
 entspricht.
+
+![Weg eines Datagramms durch die Regelketten](images/w1100-netfilter.png)
 
 Die erste Regelkette, die ein von außen kommendes Datagramm passiert ist
 PREROUTING.
-Diese Regelkette wird von den Tabellen *nat*, *mangle* und *raw* verwendet.
+Diese Regelkette gibt es bei den Tabellen *nat*, *mangle* und *raw*.
 
-Geht das Datagramm nach der Routingentscheidung an einen lokalen Prozess,
-passiert es als nächstes die Regelkette INPUT, die von der Tabelle *filter*
-verwendet wird.
+Geht das Datagramm nach der Routing-Entscheidung an einen lokalen Prozess,
+passiert es als nächstes die Regelkette INPUT, die es bei den Tabellen
+*filter*, *mangle* und *security* gibt.
 
-Geht das Datagramm stattdessen über zu einer anderen Schnittstelle, um
+Geht das Datagramm stattdessen zu einer anderen Schnittstelle, um
 wieder versendet zu werden, passiert es als nächstes die Regelkette FORWARD,
-die ebenfalls nur von der Tabelle *filter* verwendet wird.
+die es ebenfalls bei den Tabellen *filter*, *mangle* und *security* gibt.
 
 Ein von einem lokalen Prozess erzeugtes Datagramm passiert als erstes die
-Regelkette OUTPUT, die von allen vier Tabellen verwendet wird und geht dann
-nach der Routingentscheidung zur sendenden Schnittstelle.
+Regelkette OUTPUT, die es bei allen Tabellen gibt, und geht dann
+nach der Routing-Entscheidung zur sendenden Schnittstelle.
 
 Unmittelbar vor dem Versenden passiert ein Datagramm die Regelkette
-POSTROUTING, die von der Tabelle *nat* verwendet wird.
-
-![Weg eines Datagramms durch den Kernel](images/w1100-netfilter.png)
+POSTROUTING, die es bei den Tabellen *nat* und *mangle* gibt.
 
 Bei der Behandlung eines Datagramms im Kernel konsultiert der Netfilter-Code
 an den verschiedenen Einsprungstellen die zugehörigen Regelketten und
@@ -82,9 +164,8 @@ können.
 
 Diese benutzerdefinierten Regelketten können die Regeln zusammenfassen und
 einfacher strukturieren, so dass die Firewall einfacher zu verstehen ist.
-Dazu muss man jedoch das Modell kennen, nach dem diese Regelketten angelegt
-sind.
-
+Dazu muss man jedoch das Modell kennen, nach dem diese Regelketten
+verknüpft sind.
 Für OpenWrt beschreibe ich das Modell der Regelketten in einem der folgenden
 Kapitel.
 
@@ -94,16 +175,14 @@ Will ich meinen Paketfilter zustandsbezogen (stateful) betreiben, verwende
 ich die *conntrack* Module.
 
 Diese haben den Vorteil, das ich meine Regeln genauer bestimmen kann und
-trotzdem die Regeln einfacher halten kann.
+trotzdem einfacher halten kann.
 Bestimmte Anwendungen, wie das automatische Freischalten von
 FTP-Datenverbindungen, gehen nicht ohne diese Module.
 
 Ein Nachteil von zustandsbezogenen Paketfilter ist, dass sie für die
 zusätzlichen Informationen mehr Speicherplatz benötigen.
 Deshalb muss ich mir gegebenenfalls Gedanken machen, wie ich die
-Zustandstabellen schützen kann vor Überlauf schützen kann.
-Habe ich zu viele reguläre Verbindungen, muss ich eventuell auf
-zustandsbezogene Filterung verzichten.
+Zustandstabellen vor Überlauf schützen kann.
 
 Beim zustandsbezogenen Filtern kann ich die Datenpakete neben den anderen
 Kriterien noch nach dem Zustand der zugehörigen Verbindung diskriminieren.
@@ -116,17 +195,17 @@ ESTABLISHED
 : für Pakete, die zu einer bereits existierenden Verbindung gehören.
 
 RELATED
-: sind Datagramme, die zu einer bestehenden Verbindung gehören, aber nicht
+: für Datagramme, die zu einer bestehenden Verbindung gehören, aber nicht
   Teil dieser sind.
   Das kann ein Paket sein, das eine Datenverbindung zu einer bestehenden
   FTP-Verbindung aufbaut oder eine ICMP-Fehlermeldung.
 
 INVALID
-: ist ein Paket, das nicht identifiziert oder zugeordnet werden kann.
+: für ein Paket, das nicht identifiziert oder zugeordnet werden kann.
   Zum Beispiel ICMP-Fehlermeldungen oder TCP-Pakete, die zu keiner bekannten
   Verbindung passen.
 
-Dabei ist zu beachten, dass der Status einer Verbindung bei Iptables nicht
+Dabei muss ich beachten, dass der Status einer Verbindung bei Iptables nicht
 äquivalent zum Status einer TCP-Verbindung sein muss.
 So hat das SYN-ACK-Paket beim Aufbau einer TCP-Verbindung bei Iptables den
 Status ESTABLISHED, während die TCP-Verbindung erst mit dem dritten
@@ -141,10 +220,10 @@ Bei ICMP können nur vier Typen den Status NEW oder ESTABLISHED haben:
 
 Alle anderen ICMP-Nachrichten können maximal den Status RELATED haben.
 
-### Match-Erweiterungen
+### Iptables-Extensions
 
-für einige Protokolle und andere nützliche Sachen gibt es sogenannte
-Match-Erweiterungen, für die zum Teil entsprechende Kernel-Module geladen
+Für einige Protokolle und andere nützliche Sachen gibt es sogenannte
+Match-Erweiterungen, für die zum Teil zusätzliche Kernel-Module geladen
 werden müssen.
 
 Das sind beispielsweise Erweiterungen für die Protokolle ICMP, TCP und UDP,
@@ -164,8 +243,6 @@ in den Regeln, wie zum Beispiel:
 *   SNAT, DNAT, MASQUERADE um die Adressen zu manipulieren
 *   REDIRECT um eine Verbindung umzuleiten
 *   TOS und MARK um QoS zu unterstützen
-*   RETURN um die Abarbeitung einer benutzerdefinierten Kette abzubrechen
-*   QUEUE um eine Entscheidung durch ein Anwenderprogramm treffen zu lassen
 
 Ebtables
 --------
@@ -190,7 +267,7 @@ Hier gibt es drei Tabellen mit vordefinierten Regelketten:
 Arptables
 ---------
 
-Das Program `arptables` wird verwendet, um die ARP-Regeln im Linux-Kernel zu
+Das Programm `arptables` wird verwendet, um die ARP-Regeln im Linux-Kernel zu
 verwalten.
 Diese Regeln inspizieren die ARP-Datagramme.
 
