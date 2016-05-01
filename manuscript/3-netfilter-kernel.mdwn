@@ -108,8 +108,7 @@ Datagrammen, verschiedenen Regelketten nebst in ihnen enthaltenen Regeln
 sowie Kernel-Modulen mit dem Code für die Aktionen, die sich aus den Regeln
 ergeben.
 
-{width=90%}
-![Weg eines Datagramms durch den Kernel](images/w2295-weg-datenpaket.png)
+![Weg eines Datagramms durch den Kernel](images/w1650-weg-datenpaket.png)
 
 Um die Einsprungspunkte zuordnen zu können, betrachte ich zunächst abstrakt
 den Weg, den ein Datagramm durch den Kernel zurücklegt.
@@ -130,8 +129,7 @@ Es gibt fünf Einsprungspunkte für das Netfilter-Framework, deren Name im
 nachfolgenden Bild der entsprechenden Regelkette des Paketfilters
 entspricht.
 
-{width=90%}
-![Weg eines Datagramms durch die Regelketten](images/w2295-netfilter.png)
+![Weg eines Datagramms durch die Regelketten](images/w1650-netfilter.png)
 
 Die erste Regelkette, die ein von außen kommendes Datagramm passiert ist
 PREROUTING.
