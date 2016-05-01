@@ -1,6 +1,6 @@
 
-Was kann ich mit OpenWrt machen?
-================================
+Was kann ich damit machen?
+==========================
 
 Die nächste Frage ist: wofür kann ich OpenWrt einsetzen.
 Dazu will ich hier nur einen kurzen Ausschnitt geben und beschränke mich
