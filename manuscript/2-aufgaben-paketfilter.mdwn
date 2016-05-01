@@ -79,7 +79,7 @@ schützen.
 Dazu muss ich die Schwächen der in meinem Netz verwendeten Protokolle kennen
 und in manchen Fällen die Reichweite dieser Protokolle einschränken.
 So sendet beispielsweise MS Windows unter Umständen den NTLM-Hash des
-angemeldeten Nutzers an einen beliebigen SMB-Server.
+angemeldeten Nutzers an beliebige SMB-Server.
 Diese Information genügt, um sich in Windows-Netzen auszuweisen und Dienste
 zu nutzen.
 Um mich vor der versehentlichen Preisgabe dieser Information zu schützen,

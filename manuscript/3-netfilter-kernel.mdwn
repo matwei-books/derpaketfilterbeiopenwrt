@@ -254,8 +254,7 @@ Ethernet-Bridges.
 
 Hier gibt es drei Tabellen mit vordefinierten Regelketten:
 
-*  In der Tabelle *filter* wird über die Weiterleitung von Ethernet-Frames
-   entschieden.
+*  Die Tabelle *filter* entscheidet über die Weiterleitung von Ethernet-Frames.
 
 *  Die Tabelle *nat* dient der Manipulation von Ethernet-Frames.
 

@@ -102,7 +102,7 @@ ICMPv6
 
 Das Internet Control Message Protocol for IPv6 wurde erstmals 1995 in RFC
 1885 beschrieben.
-1998 wurde dieses RFC durch RFC 2463 obsolet, welches selbst wiederum
+1998 wurde dieses RFC durch RFC 2463 obsolet, welches dann
 im Jahr 2006 durch RFC 4443 abgelöst wurde.
 RFC 4884 aktualisiert und ergänzt diesen Draft Standard.
 

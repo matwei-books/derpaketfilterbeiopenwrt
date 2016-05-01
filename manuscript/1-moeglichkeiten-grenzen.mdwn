@@ -36,9 +36,9 @@ zulässigen und unzulässigen Traffic, um zu sehen, wie weit
 letzterer ersteren beeinträchtigt.
 
 Softwarefehler und Sicherheitslücken kann ich durch Penetrationstests
-entdecken.
-Dabei neue Fehler zu finden, erfordert Erfahrung und Einblick in die inneren
-Abläufe, zum Beispiel aus dem Quelltext der Software heraus.
+finden.
+Dabei neue Fehler zu entdecken, erfordert Erfahrung und Einblick in die
+inneren Abläufe, zum Beispiel aus dem Quelltext der Software heraus.
 Darauf können die wenigsten Anwender von OpenWrt zurückgreifen.
 
 Einfacher ist es, Security-Mailinglisten und ähnliche Quellen zu verfolgen
