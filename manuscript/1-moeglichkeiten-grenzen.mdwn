@@ -11,6 +11,7 @@ Ich kann:
     erlaubt,
 *   IP-Adressen mit NAT umsetzen oder mit Masquerading verstecken,
 *   Traffic-Shaping mit dem Programm `tc` unterstützen,
+*   Netzwerk-Traffic erfassen
 *   transparente Proxies und Captive Portals betreiben und
 *   Datenpakete, insbesondere deren Header, manipulieren.
 
