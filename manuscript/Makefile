@@ -10,8 +10,9 @@ DRAFTS = \
 	 2-icmp-igmp-draft.pdf \
 	 2-icmpv6-draft.pdf \
 	 2-nat-draft.pdf \
-	 3-sysctl-draft.pdf \
 	 3-netfilter-kernel-draft.pdf \
+	 3-netfilter-userspace-draft.pdf \
+	 3-sysctl-draft.pdf \
 	 3-openwrt-luci-draft.pdf \
 	 4-anforderungen-draft.pdf \
 	 4-testen-draft.pdf \
