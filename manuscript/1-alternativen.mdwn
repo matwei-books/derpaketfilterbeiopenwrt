@@ -103,7 +103,7 @@ Die Konfiguration mit speziellen Programmen, die auf dem
 Arbeitsplatzrechner laufen und von dort aus die Firewall konfigurieren
 ist oft bei proprietären Systemen zu finden.
 Dabei bin ich an das Betriebssytem gebunden, auf dem das
-Konfigurationsprogramm läuft.
+Programm läuft.
 
 Als letzte Form der Konfiguration kann ich direkt am Gerät arbeiten.
 Damit ist oft nur eine minimale Grundkonfiguration
@@ -114,7 +114,7 @@ beziehungsweise nach dem Virtualisierungssystem, falls ich den
 Paketfilter in einem Software Defined Network als virtuelle Maschine
 betreiben will.
 
-Mit all diesen Unterscheidungsmerkmalen wäge ich die Vor- und Nachteile
+Mit diesen Unterscheidungsmerkmalen wäge ich die Vor- und Nachteile
 gegenüber OpenWrt ab und entscheide mich dann an Hand meiner vorher
 aufgestellten Kriterien.
 
