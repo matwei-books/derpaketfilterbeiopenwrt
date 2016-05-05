@@ -34,8 +34,10 @@ minimale Länge ist 5.
     |                    Options                    |    Padding    |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-Die folgenden Informationen im Header von IPv4 sind für den Firewall-Betrieb
-relevant:
+Der RFC beschreibt die einzelnen Felder und die Bedeutung ihrer Werte
+recht ausführlich, so dass ich hier nicht weiter darauf eingehen will.
+Für den Firewall-Betrieb sind vor allem die folgenden Informationen im
+Header von IPv4 relevant:
 
 *   ToS (Type of Service)  
     Neben der Standard-Definition in RFC 791 gibt es Ergänzungen für die
@@ -51,9 +53,9 @@ relevant:
     Dieses Feld gibt an, welches Protokoll im IP-Datagramm eingebettet ist.
     Seit RFC 3232 führt die IANA eine Online-Datenbank unter
     <http://www.iana.org/>.
-    Auf einem Linux-Rechner finden sich die Nummern dieser Protokolle in der
-    Datei */etc/protocols*: so zum Beispiel 1 für ICMP, 2 für IGMP, 6 für
-    TCP und 17 für UDP.
+    Auf einem Linux-Rechner finden sich die Nummern und Namen dieser
+    Protokolle in der Datei */etc/protocols*: so zum Beispiel 1 für ICMP,
+     2 für IGMP, 6 für TCP und 17 für UDP.
     Will ich am Paketfilter nach Protokollen diskriminieren, muss ich dieses
     Feld beachten.
 
@@ -64,8 +66,29 @@ relevant:
     im Netfilter-Code die Regel greift und an welcher NAT, um dann entweder
     die originale oder die umgesetzte Adresse zu filtern.
 
-ICMP
-----
+Internet Control Message Protocol (ICMP)
+----------------------------------------
+
+RFC 792 beschreibt das Protokoll.
+Daraus habe ich die folgende ASCII-Graphik der Kopfdaten entnommen.
+Der ICMP-Header folgt unmittelbar auf den IPv4-Header.
+
+{linenos=off}
+     0                   1                   2                   3
+     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |     Type      |     Code      |          Checksum             |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                             unused                            |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |      Internet Header + 64 bits of Original Data Datagram      |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Für den Firewallbetrieb ist das Feld Type und davon abhängig das Feld Code
+relevant.
+Bei ICMP-Nachrichten mit Typ 3 sind die Daten des originalen Datagrams
+wichtig, da nur mit diesen die ICMP-Nachricht einem anderen Datenstrom
+zugeordnet werden kann.
 
 Das Internet Control Message Protocol ist für viele Firewall-Administratoren
 eine Problemzone.
@@ -83,6 +106,34 @@ TCP
 
 Das Transmission Control Protocol, beschrieben in RFC 793, ist eines der
 am häufigsten verwendeten Protokolle im Internet.
+Die folgende ASCII-Graphik ist dem RFC entnommen und lässt bereits die
+Komplexität des Protokolls erahnen.
+
+{linenos=off}
+     0                   1                   2                   3
+     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |          Source Port          |       Destination Port        |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                        Sequence Number                        |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                    Acknowledgment Number                      |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |  Data |           |U|A|P|R|S|F|                               |
+    | Offset| Reserved  |R|C|S|S|Y|I|            Window             |
+    |       |           |G|K|H|T|N|N|                               |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |           Checksum            |         Urgent Pointer        |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                    Options                    |    Padding    |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                             data                              |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Der TCP-Header kann aufgrund der Optionen unterschiedliche Längen haben.
+Das Feld *Data Offset* gibt seine Länge in 32-Bit-Worten an.
+Das Feld *data* in der ASCII-Graphik steht für die transportierten Daten
+und gehört nicht mehr zum TCP-Header.
 
 Eine TCP-Verbindung wird durch folgende fünf Angaben eindeutig identifiziert:
 
@@ -93,19 +144,20 @@ TCP-Verbindungen sind bidirektional, Quell- und Zieladresse sowie Quell-
 und Zielport von Datagrammen einer Sitzung sind paarweise vertauscht, je
 nach der Richtung, in der sie gesendet werden.
 
-Jede TCP-Sitzung befindet sich in einem Zustand, den eine Firewall am
+Jede TCP-Sitzung befindet sich in einem Zustand, den die Firewall am
 TCP-Header erkennen kann: an den Flags, der Sequenz- und
 Acknowledge-Nummer sowie am Receive-Window.
 
-Bei einer stateless Regel kann die Firewall den Zustand nur an Hand des
-aktuellen Datenpakets erraten und entsprechend reagieren.
+Bei einer stateless Regel kann die Firewall den Zustand ausschließlich an
+Hand des aktuellen Datenpakets erraten und entsprechend reagieren.
 Dann ist es bei einer bestehenden Verbindung nicht mehr möglich, zu erkennen,
 welche Seite die Verbindung ursprünglich initiiert hatte.
 
 Demgegenüber verfolgt die Firewall bei stateful Regeln die Sitzung und ist
 auf diese Weise in der Lage, gefälschte Datenpakete zu erkennen und zu
 unterdrücken.
-Natürlich braucht das mehr Ressourcen von der Firewall.
+Das braucht allerdings mehr Ressourcen, vor allem Speicherplatz, von der
+Firewall.
 
 TCP enthält einen Mechanismus, mit dem es die maximale Größe von Datagrammen
 auf der Verbindungsstrecke ermitteln kann.
@@ -126,12 +178,30 @@ UDP
 
 Das Universal Datagram Protocol, beschrieben in RFC 768, ist ein
 zustandsloses Protokoll.
+Die folgende ASCII-Graphik aus dem RFC lässt bereits erahnen, dass es
+sich um ein sehr einfaches Protokoll handelt.
 
-Eine UDP-Verbindung wird, genau wie bei TCP, durch folgende
+{linenos=off}
+     0      7 8     15 16    23 24    31
+    +--------+--------+--------+--------+
+    |     Source      |   Destination   |
+    |      Port       |      Port       |
+    +--------+--------+--------+--------+
+    |                 |                 |
+    |     Length      |    Checksum     |
+    +--------+--------+--------+--------+
+    |
+    |          data octets ...
+    +---------------- ...
+
+Das Längenfeld gibt die Länge des UDP-Headers und der Daten in Oktetts
+an.
+
+Eine UDP-Verbindung wird, ähnlich wie bei TCP, durch folgende
 Informationen identifiziert:
 
 *   Quell- und Zieladresse sowie Protokollfeld im IP-Header
-*   Quell- und Zielport im TCP-Header
+*   Quell- und Zielport im UDP-Header
 
 Einige auf UDP aufsetzende Protokolle verwenden mehrere dieser eindeutigen
 UDP-IDs in einer Sitzung, zum Beispiel TFTP.
