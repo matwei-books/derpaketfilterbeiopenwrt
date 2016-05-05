@@ -84,28 +84,21 @@ Der ICMP-Header folgt unmittelbar auf den IPv4-Header.
     |      Internet Header + 64 bits of Original Data Datagram      |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-Für den Firewallbetrieb ist das Feld Type und davon abhängig das Feld Code
-relevant.
-Bei ICMP-Nachrichten mit Typ 3 sind die Daten des originalen Datagrams
-wichtig, da nur mit diesen die ICMP-Nachricht einem anderen Datenstrom
-zugeordnet werden kann.
-
-Das Internet Control Message Protocol ist für viele Firewall-Administratoren
-eine Problemzone.
+ICMP ist für viele Firewall-Administratoren eine Problemzone.
 Um 2000 herum brachte Ofir Arkin seine Untersuchungsergebnisse über den
 Gebrauch von ICMP für das Scannen von Netzwerken heraus.
 Konnten zuvor in den meisten Firewalls ICMP-Pakete freizügig passieren,
 so wurden sie danach in vielen Konfigurationen rigoros gesperrt.
 Leider gibt es einige ICMP-Datagramme, die keinesfalls gesperrt werden
 sollten, um den regulären Netzbetrieb nicht zu behindern.
-Hier muss ein Firewall-Administrator sehr gut Bescheid wissen, so dass
+Hier muss der Firewall-Administrator sehr gut Bescheid wissen, so dass
 ich ICMP in einem eigenen Kapitel intensiver behandle.
 
-TCP
----
+Transmission Control Protocol (TCP)
+-----------------------------------
 
-Das Transmission Control Protocol, beschrieben in RFC 793, ist eines der
-am häufigsten verwendeten Protokolle im Internet.
+Beschrieben in RFC 793, ist TCP der am häufigsten verwendeten Protokolle
+im Internet.
 Die folgende ASCII-Graphik ist dem RFC entnommen und lässt bereits die
 Komplexität des Protokolls erahnen.
 
@@ -173,11 +166,10 @@ Bei stateful Regeln kann die Firewall Replay-Attacken erkennen, wenn die
 Sequenznummer eines Datagramms wesentlich kleiner ist, als die letzte
 Acknowledge-Nummer der Gegenrichtung.
 
-UDP
----
+Universal Datagram Protocol (UDP)
+---------------------------------
 
-Das Universal Datagram Protocol, beschrieben in RFC 768, ist ein
-zustandsloses Protokoll.
+UDP, beschrieben in RFC 768, ist ein zustandsloses Protokoll.
 Die folgende ASCII-Graphik aus dem RFC lässt bereits erahnen, dass es
 sich um ein sehr einfaches Protokoll handelt.
 
