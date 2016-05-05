@@ -141,14 +141,14 @@ Jede TCP-Sitzung befindet sich in einem Zustand, den die Firewall am
 TCP-Header erkennen kann: an den Flags, der Sequenz- und
 Acknowledge-Nummer sowie am Receive-Window.
 
-Bei einer stateless Regel kann die Firewall den Zustand ausschließlich an
+Bei einer zustandslosen Regel kann die Firewall den Zustand ausschließlich an
 Hand des aktuellen Datenpakets erraten und entsprechend reagieren.
 Dann ist es bei einer bestehenden Verbindung nicht mehr möglich, zu erkennen,
 welche Seite die Verbindung ursprünglich initiiert hatte.
 
-Demgegenüber verfolgt die Firewall bei stateful Regeln die Sitzung und ist
-auf diese Weise in der Lage, gefälschte Datenpakete zu erkennen und zu
-unterdrücken.
+Demgegenüber verfolgt die Firewall bei zustandsbehafteten Regeln die Sitzung
+und ist auf diese Weise in der Lage, gefälschte Datenpakete zu erkennen und
+zu unterdrücken.
 Das braucht allerdings mehr Ressourcen, vor allem Speicherplatz, von der
 Firewall.
 
@@ -162,9 +162,9 @@ Gehen Datenpakete verloren, wiederholt TCP automatisch bereits
 gesendete Datagramme.
 Diese wiederholt gesendeten Datagramme sollten problemlos durch die Firewall
 gehen, wenn die Verbindung legitim ist.
-Bei stateful Regeln kann die Firewall Replay-Attacken erkennen, wenn die
-Sequenznummer eines Datagramms wesentlich kleiner ist, als die letzte
-Acknowledge-Nummer der Gegenrichtung.
+Bei zustandsbehafteten Regeln kann die Firewall Replay-Attacken erkennen,
+wenn die Sequenznummer eines Datagramms wesentlich kleiner ist, als die
+letzte Acknowledge-Nummer der Gegenrichtung.
 
 Universal Datagram Protocol (UDP)
 ---------------------------------
@@ -209,10 +209,10 @@ Alternativ kann ich auch den Timeout bei der Firewall etwas größer
 ansetzen, wenn die Firewall Probleme mit einzelnen Verbindungen
 bereitet.
 
-NAT
----
+Network Address Translation (NAT)
+---------------------------------
 
-Mit Network Address Translation kann man die bei IPv4 mittlerweile
+Mit NAT kann man die bei IPv4 mittlerweile
 nicht mehr ausreichenden eindeutigen Adressen mehrfach verwenden.
 Bei IPv4-Firewalls muss ich jederzeit damit rechnen, mit NAT konfrontiert
 zu werden.
@@ -262,7 +262,7 @@ Fragmentierung
 Prinzipiell kann ich auch fragmentierte Datagramme filtern, ohne sie
 vorher zusammen zu setzen.
 In diesem Fall müsste ich alle Fragmente ohne Header-Informationen
-durchlassen und die Filterregeln nur auf die ersten Fragmente mit den
+durchlassen und die Filter-Regeln nur auf die ersten Fragmente mit den
 Header-Informationen anwenden.
 
 Sind die ersten Fragmente zu klein, so dass sie nicht genügend
