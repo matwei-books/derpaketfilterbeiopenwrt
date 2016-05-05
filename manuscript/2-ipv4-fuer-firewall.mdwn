@@ -7,9 +7,35 @@ Dementsprechend wird ein Firewall-Administrator häufig damit konfrontiert.
 In diesem Kapitel gehe ich auf wichtige Aspekte dieses und der damit
 verbundenen Protokolle ein.
 
+Internet Protokoll Version 4
+----------------------------
+
 RFC 791 beschreibt das Protokoll.
-In seinem Header transportiert IPv4 die folgenden, für den Firewall-Betrieb
-relevanten Informationen:
+Daraus habe ich die die folgende ASCII-Graphik der Kopfdaten entnommen.
+Die ersten 20 Bytes sind in jedem IPv4-Datagramm obligatorisch, die
+Optionen können in den Datagrammen fehlen.
+Das Feld *IHL* zeigt die Länge des IPv4-Headers in 32-Bit-Worten, die
+minimale Länge ist 5.
+
+{linenos=off}
+     0                   1                   2                   3
+     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |Version|  IHL  |Type of Service|          Total Length         |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |         Identification        |Flags|      Fragment Offset    |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |  Time to Live |    Protocol   |         Header Checksum       |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                       Source Address                          |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                    Destination Address                        |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                    Options                    |    Padding    |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Die folgenden Informationen im Header von IPv4 sind für den Firewall-Betrieb
+relevant:
 
 *   ToS (Type of Service)  
     Neben der Standard-Definition in RFC 791 gibt es Ergänzungen für die
