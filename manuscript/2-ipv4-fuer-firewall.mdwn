@@ -10,12 +10,9 @@ verbundenen Protokolle ein.
 Internet Protokoll Version 4
 ----------------------------
 
-RFC 791 beschreibt das Protokoll.
-Daraus habe ich die die folgende ASCII-Graphik der Kopfdaten entnommen.
-Die ersten 20 Bytes sind in jedem IPv4-Datagramm obligatorisch, die
-Optionen können in den Datagrammen fehlen.
-Das Feld *IHL* zeigt die Länge des IPv4-Headers in 32-Bit-Worten, die
-minimale Länge ist 5.
+RFC 791 beschreibt IPv4.
+Daraus habe ich die die folgende ASCII-Graphik der Kopfdaten entnommen,
+die 32 Bit pro Zeile anzeigt.
 
 {linenos=off}
      0                   1                   2                   3
@@ -34,6 +31,11 @@ minimale Länge ist 5.
     |                    Options                    |    Padding    |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
+Die ersten 20 Bytes sind in jedem IPv4-Datagramm obligatorisch, die
+Optionen können in den Datagrammen fehlen.
+Das Feld *IHL* zeigt die Länge des IPv4-Headers in 32-Bit-Worten, die
+minimale Länge ist 5.
+
 Der RFC beschreibt die einzelnen Felder und die Bedeutung ihrer Werte
 recht ausführlich, so dass ich hier nicht weiter darauf eingehen will.
 Für den Firewall-Betrieb sind vor allem die folgenden Informationen im
@@ -44,13 +46,15 @@ Header von IPv4 relevant:
     Bedeutung dieses Feldes in den RFCs 2474 (DCSP) und 3168 (ECN).
 
 *   Flags  
-    Diese zeigen an, ob das IP-Paket fragmentiert werden darf oder bereits ist.
+    Diese zeigen unter anderem an, ob das IP-Paket fragmentiert werden darf
+    oder bereits ist.
     Da Fragmentierung das Filtern erschweren kann, ist es ratsam, bei einem
     Paketfilter fragmentierte Pakete entweder zu verwerfen oder vor der
     Entscheidung zusammenzubauen.
 
 *   Protocol  
-    Dieses Feld gibt an, welches Protokoll im IP-Datagramm eingebettet ist.
+    Dieses Feld gibt an, welches Protokoll im IP-Datagramm eingebettet
+    ist, das heißt, wie die nachfolgenden Daten zu interpretieren sind.
     Seit RFC 3232 führt die IANA eine Online-Datenbank unter
     <http://www.iana.org/>.
     Auf einem Linux-Rechner finden sich die Nummern und Namen dieser
@@ -60,8 +64,8 @@ Header von IPv4 relevant:
     Feld beachten.
 
 *   Quell- und Zieladresse  
-    Mit je 32 Bit dienen diese in den meisten Regeln als Merkmale für die
-    Entscheidung.
+    Mit je 32 Bit dienen die Adressen in den meisten Regeln als Merkmale für
+    die Entscheidung.
     Verwende ich NAT bei der Firewall, muss ich beachten, an welcher Stelle
     im Netfilter-Code die Regel greift und an welcher NAT, um dann entweder
     die originale oder die umgesetzte Adresse zu filtern.
@@ -70,8 +74,8 @@ Internet Control Message Protocol (ICMP)
 ----------------------------------------
 
 RFC 792 beschreibt das Protokoll.
-Daraus habe ich die folgende ASCII-Graphik der Kopfdaten entnommen.
-Der ICMP-Header folgt unmittelbar auf den IPv4-Header.
+Daraus habe ich die folgende ASCII-Graphik der Kopfdaten entnommen, die
+ebenfalls 32 Bit pro Zeile zeigt.
 
 {linenos=off}
      0                   1                   2                   3
@@ -83,6 +87,8 @@ Der ICMP-Header folgt unmittelbar auf den IPv4-Header.
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |      Internet Header + 64 bits of Original Data Datagram      |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Der ICMP-Header folgt unmittelbar auf den IPv4-Header.
 
 ICMP ist für viele Firewall-Administratoren eine Problemzone.
 Um 2000 herum brachte Ofir Arkin seine Untersuchungsergebnisse über den
@@ -141,14 +147,14 @@ Jede TCP-Sitzung befindet sich in einem Zustand, den die Firewall am
 TCP-Header erkennen kann: an den Flags, der Sequenz- und
 Acknowledge-Nummer sowie am Receive-Window.
 
-Bei einer zustandslosen Regel kann die Firewall den Zustand ausschließlich an
+Bei einer zustandslosen Regel muss die Firewall den Zustand ausschließlich an
 Hand des aktuellen Datenpakets erraten und entsprechend reagieren.
 Dann ist es bei einer bestehenden Verbindung nicht mehr möglich, zu erkennen,
 welche Seite die Verbindung ursprünglich initiiert hatte.
 
 Demgegenüber verfolgt die Firewall bei zustandsbehafteten Regeln die Sitzung
-und ist auf diese Weise in der Lage, gefälschte Datenpakete zu erkennen und
-zu unterdrücken.
+und ist auf diese Weise zum Teil in der Lage, gefälschte Datenpakete zu
+erkennen und zu unterdrücken.
 Das braucht allerdings mehr Ressourcen, vor allem Speicherplatz, von der
 Firewall.
 
@@ -157,6 +163,12 @@ auf der Verbindungsstrecke ermitteln kann.
 Dafür setzt es das *Don't Fragment* Bit im IP-Header und ist darauf
 angewiesen, dass ICMP-Unreachable-Pakete zurückkommen können, die dem Sender
 sagen, wann ein Datagramm zu groß ist.
+Moderne TCP-Stacks können mit Heuristiken auch ohne ICMP erkennen, wenn
+die Path-MTU kleiner als die MTU des Interfaces ist und senden dann
+kleinere Datenpakete.
+Diese Heuristiken sind jedoch zeitaufwendig - sie arbeiten mit Timeouts -
+und verschwenden Bandbreite, weil sie nicht mit der maximal möglichen MTU
+arbeiten sondern meist mit kleineren.
 
 Gehen Datenpakete verloren, wiederholt TCP automatisch bereits
 gesendete Datagramme.
@@ -239,6 +251,7 @@ Adressen zur Verfügung als auf der inneren Seite verwendet werden.
 Bei einer Umsetzung von vielen inneren Adressen auf wenige äußere ist es
 ohne explizite Konfiguration schwierig, eine Verbindung von außen nach innen
 aufzubauen.
+
 Das ist genau dann problematisch, wenn zwei Rechner hinter zwei solchen
 NAT-Routern ein direkte Verbindung wünschen, zum Beispiel für VoIP oder
 Videokonferenzen.
@@ -246,6 +259,7 @@ In diesem Fall ist es ratsam sich mit dem Thema NAT-Traversal
 auseinander zu setzen.
 NATBlaster und STUN sind zwei Verfahren, mit denen direkte
 Verbindungen über zwei NAT-Router hinweg etabliert werden können.
+Diese sind auf die Kooperation der Firewall angewiesen.
 
 Schließlich behindert NAT IPsec, da letzteres die IP-Adressen
 verifiziert und durch die Änderung der Adressen die Datagramme ungültig
@@ -267,7 +281,7 @@ Header-Informationen anwenden.
 
 Sind die ersten Fragmente zu klein, so dass sie nicht genügend
 Informationen enthalten, verwerfe ich sie.
-Was zu klein ist, ist abhängig von den Regeln und den Protokollen,
+Was zu klein ist, hängt von den Regeln und den Protokollen ab,
 nach denen ich filtere.
 
 Bei Connection Tracking muss ich fragmentierte Datagramme auf jeden Fall
