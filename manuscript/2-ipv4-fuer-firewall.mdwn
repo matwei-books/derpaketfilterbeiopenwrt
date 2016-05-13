@@ -146,7 +146,7 @@ Die folgende ASCII-Graphik aus dem RFC lässt bereits erahnen, dass es
 sich um ein sehr einfaches Protokoll handelt.
 
 {width=42%}
-![UDP Header](images/w1104-rfc768-udp-header.png)
+![UDP Header](images/w628-rfc768-udp-header.png)
 
 Das Längenfeld gibt die Länge des UDP-Headers und der Daten in Oktetts
 an.
