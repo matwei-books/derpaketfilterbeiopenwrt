@@ -10,8 +10,20 @@ verbundenen Protokolle ein.
 Internet Protokoll Version 4
 ----------------------------
 
+Erinnern wir uns kurz an das OSI-Modell, so finden wir das Internet
+Protokoll in Schicht 3, direkt auf Ethernet aufsetzend, welches
+seinerseits die Funktionen der Schichten 1 und 2 bereitstellt.
+Natürlich kann man IP auch mit anderen Protokollen übertragen, jedoch
+werden wir es wohl am häufigsten mit Ethernet oder WLAN zusammen sehen.
+In einem Datagramm finden wir den IP-Header folglich hinter dem
+Ethernet-Header und vor den Headern der Protokolle aus den höheren
+Schichten.
+
+{width=73%}
+![IP Datagramm](images/w879-ipv4.png)
+
 RFC 791 beschreibt IPv4.
-Daraus habe ich die die folgende ASCII-Graphik der Kopfdaten entnommen,
+Daraus habe ich die die folgende ASCII-Graphik des IP-Headers entnommen,
 die 32 Bit pro Zeile anzeigt.
 
 {width=73%}
