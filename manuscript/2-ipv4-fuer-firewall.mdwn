@@ -19,7 +19,7 @@ In einem Datagramm finden wir den IP-Header folglich hinter dem
 Ethernet-Header und vor den Headern der Protokolle aus den höheren
 Schichten.
 
-{width=73%}
+{width=58%}
 ![IP Datagramm](images/w879-ipv4.png)
 
 RFC 791 beschreibt IPv4.
