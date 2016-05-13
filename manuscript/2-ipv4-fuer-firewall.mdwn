@@ -14,22 +14,8 @@ RFC 791 beschreibt IPv4.
 Daraus habe ich die die folgende ASCII-Graphik der Kopfdaten entnommen,
 die 32 Bit pro Zeile anzeigt.
 
-{linenos=off}
-     0                   1                   2                   3
-     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |Version|  IHL  |Type of Service|          Total Length         |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |         Identification        |Flags|      Fragment Offset    |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |  Time to Live |    Protocol   |         Header Checksum       |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                       Source Address                          |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                    Destination Address                        |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                    Options                    |    Padding    |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+{width=73%}
+[IPv4 Header](images/w1104-rfc791-ipv4-header.png)
 
 Die ersten 20 Bytes sind in jedem IPv4-Datagramm obligatorisch, die
 Optionen können in den Datagrammen fehlen.
