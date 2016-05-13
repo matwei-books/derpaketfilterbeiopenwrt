@@ -171,6 +171,7 @@ Universal Datagram Protocol (UDP)
 
 Kommen wir nun zu UDP, dem letzten der Protokolle, auf die ich im Rahmen
 von IPv4 kurz eingehen will.
+
 Auch hier finden wir die Kopfdaten direkt hinter dem IP-Header.
 Und wie bei TCP werden auch bei UDP Informationen aus dem IP-Header zur
 vollständigen Identifizierung einer UDP-Sitzung herangezogen.
