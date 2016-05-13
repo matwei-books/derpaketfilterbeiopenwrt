@@ -13,6 +13,7 @@ Internet Protokoll Version 4
 Erinnern wir uns kurz an das OSI-Modell, so finden wir das Internet
 Protokoll in Schicht 3, direkt auf Ethernet aufsetzend, welches
 seinerseits die Funktionen der Schichten 1 und 2 bereitstellt.
+
 Natürlich kann man IP auch mit anderen Protokollen übertragen, jedoch
 werden wir es wohl am häufigsten mit Ethernet oder WLAN zusammen sehen.
 In einem Datagramm finden wir den IP-Header folglich hinter dem
@@ -25,14 +26,14 @@ Schichten.
 RFC 791 beschreibt IPv4.
 Daraus habe ich die die folgende ASCII-Graphik des IP-Headers entnommen,
 die 32 Bit pro Zeile anzeigt.
+Die ersten fünf 32-Bit-Worte sind in jedem IPv4-Datagramm obligatorisch,
+die Optionen können weggelassen werden.
+
+Das Feld *IHL* zeigt die Länge des IPv4-Headers in 32-Bit-Worten, die
+minimale Länge ist 5.
 
 {width=73%}
 ![IPv4 Header](images/w1104-rfc791-ipv4-header.png)
-
-Die ersten 20 Bytes sind in jedem IPv4-Datagramm obligatorisch, die
-Optionen können in den Datagrammen fehlen.
-Das Feld *IHL* zeigt die Länge des IPv4-Headers in 32-Bit-Worten, die
-minimale Länge ist 5.
 
 Der RFC beschreibt die einzelnen Felder und die Bedeutung ihrer Werte
 recht ausführlich, so dass ich hier nicht weiter darauf eingehen will.
@@ -71,6 +72,13 @@ Header von IPv4 relevant:
 Internet Control Message Protocol (ICMP)
 ----------------------------------------
 
+ICMP wird zwar, genau wie IP, der OSI-Schicht 3 zugeordnet, es nutzt
+aber das Internet Protokoll für den Transport.
+Daher finden wir den ICMP-Header direkt hinter dem IP-Header.
+
+{width=58%}
+![ICMP Datagramm](images/w879-icmp.png)
+
 RFC 792 beschreibt das Protokoll.
 Daraus habe ich die folgende ASCII-Graphik der Kopfdaten entnommen, die
 ebenfalls 32 Bit pro Zeile zeigt.
@@ -92,6 +100,14 @@ ich ICMP in einem eigenen Kapitel intensiver behandle.
 
 Transmission Control Protocol (TCP)
 -----------------------------------
+
+Auch den TCP-Header finden wir in einem Datagramm hinter dem IP-Header.
+Interessant ist, das zur eindeutigen Identifizierung einer TCP-Sitzung
+sowohl Informationen aus dem TCP-Header als auch aus dem IP-Header
+herangezogen werden.
+
+{width=58%}
+![TCP Datagramm](images/w879-tcp.png)
 
 Beschrieben in RFC 793, ist TCP der am häufigsten verwendeten Protokolle
 im Internet.
@@ -153,7 +169,16 @@ letzte Acknowledge-Nummer der Gegenrichtung.
 Universal Datagram Protocol (UDP)
 ---------------------------------
 
-UDP, beschrieben in RFC 768, ist ein zustandsloses Protokoll.
+Kommen wir nun zu UDP, dem letzten der Protokolle, auf die ich im Rahmen
+von IPv4 kurz eingehen will.
+Auch hier finden wir die Kopfdaten direkt hinter dem IP-Header.
+Und wie bei TCP werden auch bei UDP Informationen aus dem IP-Header zur
+vollständigen Identifizierung einer UDP-Sitzung herangezogen.
+
+{width=58%}
+![UDP Datagramm](images/w879-udp.png)
+
+Beschrieben in RFC 768, ist UDP ein zustandsloses Protokoll.
 Die folgende ASCII-Graphik aus dem RFC lässt bereits erahnen, dass es
 sich um ein sehr einfaches Protokoll handelt.
 
