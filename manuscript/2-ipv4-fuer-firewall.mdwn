@@ -63,16 +63,8 @@ RFC 792 beschreibt das Protokoll.
 Daraus habe ich die folgende ASCII-Graphik der Kopfdaten entnommen, die
 ebenfalls 32 Bit pro Zeile zeigt.
 
-{linenos=off}
-     0                   1                   2                   3
-     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |     Type      |     Code      |          Checksum             |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                             unused                            |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |      Internet Header + 64 bits of Original Data Datagram      |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+{width=73%}
+![ICMP Header](images/w1104-rfc792-icmp-header.png)
 
 Der ICMP-Header folgt unmittelbar auf den IPv4-Header.
 
@@ -94,26 +86,8 @@ im Internet.
 Die folgende ASCII-Graphik ist dem RFC entnommen und lässt bereits die
 Komplexität des Protokolls erahnen.
 
-{linenos=off}
-     0                   1                   2                   3
-     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |          Source Port          |       Destination Port        |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                        Sequence Number                        |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                    Acknowledgment Number                      |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |  Data |           |U|A|P|R|S|F|                               |
-    | Offset| Reserved  |R|C|S|S|Y|I|            Window             |
-    |       |           |G|K|H|T|N|N|                               |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |           Checksum            |         Urgent Pointer        |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                    Options                    |    Padding    |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                             data                              |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+{width=73%}
+![TCP Header](images/w1104-rfc793-tcp-header.png)
 
 Der TCP-Header kann aufgrund der Optionen unterschiedliche Längen haben.
 Das Feld *Data Offset* gibt seine Länge in 32-Bit-Worten an.
@@ -171,18 +145,8 @@ UDP, beschrieben in RFC 768, ist ein zustandsloses Protokoll.
 Die folgende ASCII-Graphik aus dem RFC lässt bereits erahnen, dass es
 sich um ein sehr einfaches Protokoll handelt.
 
-{linenos=off}
-     0      7 8     15 16    23 24    31
-    +--------+--------+--------+--------+
-    |     Source      |   Destination   |
-    |      Port       |      Port       |
-    +--------+--------+--------+--------+
-    |                 |                 |
-    |     Length      |    Checksum     |
-    +--------+--------+--------+--------+
-    |
-    |          data octets ...
-    +---------------- ...
+{width=42%}
+![UDP Header](images/w1104-rfc768-udp-header.png)
 
 Das Längenfeld gibt die Länge des UDP-Headers und der Daten in Oktetts
 an.
