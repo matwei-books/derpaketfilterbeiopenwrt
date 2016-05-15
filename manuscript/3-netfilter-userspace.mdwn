@@ -2,8 +2,6 @@
 Das Netfilter-Framework: Userspace-Programme
 ============================================
 
-%% Welche gibt es?
-
 Im Netfilter-Framework gibt es vier Gruppen von Userspace-Programmen, die
 sich um verschiedene Belange bei der Paketfilterung kümmern:
 
@@ -18,24 +16,29 @@ sich um verschiedene Belange bei der Paketfilterung kümmern:
 *   **arptables** kümmert sich um ARP, das heißt die Zuordnung von
     Ethernet-Adressen zu IPv4-Adressen.
 
-Auf alle vier gehe ich im folgenden kurz ein.
-
-%% Welche Funktionen erfüllen diese?
+Auf alle vier gehe ich im folgenden nur kurz ein, für detailliertere
+Erläuterungen verweise ich auf die Handbuchseiten.
 
 iptables
 --------
 
 Hier habe ich es mit insgesamt vier Programmen zu tun:
 
-*   `iptables` ist das Programm, mit dem ich Regeln und Regelketten anlegen
-    und löschen sowie Zählerstände abfragen und rücksetzen kann.
-    Dieses Programm verwende ich, wenn ich einzelne Paketfilterregeln von
+*   `iptables` verwende ich, wenn ich einzelne Paketfilterregeln von
     Hand oder in einem Skript explizit ändern will.
+    Konkret nutze ich es für die Verwaltung von Regelketten:
+    *   Anlegen und Löschen von benutzerdefinierten Ketten,
+    *   Vorgabe einer Policy,
+    und für die Verwaltung der Regeln:
+    *   Anlegen, Ändern und Löschen von Regeln,
+    *   Abfragen, Setzen und Löschen von Zählerständen,
+    *   Aktivierung von Match-Erweiterungen und Modulen für das
+	Connection Tracking.
 
 *   Mit `iptables-save` und `iptables-restore` kann ich komplette Regelsätze
     sichern und wiederherstellen.
     Die Programme werden in den Skripts für den Systemstart verwendet, um
-    Netfilter-Regelsätze über einen Neustart des Rechners zu erhalten.
+    Regelsätze über einen Neustart des Rechners zu erhalten.
 
     Durch die kompakte Form als Textdatei mit jeweils allen Optionen von
     `iptables` für die betreffende Regel in einer Zeile eignet sich die
@@ -46,21 +49,15 @@ Hier habe ich es mit insgesamt vier Programmen zu tun:
     sie in XML für die weitere maschinelle Verarbeitung um.
 
     Lesbarer wird die Ausgabe dadurch nicht, aber sie kann mit Werkzeugen,
-    die mit XML umgehen können, weiter bearbeitet werden.
-
-%% Verwalten von Regelketten
-
-%% Verwalten von Regeln
-
-%% MATCH-Erweiterungen
+    die mit XML umgehen können, weiterbearbeitet werden.
 
 ip6tables
 ---------
 
-Hier gilt im wesentlichen das für *iptables* gesagte.
+Hier gilt das für *iptables* gesagte.
 Es gibt die drei Programme
 
-*   `ip6tables` zur Manipulation von einzelnen Regeln,
+*   `ip6tables` zur Manipulation von Regeln und Regelketten,
 
 *   `ip6tables-save` zum Speichern des gesamten IPv6-Regelsatzes und
 
@@ -71,37 +68,33 @@ ebtables
 --------
 
 Für die Administration der Ethernet Bridging Tables gibt es das Programm
-`ebtables`.
+`ebtables`, dass ich nur benötige, wenn ich eine Ethernet-Bridge betreibe.
+Die Bridge kann echte Ethernet-Adapter verbinden oder virtuelle Maschinen.
 
-Dementsprechend verwende ich es nur, wenn ich eine Ethernet-Bridge betreibe.
-Diese kann echte Ethernet-Adapter verbinden oder virtuelle Maschinen.
-Die detaillierten Optionen spare ich mir an dieser Stelle, diese stehen in
-den Handbuchseiten.
-
-Ein wichtiger Einsatzfall, für den ich `ebtables` benötige, ist für eine
-Bridge, die zusätzlich als Router, zum Beispiel für ein VPN arbeiten soll.
+Ein Einsatzfall, für den ich `ebtables` verwende, ist eine Bridge,
+die zusätzlich als Router, zum Beispiel für ein VPN arbeiten soll.
 Will ich in einem bestehenden Netzwerk minimal invasiv nachträglich einen
-VPN-Router einsetzen, ohne die Rechner oder den alten Router
+VPN-Router einsetzen, ohne die Rechner oder den Zugangs-Router
 neu zu konfigurieren, dann kann ich den VPN-Router als Bridge zwischen dem
-alten Router und den Rechnern im Netz platzieren.
+vorhandenen Router und den Rechnern im Netz platzieren.
 Damit die Datagramme, die durch das VPN geleitet werden sollen, auch
 wirklich dort ankommen, muss der IP-Stack des VPN-Routers sie zu "sehen"
 bekommen.
-Dafür muss ich mit `ebtables` diese Datagramme von der Weiterleitung durch
-die Bridge ausnehmen und dem IP-Stack zuführen.
-Das konkrete Vorgehen dazu ist in Teil 4 beschrieben.
+Dafür nehme ich mit `ebtables` diese Datagramme von der Weiterleitung durch
+die Bridge aus und führe sie dem IP-Stack zu.
+Das konkrete Vorgehen dazu beschreibe ich in Teil 4.
 
 arptables
 ---------
 
-Hier habe ich es wieder mit drei Programmen zu tun:
+Hier habe ich es ebenfalls mit drei Programmen zu tun:
 
 *   `arptables` setzt die Regeln zum Inspizieren und Manipulieren von
-    Datagrammen des Adress Resolution Protocol (ARP),
+    Datagrammen des Address Resolution Protocol (ARP),
 
 *   `arptables-save` sichert alle Regeln und
 
-*   `arptables-restore` stellt alle auf einmal wieder her.
+*   `arptables-restore` stellt alle wieder her.
 
 Zwar kann ich mit `arptables` auch einen einzelnen Rechner schützen, doch
 werde ich dieses vorwiegend bei einer Bridge einsetzen.
@@ -119,10 +112,10 @@ Ich kann ein Kernel-Modul schreiben, dass an den nötigen Hooks eingehängt
 und von einem Userspace-Programm gesteuert wird.
 
 Alternativ kann ich mit *libipq* die entsprechende Funktionalität auch
-gleich im Userspace selbst realisieren.
+im Userspace realisieren.
 
 Für Experimente und Tests würde ich die Filterung im Userspace vorziehen,
 bei hohen Anforderungen an die Performance den Weg über das Kernel-Modul.
 
-Einen Einstieg in das Thema bietet das
+Einen Einstieg in dieses Thema bietet das
 [Linux netfilter hacking HOWTO](http://www.netfilter.org/documentation/HOWTO/de/netfilter-hacking-HOWTO.html)
