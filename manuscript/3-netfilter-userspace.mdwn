@@ -1,6 +1,6 @@
 
-Netfilter: Userspace-Programme
-==============================
+Netfilter: Benutzerprogramme
+============================
 
 Im Netfilter-Framework gibt es vier Gruppen von Userspace-Programmen, die
 sich um verschiedene Belange bei der Paketfilterung kümmern:
@@ -27,10 +27,12 @@ Hier habe ich es mit insgesamt vier Programmen zu tun:
 *   `iptables` verwende ich, wenn ich einzelne Paketfilterregeln von
     Hand oder in einem Skript explizit ändern will.
     Konkret nutze ich es für die Verwaltung von Regelketten:
+
     *   Anlegen und Löschen von benutzerdefinierten Ketten,
     *   Vorgabe einer Policy,
 
     und für die Verwaltung der Regeln:
+
     *   Anlegen, Ändern und Löschen von Regeln,
     *   Abfragen, Setzen und Löschen von Zählerständen,
     *   Aktivierung von Match-Erweiterungen und Modulen für das
