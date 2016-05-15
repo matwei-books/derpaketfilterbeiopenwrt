@@ -1,6 +1,6 @@
 
-Das Netfilter-Framework: Userspace-Programme
-============================================
+Netfilter: Userspace-Programme
+==============================
 
 Im Netfilter-Framework gibt es vier Gruppen von Userspace-Programmen, die
 sich um verschiedene Belange bei der Paketfilterung kümmern:
@@ -29,6 +29,7 @@ Hier habe ich es mit insgesamt vier Programmen zu tun:
     Konkret nutze ich es für die Verwaltung von Regelketten:
     *   Anlegen und Löschen von benutzerdefinierten Ketten,
     *   Vorgabe einer Policy,
+
     und für die Verwaltung der Regeln:
     *   Anlegen, Ändern und Löschen von Regeln,
     *   Abfragen, Setzen und Löschen von Zählerständen,
@@ -47,9 +48,6 @@ Hier habe ich es mit insgesamt vier Programmen zu tun:
 
 *   `iptables-save-xml` nimmt die Ausgabe von `iptables-save` und wandelt
     sie in XML für die weitere maschinelle Verarbeitung um.
-
-    Lesbarer wird die Ausgabe dadurch nicht, aber sie kann mit Werkzeugen,
-    die mit XML umgehen können, weiterbearbeitet werden.
 
 ip6tables
 ---------
