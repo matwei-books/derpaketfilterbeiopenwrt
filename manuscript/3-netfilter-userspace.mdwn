@@ -55,6 +55,9 @@ Hier habe ich es mit insgesamt vier Programmen zu tun:
 *   `iptables-save-xml` nimmt die Ausgabe von `iptables-save` und wandelt
     sie in XML für die weitere maschinelle Verarbeitung um.
 
+    Bis jetzt habe ich für dieses Programm noch keine Verwendung
+    gefunden.
+
 ip6tables
 ---------
 
