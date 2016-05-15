@@ -26,6 +26,7 @@ Hier habe ich es mit insgesamt vier Programmen zu tun:
 
 *   `iptables` verwende ich, wenn ich einzelne Paketfilterregeln von
     Hand oder in einem Skript explizit ändern will.
+
     Konkret nutze ich es für die Verwaltung von Regelketten:
 
     *   Anlegen und Löschen von benutzerdefinierten Ketten,
@@ -38,15 +39,18 @@ Hier habe ich es mit insgesamt vier Programmen zu tun:
     *   Aktivierung von Match-Erweiterungen und Modulen für das
 	Connection Tracking.
 
-*   Mit `iptables-save` und `iptables-restore` kann ich komplette Regelsätze
-    sichern und wiederherstellen.
-    Die Programme werden in den Skripts für den Systemstart verwendet, um
-    Regelsätze über einen Neustart des Rechners zu erhalten.
+*   Mit `iptables-save` kann ich komplette Regelsätze sichern.
 
     Durch die kompakte Form als Textdatei mit jeweils allen Optionen von
     `iptables` für die betreffende Regel in einer Zeile eignet sich die
     Ausgabe von `iptables-save` sehr gut zur Analyse eines Paketfilters.
     Darauf komme ich in einem späteren Kapitel zurück.
+
+*   `iptables-restore` nimmt die Ausgabe von `iptables-save` und
+    installiert alle Regeln im Kernel.
+    Dieses Programm wird in den Skripts beim Systemstart verwendet, um
+    die vor dem Herunterfahren gesicherten Regeln beim Neustart des
+    Rechners wiederherzustellen.
 
 *   `iptables-save-xml` nimmt die Ausgabe von `iptables-save` und wandelt
     sie in XML für die weitere maschinelle Verarbeitung um.
