@@ -67,18 +67,17 @@ Variablen.
   ICMP-Echo-Requests, die ihn via Multicast oder Broadcast erreichen.
 
 *net.ipv4.icmp_errors_use_inbound_ifaddr*
-: Ist diese Option auf 0 gesetzt, sendet der Kernel eines Routers
+: Ist diese Option auf 0 gesetzt, sendet ein Router
   ICMP-Fehlermeldungen mit der primären Adresse der abgehenden Schnittstelle.
-  Mit dem Wert 1 nimmt er die primäre Adresse der ankommenden Schnittstelle.
-  Der Unterschied wird deutlich, wenn man mit `traceroute` den
-  Pfad der Datagramme durch das Netz untersucht.
+  Mit dem Wert 1 nimmt er die primäre Adresse der Schnittstelle auf der
+  das Paket ankam, welches den Fehler verursacht hat.
 
 *net.ipv4.icmp_ratelimit*
 : Diese Variable bestimmt die Rate, mit der bestimmte ICMP-Nachrichten
   gesendet werden.
   Der Wert gibt den minimalen Abstand in Millisekunden zwischen zwei
   ICMP-Nachrichten an, 0 bedeutet dementsprechend keine Beschränkung.
-  Welche ICMP-Nachrichten limitiert werden, steht in
+  Welche ICMP-Nachrichten limitiert werden, steht in der Variable
   *net.ipv4.icmp_ratemask*.
 
 *net.ipv4.icmp_ratemask*
