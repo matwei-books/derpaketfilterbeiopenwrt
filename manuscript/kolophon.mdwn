@@ -1,0 +1,19 @@
+
+# Kolophon
+
+Dieses Buch ist im Markdown-Format mit Erweiterungen von Leanpub
+geschrieben.
+Daraus wurden die PDF-, EPUB- und MOBI-Versionen erzeugt.
+
+Die Diagramme für die Datenpakete im Kapitel über IPv4 habe ich mit
+[ditaa][ditaa] erstellt.
+
+Das Titelbild ist von einer Zeichnung gescannt, mit [Inkscape][inkscape]
+vektorisiert und in passender Auflösung als Rastergraphik exportiert.
+Die gesamte Titelseite ist mit [GIMP][gimp] erstellt.
+
+[ditaa]: http://ditaa.sourceforge.net/
+
+[gimp]: https://www.gimp.org/
+
+[inkscape]: https://inkscape.org/de/
