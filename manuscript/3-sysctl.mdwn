@@ -5,23 +5,22 @@ Besonderheiten des Linux-Kernels
 Der Linux-Kernel bietet viele Einstellmöglichkeiten über das *proc*
 Dateisystem.
 Dieses spezielle Dateisystem, dass im Verzeichnisbaum unter `/proc`
-eingehängt wird enthält viele Pseudo-Dateien, aus denen Kernelparameter
+eingehängt ist, enthält Pseudo-Dateien, aus denen Kernelparameter
 ausgelesen werden können.
-Durch Schreiben in diese Dateien können Kernelparameter gesetzt werden.
+Durch Schreiben in diese Dateien kann ich die Kernelparameter setzen.
 
 Die für das Netzwerk und damit für Paketfilter und Firewalls interessanten
 Parameter sind im Verzeichnis */proc/sys/net/* zu finden.
 
-Diese Parameter kann ich mit `cat` oder `less` auslesen und mit
-`echo $wert > /proc/sys/net/parameter` setzen.
+Ich kann diese Parameter mit `cat` oder `less` auslesen und mit
+`echo $wert > /proc/sys/net/$parameter` setzen.
+Einfacher geht das jedoch mit dem Programm `sysctl`, dem ich den Namen des
+Parameters und den Wert in der Kommandozeile oder in der
+Datei */etc/sysctl.conf* mitgeben kann.
 
-Einfacher geht das mit dem Programm `sysctl`, dem ich den Namen der
-Parameters und den Wert in der Kommandozeile mitgeben kann, oder in der
-Datei */etc/sysctl.conf*.
 Dabei gilt die Besonderheit beim Namen des Parameters, dass dieser dem
-vollständigen Pfadnamen der Datei unterhalb von */proc/sys/* entspricht,
+Pfadnamen der Datei unterhalb von */proc/sys/* entspricht,
 wobei statt der '/' im Dateisystem '.' im Namen des Parameters gesetzt wird.
-
 So entspricht die Datei */proc/sys/net/ipv4/ip_forward* dem Parameter
 `net.ipv4.ip_forward` in der Kommandozeile von `sysctl` beziehungsweise in
 der Datei */etc/sysctl.conf*.
@@ -37,20 +36,20 @@ Variablen.
 
 *net.core.bpf_jit_enable*
 : Für die Architektur *x86_64* gibt es ein Framework, dass die
-  Paketfilterung beschleunigen kann. Das wird mit diesem Parameter
+  Paketfilterung beschleunigen kann. Dieses wird mit diesem Parameter
   aktiviert.
 
 *net.ipv4.ip_forward*
 : Diese Variable entscheidet, ob eine Maschine mit mehreren
   Netzwerkschnittstellen als Router arbeitet und Pakete zwischen den
   Schnittstellen weiterleitet.
-  Üblicherweise setzt man diesen Parameter auf 0 zurück, bevor die Regeln
+  In Skripts setzt man diesen Parameter oft auf 0, bevor die Regeln
   des Paketfilters gesetzt werden und aktiviert die Weiterleitung mit einem
   von 0 verschiedenen Wert nach dem Setzen der Regeln.
 
 *net.ipv4.ipfrag_* *
 : Diese Gruppe von Variablen steuert das Zusammensetzen von IP-Fragmenten.
-  Setze ich auf dem Paketfilter ankommende Fragmente zusammen, muss ich
+  Will ich auf dem Paketfilter ankommende Fragmente zusammensetzen, muss ich
   diese Variablen näher anschauen.
 
 *net.ipv4.tcp_mtu_probing*
@@ -65,14 +64,14 @@ Variablen.
 
 *net.ipv4.icmp_echo_ignore_broadcasts*
 : Wenn diese Option ungleich 0 gesetzt ist, ignoriert der Kernel alle
-  ICMP-Echo-Requests, die an ihn via Multicast oder Broadcast gesendet
-  werden.
+  ICMP-Echo-Requests, die ihn via Multicast oder Broadcast erreichen.
 
 *net.ipv4.icmp_errors_use_inbound_ifaddr*
 : Ist diese Option auf 0 gesetzt, sendet der Kernel eines Routers
   ICMP-Fehlermeldungen mit der primären Adresse der abgehenden Schnittstelle.
-  Mit dem Wert 1 nimmt er die primäre Adresse der ankommenden Schnittstelle,
-  wie es viele Netzwerk-Administratoren erwarten.
+  Mit dem Wert 1 nimmt er die primäre Adresse der ankommenden Schnittstelle.
+  Der Unterschied wird deutlich, wenn man mit `traceroute` den
+  Pfad der Datagramme durch das Netz untersucht.
 
 *net.ipv4.icmp_ratelimit*
 : Diese Variable bestimmt die Rate, mit der bestimmte ICMP-Nachrichten
@@ -134,8 +133,7 @@ exemplarisch für die anderen Verzeichnisse gelten.
   Datagramm verworfen.
   Der Wert 2 entspricht der Loose Mode nach RFC 3704: nur wenn es überhaupt
   keine Route zurück zur Absenderadresse gibt, wird das Datagramm verworfen.
-  Loose Mode empfiehlt sich bei asymmetrischem Routing oder anderen
-  komplizierten Routen
+  Loose Mode empfiehlt sich bei asymmetrischem Routing.
 
 Für IPv6 gilt das gleiche, wie für IPv4: die Dateien und Verzeichnisse unter
 */proc/sys/net/ipv6/conf* erlauben Einstellungen für einzelne oder alle
@@ -149,7 +147,7 @@ Schnittstellen.
   an- oder abschalten.
 
 *net.ipv6.conf.default.suppress_frag_ndisc*
-: Damit kann das Verhalten nach RFC 6980 steuern.
+: Damit kann ich das Verhalten nach RFC 6980 steuern.
   Mit dem Defaultwert von 1 verwirft der Kernel fragmentierte
   Neighbor-Discovery-Datagramme, mit dem Wert 0 erlaubt er sie.
 
