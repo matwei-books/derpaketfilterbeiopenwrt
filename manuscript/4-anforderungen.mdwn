@@ -4,12 +4,12 @@ Wie ermittle ich meine persönlichen Anforderungen?
 
 Bevor ich Zeit in ein Projekt mit einem OpenWrt Router investiere, ist es
 sinnvoll, dass ich meine ganz persönlichen Anforderungen definiere.
-Das kann mir später unliebsame Überaschungen ersparen, wenn ich rechtzeitig
-merke, dass mein ursprüngliches Wunschgerät doch nicht geeignet ist.
-Selbst wenn ich es doch erst spät merke, dass meine Vorstellungen nicht
+Das kann mir später unliebsame Überraschungen ersparen, wenn ich rechtzeitig
+merke, dass mein Wunschgerät doch nicht geeignet ist.
+Selbst wenn ich es erst spät merke, dass meine Vorstellungen nicht
 erreichbar sind, fällt es mir leichter, die Positionen zu identifizieren,
 bei denen ich Kompromisse machen kann, wenn ich meine ursprünglichen Ziele
-dokumentiert und vielleiht sogar priorisiert habe.
+dokumentiert und vielleicht sogar priorisiert habe.
 
 Im Wesentlichen muss ich mir über drei Fragenkomplexe Gedanken machen:
 
@@ -21,55 +21,56 @@ Wofür will ich das System einsetzen?
 ------------------------------------
 
 Soll es ein einfacher filternder Router sein, ein Captive Portal für ein
-WLAN oder sollen gar noch weitere Dienste darauf laufen.
-Wenn noch zusätzliche Dienste darauf laufen sollen, dann welche.
+WLAN oder sollen weitere Dienste darauf laufen?
+Wenn noch zusätzliche Dienste darauf laufen sollen, dann welche?
 
 Wieviel Geld und Zeit will ich investieren?
 -------------------------------------------
 
-Wenn das Projekt nur zum Lernen da ist, will ich möglicherweise weniger Geld
+Wenn das Projekt nur zum Lernen ist, will ich vielleicht weniger Geld
 in die Hand nehmen, dafür aber mehr Zeit damit verbringen.
 Habe ich einen konkreten Einsatzzweck, bestimmt dieser mein Budget.
 
 Da OpenWrt nahezu kostenlos erhältlich ist, wird das meiste Geld vermutlich
 in die Hardware gehen.
-Vielleicht will ich aber auch etwas Geld in die Hand nehmen und jemand
+Bei deren Auswahl lasse ich mich von der Tabelle der
+[unterstützten Hardware][toh] leiten.
+
+Vielleicht will ich auch etwas Geld in die Hand nehmen und jemand
 beauftragen, der mir beim Zusammenstellen des Systems hilft.
 
 Mit welchem Datenaufkommen rechne ich?
 --------------------------------------
 
-Diese Frage bestimmt zu einem großen Teil,, welche Hardware überhaupt für
+Diese Frage bestimmt, welche Hardware überhaupt für
 mein Vorhaben geeignet ist.
 Und darüber dann, wieviel Geld ich in die Hand nehmen muss.
 Ich kann OpenWrt auf kleinen WLAN-Routern für wenige Euro einsetzen, die
 vielleicht gerade mal ein paar MBit pro Sekunde schaffen und für bestimmte
 Einsatzzwecke ausreichen.
-Benötige ich mehr Durchsatz, gibt esa aber auch Hardware mit
+Benötige ich mehr Durchsatz, gibt es Geräte mit
 Gigabit-Schnittstellen und mehreren Prozessorkernen, die recht wenig
 elektrische Leistung benötigen und somit problemlos im Dauerbetrieb laufen
 können.
-Will ich nur wenige Rchner über eine DSL-Leitung von mehreren Kilometern
+Will ich nur wenige Rechner über eine DSL-Leitung von mehreren Kilometern
 Länge anschließen, reicht vielleicht das erste.
 Möchte ich hingegen einen Streaming-Server mit mehreren Clients verbinden,
 benötige ich eher etwas Schnelleres.
 
-Von Vorteil ist, wenn ich meine ganz persönlichen Anforderungen nicht nur
+Von Vorteil ist, wenn ich meine persönlichen Anforderungen nicht nur
 notiere, sondern gleich vermerke, bis zu welchem Grad ich bei den einzelnen
 Positionen zu Kompromissen bereit bin.
 
 Alle drei Komplexe sind von einander abhängig.
-Wären die erste Frage im Allgemeinen harte Kriterien für die spätere Auswahl
-eines Gerätes liefert, sind die Kriterien Geld unnd Leistungsfähigkeit eher
+Während die erste Frage im Allgemeinen harte Kriterien für die spätere Auswahl
+eines Gerätes liefert, sind die Kriterien Geld und Leistungsfähigkeit eher
 fließend.
 Hier ist es nicht so einfach, zu einer Entscheidung zu kommen.
-Einerseits werden im Laufe der Zeit leistungsfähige Geräte immer
-preiswerter, andererseits steigen aber auch die Anforderungen an die
-Leistung.
 
-Hier empfiehlt sich, ähnlich wie allgemein beim Rechnerkauf nur soviel
-Leistung zu kaufen, wie aktuell benötigt wird, zuzüglich einer Reserve für
+Es empfiehlt sich, ähnlich wie allgemein beim Rechnerkauf nur soviel
+Leistung zu kaufen, wie im Moment benötigt wird, zuzüglich einer Reserve für
 den Ausfall von Geräten und kurzfristige Leistungsspitzen.
-Später lohnt es sich, die dann aktuellen Preise und Geräte erneut zu
+Später lohnt es sich mitunter, die dann aktuellen Preise und Geräte erneut zu
 untersuchen.
 
+[toh]: http://wiki.openwrt.org/toh/start
