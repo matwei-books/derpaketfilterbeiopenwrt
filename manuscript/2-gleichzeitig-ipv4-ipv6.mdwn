@@ -4,9 +4,9 @@ Gleichzeitiger Betrieb von IPv4 und IPv6
 
 Wenn ich in meinem Netz gleichzeitig IPv4 und IPv6 betreibe, kommen
 zusätzliche Herausforderungen auf mich als Firewall-Administrator zu.
-Davon handelt dieses Kapitel.
-Zunächst betrachte ich die Arten des gleichzeitigen Betriebs von
-IPv4 und IPv6, dann gehe ich kurz auf einige Aspekte zur Sicherheit ein.
+Darum geht es in diesem Kapitel.
+Zunächst betrachte ich verschiedene Arten des gleichzeitigen Betriebs von
+IPv4 und IPv6, dann gehe ich auf einige Aspekte zur Sicherheit ein.
 
 Ich unterscheide drei Arten, IPv4 und IPv6 gleichzeitig zu betreiben:
 
@@ -30,7 +30,7 @@ Alle Switche, Router und Paketfilter müssen beide Protokolle unterstützen,
 damit das reibungslos funktioniert.
 
 Der Dual-Stack-Betrieb ist einfach zu benutzen und flexibel.
-Er ist die beste Option für den gleichzeitigen Betrieb von IPv4 und IPv6.
+Er ist oft die beste Option für den gleichzeitigen Betrieb von IPv4 und IPv6.
 
 Vom Standpunkt der Firewall habe ich zwei Zugänge zum Netzwerk, für die ich
 zwei - dem jeweiligen Protokoll angepasste - Sicherheitskonzepte benötige.
@@ -44,7 +44,7 @@ zwei Protokolle vorhalten muss.
 Ich benötige sowohl für IPv4 als auch für IPv6 Routing-Informationen und
 gegebenenfalls zwei Routing-Protokolle.
 
-Auch die Fehlersuche wird komplizierter, weil ich zusätzlich in Betracht
+Auch die Fehlersuche wird komplizierter, weil ich in Betracht
 ziehen muss, das ein Host versucht, einen Dienst mit dem falschen Protokoll
 zu erreichen, oder dass IPv4- und IPv6-Datagramme unterschiedliche Wege
 gehen.
@@ -54,8 +54,7 @@ Tunnel
 
 Bei einem Tunnel leite ich IPv6-Pakete über IPv4-Netze weiter oder
 umgekehrt.
-
-Dabei muss ich drei Punkte betrachten:
+Dabei muss ich drei wesentliche Punkte betrachten:
 
 *   das Verpacken der Pakete am Eingang des Tunnels,
 *   das Auspacken der Pakete am Ausgang des Tunnels und
@@ -66,7 +65,7 @@ Außerdem unterscheiden sich die Tunnel nach der Art der gekapselten Daten
 und des Transports.
 
 Tunnel erlauben es mir, genau in dem Tempo IPv4 zu IPv6 zu migrieren,
-dass ich gerade gehen kann.
+dass ich im Moment gehen kann.
 Habe ich kein Dual-Stack-Netzwerk und möchte zwei IPv6-Inseln über ein
 IPv4-Netzwerk verbinden, kann ich das sofort machen und muss nicht warten,
 bis der Backbone IPv6 übertragen kann.
@@ -88,10 +87,10 @@ Durch die zusätzlichen Header verringert sich die MTU des Datenpfades.
 Auch die Fehlersuche wird komplexer, da Probleme mit dem Hop-Count, der
 Path-MTU und Fragmentierung hinzukommen können.
 Bei Problemen mit der Verbindung muss ich sowohl das Tunnelprotokoll als
-auch das getunnelte Protokoll untersuchen.
+auch das getunnelte Protokoll in Betracht ziehen.
 
-Vom Standpunkt der Sicherheit können insbesondere automatisch aufgebaute
-Tunnel problematisch sein, da ich sicherstellen muss, dass auch getunnelte
+Vom Standpunkt der Sicherheit sind insbesondere automatisch aufgebaute
+Tunnel problematisch, da ich sicherstellen muss, dass auch getunnelte
 Daten von einer Firewall gefiltert werden, die unter meiner Kontrolle
 steht.
 Falls durch meinen Paketfilter getunnelte Daten laufen, trage ich dafür
@@ -102,13 +101,14 @@ Als Firewall-Administrator muss ich mich kundig machen, welche Tunnel in
 meinem Netzwerk zugelassen sind.
 Gegebenenfalls muss ich unerwünschte Tunnel erkennen und sperren.
 
-Hier folgt noch eine Liste von gängigen Techniken für Tunnel und Quellen
-für Informationen dazu.
+Hier habe ich eine Liste von gängigen Techniken für Tunnel und Quellen
+für Informationen dazu als Einstieg für interessierte Administratoren
+zusammengetragen.
 
 ### 6to4
 
-ist ein Verfahren, bei dem jede IPv4-Adresse auf ein /48 großes IPv6-Netz
-abgebildet wird.
+ist ein Verfahren, bei dem jede IPv4-Adresse auf ein IPv6-Netz mit der
+Netzmaske /48 abgebildet wird.
 Die IPv6-Adresse setzt sich aus dem Präfix 2002 und der hexadezimal
 notierten IPv4-Adresse zusammen
 
@@ -116,7 +116,7 @@ Das Verfahren ist in RFC 3056 beschrieben.
 
 ### 6rd (IPv6 Rapid Deployment)
 
-erlaubt einem Provider seinen Kunden bereits IPv6 anbieten, auch wenn
+erlaubt einem Provider seinen Kunden bereits IPv6 anzubieten, auch wenn
 seine eigene Infrastruktur noch nicht vollständig auf IPv6 umgestellt ist.
 Es basiert auf den Ideen von 6to4 nutzt im Gegensatz zu diesem jedoch
 keinen speziellen Adressbereich sondern den des Providers.
@@ -125,8 +125,8 @@ keinen speziellen Adressbereich sondern den des Providers.
 
 ### ISATAP (Intra-Site Automatic Tunnel Addressing Protocol)
 
-ist eine Variante des 6to4-Verfahrens, bei der ein automatischer
-Tunnel aufgebaut wird.
+ist eine Variante des 6to4-Verfahrens, bei der Tunnel automatisch
+aufgebaut werden.
 
 Das Verfahren ist in RFC 5214 beschrieben.
 
@@ -137,8 +137,8 @@ Es ist in RFC 4380 beschrieben.
 
 ### Tunnel Broker
 
-sind IPv6 Provider für jemand, der nur eine IPv4-Verbindung zum Internet hat.
-Diese sind in RFC 3053 beschrieben.
+sind IPv6 Provider für Netze, die nur eine IPv4-Verbindung zum Internet haben.
+Sie sind in RFC 3053 beschrieben.
 
 ### GRE (Generic Routing Encapsulation)
 
@@ -148,8 +148,7 @@ Es ist in RFC 2784 beschrieben.
 Netzwerk Adress- und Protokollumsetzung (NAPT)
 ----------------------------------------------
 
-Diese Lösung setze ich nur ein, wenn keine andere verfügbar ist und
-verwende sie nur temporär.
+Diese Lösung setze ich nur ein, wenn keine andere verfügbar ist.
 Sie unterstützt nicht die fortgeschrittenen Möglichkeiten von IPv6.
 
 Der Vorteil von NAPT ist die damit mögliche "direkte" Kommunikation eines
@@ -159,12 +158,13 @@ Protokoll verwenden.
 
 Nachteile sind begrenzte Topologie-Optionen, da ich einen NAPT-Router, der
 die Protokolle umsetzt, im Netzwerk-Pfad benötige.
-Protokolle, die in den Datenpaketen gesendete IP-Adressen verwenden, werden
-dabei vermutlich durcheinander kommen.
+Protokolle, die in den Datenpaketen Informationen über die beteiligten
+Adressen senden, funktionieren nur mit zusätzlichem Aufwand oder gar
+nicht.
 
 ### Secure Shell (SSH)
 
-erlaubt über Portweiterleitungen einen verschlüsselten Tunnel für die
+erlaubt über Port-Weiterleitungen einen verschlüsselten Tunnel für die
 Datenpakete und kann dabei das Protokoll umsetzen, wenn der SSH-Rechner im
 Dual-Stack-Betrieb arbeitet.
 
@@ -172,7 +172,7 @@ Sicherheitserwägungen
 ---------------------
 
 Beim gleichzeitigen Betrieb von IPv4 und IPv6 muss ich mehrere Zugänge zum
-Netz in meinen Richtlinien berücksichtigen.
+Netz in den Richtlinien berücksichtigen.
 
 Ich muss dafür Sorge tragen, dass Datenpakete, die mein Netzwerk über einen
 Tunnel erreichen oder verlassen, ebenfalls gefiltert werden.
