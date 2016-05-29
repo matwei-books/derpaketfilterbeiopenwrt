@@ -2,9 +2,10 @@
 Ein Modell der Firewall-Regeln bei OpenWrt
 ==========================================
 
-Um den Paketfilter bei OpenWrt zu verstehen, rufe ich mir das allgemeine
-Modell für das Netfilter Framework bei Linux, wie in Kapitel XXX
-beschrieben, in das Gedächtnis zurück.
+Um den Paketfilter bei OpenWrt zu verstehen, rufe ich mir den
+[Weg eines Datagramms](#weg-eines-datagramms) durch das Netfilter Framework
+bei Linux, wie im Kapitel "Netfilter: Kernel-Komponenten" beschrieben,
+in das Gedächtnis zurück.
 Dieses Modell liefert mir die Einsprungspunkte in die Paketfilter-Tabellen
 beim Weg eines Datagramms durch den Netzwerkcode des Kernel.
 Die Einsprungspunkte in dem Modell liefern die Reihenfolge, in der die

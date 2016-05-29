@@ -130,7 +130,7 @@ Es gibt fünf Einsprungspunkte für das Netfilter-Framework, deren Name im
 nachfolgenden Bild der entsprechenden Regelkette des Paketfilters
 entspricht.
 
-{width=100%}
+{width="100%",id="weg-eines-datagramms"}
 ![Weg eines Datagramms durch die Regelketten](images/w1650-netfilter.png)
 
 Die erste Regelkette, die ein von außen kommendes Datagramm passiert ist
