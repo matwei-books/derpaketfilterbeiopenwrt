@@ -229,3 +229,6 @@ Tabelle raw
 -----------
 
 Hier gibt es nur die Kette *delegate_notrack*. XXX (wofür ist das)
+
+![Modell der Tabelle raw](images/iptables-save-raw-modell.png)
+
