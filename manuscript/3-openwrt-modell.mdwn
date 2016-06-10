@@ -75,13 +75,11 @@ Iptables-Paketfilter ein grafisches Modell der Regelketten erzeugen lässt.
 Tabelle filter
 --------------
 
-Das Bild zeigt ein allgemeines Modell der Regelketten dieser Tabelle.
+Das nachfolgende Bild zeigt ein allgemeines Modell der Regelketten dieser Tabelle.
 Ganz links stehen die vordefinierten Regelketten, die den Einsprungspunkten
 in Kapitel "Netfilter: Kernel-Komponenten" entsprechen.
 Die Namen der Regelketten folgen einem festen Schema, dem die Namen der
 Knoten im Graphen entsprechen.
-
-![Modell der Tabelle filter](images/iptables-save-filter-modell.png)
 
 Dabei steht der Wortteil *bereich* in einem Namen für die entsprechende Zone
 bei der Netzkonfiguration des Routers.
@@ -90,6 +88,8 @@ sind, dann gibt es für den Knoten *zone_bereich_forward* im Modell,
 die beiden Regelketten *zone_lan_forward* und *zone_wan_forward* in der
 Tabelle *filter*, die die gleiche Funktion, wie im Modell haben, deren
 Regeln aber nur für die betreffende Zone gelten.
+
+![Modell der Tabelle filter](images/iptables-save-filter-modell.png)
 
 Mit diesem Kunstgriff konnte ich das Modell überschaubar halten, mit 15
 Knoten im Graphen für die Tabelle *filter*, statt 23 bei zwei Zonen und 30
@@ -199,6 +199,8 @@ verwendet.
 
 > Die Tatsache, dass OUTPUT nicht verwendet wird, deutet daraufhin, dass bei
 > Datenpaketen, die im Router erzeugt werden, kein DNAT vorgesehen ist.
+
+![Modell der Tabelle nat](images/iptables-save-nat-modell.png)
 
 Von **PREROUTING** aus geht es in die Kette *delegate_prerouting*, in der
 anhand des ankommenden Interfaces die Kette *zone_bereich_prerouting*
