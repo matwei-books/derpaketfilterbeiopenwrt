@@ -81,6 +81,8 @@ in Kapitel "Netfilter: Kernel-Komponenten" entsprechen.
 Die Namen der Regelketten folgen einem festen Schema, dem die Namen der
 Knoten im Graphen entsprechen.
 
+![Modell der Tabelle filter](images/iptables-save-filter-modell.png)
+
 Dabei steht der Wortteil *bereich* in einem Namen für die entsprechende Zone
 bei der Netzkonfiguration des Routers.
 Das heißt, wenn zwei Zonen (zum Beispiel LAN und WAN) definiert
