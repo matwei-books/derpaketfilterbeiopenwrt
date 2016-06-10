@@ -214,6 +214,7 @@ Tabelle mangle
 
 In dieser Tabelle gibt es zwei benutzerdefinierte Ketten.
 
+{width=52%}
 ![Modell der Tabelle mangle](images/iptables-save-mangle-modell.png)
 
 Von **PREROUTING** aus geht es zur Kette *fwmark*. XXX (wofür ist die)
