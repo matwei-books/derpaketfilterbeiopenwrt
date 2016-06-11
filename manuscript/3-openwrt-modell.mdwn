@@ -81,10 +81,10 @@ in Kapitel "Netfilter: Kernel-Komponenten" entsprechen.
 Die Namen der Regelketten folgen einem festen Schema, dem die Namen der
 Knoten im Graphen entsprechen.
 
-Dabei steht der Wortteil *bereich* in einem Namen für die entsprechende Zone
+Dabei steht der Wortteil *name* für die entsprechende Zone
 bei der Netzkonfiguration des Routers.
 Das heißt, wenn zwei Zonen (zum Beispiel LAN und WAN) definiert
-sind, dann gibt es für den Knoten *zone_bereich_forward* im Modell,
+sind, dann gibt es für den Knoten *zone_name_forward* im Modell,
 die beiden Regelketten *zone_lan_forward* und *zone_wan_forward* in der
 Tabelle *filter*, die die gleiche Funktion, wie im Modell haben, deren
 Regeln aber nur für die betreffende Zone gelten.
@@ -119,18 +119,18 @@ der Zone LAN, dann finde ich hier eine Regel `-A input -i eth0 -j zone_wan`
 und eine Regel `-A input -i eth1 -j zone_lan`.
 Kurz gesagt: in dieser Regelkette wird entschieden, zu welcher Zone ein
 ankommendes Datagramm gehört.
-Von hier geht es weiter zur Kette *zone_bereich*.
+Von hier geht es weiter zur Kette *zone_name*.
 
-Die Kette *zone_bereich* hat zwei Regeln: einen Sprung zu *input_bereich*,
+Die Kette *zone_name* hat zwei Regeln: einen Sprung zu *input_name*,
 in der ich die Input-Regeln für den Bereich finde und einen Sprung zu einer
 der Policy-Ketten für den Bereich. Zu welcher Policy-Kette es geht, wird bei
 den Policy-Einstellungen für den Bereich in der Konfiguration festgelegt.
 
-Die Kette *input_bereich* enthält Regeln für Datagramme, die in einer Zone
+Die Kette *input_name* enthält Regeln für Datagramme, die in einer Zone
 ankommen und für den Router selbst bestimmt sind.
 
-Policy-Ketten sind die Ketten *zone_bereich_ACCEPT*, *zone_bereich_DROP*,
-*zone_bereich_src_REJECT* und *zone_bereich_dest_REJECT*.
+Policy-Ketten sind die Ketten *zone_name_ACCEPT*, *zone_name_DROP*,
+*zone_name_src_REJECT* und *zone_name_dest_REJECT*.
 Diese werden sowohl für Datagramme, die in der betreffenden Zone
 ankommen, als auch für solche, die abgehen, genutzt.
 
@@ -138,7 +138,7 @@ Dementsprechend enthalten sie sowohl Regeln für ankommende Schnittstellen
 (-i), als auch für abgehende Schnittstellen (-o) mit der entsprechenden
 Aktion.
 
-Die Ketten *zone_bereich_dest_REJECT* und *zone_bereich_src_REJECT*
+Die Ketten *zone_name_dest_REJECT* und *zone_name_src_REJECT*
 enthalten jeweils am Ende einen Sprung zur Kette *reject*.
 Diese Kette dient nur dazu, ein Datagramm zurückzuweisen.
 Und zwar mit TCP-Reset für TCP-Pakete und mit ICMP-Port-Unreachable für alle
@@ -152,7 +152,7 @@ enthaltenen Regeln konzentrieren.
 Damit muss ich mir beim Hinzufügen von Regeln weniger Gedanken machen und
 kann mich ganz auf den Zweck der Regeln konzentrieren.
 Wenn ich die Policy für einen Bereich auswähle und damit den entsprechenden
-Sprung in der Kette *input_bereich* festlege, muss ich nicht wissen, welche
+Sprung in der Kette *input_name* festlege, muss ich nicht wissen, welche
 Interfaces dazugehören.
 Diese stehen in der entsprechenden Policy-Kette.
 Das gleiche gilt für die Input-Regeln der betreffenden Zone.
@@ -178,15 +178,15 @@ Die Kette *forwarding_rule* enthält XXX (noch erkunden)
 
 Die Regelkette *forward* enthält, ähnlich der Kette *input* für ankommende
 Datagramme die Zuordnung der Datagramme zu einem Bereich über die
-Weiterleitung zur Kette *zone_bereich_forward*.
+Weiterleitung zur Kette *zone_name_forward*.
 Die Datagramme werden den Zonen entsprechend dem ankommenden Interface
 zugeordnet.
 
-In der Kette *zone_bereich_forward* gibt es Sprünge zu anderen Bereichen,
+In der Kette *zone_name_forward* gibt es Sprünge zu anderen Bereichen,
 als dem, über den das Datagramm angekommen ist.
 Damit kann ich Datenverkehr zwischen verschiedenen Zonen ganz verbieten
 oder erlauben.
-Darauf folgt ein Sprung zur Kette *forwarding_bereich*, welche die Regeln
+Darauf folgt ein Sprung zur Kette *forwarding_name*, welche die Regeln
 für den Bereich enthält und schließlich ein Sprung zur Policy-Kette der Zone.
 
 Tabelle nat
@@ -203,11 +203,11 @@ verwendet.
 ![Modell der Tabelle nat](images/iptables-save-nat-modell.png)
 
 Von **PREROUTING** aus geht es in die Kette *delegate_prerouting*, in der
-anhand des ankommenden Interfaces die Kette *zone_bereich_prerouting*
+anhand des ankommenden Interfaces die Kette *zone_name_prerouting*
 ausgewählt wird, die die DNAT-Regeln für den betreffenden Bereich aufnimmt.
 
 Analog geht es von **POSTROUTING** aus über die Kette *delegate_postrouting*
-zu *zone_bereich_postrouting* mit den Regeln für SNAT und MASQUERADE.
+zu *zone_name_postrouting* mit den Regeln für SNAT und MASQUERADE.
 
 Tabelle mangle
 --------------
