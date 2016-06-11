@@ -62,8 +62,8 @@ Dazu muss ich die Regelketten sorgfältig strukturieren und den Zweck der
 benutzerdefinierten Ketten genau abgrenzen und dokumentieren.
 
 Die benutzerdefinierten Regelketten sind bei OpenWrt gut strukturiert, das
-Modell dafür hatte ich in XXX bereits für die damals aktuelle Version grob
-beschrieben.
+Modell dafür hatte ich in [[Weidner2012](#lit-weidner2012)] bereits für die
+damals aktuelle Version grob beschrieben.
 Inzwischen hat sich OpenWrt weiterentwickelt und auch das Modell der
 Regelketten geändert.
 Darum gehe ich hier noch einmal detailliert auf die verschiedenen Tabellen
