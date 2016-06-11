@@ -109,7 +109,10 @@ In der Kette sind zwei Regeln: eine, die ein Limit prüft und zur aufrufenden
 Regelkette zurückspringt und eine, die alle Datagramme, welche über dem
 Limit liegen, verwirft.
 
-Die nächste mögliche Kette ist *input_rule*. XXX (noch erkunden)
+Die nächste mögliche Kette ist *input_rule*.
+Diese Kette ist reserviert für benutzerdefinierte Regeln für
+Verbindungen zum Router, die über die Datei */etc/firewall.user*
+konfiguriert werden.
 
 Die letzte Kette, die von INPUT aus angesprungen wird, ist *input*.
 In dieser Kette verzweigen die Regeln entsprechend den bei den
