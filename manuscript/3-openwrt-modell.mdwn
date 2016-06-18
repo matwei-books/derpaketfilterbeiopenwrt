@@ -85,18 +85,17 @@ Dort werden die Regelketten nach drei Typen unterschieden:
     Regeln für diese Ketten kann ich in der Datei */etc/firewall.user*
     definieren.
 
-Im Anhang beschreibe ich, wie sich aus jedem strukturierten
-Iptables-Paketfilter ein grafisches Modell der Regelketten erzeugen lässt.
-
 Tabelle filter
 --------------
 
 Das nachfolgende Bild zeigt ein allgemeines Modell der Regelketten dieser Tabelle.
 Ganz links stehen die vordefinierten Regelketten, die den Einsprungspunkten
 in Kapitel "Netfilter: Kernel-Komponenten" entsprechen.
+
+![Modell der Tabelle filter](images/iptables-save-filter-modell.png)
+
 Die Namen der Regelketten folgen einem festen Schema, dem die Namen der
 Knoten im Graphen entsprechen.
-
 Dabei steht der Wortteil *name* für die entsprechende Zone
 bei der Netzkonfiguration des Routers.
 Das heißt, wenn zwei Zonen (zum Beispiel LAN und WAN) definiert
@@ -104,8 +103,6 @@ sind, dann gibt es für den Knoten *zone_name_forward* im Modell,
 die beiden Regelketten *zone_lan_forward* und *zone_wan_forward* in der
 Tabelle *filter*, die die gleiche Funktion, wie im Modell haben, deren
 Regeln aber nur für die betreffende Zone gelten.
-
-![Modell der Tabelle filter](images/iptables-save-filter-modell.png)
 
 Gehen wir die einzelnen Ketten und deren Funktion durch.
 
