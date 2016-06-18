@@ -39,10 +39,8 @@ Dazu begebe ich mich auf eine andere Abstraktionsebene und betrachte die
 Regelketten der Tabellen als Folgen von Anweisungen, um zu einer Aussage zu
 kommen, was mit einem Datagramm passieren soll, das bei einer vordefinierten
 Regelkette ankommt.
-
 Mit `iptables-save` beziehungsweise `ip6tables-save` erhalte ich alle
 Regelketten und Tabellen in einer Textdatei mit einer Regel pro Zeile.
-
 Diese Textdatei ohne Hilfsmittel auszuwerten, ist mühsam, da ich
 ohne Vorwissen immer bei den Standard-Regelketten anfangen muss,
 diese nacheinander betrachte und bei einer Jump-Aktion an anderer Stelle
@@ -58,8 +56,6 @@ großen Ausdruck folgen.
 Bei komplexeren Paketfiltern wird aber auch dass schon zu unübersichtlich.
 Hier betrachte ich nur die Regelketten und die zwischen ihnen existierenden
 oder möglichen Sprünge.
-Dazu muss ich die Regelketten sorgfältig strukturieren und den Zweck der
-benutzerdefinierten Ketten genau abgrenzen und dokumentieren.
 
 Die benutzerdefinierten Regelketten sind bei OpenWrt gut strukturiert, das
 Modell dafür hatte ich in [[Weidner2012](#lit-weidner2012)] bereits für die
