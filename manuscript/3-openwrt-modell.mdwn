@@ -69,6 +69,22 @@ Regelketten geändert.
 Darum gehe ich hier noch einmal detailliert auf die verschiedenen Tabellen
 der momentan aktuellen Version Barrier Breaker ein.
 
+Ein guter Anlaufpunkt ist auch die Dokumentation zur
+[Firewall-Konfiguration][wiki-uci-firewall] im Wiki.
+Dort werden die Regelketten nach drei Typen unterschieden:
+
+*   **system:** sind die vordefinierten Regelketten des
+    Netfilter-Frameworks wie INPUT, OUTPUT, FORWARD, ...
+
+*   **internal:** sind Regelketten, die von der OpenWrt-Firewall intern
+    verwendet werden. 
+    Diese enthalten Sprünge zu den anderen Regelketten oder Regeln, die
+    via LuCI oder UCI konfiguriert wurden.
+
+*   **user:** sind frei verfügbar und zunächst leer.
+    Regeln für diese Ketten kann ich in der Datei */etc/firewall.user*
+    definieren.
+
 Im Anhang beschreibe ich, wie sich aus jedem strukturierten
 Iptables-Paketfilter ein grafisches Modell der Regelketten erzeugen lässt.
 
@@ -91,61 +107,54 @@ Regeln aber nur für die betreffende Zone gelten.
 
 ![Modell der Tabelle filter](images/iptables-save-filter-modell.png)
 
-Mit diesem Kunstgriff konnte ich das Modell überschaubar halten, mit 15
-Knoten im Graphen für die Tabelle *filter*, statt 23 bei zwei Zonen und 30
-bei drei Zonen.
-
 Gehen wir die einzelnen Ketten und deren Funktion durch.
 
 Ich beginne bei der Kette **INPUT**.
-Von dieser Kette aus kommen wir zu den Ketten *syn_flood*, *input_rule* und
-*input*.
+Von hier aus geht es zur Kette *delegate_input* (system).
+Wie der Name verrät, delegiert diese zu verschiedenen anderen Ketten und
+zwar zu *input_rule*, *syn_flood* und zu *zone_name_input*.
+Außerdem enthält diese Kette einige hoch priorisierte Regeln, wie zum
+Beispiel `-i lo -j ACCEPT`, die dafür sorgt, dass lokaler Datenverkehr
+über Adresse 127.0.0.1 immer durchkommt.
 
-Zur Kette *syn_flood* geht es nicht immer, sondern nur, wenn in der
-Konfiguration "SYN flood protection" aktiviert wurde.
+Die erste angesprungene Kette ist *input_rule* (user).
+Diese Kette ist reserviert für benutzerdefinierte Regeln für
+Verbindungen zum Router, die über die Datei */etc/firewall.user*
+konfiguriert werden.
+
+Zur Kette *syn_flood* (internal) geht es nicht immer, sondern nur, wenn in
+der Konfiguration "SYN flood protection" aktiviert wurde.
 Genau dann wird in INPUT eine Regel eingefügt, die für alle TCP-Pakete mit
 gesetztem SYN-Flag zu dieser Kette springt.
 In der Kette sind zwei Regeln: eine, die ein Limit prüft und zur aufrufenden
 Regelkette zurückspringt und eine, die alle Datagramme, welche über dem
 Limit liegen, verwirft.
 
-Die nächste mögliche Kette ist *input_rule*.
-Diese Kette ist reserviert für benutzerdefinierte Regeln für
-Verbindungen zum Router, die über die Datei */etc/firewall.user*
-konfiguriert werden.
+Die letzte Ketten, die von *delegate_input* aus angesprungen werden, sind
+im Modell mit *zone_name_input* (internal) bezeichnet.
+Wie viele Ketten das genau sind, hängt von den Firewall-Zonen ab, ich
+definiert habe
+Als erstes verzweigen diese Ketten zu den entsprechenden Ketten namens
+*input_name_rule*.
+Dann folgen die Regeln, die in LuCI oder UCI für die betreffende Zone
+konfiguriert wurden sowie einige automatisch generierte Regeln wie zum
+Beispiel die Regeln, die konfigurierte Portweiterleitungen zulassen.
+Als letztes verzweigen diese Ketten je nach gewählter Policy für die
+betreffende Zone zu einer der drei Ketten *zone_name_src_ACCEPT*,
+*zone_name_src_DROP* oder *zone_name_src_REJECT*.
 
-Die letzte Kette, die von INPUT aus angesprungen wird, ist *input*.
-In dieser Kette verzweigen die Regeln entsprechend den bei den
-Einstellungen für das Netzwerk definierten Zonen.
-Wenn zum Beispiel Schnittstelle eth0 der Zone WAN zugeordnet ist und eth1
-der Zone LAN, dann finde ich hier eine Regel `-A input -i eth0 -j zone_wan`
-und eine Regel `-A input -i eth1 -j zone_lan`.
-Kurz gesagt: in dieser Regelkette wird entschieden, zu welcher Zone ein
-ankommendes Datagramm gehört.
-Von hier geht es weiter zur Kette *zone_name*.
-
-Die Kette *zone_name* hat zwei Regeln: einen Sprung zu *input_name*,
-in der ich die Input-Regeln für den Bereich finde und einen Sprung zu einer
-der Policy-Ketten für den Bereich. Zu welcher Policy-Kette es geht, wird bei
-den Policy-Einstellungen für den Bereich in der Konfiguration festgelegt.
-
-Die Kette *input_name* enthält Regeln für Datagramme, die in einer Zone
-ankommen und für den Router selbst bestimmt sind.
-
-Policy-Ketten sind die Ketten *zone_name_ACCEPT*, *zone_name_DROP*,
-*zone_name_src_REJECT* und *zone_name_dest_REJECT*.
-Diese werden sowohl für Datagramme, die in der betreffenden Zone
-ankommen, als auch für solche, die abgehen, genutzt.
-
-Dementsprechend enthalten sie sowohl Regeln für ankommende Schnittstellen
-(-i), als auch für abgehende Schnittstellen (-o) mit der entsprechenden
-Aktion.
+Die Ketten *zone_name_src_ACCEPT* (internal), *zone_name_src_DROP*
+(internal) und *zone_name_src_REJECT* (internal) sind Policy-Ketten.
+Diese lösen die entsprechende Reaktion für Datagramme aus der
+betreffenden Zone aus, wenn bis dahin noch keine Entscheidung getroffen
+wurde.
 
 Die Ketten *zone_name_dest_REJECT* und *zone_name_src_REJECT*
-enthalten jeweils am Ende einen Sprung zur Kette *reject*.
-Diese Kette dient nur dazu, ein Datagramm zurückzuweisen.
-Und zwar mit TCP-Reset für TCP-Pakete und mit ICMP-Port-Unreachable für alle
-anderen.
+enthalten jeweils einen Sprung zur Kette *reject*.
+Diesen habe ich im Modell nicht aufgenommen, um es nicht unnötig zu
+komplizieren.
+In der Kette *reject* werden alle Datagramme zurückgewiesen, und zwar mit
+TCP-Reset für TCP-Pakete und mit ICMP-Port-Unreachable für alle anderen.
 
 Auf den ersten Blick mag das recht willkürlich erscheinen, es offenbart
 jedoch ein grundlegendes Design-Prinzip:
@@ -155,42 +164,61 @@ enthaltenen Regeln konzentrieren.
 Damit muss ich mir beim Hinzufügen von Regeln weniger Gedanken machen und
 kann mich ganz auf den Zweck der Regeln konzentrieren.
 Wenn ich die Policy für einen Bereich auswähle und damit den entsprechenden
-Sprung in der Kette *input_name* festlege, muss ich nicht wissen, welche
+Sprung in der Kette *zone_name_input* festlege, muss ich nicht wissen, welche
 Interfaces dazugehören.
 Diese stehen in der entsprechenden Policy-Kette.
 Das gleiche gilt für die Input-Regeln der betreffenden Zone.
-Für diese werden die ankommenden Schnittstellen in der Kette *input* den Zonen
-zugeordnet.
+Für diese werden die ankommenden Schnittstellen in der Kette
+*delegate_input* den Zonen zugeordnet.
 
-Schauen wir uns als nächstes die **OUTPUT** Regeln an.
+Schauen wir uns als nächstes die **FORWARD** Regeln an.
+Dort finden wir nur einen Sprung zur Kette *delegate_forward* (internal).
+In dieser Kette geht es als erstes zur Kette *forwarding_rule*.
+Danach kommen einige automatisch generierte Regeln, wie zum Beispiel
+`-m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT`, die dafür sorgt,
+dass Datagramme von bestehenden Verbindungen akzeptiert werden.
+Danach folgen Sprünge zu den Regelketten *zone_name_forward*, die anhand
+des Ingress-Interfaces ausgewählt werden.
+Schließlich werden alle Datagramme, für die noch keine Entscheidung
+gefällt wurde mit einem Sprung zur Regelkette *reject* abgewiesen.
+
+Die Regelkette *forwarding_rule* (user) ist reserviert für Regeln, die
+ich in */etc/firewall.user* definieren kann.
+
+Die Ketten *zone_name_forward* (internal) enthalten einen Sprung zur Kette
+*forwarding_name_rule* sowie Regeln für die betreffende Zone.
+Da diese Regeln üblicherweise andere Zonen haben, gibt es hier Sprünge
+zu den Zonen *zone_name_dest_ACCEPT*, *zone_name_dest_DROP* und
+*zone_name_dest_REJECT*, die nur für Datagramme mit dem entsprechenden
+Egress-Interface greifen.
+Am Schluß der Kette *zone_name_forward* steht eine Policy-Regel, die bei
+Datagrammen greift, für die noch keine Entscheidung gefallen ist.
+
+Bleiben als letztes die Regeln für den abgehenden Verkehr.
+
 Von der vordefinierten Kette OUTPUT geht es zunächst zur Regelkette
-*output_rule* und danach zu *output*.
+*delegate_output* (internal), die zu den Regelketten *output_rule* und den
+Ketten für die einzelnen Zonen *zone_name_output* verzweigt.
+Außerdem enthält diese Kette Firewallregeln mit hoher Priorität, wie zum
+Beispiel die Regel `-m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT`,
+dafür sorgt, dass Datenpakete von bestehenden Verbindungen -- die an
+anderer Stelle im Regelwerk erlaubt wurden -- sofort durchgelassen
+werden.
 
-In der Regelkette *output_rule* XXX (noch erkunden)
+Die Regelkette *output_rule* (user) ist für benutzerdefinierte Regeln für
+abgehende Verbindungen vom Router reserviert.
+Diese können wir über die Datei */etc/firewall.user* konfigurieren.
 
-Die Regelkette *output* enthält lediglich Sprünge zu den Policy-Ketten für
-die Bereiche, die ich weiter oben bereits erläutert habe.
+Die Regelketten *zone_name_output* (internal) enthalten einen zunächst
+einen Sprung zur zugehörigen Kette *output_name_rule*.
+Darauf folgen die Firewall-Regeln, die die entsprechende abgehende Zone
+betreffen und schließlich eine Policy-Regel für die betreffende Zone.
 
-Bleiben als letztes die Regeln für den durchgehenden Verkehr.
-
-Ich beginne in der Regelkette **FORWARD**.
-In dieser gib es zunächst einen Sprung zu Kette *forwarding_rule*, gefolgt
-von einem Sprung zur Kette *forward*.
-
-Die Kette *forwarding_rule* enthält XXX (noch erkunden) 
-
-Die Regelkette *forward* enthält, ähnlich der Kette *input* für ankommende
-Datagramme die Zuordnung der Datagramme zu einem Bereich über die
-Weiterleitung zur Kette *zone_name_forward*.
-Die Datagramme werden den Zonen entsprechend dem ankommenden Interface
-zugeordnet.
-
-In der Kette *zone_name_forward* gibt es Sprünge zu anderen Bereichen,
-als dem, über den das Datagramm angekommen ist.
-Damit kann ich Datenverkehr zwischen verschiedenen Zonen ganz verbieten
-oder erlauben.
-Darauf folgt ein Sprung zur Kette *forwarding_name*, welche die Regeln
-für den Bereich enthält und schließlich ein Sprung zur Policy-Kette der Zone.
+Die Kette *output_name_rule* (user) ist wie *output_rule* für
+benutzerdefinierte Regeln definiert, die ich in */etc/firewall.user*
+angeben kann.
+Im Gegensatz zu *output_rule* sehen die Regeln in dieser Kette aber nur
+Datenverkehr, der zu einer bestimmten Zone hinausgeht.
 
 Tabelle nat
 -----------
@@ -236,3 +264,4 @@ Hier gibt es nur die Kette *delegate_notrack*. XXX (wofür ist das)
 
 ![Modell der Tabelle raw](images/iptables-save-raw-modell.png)
 
+[wiki-uci-firewall]: https://wiki.openwrt.org/doc/uci/firewall
