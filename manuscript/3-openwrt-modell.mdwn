@@ -65,7 +65,7 @@ Regelketten geändert.
 Darum gehe ich hier noch einmal detailliert auf die verschiedenen Tabellen
 der momentan aktuellen Version Barrier Breaker ein.
 
-Ein guter Anlaufpunkt ist auch die Dokumentation zur
+Einen guter Einstieg bietet die Dokumentation zur
 [Firewall-Konfiguration][wiki-uci-firewall] im Wiki.
 Dort werden die Regelketten nach drei Typen unterschieden:
 
@@ -131,7 +131,7 @@ Als erstes verzweigen diese Ketten zu den entsprechenden Ketten namens
 *input_name_rule*.
 Dann folgen die Regeln, die in LuCI oder UCI für die betreffende Zone
 konfiguriert wurden sowie einige automatisch generierte Regeln wie zum
-Beispiel die Regeln, die konfigurierte Portweiterleitungen zulassen.
+Beispiel die Regeln, die konfigurierte Port-Weiterleitungen zulassen.
 Als letztes verzweigen diese Ketten je nach gewählter Policy für die
 betreffende Zone zu einer der drei Ketten *zone_name_src_ACCEPT*,
 *zone_name_src_DROP* oder *zone_name_src_REJECT*.
@@ -218,43 +218,77 @@ Tabelle nat
 
 Für die Tabelle *nat* ist das Modell einfacher.
 Hier haben wir im Netfilter-Framework die drei Einsprungspunkte PREROUTING,
-OUTPUT und POSTROUTING, von denen OpenWrt nur PREROUTING und POSTROUTING
-verwendet.
-
-> Die Tatsache, dass OUTPUT nicht verwendet wird, deutet daraufhin, dass bei
-> Datenpaketen, die im Router erzeugt werden, kein DNAT vorgesehen ist.
+OUTPUT und POSTROUTING, von denen die Firewall von OpenWrt nur PREROUTING
+und POSTROUTING verwendet.
 
 ![Modell der Tabelle nat](images/iptables-save-nat-modell.png)
 
-Von **PREROUTING** aus geht es in die Kette *delegate_prerouting*, in der
-anhand des ankommenden Interfaces die Kette *zone_name_prerouting*
-ausgewählt wird, die die DNAT-Regeln für den betreffenden Bereich aufnimmt.
+Von **PREROUTING** aus geht es in die Kette *delegate_prerouting* (internal).
+In dieser Kette finden wir einen Sprung zur Kette *prerouting_rule*, ein
+paar globale Pre-Routing-Regeln und die Verzweigungen zu den Ketten
+*zone_name_prerouting* für die einzelnen Firewall-Zonen.
 
-Analog geht es von **POSTROUTING** aus über die Kette *delegate_postrouting*
-zu *zone_name_postrouting* mit den Regeln für SNAT und MASQUERADE.
+Die Regelkette *prerouting_rule* (user) ist für benutzerspezifische
+Regeln, die ich in der Datei */etc/firewall.user* spezifiziere.
+
+Die Ketten *zone_name_prerouting* (internal) enthalten einen Sprung zur
+Kette *prerouting_name_rule* und die DNAT-Regeln, die ich mit LuCI oder
+UCI für die betreffende Zone.
+
+Die Regelketten *prerouting_name_rule* wiederum können
+benutzerspezifische Regeln für die betreffende Zone aufnehmen, die in
+*/etc/firewall.user* spezifiziert werden.
+
+Betrachten wir die Kette **POSTROUTING**, so finden wir dort nur einen
+Sprung zur Kette *delegate_postrouting* (internal).
+Darin finden wir einen Sprung zu *postrouting_rule*, globale
+Post-Routing-NAT-Regeln und Verzweigungen zu den Ketten
+*zone_name_postrouting*.
+
+Die Regelkette *postrouting_rule* (user) ist für globale
+benutzerspezifische NAT-Regeln, die ich in der Datei */etc/firewall.user*
+konfigurieren kann.
+
+In den Ketten *zone_name_postrouting* (internal) finden wir einen Sprung
+zu *postrouting_name_rule* sowie NAT-Regeln für die betreffende Zone.
+Das sind SNAT- und MASQERADE-Regeln, wie im Graphen bereits angedeutet.
+
+Die Regelkette *postrouting_name_rule* (user) kann ich in der Datei
+*/etc/firewall.user* nach eigenem Gutdünken mit NAT-Regeln für die
+betreffende Zone füllen.
 
 Tabelle mangle
 --------------
 
-In dieser Tabelle gibt es zwei benutzerdefinierte Ketten.
+In dieser Tabelle gibt es nur zwei benutzerdefinierte Ketten.
 
 {width=52%}
 ![Modell der Tabelle mangle](images/iptables-save-mangle-modell.png)
 
-Von **PREROUTING** aus geht es zur Kette *fwmark*. XXX (wofür ist die)
+Von **PREROUTING** aus geht es zur Kette *fwmark* (internal), die für
+MARK-Regeln verwendet wird.
 
-Von **FORWARD** aus geht es zur Kette *mssfix*.
-In dieser Kette sind Regeln, die bei Datagrammen, welche eine neue
+Von **FORWARD** aus geht es zur Kette *mssfix* (internal).
+In dieser Kette kann ich die TCPMSS-Regeln finden.
+Das sind Regeln, die bei Datagrammen, welche eine neue
 TCP-Verbindung aufbauen (mit gesetztem SYN-Bit) die TCP-Option MSS (Maximum
 Segment Size) auf die MTU der abgehenden Schnittstelle beschränkt.
-Damit wird die PMTU für TCP bei Verbindungen zu Netzen mit kleinerer MTU
+Damit wird die Path-MTU für TCP bei Verbindungen zu Netzen mit kleinerer MTU
 (zum Beispiel PPPoE-Verbindungen) automatisch angepasst.
 
 Tabelle raw
 -----------
 
-Hier gibt es nur die Kette *delegate_notrack*. XXX (wofür ist das)
+Diese Tabelle wird nur für Datagramme genutzt, die vom Connection
+Tracking ausgenommen werden sollen.
 
 ![Modell der Tabelle raw](images/iptables-save-raw-modell.png)
+
+Von *PREROUTING* aus geht es zur Kette *delegate_notrack* (internal), die
+ihrerseits zu den Ketten *zone_name_notrack* verzweigt.
+
+Die Ketten *zone_name_notrack* (internal) enthalten für die
+entsprechende Zone Regeln für Datagramme, die vom Connection Tracking
+ausgenommen werden sollen.
 
 [wiki-uci-firewall]: https://wiki.openwrt.org/doc/uci/firewall
