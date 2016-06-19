@@ -1,6 +1,5 @@
 
-Um welche Protokolle geht es?
-=============================
+# Um welche Protokolle geht es?
 
 Welche Netzwerkprotokolle sind für mich interessant, wenn ich eine
 Paketfilter-Firewall betreiben will?
@@ -41,8 +40,7 @@ Die meisten dieser Protokolle werden in RFCs beschrieben, welche ich im
 Internet von <http://tools.ietf.org/> beziehen kann.
 Nachfolgend gehe ich kurz auf einige davon ein.
 
-Ethernet
---------
+## Ethernet
 
 Die RFCs 894, 1042 und 2464 beschreiben, wie IPv4 und IPv6 Datenpakete in
 Ethernet- und 802.3-Frames eingebettet werden.
@@ -68,8 +66,7 @@ für das Verhältnis zwischen Links und Subnetz-Präfixen.
 RFC 6980 geht auf die Auswirkungen von IPv6-Fragmentierung
 auf Neighbor Discovery ein.
 
-IPv4
-----
+## IPv4
 
 RFC 791 beschreibt das Internet Protokoll in Version 4.
 RFC 1349 ändert und erläutert einige Aspekte des Type of Service
@@ -77,8 +74,7 @@ RFC 1349 ändert und erläutert einige Aspekte des Type of Service
 RFC 2474 definiert das Differentiated Services (DS) Feld und
 RFC 6864 aktualisiert die Definition des ID-Feldes.
 
-IPv6
-----
+## IPv6
 
 IPv6 wurde erstmals 1995 in RFC 1883 beschrieben.
 1998 löste RFC 2460 diese inzwischen veraltete Beschreibung ab.
@@ -86,8 +82,7 @@ IPv6 wurde erstmals 1995 in RFC 1883 beschrieben.
 RFC 4303 "IP Encapsulation Security Payload (ESP)" beschreibt die IPv6
 Header Extensions für IPsec.
 
-ICMP
-----
+## ICMP
 
 Das Internet Control Message Protocol ist in RFC 792 beschrieben.
 RFC 4884 erweitert ICMP für Multipart-Nachrichten.
@@ -97,8 +92,7 @@ ICMP-Nachrichten.
 Damit helfen mir diese beiden RFCs bei der Entscheidung für oder gegen
 diese Datagramme.
 
-ICMPv6
-------
+## ICMPv6
 
 Das Internet Control Message Protocol for IPv6 wurde erstmals 1995 in RFC
 1885 beschrieben.
@@ -110,8 +104,7 @@ Für mich als Firewall-Administrator ist RFC 4890 "Recommendations for
 Filtering ICMPv6 Messages in Firewalls" interessant, welches begründete
 Empfehlungen für die Behandlung von ICMPv6 gibt.
 
-IGMP
-----
+## IGMP
 
 RFC 1112 beschreibt Host Extensions for Multicasting und in seinem
 Anhang Version 1 von IGMP.
@@ -129,8 +122,7 @@ von bestimmten Routern oder nicht an solchen interessiert ist.
 
 Bei IPv6 übernimmt ICMPv6 die Steuerung der Multicast-Zugehörigkeit.
 
-TCP
----
+## TCP
 
 RFC 793 beschreibt das Transmission Control Protocol.
 RFC 1122 erläutert die Anforderungen für Internet-Hosts und geht dabei auch
@@ -138,8 +130,7 @@ näher auf TCP, UDP, ICMP und IP ein.
 Explicit Congestion Notification (ECN) und deren Anwendung bei TCP ist in
 RFC 3168 beschrieben.
 
-UDP
----
+## UDP
 
 RFC 768 beschreibt das User Datagram Protocol bereits seit 1980.
 Das Protokoll ist so simpel, dass drei Seiten für die Beschreibung und
@@ -149,8 +140,7 @@ Für IPv6 ergab sich lediglich die Notwendigkeit, die UDP-Checksumme
 obligatorisch zu machen, da im IPv6-Header keine Checksumme enthalten ist.
 RFC 768 erlaubt noch das Senden von UDP-Datagrammen ohne Checksumme.
 
-Tunnelprotokolle
-----------------
+## Tunnelprotokolle
 
 Für die Übergangszeit, in der sowohl IPv4 als auch IPv6 nebeneinander
 existieren, gibt es verschiedene Protokolle, mit denen IPv6-Datagramme über

@@ -1,6 +1,5 @@
 
-Vorwort
-=======
+# Vorwort
 
 2012 schrieb ich an einem Buch über Einplatinenrechner und was man mit
 diesen und Linux anstellen kann.
@@ -29,8 +28,7 @@ Deshalb beschreibe ich im Anhang, wie ich mir die Kenntnisse
 erarbeitet habe, so dass dieses Buch auch in ein paar Jahren hoffentlich
 noch nützlich ist.
 
-Wie ist das Buch aufgebaut
---------------------------
+## Wie ist das Buch aufgebaut
 
 Es gibt vier Hauptteile.
 
@@ -78,8 +76,7 @@ Regelketten bei OpenWrt wieder geändert haben.
 Außerdem lassen sich auf diese Art auch andere Paketfilter, die Linux
 und *iptables* nutzen, analysieren.
 
-Zur Schreibweise
-----------------
+## Zur Schreibweise
 
 Für Eingaben auf der Kommandozeile sowie für Auszüge aus
 Konfigurationsdateien verwende ich eine `dicktengleiche Schrift`.

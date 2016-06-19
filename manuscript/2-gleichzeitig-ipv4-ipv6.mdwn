@@ -1,6 +1,5 @@
 
-Gleichzeitiger Betrieb von IPv4 und IPv6
-========================================
+# Gleichzeitiger Betrieb von IPv4 und IPv6
 
 Wenn ich in meinem Netz gleichzeitig IPv4 und IPv6 betreibe, kommen
 zusätzliche Herausforderungen auf mich als Firewall-Administrator zu.
@@ -17,8 +16,7 @@ Ich unterscheide drei Arten, IPv4 und IPv6 gleichzeitig zu betreiben:
 *   Netzwerk Adress- und Protokollübersetzung, bei der an einer Stelle im
     Netz IPv4-Pakete in IPv6 umgesetzt werden und umgekehrt.
 
-Dual-Stack-Betrieb
-------------------
+## Dual-Stack-Betrieb
 
 Beim Dual-Stack-Betrieb verwende ich IPv4 und IPv6 gleichberechtigt.
 
@@ -49,8 +47,7 @@ ziehen muss, das ein Host versucht, einen Dienst mit dem falschen Protokoll
 zu erreichen, oder dass IPv4- und IPv6-Datagramme unterschiedliche Wege
 gehen.
 
-Tunnel
-------
+## Tunnel
 
 Bei einem Tunnel leite ich IPv6-Pakete über IPv4-Netze weiter oder
 umgekehrt.
@@ -145,8 +142,7 @@ Sie sind in RFC 3053 beschrieben.
 erlaubt es, beliebige Protokolle in beliebigen anderen Protokollen zu kapseln.
 Es ist in RFC 2784 beschrieben.
 
-Netzwerk Adress- und Protokollumsetzung (NAPT)
-----------------------------------------------
+## Netzwerk Adress- und Protokollumsetzung (NAPT)
 
 Diese Lösung setze ich nur ein, wenn keine andere verfügbar ist.
 Sie unterstützt nicht die fortgeschrittenen Möglichkeiten von IPv6.
@@ -168,8 +164,7 @@ erlaubt über Port-Weiterleitungen einen verschlüsselten Tunnel für die
 Datenpakete und kann dabei das Protokoll umsetzen, wenn der SSH-Rechner im
 Dual-Stack-Betrieb arbeitet.
 
-Sicherheitserwägungen
----------------------
+## Sicherheitserwägungen
 
 Beim gleichzeitigen Betrieb von IPv4 und IPv6 muss ich mehrere Zugänge zum
 Netz in den Richtlinien berücksichtigen.

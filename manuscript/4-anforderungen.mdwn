@@ -1,6 +1,5 @@
 
-Wie ermittle ich meine persönlichen Anforderungen?
-==================================================
+# Wie ermittle ich meine persönlichen Anforderungen?
 
 Bevor ich Zeit in ein Projekt mit einem OpenWrt Router investiere, ist es
 sinnvoll, dass ich meine ganz persönlichen Anforderungen definiere.
@@ -17,15 +16,13 @@ Im Wesentlichen muss ich mir über drei Fragenkomplexe Gedanken machen:
 *   Wieviel Geld und Zeit will ich investieren?
 *   Mit welchem Datenaufkommen rechne ich?
 
-Wofür will ich das System einsetzen?
-------------------------------------
+## Wofür will ich das System einsetzen?
 
 Soll es ein einfacher filternder Router sein, ein Captive Portal für ein
 WLAN oder sollen weitere Dienste darauf laufen?
 Wenn noch zusätzliche Dienste darauf laufen sollen, dann welche?
 
-Wieviel Geld und Zeit will ich investieren?
--------------------------------------------
+## Wieviel Geld und Zeit will ich investieren?
 
 Wenn das Projekt nur zum Lernen ist, will ich vielleicht weniger Geld
 in die Hand nehmen, dafür aber mehr Zeit damit verbringen.
@@ -39,8 +36,7 @@ Bei deren Auswahl lasse ich mich von der Tabelle der
 Vielleicht will ich auch etwas Geld in die Hand nehmen und jemand
 beauftragen, der mir beim Zusammenstellen des Systems hilft.
 
-Mit welchem Datenaufkommen rechne ich?
---------------------------------------
+## Mit welchem Datenaufkommen rechne ich?
 
 Diese Frage bestimmt, welche Hardware überhaupt für
 mein Vorhaben geeignet ist.

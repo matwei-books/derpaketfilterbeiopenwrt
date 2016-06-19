@@ -1,6 +1,5 @@
 
-Ein Modell der Firewall-Regeln bei OpenWrt
-==========================================
+# Ein Modell der Firewall-Regeln bei OpenWrt
 
 Um den Paketfilter bei OpenWrt zu verstehen, rufe ich mir den
 [Weg eines Datagramms](#weg-eines-datagramms) durch die Regelketten des
@@ -81,8 +80,7 @@ Dort werden die Regelketten nach drei Typen unterschieden:
     Regeln für diese Ketten kann ich in der Datei */etc/firewall.user*
     definieren.
 
-Tabelle filter
---------------
+## Tabelle filter
 
 Das nachfolgende Bild zeigt ein allgemeines Modell der Regelketten dieser Tabelle.
 Ganz links stehen die vordefinierten Regelketten, die den Einsprungspunkten
@@ -213,8 +211,7 @@ angeben kann.
 Im Gegensatz zu *output_rule* sehen die Regeln in dieser Kette aber nur
 Datenverkehr, der zu einer bestimmten Zone hinausgeht.
 
-Tabelle nat
------------
+## Tabelle nat
 
 Für die Tabelle *nat* ist das Modell einfacher.
 Hier haben wir im Netfilter-Framework die drei Einsprungspunkte PREROUTING,
@@ -257,8 +254,7 @@ Die Regelkette *postrouting_name_rule* (user) kann ich in der Datei
 */etc/firewall.user* nach eigenem Gutdünken mit NAT-Regeln für die
 betreffende Zone füllen.
 
-Tabelle mangle
---------------
+## Tabelle mangle
 
 In dieser Tabelle gibt es nur zwei benutzerdefinierte Ketten.
 
@@ -276,8 +272,7 @@ Segment Size) auf die MTU der abgehenden Schnittstelle beschränkt.
 Damit wird die Path-MTU für TCP bei Verbindungen zu Netzen mit kleinerer MTU
 (zum Beispiel PPPoE-Verbindungen) automatisch angepasst.
 
-Tabelle raw
------------
+## Tabelle raw
 
 Diese Tabelle wird nur für Datagramme genutzt, die vom Connection
 Tracking ausgenommen werden sollen.

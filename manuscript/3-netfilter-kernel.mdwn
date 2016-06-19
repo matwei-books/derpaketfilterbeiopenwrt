@@ -1,12 +1,10 @@
 
-Netfilter: Kernel-Komponenten
-=============================
+# Netfilter: Kernel-Komponenten
 
 Das Netfilter-Framework besteht aus drei Komponenten: iptables, ebtables und
 arptables.
 
-Iptables
---------
+## Iptables
 
 Der Teil des Netfilter-Frameworks, der sich mit der Filterung und
 Manipulation von IPv4-Datagrammen befasst ist Iptables.
@@ -246,8 +244,7 @@ in den Regeln, wie zum Beispiel:
 *   REDIRECT um eine Verbindung umzuleiten
 *   TOS und MARK um QoS zu unterstützen
 
-Ebtables
---------
+## Ebtables
 
 Dieser Teil der Netfilter-Frameworks behandelt die Administration der
 Ethernet-Bridges.
@@ -265,8 +262,7 @@ Hier gibt es drei Tabellen mit vordefinierten Regelketten:
    Traffic (zum Beispiel NetBEUI oder IPX) vorkommt, kann man damit einen
    sogenannten Brouter realisieren.
 
-Arptables
----------
+## Arptables
 
 Das Programm `arptables` wird verwendet, um die ARP-Regeln im Linux-Kernel zu
 verwalten.

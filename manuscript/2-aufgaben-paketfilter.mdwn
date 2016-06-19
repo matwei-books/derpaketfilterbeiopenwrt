@@ -1,6 +1,5 @@
 
-Aufgaben eines Paketfilters
-===========================
+# Aufgaben eines Paketfilters
 
 Ich mache mir zunächst die Aufgaben eines Paketfilters klar, um dann seine
 Bestandteile unter diesen Aspekten - den Aufgaben - zu betrachten und so
@@ -92,8 +91,7 @@ von Netzwerk-Geräten unterstützen, indem er HTTP-Anfragen zunächst zu einem
 Captive Portal umleitet und den Datenverkehr erst nach Anmeldung am Portal
 freigibt.
 
-Chance - Risiko - Policy - Firewall - Paketfilter
--------------------------------------------------
+## Chance - Risiko - Policy - Firewall - Paketfilter
 
 Bevor ich mich weiter in Details verliere, will ich kurz auf ein paar
 Begriffe und Zusammenhänge eingehen.
@@ -153,8 +151,7 @@ Netzwerkadressen, die ich zulassen oder sperren muss und die Art von
 Application Gateways, die ich einsetzen muss, um die Ziele der Policy zu
 erreichen.
 
-OSI Modell
-----------
+## OSI Modell
 
 Um den Paketfilter und die Application Gateways richtig einzuordnen,
 greife ich auf das Open Systems Interconnection (OSI) Modell zurück.
@@ -195,8 +192,7 @@ Oder ich untersuche den Datenverkehr mittels Deep Packet Inspection (DPI)
 und steuere mit den gewonnenen Erkenntnissen den Paketfilter und damit den
 Datenverkehr.
 
-Reaktive Schutzmaßnahmen
-------------------------
+## Reaktive Schutzmaßnahmen
 
 Eine Möglichkeit, einen Server mittels Paketfilter zu schützen, besteht darin,
 die Log-Nachrichten des Servers auszuwerten und unerwünschten Datenverkehr
@@ -215,8 +211,7 @@ Für lokale Dienste ist das leicht zu realisieren.
 Auf einem separaten Paketfilter benötige ich dafür ein komplexes System, das
 die Log-Nachrichten zentral auswertet und die Paketfilter steuert.
 
-Port-Knocking und TCP-Stealth
------------------------------
+## Port-Knocking und TCP-Stealth
 
 Eine weitere Möglichkeit, bei der ein Paketfilter einen Server schützt,
 ist Port-Knocking.

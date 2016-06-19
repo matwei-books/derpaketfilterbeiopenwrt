@@ -1,6 +1,5 @@
 
-Besonderheiten des Linux-Kernels
-================================
+# Besonderheiten des Linux-Kernels
 
 Der Linux-Kernel bietet viele Einstellmöglichkeiten über das *proc*
 Dateisystem.

@@ -1,6 +1,5 @@
 
-IPv6 für den Firewall-Administrator
-===================================
+# IPv6 für den Firewall-Administrator
 
 Mit IPv6 trat 1998 ein weiterer Akteur auf die Bühne der Transport-Protokolle.
 Die Adoption verlief anfangs sehr schleppend, hat in den letzten Jahren aber
@@ -24,8 +23,7 @@ dort genannten nichts weiter hinzu, als dass UDP bei IPv6 zwingend eine
 Prüfsumme berechnen muss.
 Der IPv6-Header hat keine Prüfsumme.
 
-Paket-Header
-------------
+## Paket-Header
 
 Mit 40 Byte ist der IPv6-Header recht klein, davon gehen bereits 32 Byte
 für die Adressen von Sender und Empfänger drauf.
@@ -57,8 +55,7 @@ Extension-Header.
 Eine Ausnahme dazu bildet der Hop-by-Hop-Options-Header, der von allen
 Geräten beachtet wird, die das Datagramm durchläuft.
 
-Adressierung
-------------
+## Adressierung
 
 Aufgrund des riesigen Adressraums, und um es einfacher zu handhaben, verwendet
 man in einer Layer-2-Domain (früher als Broadcast-Domain bezeichnet) 64
@@ -102,8 +99,7 @@ Damit hat jeder Host schon mindestens zwei Adressen, mit denen er über das
 Netz erreicht werden kann.
 Hinzu kommen noch einige Multicast-Adressen, auf die er reagieren muss.
 
-Vereinfachungen für Router
---------------------------
+## Vereinfachungen für Router
 
 Für Router gibt es einige Vereinfachungen bei IPv6.
 
@@ -122,8 +118,7 @@ sind alle Informationen für die Entscheidung enthalten.
 Da der IPv6-Header keine Prüfsumme enthält, müssen Router diese auch
 nicht neu berechnen, wenn sie das Hop-Limit-Feld reduzieren.
 
-Gleichzeitiger Betrieb von IPv4 und IPv6
-----------------------------------------
+## Gleichzeitiger Betrieb von IPv4 und IPv6
 
 Ein Problem für Firewall-Administratoren ist, dass voraussichtlich noch lange
 Zeit IPv4 und IPv6 gleichzeitig betrieben werden.

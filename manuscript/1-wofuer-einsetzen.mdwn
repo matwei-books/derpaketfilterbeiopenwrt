@@ -1,6 +1,5 @@
 
-Was kann ich damit machen?
-==========================
+# Was kann ich damit machen?
 
 Die nächste Frage ist: wofür kann ich OpenWrt einsetzen.
 Dazu will ich hier nur einen kurzen Ausschnitt geben und beschränke mich
@@ -16,8 +15,7 @@ OpenWrt kann ich einsetzen:
 
 Bei diesen Einsatzfällen will ich den Paketfilter auf jeden Fall nutzen.
 
-Internet-Zugangsrouter
-----------------------
+## Internet-Zugangsrouter
 
 Als Internet-Zugangsrouter nutze ich meist einfache, stromsparende Hardware,
 wie zum Beispiel einen billigen SOHO-Router, auf dem ich OpenWrt installiert
@@ -34,8 +32,7 @@ das Weiterleiten von Ports konfigurieren.
 Bei IPv6 will ich zumindest den Verbindungsaufbau aus dem Internet in mein
 lokales Netz reglementieren.
 
-VPN-Router
-----------
+## VPN-Router
 
 Einen Tunnel oder ein VPN verwende ich, wenn ich ein anderes Netz unabhängig
 vom Routing über das Internet erreichen will.
@@ -55,8 +52,7 @@ Den Paketfilter benötige ich hier nur, wenn ich den Zugang zum Tunnel
 beschränken will oder wenn ich Masquerading gegenüber dem anderen
 Tunnel-Endpunkt einsetzen will.
 
-Kurzfristiger Ersatz für einen anderen Router
----------------------------------------------
+## Kurzfristiger Ersatz für einen anderen Router
 
 Manchmal geht mein Zugangsrouter einfach kaputt.
 Oder er hat eine gravierende Sicherheitslücke, die nicht schnell genug
@@ -67,8 +63,7 @@ habe.
 Möglicherweise kann ich auch OpenWrt in einer VM verwenden.
 Für den Paketfilter gilt das gleiche wie für einen normalen Zugangsrouter.
 
-IPv6-Tunnel-Endpunkt
---------------------
+## IPv6-Tunnel-Endpunkt
 
 Habe ich einen Internet-Provider, der nur IPv4 anbietet, kann ich mir über
 einen der IPv6-Tunnel-Provider ein Subnetz geben lassen und eine
@@ -84,8 +79,7 @@ den Clients oder beim Zugangsrouter eintragen.
 Mit dem Paketfilter muss ich in diesem Fall mein Netz gegen unerwünschten
 Datenverkehr abschirmen.
 
-WLAN-Basisstation, -Client, -Mesh-Router
-----------------------------------------
+## WLAN-Basisstation, -Client, -Mesh-Router
 
 Bei all diesen Einsatzfällen nutze ich die Möglichkeiten der eingesetzten
 Hardware.

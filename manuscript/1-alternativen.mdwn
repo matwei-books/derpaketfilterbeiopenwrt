@@ -1,6 +1,5 @@
 
-Alternativen zum OpenWrt-Paketfilter
-====================================
+# Alternativen zum OpenWrt-Paketfilter
 
 Will ich mich nach Alternativen für den Paketfilter von OpenWrt umsehen,
 muss ich mir als erstes über den Einsatzzweck und meine Anforderungen klar

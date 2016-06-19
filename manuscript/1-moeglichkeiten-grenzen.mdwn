@@ -1,6 +1,5 @@
 
-Möglichkeiten und Grenzen
-=========================
+# Möglichkeiten und Grenzen
 
 Der Paketfilter von OpenWrt bietet mir alle Möglichkeiten des Linux
 Netfilter-Frameworks.
@@ -26,8 +25,7 @@ Zum anderen kann der OpenWrt-Paketfilter an Grenzen stoßen, die sich aus der
 Hardware, konkret aus den Peripheriegeräten, dem Hauptspeicher und der CPU
 ergeben.
 
-Wie kann ich die Grenzen herausfinden?
---------------------------------------
+## Wie kann ich die Grenzen herausfinden?
 
 Die Grenzen der Hardware kann ich durch Lasttests herausfinden.
 Ich sende so viel Traffic zum Gerät wie möglich und beobachte, wie viel
@@ -48,8 +46,7 @@ anfällig ist.
 Zu diesem Zweck gibt es Exploit-Frameworks, die solche Tests
 vereinfachen.
 
-Wie kann ich die Grenzen verschieben?
--------------------------------------
+## Wie kann ich die Grenzen verschieben?
 
 In manchen Fällen, speziell bei Leistungsproblemen, bleibt mir nur, auf
 leistungsfähigere Hardware auszuweichen.
@@ -68,8 +65,7 @@ Gibt es noch keine Version im Repository, in der das Problem behoben ist,
 kann ich die Software selbst übersetzen.
 Dafür brauche ich eine Entwicklungsumgebung für OpenWrt.
 
-Stärken von OpenWrt
--------------------
+## Stärken von OpenWrt
 
 Ein großer Vorteil von OpenWrt ist seine Modularität, so dass ich mir ein
 System genau nach meinen Wünschen einrichten kann.
@@ -80,8 +76,7 @@ System zu erweitern, ohne eine neue Firmware aufspielen zu müssen.
 Und schließlich die Vielfalt an billiger Hardware, die unterstützt wird und
 damit zu eigenen Experimenten einlädt.
 
-Schwächen von OpenWrt
----------------------
+## Schwächen von OpenWrt
 
 Ein Kritikpunkt ist die Vielzahl von möglichen Erweiterungen in Form von
 Softwarepaketen, die gerade Einsteiger verwirren kann.
@@ -96,8 +91,7 @@ Dann muss ich eine neuere Version selbst übersetzen.
 Das kann sich über Abhängigkeiten von Versionen anderer Software zu
 einem eigenen Projekt entwickeln.
 
-Wie kann ich die Schwächen kompensieren?
-----------------------------------------
+## Wie kann ich die Schwächen kompensieren?
 
 Wenn ich sowenig Softwarepakete wie möglich, also nur die für den Einsatz
 nötige Software installiere, umgehe ich Probleme mit Softwarepaketen,

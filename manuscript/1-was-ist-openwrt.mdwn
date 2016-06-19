@@ -1,6 +1,5 @@
 
-Was ist OpenWrt?
-================
+# Was ist OpenWrt?
 
 Eine gute Frage.
 OpenWrt ist eine kleine Linux-Distribution, also ein Betriebssystem für

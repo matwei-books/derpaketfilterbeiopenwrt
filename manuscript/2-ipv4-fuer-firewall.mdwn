@@ -1,14 +1,12 @@
 
-IPv4 für den Firewall-Administrator
-===================================
+# IPv4 für den Firewall-Administrator
 
 IPv4 wird auf längere Zeit noch eine große Rolle spielen.
 Dementsprechend wird ein Firewall-Administrator häufig damit konfrontiert.
 In diesem Kapitel gehe ich auf wichtige Aspekte dieses und der damit
 verbundenen Protokolle ein.
 
-Internet Protokoll Version 4
-----------------------------
+## Internet Protokoll Version 4
 
 Erinnern wir uns kurz an das OSI-Modell, so finden wir das Internet
 Protokoll in Schicht 3, direkt auf Ethernet aufsetzend, welches
@@ -69,8 +67,7 @@ Header von IPv4 relevant:
     im Netfilter-Code die Regel greift und an welcher NAT, um dann entweder
     die originale oder die umgesetzte Adresse zu filtern.
 
-Internet Control Message Protocol (ICMP)
-----------------------------------------
+## Internet Control Message Protocol (ICMP)
 
 ICMP wird zwar, genau wie IP, der OSI-Schicht 3 zugeordnet, es nutzt
 aber das Internet Protokoll für den Transport.
@@ -98,8 +95,7 @@ sollten, um den regulären Netzbetrieb nicht zu behindern.
 Hier muss der Firewall-Administrator sehr gut Bescheid wissen, so dass
 ich ICMP in einem eigenen Kapitel intensiver behandle.
 
-Transmission Control Protocol (TCP)
------------------------------------
+## Transmission Control Protocol (TCP)
 
 Auch den TCP-Header finden wir in einem Datagramm hinter dem IP-Header.
 Interessant ist, das zur eindeutigen Identifizierung einer TCP-Sitzung
@@ -166,8 +162,7 @@ Bei zustandsbehafteten Regeln kann die Firewall Replay-Attacken erkennen,
 wenn die Sequenznummer eines Datagramms wesentlich kleiner ist, als die
 letzte Acknowledge-Nummer der Gegenrichtung.
 
-Universal Datagram Protocol (UDP)
----------------------------------
+## Universal Datagram Protocol (UDP)
 
 Kommen wir nun zu UDP, dem letzten der Protokolle, auf die ich im Rahmen
 von IPv4 kurz eingehen will.
@@ -209,8 +204,7 @@ Alternativ kann ich auch den Timeout bei der Firewall etwas größer
 ansetzen, wenn die Firewall Probleme mit einzelnen Verbindungen
 bereitet.
 
-Network Address Translation (NAT)
----------------------------------
+## Network Address Translation (NAT)
 
 Mit NAT kann man die bei IPv4 mittlerweile
 nicht mehr ausreichenden eindeutigen Adressen mehrfach verwenden.
@@ -258,8 +252,7 @@ RFC 3948 ausweichen.
 Da das Thema NAT sehr komplex ist und sehr viele Facetten enthält, gehe ich
 in einem späteren Kapitel noch einmal ausführlich darauf ein.
 
-Fragmentierung
---------------
+## Fragmentierung
 
 Prinzipiell kann ich auch fragmentierte Datagramme filtern, ohne sie
 vorher zusammen zu setzen.
