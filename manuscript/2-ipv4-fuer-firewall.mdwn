@@ -27,11 +27,11 @@ die 32 Bit pro Zeile anzeigt.
 Die ersten fünf 32-Bit-Worte sind in jedem IPv4-Datagramm obligatorisch,
 die Optionen können weggelassen werden.
 
-Das Feld *IHL* zeigt die Länge des IPv4-Headers in 32-Bit-Worten, die
-minimale Länge ist 5.
-
 {width=73%}
 ![IPv4 Header](images/w1104-rfc791-ipv4-header.png)
+
+Das Feld *IHL* zeigt die Länge des IPv4-Headers in 32-Bit-Worten, die
+minimale Länge ist 5.
 
 Der RFC beschreibt die einzelnen Felder und die Bedeutung ihrer Werte
 recht ausführlich, so dass ich hier nicht weiter darauf eingehen will.
