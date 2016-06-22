@@ -19,6 +19,7 @@ part3.mdwn
 3-openwrt-modell.mdwn
 part4.mdwn
 4-anforderungen.mdwn
+4-testen.mdwn
 backmatter.txt
 anhang.mdwn
 A-literatur.mdwn
