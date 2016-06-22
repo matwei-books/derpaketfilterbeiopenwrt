@@ -1,6 +1,5 @@
 
-Testen der Firewall
-===================
+# Testen der Firewall
 
 All das Wissen um die Paketfilter-Firewall nützt mir recht wenig, wenn ich
 mich nicht überzeugen kann, dass meine Kenntnisse zutreffen und
@@ -47,8 +46,7 @@ Testumgebung ausführen und muss mir keine Gedanken darüber machen, dass
 die Tests die Umgebung nicht stören dürfen beziehungsweise, dass
 letztere die Tests beeinflussen kann.
 
-Testumgebung
-------------
+## Testumgebung
 
 ### Testmaschinen
 
@@ -122,8 +120,7 @@ unter verschiedenen Werkzeugen auswählen:
 *   **Wireshark** ist ein GUI-Programm zum Mitschneiden von Datenverkehr und
     zum bequemen Auswerten der Mitschnitte.
 
-Vorgehen
---------
+## Vorgehen
 
 ### Testplan
 
@@ -206,8 +203,7 @@ auf die Performance testen und anschließend mit einem funktionalen Test
 verifizieren, dass die performantere Konfiguration noch der
 Sicherheitsrichtlinie genügt.
 
-Weitere Hinweise
-----------------
+## Weitere Hinweise
 
 Einen allgemeinen Einblick in die Vorgehensweise beim Test von
 Firewall-Paketfiltern gibt die Diplomarbeit von Gerhard Zaugg an der ETH
