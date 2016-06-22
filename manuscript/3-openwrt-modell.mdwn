@@ -64,7 +64,7 @@ Regelketten geändert.
 Darum gehe ich hier noch einmal detailliert auf die verschiedenen Tabellen
 der momentan aktuellen Version Barrier Breaker ein.
 
-Einen guter Einstieg bietet die Dokumentation zur
+Einen guten Einstieg bietet die Dokumentation zur
 [Firewall-Konfiguration][wiki-uci-firewall] im Wiki.
 Dort werden die Regelketten nach drei Typen unterschieden:
 
