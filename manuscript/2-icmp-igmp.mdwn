@@ -1,9 +1,7 @@
 
-ICMP und IGMP
-=============
+# ICMP und IGMP
 
-ICMP
-----
+## ICMP
 
 Bereits 1981 beschrieb Jon Postel in RFC 792 das Internet Control Message
 Protocol.
@@ -142,8 +140,7 @@ Synchronisation der Uhren von Rechnern verwendet werden.
 Wenn andere Protokolle für die Synchronisation der Uhren verfügbar sind,
 sehe ich kein Problem darin, diese Datagramme zu sperren.
 
-IGMP
-----
+## IGMP
 
 Das Internet Group Management Protocol ermöglicht IPv4-Multicast.
 Die Multicast-Gruppen werden dabei in den Routern verwaltet, an denen die
