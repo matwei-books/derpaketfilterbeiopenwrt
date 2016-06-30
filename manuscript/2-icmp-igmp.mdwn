@@ -127,7 +127,7 @@ ausgewertet, um die Topologie eines Netzes zu erkunden.
 Innerhalb meiner eigenen Netze will ich das in den meisten Fällen, weil es
 bei der Fehlersuche helfen kann.
 Von außen nach innen will ich diese ICMP-Nachrichten auch, von innen nach
-außen nicht, wenn ich die Struktur meines interen Netzes
+außen nicht, wenn ich die Struktur meines internen Netzes
 nicht preisgeben will.
 
 **Typ 12** "Parameter Problem" kann bei der Fehlersuche helfen.
