@@ -21,27 +21,25 @@ ICMP-Pakete nutzen IPv4 zum Transport, haben also ebenfalls einen IP-Header.
 Im darauf folgenden ICMP-Header werden die Datagramme nach dem Typ der
 ICMP-Nachricht und einem zu dem Typ gehörenden Code unterschieden.
 Da viele ICMP-Nachrichten als Reaktion auf Probleme mit bestimmten
-Datagrammen generiert werden, enthalten sie oft den Anfang des Datagramms,
-auf das sich die ICMP-Nachricht bezieht.
+Datagrammen generiert werden, enthalten sie oft im Anhang den Anfang des
+Datagramms, auf das sich die ICMP-Nachricht bezieht.
 
-Die Daten am Ende der ICMP-Nachricht können für versteckte Kommunikation
-verwendet werden.
-Das ist ein Grund, warum ich diese nicht wahllos durchlassen sollte.
-Ein anderer Grund liegt darin, dass die ICMP-Nachrichten selbst sehr viele
+Diese Daten am Ende der ICMP-Nachricht können für versteckte Kommunikation
+verwendet werden, deshalb sollte ich ICMP-Datagramme nicht wahllos durchlassen.
+Ein weiterer Grund ist, dass die ICMP-Nachrichten selbst sehr viele
 Informationen über IP-Netze preisgeben.
 
-Eine ICMP-Nachricht, die ich immer durchlassen sollte, ist die Nachricht
+Immer durchlassen sollte ich ICMP-Datagramme
 vom Typ 3 "Destination Unreachable" mit Code 4 "Fragmentation Needed".
-Dieses Datagramm wird für die Path-MTU-Discovery bei TCP benötigt.
+Diese werden für die Path-MTU-Discovery bei TCP benötigt.
 Ein Blockieren dieser Nachricht führt nicht automatisch zum Blockieren aller
-TCP-Verbindungen, kann bei manchen Verbindungen aber zu subtilen Fehlern
-führen, die für unerfahrene Administratoren schwer einzugrenzen sind.
+TCP-Verbindungen, kann bei manchen Verbindungen aber Fehler hervorrufen,
+die für unerfahrene Administratoren schwer einzugrenzen sind.
 Selbst wenn das Problem erkannt ist - zu geringe MTU auf einem Teilstück der
-Verbindung - ist die Abhilfe oft ineffizient, wenn diese ICMP-Nachricht
-nicht ankommt.
+Verbindung - ist die Abhilfe oft ineffizient.
 
-ICMP-Nachrichten, die ich demgegenüber bedenkenlos sperren kann, sind in den
-RFCs 6633 und 6918 angegeben.
+Die RFCs 6633 und 6918 diskutieren ICMP-Nachrichten, die ich bedenkenlos
+sperren kann.
 Das sind ICMP-Nachrichten, für die es keine weitverbreiteten
 Implementierungen gibt, deren Aufgaben anderweitig besser gelöst sind oder
 die eher schädlich als nützlich sind.
@@ -58,7 +56,7 @@ Konkret kann ich die folgenden ICMP-Nachrichten unterdrücken:
     **Typ 17** "Address Mask Request" und **Typ 18** "Address Mask Reply",
     **Typ 30** "Traceroute" bis **Typ 39** "SKIP" (Deprecated in RFC 6918).
     Diese Typen sind in der Praxis technisch überholt und in genanntem RFC
-    förmlich missbilligt worden.
+    förmlich missbilligt.
     Dort steht auch eine Diskussion zu den einzelnen Typen.
 
 Bleibt als dritte Gruppe die ICMP-Nachrichten, bei denen ich von Fall zu
@@ -74,7 +72,7 @@ Dann lasse ich Typ 8 von innen (meinem Netz) nach außen (dem fremden Netz)
 und Typ 0 von außen nach innen zu.
 Will ich auch Rechner in meinem Netz von außen prüfen lassen,
 gebe ich die beiden Typen auch in der anderen Richtung frei, eventuell
-beschränkt auf bestimmte Netze oder Adressen.
+beschränkt auf bekannte Netze oder Adressen.
 
 Bei **Typ 3** "Destination Unreachable" gibt es außer Code 4 "Fragmentation
 needed and DF bit set", den ich immer freigeben will, noch die Codes 0
@@ -82,9 +80,9 @@ needed and DF bit set", den ich immer freigeben will, noch die Codes 0
 "Port unreachable", die Hinweise bei der Fehlersuche im Netz liefern.
 Diese will ich im internen Netz auf jeden Fall haben.
 Von außen nach innen will ich diese Nachrichten auch.
-Von innen nach außen will ich diese Nachrichten aber nur an jemand
+Von innen nach außen will ich diese Nachrichten aber höchstens an jemand
 senden, der mein Netz analysieren darf.
-Wer das ist sollte in einer Policy festgelegt sein.
+Wer das ist, sollte in einer Policy festgelegt sein.
 
 Code 5 "Source route failed" tritt nur bei Source Routing auf.
 Verwende ich dieses nicht, kann ich getrost auch die ICMP-Nachrichten
@@ -100,17 +98,16 @@ Der Mehrwert dieser ICMP-Nachricht für einen Angreifer, der systematisch
 Netzwerkadressen ausprobiert, ist gering.
 Bei einer großen Anzahl derartiger Tests sollte ich allerdings ein
 Rate-Limit aktiviert haben, insbesondere bei einer asymmetrischen Anbindung.
-Wichtig ist auch, dass diese Nachrichten vom Border-Gateway generiert und
-nicht durch geleitet werden, da sonst die TTL Informationen zur internen
+Wichtig ist, dass diese Nachrichten nur vom Border-Gateway generiert und
+nicht durchgeleitet werden, da sonst die TTL Informationen zur internen
 Netzwerkstruktur preisgibt.
 
-Nachrichten vom **Typ 5** "Redirect" werden regulär vom Router an einen
-Rechner in einem direkt angeschlossenen Netz gesendet, wenn dieser für
+Nachrichten vom **Typ 5** "Redirect" werden regulär vom Router an
+Hosts in einem direkt angeschlossenen Netz gesendet, wenn diese für
 bestimmte Verbindungen ein anderes Gateway verwenden soll.
-Diese Nachrichten sollten einen Router nicht passieren.
-Ein Host-Rechner sollte sie von seinem Default-Gateway akzeptieren, wenn es
-verschiedene Router in dem Netzsegment gibt.
-Gibt es nur ein Gateway, sollten die Hosts diese Nachrichten ignorieren.
+Ein Host sollte diese Nachrichten von seinem Default-Gateway
+akzeptieren, wenn es mehrere Router in dem Netzsegment gibt.
+Gibt es nur ein Gateway, sollten Hosts diese Nachrichten ignorieren.
 
 **Typ 8** hatte ich bereits bei Typ 0 abgehandelt.
 
@@ -132,7 +129,7 @@ ausgewertet, um die Topologie eines Netzes zu erkunden.
 Innerhalb meiner eigenen Netze will ich das in den meisten Fällen, weil es
 bei der Fehlersuche helfen kann.
 Von außen nach innen will ich diese ICMP-Nachrichten auch, von innen nach
-außen am Border-Router nicht, wenn ich die Struktur meines inneren Netzes
+außen nicht, wenn ich die Struktur meines interen Netzes
 nicht preisgeben will.
 
 **Typ 12** "Parameter Problem" kann bei der Fehlersuche helfen.
@@ -148,7 +145,7 @@ sehe ich kein Problem darin, diese Datagramme zu sperren.
 IGMP
 ----
 
-Das Internet Group Management Protocol ermöglicht IPv4-Multitasking.
+Das Internet Group Management Protocol ermöglicht IPv4-Multicast.
 Die Multicast-Gruppen werden dabei in den Routern verwaltet, an denen die
 Empfänger angeschlossen sind.
 Es gibt drei Versionen von IGMP:
@@ -169,5 +166,5 @@ Multicast-Gruppen.
 Als Firewall-Administrator entscheide ich lediglich, ob ich Multicast über
 Router überhaupt zulasse oder nicht.
 Will ich einzelne Gruppen oder Quellen sperren, muss ich die
-einzelnen IGMP-Nachrichten analysieren und selektiv sperren.
+IGMP-Nachrichten analysieren und selektiv sperren.
 
