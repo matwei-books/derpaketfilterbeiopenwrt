@@ -1,140 +1,154 @@
 
-Die Webschnittstelle LuCI
-=========================
+# Die Webschnittstelle LuCI
 
 Ein Vorteil der browserbasierten Konfiguration ist, dass sie Leuten, die die
 Kommandozeile eher scheuen, die Administration von OpenWrt akzeptabel machen
 kann.
-Insbesondere, wenn ich längere Zeit keine Router konfiguriert habe, liefert
+Insbesondere, wenn man längere Zeit keine Router konfiguriert hat, liefert
 die Webschnittstelle genügend Kontext, um eine kleine Änderung mal eben
 schnell einzustellen.
 
-Mit der Programmiersprache Lua kann ich die Schnittstelle für meine Zwecke
-erweitern.
-
-In den meisten Fällen wird die Webschnittstelle auf Englisch eingestellt
-sein.
-Will ich die Konfiguration in deutscher Sprache, muss ich gegebenenfalls
-unter **System -> Software** das Paket *luci-i18n-german* installieren.
+In den meisten Fällen wird LuCI auf Englisch eingestellt sein.
+Will ich die Konfiguration in deutscher Sprache, muss ich unter
+**System -> Software** die Pakete *luci-i18n-...-de* installieren.
 Danach sollte sich die Webschnittstelle automatisch auf die in den
 Spracheinstellungen des Browser gemachten Vorgaben einstellen.
-Tut sie das nicht, kann ich unter **System -> System** im Reiter *Sprache
-und Aussehen* die Einstellungen anpassen.
+Tut sie das nicht, kann ich unter **System -> System** im Reiter
+*Language and Style* die Einstellungen anpassen.
+In diesem Buch beziehe ich mich auf das englischsprachige Interface.
 
-An manchen Stellen merkt sich LuCI Änderungen, die ich noch nicht
-gespeichert habe.
-Dann zeigt sie oben rechts einen anklickbaren Hinweistext
-"Ungespeicherte Änderungen".
-Klicke ich darauf, zeigt mir LuCI die noch nicht gespeicherten Änderungen
-für die Kommandozeilenoberfläche UCI.
-Dann kann ich diese anwenden, speichern und anwenden oder verwerfen.
+LuCI merkt sich Änderungen, die ich noch nicht aktiviert habe
+und zeigt dann oben rechts einen anklickbaren Hinweistext:
+"Unsaved Changes".
+Klicke ich darauf, zeigt mir LuCI die noch nicht aktivierten Änderungen
+der Kommandozeilenoberfläche UCI.
+Dann kann ich diese anwenden oder verwerfen.
+
+Auf der Kommandozeile kann ich diese Änderungen mit `uci changes`
+anzeigen lassen, mit `uci commit` aktivieren oder mit `uci revert ...`
+zurücknehmen.
 
 Damit genug des Vorgeplänkels, kommen wir zur Konfiguration der Firewall mit
 LuCI.
 
-Zuordnung der Netzwerke und Schnittstellen
-------------------------------------------
+## Zuordnung der Netzwerke und Schnittstellen
 
 Ich beginne, indem ich die Schnittstellen, die mein Gerät besitzt, den
 Netzwerken respektive Firewall-Zonen meiner Policy zuordne.
 
 Bei OpenWrt habe ich verschiedene Möglichkeiten, die Schnittstellen
-zuzuordnen: eine Zone kann eine Schnittstelle umfassen oder mehrere
-Schnittstellen, die in einer Bridge zusammengefasst sind.
+zuzuordnen: eine Firewall-Zone kann eine Schnittstelle umfassen oder mehrere
+Schnittstellen, wobei eine Schnittstelle aus einem physischen Anschluss
+bestehen kann oder aus mehreren Anschlüssen, die zu einer Bridge
+zusammengefasst sind.
 
-Für diese Einstellungen gehe ich in den Menüpunkt
-**Netzwerk -> Schnittstellen** und wähle eine Schnittstelle über den
-Schalter *Bearbeiten* aus, oder füge eine neue Schnittstelle mit dem
-Schalter *Neue Schnittstelle hinzufügen* hinzu.
+Für diese Zuordnung gehe ich in den Menüpunkt
+**Network -> Interfaces** und wähle eine Schnittstelle über den
+Schalter *Edit* aus, oder füge eine neue Schnittstelle mit dem
+Schalter *Add new interface* hinzu.
 
-Beim Reiter  *Allgemeinen Einstellungen* stelle ich bei *Protokoll* ein, wie
+Im Reiter  *General Setup* stelle ich bei *Protokol* ein, wie
 die Adressen konfiguriert werden (Statische Adresse, DHCP-Client, Ignoriert,
-...) und stelle nötigenfalls die Netzwerk-Konfiguration selbst ein.
+...) und trage nötigenfalls die Netzwerk-Konfiguration selbst ein.
 
-Beim Reiter *Erweiterten Einstellungen* vergewissere ich mich, dass die
+Im unteren Bereich habe ich die Möglichkeit einen DHCP-Server für diese
+Schnittstelle bereitzustellen.
+
+Beim Reiter *Advanced Settings* vergewissere ich mich, dass die
 Schnittstelle während des Bootvorgangs aktiviert wird.
-Hier kann ich bei Bedarf die MAC-Adresse, die MTU und die Gateway-Metrik
+Bei *Use builtin IPv6-Management* lasse ich den Haken gesetzt.
+Weiter kann ich hier bei Bedarf die MAC-Adresse, die MTU und die Gateway-Metrik
 vorgeben.
 
-Beim Reiter *Physikalische Einstellungen* kann ich die zu einer Bridge
-gehörenden Schnittstellen festlegen oder eine Schnittstelle auswählen, wenn
-ich keine Bridge in der Zone betreibe.
+Beim Reiter *Physical Settings* kann ich die zu einer Bridge
+gehörenden Anschlüsse festlegen oder eine einzelne Schnittstelle auswählen,
+wenn ich keine Bridge in der Zone betreibe.
 
-Beim Reiter*Firewall Einstellungen* weise ich die Zonen für die Firewall zu
+Beim Reiter*Firewall Settings* weise ich die Zonen für die Firewall zu
 oder lege eine neue Firewallzone an.
 Diese Zonen sind die Zonen im Modell aus dem vorigen Kapitel, die im Graphen
-unter dem Namen "bereich" zusammengefasst sind.
+unter "name" zusammengefasst sind.
 
 Habe ich Netzwerke, die nicht direkt mit dem Gerät verbunden sind und
 verwende kein Routing-Protokoll, kann ich über den Menüpunkt
-**Netzwerk -> Statische Routen** das Gateway dorthin angeben.
+**Network -> Static Routes** das Gateway dorthin angeben.
 
-Damit habe ich die grundlegenden Netzwerkeinstellungen und kann mich nun der
+Damit habe ich die grundlegenden Netzwerkeinstellungen und kann mich der
 eigentlichen Konfiguration der Firewall widmen.
 
 
-Allgemeine Firewall-Einstellungen
----------------------------------
+## Allgemeine Firewall-Einstellungen
 
 Ich beginne beim Menü
-**Netzwerk -> Firewall** im Reiter *Allgemeine Einstellungen*.
+**Network -> Firewall** im Reiter *General Settings*.
 
 Mit einem Haken kann ich den Schutz vor SYN-Flood-Attacken aktivieren, was
 mir für TCP-Datagramme beim Verbindungsaufbau in der Iptables-Tabelle
 *filter* einen Sprung von der Regelkette *delegate_input* zur Kette
 *syn_flood* beschert.
-Das heißt, dieser Schutz gilt nur für Datagramme direkt an das Gerät.
+Das heißt, dieser Schutz gilt nur für Datagramme direkt an das Gerät und
+nicht für die Netze hinter der Firewall.
 
-Mit dem Haken *Ungültige Pakete verwerfen* kommt in jede der Regelketten
+Mit dem Haken *Drop invalid packets* kommt in jede der Regelketten
 *delegate_forward*, *delegate_input* und *delegate_output* eine Regel, die
-Datagramme, die keiner bekannten Verbindung zugeordnet werden können,
-verwirft.
+ungültige Datagramme verwirft.
+Ungültige Datagramme sind Datagramme mit ungültigen Headern,
+Prüfsummen oder TCP-Flags, ungültige ICMP-Nachrichten und Pakete außer
+der Reihe, die zum Beispiel bei Attacken mit Vorhersage der
+Sequenznummer entstehen.
 
-Bei den Richtlinien für Eingang, Ausgang und Weiterleitung lege ich fest,
+Bei den Richtlinien für *Input*, *Output* und *Forward* lege ich die
+Policy der drei System-Regelketten INPUT, OUTPUT und FORWARD fest,
 wie mit Datagrammen verfahren wird, für die es keine explizite Regel gibt.
 
-Im Abschnitt *Zonen* kann ich detaillierte Vorgaben machen.
-Hier finde ich die Zonen aus den Netzwerkeinstellungen.
+Im Abschnitt *Zones* kann ich detaillierte Vorgaben machen.
+Hier finde ich die Firewall-Zonen aus den Netzwerkeinstellungen.
 
-In der Tabelle der Weiterleitungen gebe ich generell vor, zwischen welchen
+In der Tabelle *Zone Forwardings* gebe ich vor, zwischen welchen
 Zonen Daten ausgetauscht werden dürfen.
-Mit dem Schalter *Hinzufügen* kann ich weitere Weiterleitungen definieren.
-Über den Schalter *Bearbeiten* kann ich bestehende Weiterleitungen
+Mit dem Schalter *Add* kann ich weitere Weiterleitungen definieren.
+Über den Schalter *Edit* kann ich bestehende Weiterleitungen
 modifizieren.
 
 Hier kann ich - analog zu den globalen Richtlinien - festlegen, wie mit
 Datagrammen zwischen zwei Zonen verfahren wird, für die es keine explizite
 Regel gibt.
+Das heißt ich lege die Policy für den Datenverkehr zwischen diesen
+beiden Zonen fest.
 
-Mit dem Haken bei *NAT aktivieren* stelle ich Masquerading für abgehende
+Mit dem Haken bei *Masquerading* stelle ich dieses für abgehende
 Datagramme in dieser Zone ein.
+Bei SOHO-Routern setze ich diesen Haken üblicherweise am WAN-Interface
+beziehungsweise bei der zugehörigen Zone.
 
-Der Haken bei *MSS Korrektur* erzeugt in Iptables-Tabelle *mangle* eine
+Der Haken bei *MSS Clamping* erzeugt in Iptables-Tabelle *mangle* eine
 Regel in der Kette *mssfix*, mit der beim Aufbau von TCP-Verbindungen die
 Maximum Segment Size (MSS) an die MTU der Zone anpasst.
+Das brauche ich zum Beispiel bei PPPoE-Verbindungen (DSL), bei denen ein
+Teil des Ethernet-Frames für Verwaltungsinformationen draufgeht und nur
+1492 statt 1500 Byte für die IP-Datagramme zur Verfügung stehen.
 
-Die von der Zone abgedeckten Netzwerke entsprechen denen in den
-Netzwerkeinstellungen
+Die *Covered Networks* entsprechen denen in den Netzwerkeinstellungen
 
-Bei *Weiterleitungen zwischen Zonen* stelle ich ein, zu beziehungsweise von
-welchen Zonen ich weiterleiten möchte.
+Bei *Inter-Zone-Forwarding* stelle ich ein, zu beziehungsweise von
+welchen Zonen ich Datagramme weiterleiten möchte.
 Dabei erzeugt ein Haken bei den entsprechenden Zonen, dass ein Sprung in der
-Kette *zone_quellbereich_forward* zur Kette *zone_zielbereich_dest_ACCEPT*
+Kette *zone_quellname_forward* zur Kette *zone_zielname_dest_ACCEPT*
 angelegt wird.
 
-In den *Erweiterten Einstellungen* kann ich die Zonen auf eine Adressfamilie
+In den *Advanced Settings* kann ich die Zonen auf eine Adressfamilie
 (IPv4, IPv6) beschränken.
 
-Weiterhin kann ich NAT auf bestimmte Quell- oder Zielnetze beschränken.
+Weiterhin kann ich Masquerading auf bestimmte Quell- oder Zielnetze
+einschränken.
 
 Connection Tracking ist nur bei NAT automatisch aktiv.
 Hier kann ich es gezielt einschalten, genauso wie das Logging für die Zone.
 
-Portweiterleitungen
--------------------
+## Port Forwards
 
-Insbesondere bei NAT, wie ich es in SOHO-Routern oft finde, habe ich keine
-Möglichkeit, von der externen Seite aus, einen Rechner auf der internen
+Insbesondere bei Masquerading, wie ich es in SOHO-Routern oft finde, habe ich
+keine Möglichkeit, von der externen Seite aus, einen Rechner auf der internen
 Seite zu erreichen, da der Router das einzige Gerät ist, dessen Adresse im
 externen Netz bekannt ist.
 
@@ -142,45 +156,55 @@ Hier helfe ich mir mit Port-Weiterleitungen zumindest für TCP und UDP
 weiter.
 Dabei gebe ich einen frei wählbaren Namen für die Weiterleitung an, das
 Protokoll, die externe Zone und den Port, sowie die interne Zone, Adresse
-und Port, an die das Datagramm weitergeleitet werden soll.
+und Port, an die die Datagramme weitergeleitet werden sollen.
+Über den Schalter "Add" füge ich eine Portweiterleitung hinzu.
 
 Beim Protokoll habe ich die Auswahl zwischen:
 
 *   TCP+UDP: die Portweiterleitung gilt gleichermaßen für beide Protokolle
 *   TCP: nur für TCP
 *   UDP: nur für UDP
-*   Anderes: für andere Protokolle, zum Beispiel ICMP
+*   Other: für andere Protokolle, zum Beispiel ICMP
 
 Die Weiterleitung für andere Protokolle ist etwas kompliziert.
-Diese lassen sich am ehesten über den Schalter "Bearbeiten" einer
+Diese lässt sich am besten über den Schalter "Edit" einer
 bestehenden Weiterleitung einstellen.
-Auf jeden Fall muss ich die erzeugte Regel kontrollieren und am Besten auch
-ausprobieren.
+Auf jeden Fall muss ich die erzeugte Regel kontrollieren und ausprobieren.
 
-Verkehrsregeln
---------------
+## Traffic Rules
 
-Beim Reiter *Verkehrsregeln* finde ich eine sortierte Liste von Regeln, in
-die ich meine eigenen Regeln einfügen kann.
+Beim Reiter *Traffic Rules* finde ich eine sortierte Liste von Regeln, in
+die ich meine eigenen einfügen kann.
 
 Einige Regeln sind bereits vordefiniert, wie zum Beispiel
 
 *   Allow-DHCP-Renew
 *   Allow-Ping
+*   Allow-ICMP
 *   Allow-DHCPv6
+*   Allow-MLD
 *   Allow-ICMPv6-Input
 *   Allow-ICMPv6-Forward
+*   Regeln für das Durchlassen von IPsec-Tunneln
 
-Hier kann ich Ports öffnen, falls ich lokale Dienste auf dem Router
+Diese Regeln kontrolliere ich, ob ich sie wirklich haben möchte, und
+deaktiviere die unerwünschten.
+Außerdem kann ich diese Regeln als Muster für meine eigenen verwenden.
+
+Weiterhin kann ich hier Ports öffnen, falls ich lokale Dienste auf dem Router
 betreibe, Regeln für die Weiterleitung vorgeben oder mit *Source NAT* die
 volle Kontrolle über die Quelladressen auszuüben.
 
-Benutzerdefinierte Regeln
--------------------------
+## Custom Rules
 
 Habe ich ein Problem, das ich mit LuCI nicht in entsprechende Regeln fassen
 kann, besteht die Möglichkeit, beliebige Iptables-Befehle in einem
 Shell-Skript aufzurufen.
-Dieses Skript wird mit jedem Neustart der Firewall, direkt nach dem
+Das Skript wird mit jedem Neustart der Firewall, direkt nach dem
 Abarbeiten der Basis-Regeln abgearbeitet.
+
+Diese Regeln sind am besten in den System-Regelketten oder den explizit
+als User-Regelketten ausgewiesenen Ketten aufgehoben.
+Vergleiche dazu die Ausführungen zum Modell der OpenWrt-Firewall im
+vorigen Kapitel.
 
