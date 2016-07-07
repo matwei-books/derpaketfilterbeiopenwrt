@@ -85,6 +85,8 @@ verwende kein Routing-Protokoll, kann ich über den Menüpunkt
 
 ![Network -> Static Routes](images/luci-static-routes.png)
 
+Routen für IPv6 kann ich auf der gleichen Seite eingeben.
+
 Damit habe ich die grundlegenden Netzwerkeinstellungen und kann mich der
 eigentlichen Konfiguration der Firewall widmen.
 
