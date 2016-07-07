@@ -36,13 +36,13 @@ LuCI.
 Ich beginne, indem ich die Schnittstellen, die mein Gerät besitzt, den
 Netzwerken respektive Firewall-Zonen meiner Policy zuordne.
 
+![Network -> Interfaces](images/luci-interfaces.png)
+
 Bei OpenWrt habe ich verschiedene Möglichkeiten, die Schnittstellen
 zuzuordnen: eine Firewall-Zone kann eine Schnittstelle umfassen oder mehrere
 Schnittstellen, wobei eine Schnittstelle aus einem physischen Anschluss
 bestehen kann oder aus mehreren Anschlüssen, die zu einer Bridge
 zusammengefasst sind.
-
-![Network -> Interfaces](images/luci-interfaces.png)
 
 Für diese Zuordnung gehe ich in den Menüpunkt
 **Network -> Interfaces** und wähle eine Schnittstelle über den
