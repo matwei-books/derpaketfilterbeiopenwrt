@@ -42,10 +42,14 @@ Schnittstellen, wobei eine Schnittstelle aus einem physischen Anschluss
 bestehen kann oder aus mehreren Anschlüssen, die zu einer Bridge
 zusammengefasst sind.
 
+![Network -> Interfaces][luci-interfaces.png]
+
 Für diese Zuordnung gehe ich in den Menüpunkt
 **Network -> Interfaces** und wähle eine Schnittstelle über den
 Schalter *Edit* aus, oder füge eine neue Schnittstelle mit dem
 Schalter *Add new interface* hinzu.
+
+![Network -> Interfaces -> DMZ -> General Setup][luci-interface-general-setup.png]
 
 Im Reiter  *General Setup* stelle ich bei *Protokol* ein, wie
 die Adressen konfiguriert werden (Statische Adresse, DHCP-Client, Ignoriert,
@@ -54,15 +58,21 @@ die Adressen konfiguriert werden (Statische Adresse, DHCP-Client, Ignoriert,
 Im unteren Bereich habe ich die Möglichkeit einen DHCP-Server für diese
 Schnittstelle bereitzustellen.
 
+![Network -> Interfaces -> DMZ -> Advanced Settings][luci-interface-advanced-settings.png]
+
 Beim Reiter *Advanced Settings* vergewissere ich mich, dass die
 Schnittstelle während des Bootvorgangs aktiviert wird.
 Bei *Use builtin IPv6-Management* lasse ich den Haken gesetzt.
 Weiter kann ich hier bei Bedarf die MAC-Adresse, die MTU und die Gateway-Metrik
 vorgeben.
 
+![Network -> Interfaces -> DMZ -> Physical Settings][luci-interface-physical-settings.png]
+
 Beim Reiter *Physical Settings* kann ich die zu einer Bridge
 gehörenden Anschlüsse festlegen oder eine einzelne Schnittstelle auswählen,
 wenn ich keine Bridge in der Zone betreibe.
+
+![Network -> Interfaces -> DMZ -> Firewall Settings][luci-interface-firewall-settings.png]
 
 Beim Reiter*Firewall Settings* weise ich die Zonen für die Firewall zu
 oder lege eine neue Firewallzone an.
@@ -73,6 +83,8 @@ Habe ich Netzwerke, die nicht direkt mit dem Gerät verbunden sind und
 verwende kein Routing-Protokoll, kann ich über den Menüpunkt
 **Network -> Static Routes** das Gateway dorthin angeben.
 
+![Network -> Static Routes][luci-static-routes.png]
+
 Damit habe ich die grundlegenden Netzwerkeinstellungen und kann mich der
 eigentlichen Konfiguration der Firewall widmen.
 
@@ -81,6 +93,8 @@ eigentlichen Konfiguration der Firewall widmen.
 
 Ich beginne beim Menü
 **Network -> Firewall** im Reiter *General Settings*.
+
+![Network -> Firewall][luci-firewall-general-settings.png]
 
 Mit einem Haken kann ich den Schutz vor SYN-Flood-Attacken aktivieren, was
 mir für TCP-Datagramme beim Verbindungsaufbau in der Iptables-Tabelle
@@ -110,6 +124,8 @@ Mit dem Schalter *Add* kann ich weitere Weiterleitungen definieren.
 Über den Schalter *Edit* kann ich bestehende Weiterleitungen
 modifizieren.
 
+![Network -> Firewall > Zone > General Settings][luci-firewall-zone-general-settings.png]
+
 Hier kann ich - analog zu den globalen Richtlinien - festlegen, wie mit
 Datagrammen zwischen zwei Zonen verfahren wird, für die es keine explizite
 Regel gibt.
@@ -136,6 +152,8 @@ Dabei erzeugt ein Haken bei den entsprechenden Zonen, dass ein Sprung in der
 Kette *zone_quellname_forward* zur Kette *zone_zielname_dest_ACCEPT*
 angelegt wird.
 
+![Network -> Firewall > Zone > Advanced Settings][luci-firewall-zone-advanced-settings.png]
+
 In den *Advanced Settings* kann ich die Zonen auf eine Adressfamilie
 (IPv4, IPv6) beschränken.
 
@@ -146,6 +164,8 @@ Connection Tracking ist nur bei NAT automatisch aktiv.
 Hier kann ich es gezielt einschalten, genauso wie das Logging für die Zone.
 
 ## Port Forwards
+
+![Network -> Firewall > Port Forwards][luci-firewall-port-forwards.png]
 
 Insbesondere bei Masquerading, wie ich es in SOHO-Routern oft finde, habe ich
 keine Möglichkeit, von der externen Seite aus, einen Rechner auf der internen
@@ -173,6 +193,8 @@ Auf jeden Fall muss ich die erzeugte Regel kontrollieren und ausprobieren.
 
 ## Traffic Rules
 
+![Network -> Firewall > Traffic Rules][luci-firewall-traffic-rules.png]
+
 Beim Reiter *Traffic Rules* finde ich eine sortierte Liste von Regeln, in
 die ich meine eigenen einfügen kann.
 
@@ -196,6 +218,8 @@ betreibe, Regeln für die Weiterleitung vorgeben oder mit *Source NAT* die
 volle Kontrolle über die Quelladressen auszuüben.
 
 ## Custom Rules
+
+![Network -> Firewall > Custom Rules][luci-firewall-custom-rules.png]
 
 Habe ich ein Problem, das ich mit LuCI nicht in entsprechende Regeln fassen
 kann, besteht die Möglichkeit, beliebige Iptables-Befehle in einem
