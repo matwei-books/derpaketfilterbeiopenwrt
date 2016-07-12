@@ -46,10 +46,6 @@ Schritt und werden dann von neueren Kernels nicht mehr unterstützt.
 Damit wäre mein Projekt auf eine bestimmte Version des Kernels festgenagelt und
 könnte nicht von der Weiterentwicklung des Kernels profitieren.
 
-Andererseits spricht außer nicht gefixten Sicherheitsproblemen nichts
-dagegen, ein Gerät weiter mit alter Software zu betreiben, wenn es seine
-Aufgabe erfüllt.
-
 Eine weiterer wichtiger Aspekt kann die Möglichkeit sein, externe Antennen
 anschließen zu können.
 Das hängt vom Projekt ab.
