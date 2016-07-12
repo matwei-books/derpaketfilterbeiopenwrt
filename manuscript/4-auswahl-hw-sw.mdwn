@@ -1,12 +1,10 @@
 
-Auswahl von Hardware und Software
-=================================
+# Auswahl von Hardware und Software
 
 Nachdem ich mir Gedanken über meine Anforderungen an das Projekt gemacht
 habe, ist der nächste Schritt, geeignete Hardware und Software auszuwählen.
 
-Hardware
---------
+## Hardware
 
 Ein erster Anlaufpunkt für die Auswahl der Hardware ist der
 [Buyer's Guide][obg] von OpenWrt.
@@ -103,8 +101,7 @@ Der [OpenWrt Buyer's Guide][obg]  verlinkt für einige Länder auf spezielle
 Filter bei Preisvergleichsportalen, die helfen, preiswerte aktuelle Hardware
 für OpenWrt zu finden.
 
-Software
---------
+## Software
 
 Ein Hauptkriterium bei der Auswahl der Software ist ihre Eignung für den
 Einsatzzweck.
