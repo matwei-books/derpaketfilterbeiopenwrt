@@ -52,7 +52,7 @@ Aufgabe erfüllt.
 
 Eine weiterer wichtiger Aspekt kann die Möglichkeit sein, externe Antennen
 anschließen zu können.
-Das ist abhängig vom Projekt.
+Das hängt vom Projekt ab.
 
 ### Prozessor und Speicher
 
@@ -97,7 +97,7 @@ bin, kann ich zunächst zu billiger Hardware greifen, um über Monitoring
 die benötigten Parameter zu ermitteln und dann gezielt meine Kriterien
 anzupassen.
 
-Der [OpenWrt Buyer's Guide][obg]  verlinkt für einige Länder auf spezielle
+Der *OpenWrt Buyer's Guide* verlinkt für einige Länder auf spezielle
 Filter bei Preisvergleichsportalen, die helfen, preiswerte aktuelle Hardware
 für OpenWrt zu finden.
 
