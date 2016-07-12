@@ -2,15 +2,15 @@
 Auswahl von Hardware und Software
 =================================
 
-Nachdem ich mir über meine Anforderungen an das Projekt klar geworden bin,
-ist der nächste Schritt, die geeignete Hardware und Software auszuwählen.
+Nachdem ich mir Gedanken über meine Anforderungen an das Projekt gemacht
+habe, ist der nächste Schritt, geeignete Hardware und Software auszuwählen.
 
 Hardware
 --------
 
 Ein erster Anlaufpunkt für die Auswahl der Hardware ist der
 [Buyer's Guide][obg] von OpenWrt.
-In diesem finde gleich am Anfang drei Hinweise, die den Auswahlprozess kurz
+Darin finde gleich am Anfang drei Hinweise, die den Auswahlprozess kurz
 und prägnant zusammenfassen:
 
 *   Es gibt keine *beste Hardware*, kaufe das, was Deinen Anforderungen
@@ -19,19 +19,18 @@ und prägnant zusammenfassen:
     andere Benutzer nach Empfehlungen.
 *   Meide überteuerte Produkte, Hardware für OpenWrt kann sehr billig sein.
 
-Mit diesen Ratschlägen im Hinterkopf kann ich mich auf die wichtigsten
+Mit diesen Ratschlägen im Hinterkopf kann ich mich auf die
 Kenndaten der Hardware konzentrieren.
 
 ### LAN - Ethernet
 
 Üblicherweise - und insbesondere bei Projekten, die starken Gebrauch vom
-Linux-Paketfilter machen - arbeite ich mit IP-Netzwerken und dementsprechend
-mit Ethernet.
+Linux-Paketfilter machen - arbeite ich mit IP-Netzwerken und Ethernet.
 
 So gut wie alle Hardware, auf die OpenWrt portiert ist, hat Anschlüsse für
 Ethernet.
-Hier interessiert mich zum Einen die Anzahl dieser Anschlüsse und zum Anderen,
-wie schnell diese arbeiten können.
+Hier interessiert mich einerseits die Anzahl dieser Anschlüsse und
+andererseits, wie schnell diese arbeiten können.
 
 ### WLAN - drahtlose Netze
 
@@ -41,22 +40,26 @@ wobei für die meisten Anwendungen einer ausreichen dürfte.
 Außerdem schaue ich nach, welche Substandards aus der IEEE-802.11-Familie
 die Adapter unterstützen.
 
-Hier ist besonders wichtig, wie gut die Adapter mit Treibern unterstützt
-werden.
+Besonders wichtig ist, wie gut die Adapter mit Treibern unterstützt werden.
 Wenn es gute quelloffene Treiber gibt, ziehe ich diese proprietären Treibern
 vor.
 Allzuoft halten proprietäre Treiber nicht mit der Entwicklung des Kernels
-Schritt und werden dann von neueren Kernel nicht mehr unterstützt.
+Schritt und werden dann von neueren Kernels nicht mehr unterstützt.
 Damit wäre mein Projekt auf eine bestimmte Version des Kernels festgenagelt und
-könnte nicht von einem neueren Kernel profitieren.
+könnte nicht von der Weiterentwicklung des Kernels profitieren.
 
-Eine weitere wichtige Frage könnte die Möglichkeit sein, externe Antennen
-anzuschließen.
+Andererseits spricht außer nicht gefixten Sicherheitsproblemen nichts
+dagegen, ein Gerät weiter mit alter Software zu betreiben, wenn es seine
+Aufgabe erfüllt.
+
+Eine weiterer wichtiger Aspekt kann die Möglichkeit sein, externe Antennen
+anschließen zu können.
+Das ist abhängig vom Projekt.
 
 ### Prozessor und Speicher
 
 Die Leistung des Prozessors und der Speicherplatz sind zwei Kriterien, die
-ich vor alle bei ambitionierten Projekten berücksichtigen muss, bei denen
+ich vor allem bei ambitionierten Projekten berücksichtigen muss, wenn
 noch weitere Dienste auf dem Gerät laufen sollen.
 
 Beim Speicher geht es dabei einerseits um den für die Prozesse zur Verfügung
@@ -90,10 +93,10 @@ Eine Anzeige kann mir Auskunft über aktuelle Betriebszustände geben.
 
 ### Preis
 
-Ein wichtiges Kriterium für die Auswahl der Hardware ist der Preis.
+Ein weiteres Kriterium für die Auswahl der Hardware ist der Preis.
 Insbesondere, wenn ich mir noch nicht klar über die genauen Anforderungen
-bin, kann ich zunächst zu billigerer Hardware greifen, um über Monitoring
-die entsprechenden Parameter zu ermitteln und dann gezielt meine Kriterien
+bin, kann ich zunächst zu billiger Hardware greifen, um über Monitoring
+die benötigten Parameter zu ermitteln und dann gezielt meine Kriterien
 anzupassen.
 
 Der [OpenWrt Buyer's Guide][obg]  verlinkt für einige Länder auf spezielle
@@ -125,7 +128,7 @@ Außerdem benötigt das Gerät keine Verbindung zu einem Software-Repository,
 bevor es für den Einsatzzweck konfiguriert werden kann.
 
 Andererseits muss ich dann das komplette Image des Betriebssystems
-auswechseln, wenn ich nur eine der installierten Komponenten auswechseln
+auswechseln, wenn ich nur eines der installierten Programme auswechseln
 will.
 
 [obg]: http://wiki.openwrt.org/toh/buyerguide
