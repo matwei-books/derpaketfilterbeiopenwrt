@@ -157,7 +157,7 @@ Interface durchläßt.
 
 ### Empfehlungen für Transitverkehr
 
-#### Unbedingt durchgehen sollten die folgenden Fehlernachrichten:
+**Unbedingt durchgehen sollten die folgenden Fehlernachrichten:**
 
 *   Destination Unreachable (Typ 1), alle Codes
 *   Packet Too Big (Typ 2)
@@ -174,8 +174,8 @@ um einen Netzwerk-Scan zu verhindern.
 Bei IPv6 ist das Risiko eines Netzwerk-Scans sehr viel geringer.
 In RFC 4890 wird das Thema ausführlicher betrachtet.
 
-#### Die folgenden Fehlernachrichten sollten normalerweise nicht verworfen
-werden, wenn nicht gute Gründe für das Verwerfen sprechen:
+**Die folgenden Fehlernachrichten sollten normalerweise nicht verworfen
+werden, wenn nicht gute Gründe für das Verwerfen sprechen:**
 
 *   Time Exceeded (Typ 3), Code 1
 *   Parameter Problem (Typ 4), Code 0
@@ -191,8 +191,8 @@ Außerdem die folgenden Nachrichten zur Unterstützung von mobile IP (RFC
 Hier kann ich selektive Regeln verwenden, je nachdem, ob ich mobiles
 IP für eigene oder fremde Knoten unterstützen will.
 
-#### Die folgenden Nachrichten verwirft ein Router sowieso, hier ist keine
-zusätzliche Maßnahme nötig.
+**Die folgenden Nachrichten verwirft ein Router sowieso, hier ist keine
+zusätzliche Maßnahme nötig:**
 
 Nachrichten zur Konfiguration und Auswahl des Routers (RFC 4620, 4861):
 
@@ -221,15 +221,15 @@ Nachrichten für Multicast-Router (RFC 4286)
 *   Multicast Router Solicitation (Typ 152)
 *   Multicast Router Termination (Typ 153)
 
-#### Für die folgenden Datagramme sollte in einer Policy festgelegt sein,
-ob sie durchgelassen oder verworfen werden:
+**Für die folgenden Datagramme sollte in einer Policy festgelegt sein,
+ob sie durchgelassen oder verworfen werden:**
 
 *   Seamoby Experimental (Typ 150), siehe RFC 4065
 *   momentan nicht verwendete Fehlernachrichten (Typ 5-99, 102-126)
 *   momentan nicht verwendete Informationsnachrichten (Typ 154-199, 202-254)
 
-#### Die folgenden Nachrichten sollten verworfen werden, wenn nicht triftige
-Gründe für das Weiterleiten sprechen:
+**Die folgenden Nachrichten sollten verworfen werden, wenn nicht triftige
+Gründe für das Weiterleiten sprechen:**
 
 *   Node Information Query (Typ 139), siehe RFC 4620
 *   Node Information Response (Typ 140), siehe RFC 4620
@@ -239,7 +239,7 @@ Gründe für das Weiterleiten sprechen:
 
 ### Empfehlungen für lokalen ICMPv6-Verkehr
 
-#### Die folgenden Datagramme dürfen an Host-Firewalls nicht verworfen werden.
+**Die folgenden Datagramme dürfen an Host-Firewalls nicht verworfen werden:**
 
 Fehlermeldungen (RFC 4443):
 
@@ -280,13 +280,14 @@ Multicast Router Discovery (RFC 4286):
 *   Multicast Router Solicitation (Typ 152)
 *   Multicast Router Termination (Typ 153)
 
-#### Die folgenden Datagramme sollten normalerweise nicht verworfen werden.
+**Die folgenden Datagramme sollten normalerweise nicht verworfen
+werden:**
 
 *   Time Exceeded (Typ 3), Code 1
 *   Parameter Problem (Typ 4), Code 0
 
-#### Die folgenden Datagramme werden sowieso verworfen, dafür ist keine besondere
-Aufmerksamkeit nötig.
+**Die folgenden Datagramme werden sowieso verworfen, dafür ist keine besondere
+Aufmerksamkeit nötig:**
 
 *   Router Renumbering (Typ 138), RFC 2894
 
@@ -302,7 +303,8 @@ unterstützt wird:
 
 *   Seamoby Experimental (Typ 150), siehe RFC 4065
 
-#### Die folgenden Datagramme sollten in einer Policy berücksichtigt werden.
+**Die folgenden Datagramme sollten in einer Policy berücksichtigt
+werden:**
 
 Redirect-Nachrichten (RFC 4861) stellen ein erhebliches Sicherheitsrisiko
 dar.
@@ -331,8 +333,8 @@ Anfang des auslösenden Datagramms bestimmt.
 Es besteht die Möglichkeit, dass diese Nachrichten für einen versteckten
 Datenkanal benutzt werden.
 
-#### Der folgende Datenverkehr sollte verworfen werden, wenn nicht triftige
-Gründe für seine Verwendung gefunden werden.
+**Der folgende Datenverkehr sollte verworfen werden, wenn nicht triftige
+Gründe für seine Verwendung gefunden werden:**
 
 *   Private Experimentation (Typ 100, 101, 200, 201)
 *   Reserved for Expansion (Typ 127, 255), siehe RFC 4443
