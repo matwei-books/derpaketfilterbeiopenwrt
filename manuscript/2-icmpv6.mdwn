@@ -9,26 +9,26 @@ von ICMPv6 und als Neighbor Discovery in RFC 4861 beschrieben.
 Die Verwaltung von Multicast-Gruppen, für die es bei IPv4 das Protokoll IGMP
 gibt, ist ebenfalls Aufgabe von ICMPv6.
 
-Das Protokoll selbst ist in RFC 4443 beschrieben.
-Für den Firewall-Administrator gibt es RFC 4890 "Recommendations for
-Filtering ICMPv6 Messages in Firewalls", das handfeste Empfehlungen für die
-Behandlung von ICMPv6 gibt.
+RFC 4443 beschreibt das Protokoll.
+Für den Firewall-Administrator gibt es mit RFC 4890 "Recommendations for
+Filtering ICMPv6 Messages in Firewalls" handfeste Empfehlungen für die
+Behandlung von ICMPv6.
 
 Konkret hat ICMPv6 die folgenden Aufgaben:
 
-*   Fehlermeldungen an den Absender von Datagrammen zurückschicken
+*   Fehlermeldungen an den Absender von Datagrammen senden
 *   Verbindungen überprüfen
-*   Netzwerkumgebung erkunden
+*   das Netzwerk erkunden:
     *   Nachbarn im gleichen Netzsegment finden und ihre IP- und
-	Link-Layer-Adresse bestimmen.
-    *   Die Erreichbarkeit von Nachbarn überwachen.
-    *   Router finden und die Netzwerk-Konfiguration von diesen übernehmen.
+	Link-Layer-Adresse bestimmen
+    *   Die Erreichbarkeit von Nachbarn überwachen
+    *   Router finden und die Netzwerk-Konfiguration von diesen übernehmen
     *   Informationen wie Netzwerkpräfixe und MTU von Routern an Hosts
-	senden.
+	senden
     *   Authentifizieren von Nachbarn mit SEND
     *   Bestimmen der Path-MTU für Verbindungen
     *   IPv6-Adressen für Link-Layer-Adressen bestimmen
-    *   Multicast-Gruppenmitgliedschaft verwalten
+    *   Multicast-Gruppenmitgliedschaften verwalten
     *   Multicast-Router finden
 *   Rekonfiguration
     *   Weiterleitung zu anderen Routern mit Redirect-Nachrichten
@@ -40,13 +40,13 @@ Klassifizierung von ICMPv6-Nachrichten
 --------------------------------------
 
 ICMPv6-Nachrichten können nach verschiedenen Kriterien klassifiziert werden.
-In RFC 4890 finden sich die folgenden Klassifikationskriterien:
+In RFC 4890 finden sich die folgenden:
 
-*   Fehler- und Informations-Nachrichten
+*   Fehler- und Informationsnachrichten
 
     ICMPv6-Nachrichten mit Typ 0 bis 127 sind Fehlermeldungen, die in den
     meisten Fällen erlaubt sein sollten.
-    Nachrichten mit Typ 128 bis 255 sind Informations-Nachrichten, die
+    Nachrichten mit Typ 128 bis 255 sind Informationsnachrichten, die
     eher einer Policy unterliegen sollten.
 
 *   Adressen
@@ -57,7 +57,7 @@ In RFC 4890 finden sich die folgenden Klassifikationskriterien:
     IPv6-Adresse konfiguriert wurde, können ICMPv6-Nachrichten mit
     unspezifizierter Adresse [::] gesendet werden.
     Die Zieladresse ist bei Fehler-Nachrichten eine Unicast-Adresse,
-    bei Informations-Nachrichten kann es eine Unicast- oder
+    bei Informationsnachrichten kann es eine Unicast- oder
     Multicast-Adresse sein.
 
 *   Netzwerktopologie und Geltungsbereich der Adresse
@@ -77,61 +77,60 @@ Sicherheitsüberlegungen
 -----------------------
 
 Während es bei IPv6 generell möglich ist, Datenpakete kryptographisch
-abzusichern, trifft das auf ICMPv6 nur beding zu.
+abzusichern, trifft das auf ICMPv6 nur bedingt zu.
 Dadurch, dass legitime ICMPv6-Nachrichten von beliebigen Hosts oder Routern
 im Internet kommen können, ist es nicht möglich, zu allen Sendern von
 ICMPv6-Nachrichten Security Associations aufzubauen.
 
 Aus diesem Grund ist die Filterung von ICMPv6-Nachrichten der häufigste Weg,
 mit diesem Problem umzugehen.
-Dabei müssen wir eine Balance finden zwischen dem Verwerfen von Datagrammen
+Dabei muss ich eine Balance finden zwischen dem Verwerfen von Datagrammen
 um die Site zu schützen und dem Zulassen von Datagrammen um sicherzustellen,
 dass effiziente Kommunikation möglich ist.
 
-Wenn ich ICMPv6 mit einer Firewall überwache, habe ich dabei die folgenden
-Sicherheitsbedenken im Auge:
+Wenn ich ICMPv6 mit einer Firewall kontrolliere, habe ich dabei die folgenden
+Sicherheitsbedenken im Sinn:
 
 ### Denial of Service Attacken (DoS)
 
 ICMPv6 kann auf zwei Arten für DoS verwendet werden: es können einfach
-übermäßig viele ICMPv6-Nchrichten geschickt werden oder es wird versucht,
+übermäßig viele ICMPv6-Nachrichten geschickt werden oder es wird versucht,
 durch Konfigurationsnachrichten legitime Adressen ungültig zu machen oder
 Interfaces zu deaktivieren.
 
 ### Probing
 
-Sorgfältig fabrizierte Datagramme, die ICMPv6-Fehlermeldungen
-provozieren, können von Angreifern genutzt werden, um die Topologie des
-Netzes zu erkunden und so Ziele für weitere Attacken zu finden.
+Angreifer können mit Datagrammen, die ICMPv6-Fehlermeldungen provozieren, die
+Topologie des Netzes erkunden und so Ziele für weitere Attacken finden.
 Dieser Ansatz ist durch den riesigen Adressraum von IPv6 allerdings nicht so
-effektiv wie bei IPv4 in [SCAN-IMP RFC4890] wird dieses Thema weiter
-ausgeführt.
+effektiv wie bei IPv4.
+In RFC 4890 wird dieses Thema weiter ausgeführt.
 
 ### Redirection
 
 Durch Umleitung des Datenverkehrs kann ein Angreifer
 Man-in-the-middle-Angriffe aufsetzen.
-Diese Angriffe passieren im Allgemeinen lokal, das heißt, der Angreifer hat
-bereits Zugang zum Netz.
+Diese Angriffe erfolgen häufig lokal, wenn der Angreifer bereits Zugang zum
+Netz hat.
 
 Als Administrator muss ich einschätzen, ob die Effizienzverbesserung durch
-Redirect-Nachrichten das Risiko eines bösartigen Angriffes wert ist.
+Redirect-Nachrichten das Risiko eines derartigen Angriffes wert ist.
 Bei dieser Entscheidung ist die Sicherheit der Verkabelung, des Gebäudes und
 der anderen Hosts im Netzwerk ebenso zu berücksichtigen, wie die Komplexität
 der Adressen und Routen.
 
 ### Renumbering
 
-Netzumnummerierungs-Nachrichten können ein ganzes Netzsegment unerreichbar
+Nachrichten zur Umnummerierung des Netzes können ein Netzsegment unerreichbar
 machen.
-Diese Nachrichten sollten auf jeden Fall am Border-Router gefiltert werden.
+Diese Nachrichten will ich auf jeden Fall am Border-Router filtern.
 
 ### Probleme durch ICMPv6-Transparenz
 
-Da ICMPv6-Nachrichten in beiden Richtungen zugelassen werden müssen, könnten
+Da ICMPv6-Nachrichten in beiden Richtungen zugelassen werden müssen, können
 diese für verdeckte Kommnikationskanäle benutzt werden.
-Diesem kann ich mit DPI-Techniken begegnen, die sicherstellen, dass eine
-ICMP-Nachricht zu legitimen Traffic gehört.
+Diesem kann ich mit DPI-Techniken begegnen, die sicherstellen, dass die
+ICMP-Nachrichten zu legitimen Datenverkehr gehören.
 
 Empfehlungen zur Filterung
 --------------------------
@@ -149,14 +148,14 @@ in Regeln für Nachrichten, die
     Grund,
 *   verworfen werden können, aber aus anderen Gründen sowieso nicht
     akzeptiert werden,
-*   entsprechend einer Policy verworfen werden können oder nicht,
-*   immer verworfen werdenn sollten.
+*   entsprechend einer Richtlinie verworfen werden können oder nicht,
+*   immer verworfen werden sollten.
 
 Generell müssen Firewalls, die als Bridge in einem Netzsegment arbeiten,
 link-lokale ICMPv6-Nachrichten eher durchlassen, während Firewall-Router
 diese einfach sperren können.
 
-Die Firewall eines Endhosts kann man sich als Spezialfall einer
+Eine Host-Firewall kann man sich als Spezialfall einer
 Firewall-Bridge vorstellen, die aus dem Netz nur Pakete für das eigene
 Interface durchläßt.
 
@@ -174,10 +173,10 @@ Außerdem diese Nachrichten für Verbindungstests:
 *   Echo Request (Typ 128)
 *   Echo Reply (Typ 129)
 
-Bei IPv4 ist es üblich, die Nachrichten zur Verbindungstests generell zu
-sperren,, um einen Netzwerk-Scan zu verhindern.
-Bei IPv6 ist das Risiko eines Netzwerk-Scans sehr viel geringer, in 
-[SCAN-IMP RFC4890] wird das Thema ausführlich betrachtet.
+Bei IPv4 werden die Nachrichten zur Verbindungstests oft gesperrt,
+um einen Netzwerk-Scan zu verhindern.
+Bei IPv6 ist das Risiko eines Netzwerk-Scans sehr viel geringer.
+In RFC 4890 wird das Thema ausführlicher betrachtet.
 
 #### Die folgenden Fehlernachrichten sollten normalerweise nicht verworfen
 werden, wenn nicht gute Gründe für das Verwerfen sprechen:
@@ -193,14 +192,13 @@ Außerdem die folgenden Nachrichten zur Unterstützung von mobile IP (RFC
 *   Mobile Prefix Solicitation (Typ 146)
 *   Mobile Prefix Advertisement (Typ 147)
 
-Hier kann ich auch selektivere Regeln verwenden, je nachdem, ob ich mobiles
-IP für eigene oder fremde Knoten anbieten will.
+Hier kann ich selektive Regeln verwenden, je nachdem, ob ich mobiles
+IP für eigene oder fremde Knoten unterstützen will.
 
-#### Die folgenden Nachrichten werden sowieso verworfen, hier ist keine
+#### Die folgenden Nachrichten verwirft ein Router sowieso, hier ist keine
 zusätzliche Maßnahme nötig.
 
-Das betrifft Nachrichten zur Konfiguration und Auswahl des Routers (RFC
-4620, 4861):
+Nachrichten zur Konfiguration und Auswahl des Routers (RFC 4620, 4861):
 
 *   Router Solicitation (Typ 133)
 *   Router Advertisement (Typ 134)
@@ -227,8 +225,8 @@ Nachrichten für Multicast-Router (RFC 4286)
 *   Multicast Router Solicitation (Typ 152)
 *   Multicast Router Termination (Typ 153)
 
-#### Für den folgenden Verkehr sollte in einer Policy festgelegt werden, ob er
-durchgelassen oder verworfen wird:
+#### Für die folgenden Datagramme sollte in einer Policy festgelegt sein,
+ob sie durchgelassen oder verworfen werden:
 
 *   Seamoby Experimental (Typ 150), siehe RFC 4065
 *   momentan nicht verwendete Fehlernachrichten (Typ 5-99, 102-126)
@@ -245,7 +243,7 @@ Gründe für das Weiterleiten sprechen:
 
 ### Empfehlungen für lokalen ICMPv6-Verkehr
 
-#### Die folgenden Datagramme dürfen nicht verworfen werden.
+#### Die folgenden Datagramme dürfen an Host-Firewalls nicht verworfen werden.
 
 Fehlermeldungen (RFC 4443):
 
@@ -286,13 +284,13 @@ Multicast Router Discovery (RFC 4286):
 *   Multicast Router Solicitation (Typ 152)
 *   Multicast Router Termination (Typ 153)
 
-#### Die folgenden Datagramme sollte normalerweise nicht verworfen werden.
+#### Die folgenden Datagramme sollten normalerweise nicht verworfen werden.
 
 *   Time Exceeded (Typ 3), Code 1
 *   Parameter Problem (Typ 4), Code 0
 
 #### Die folgenden Datagramme werden sowieso verworfen, dafür ist keine besondere
-Aufmerksam nötig.
+Aufmerksamkeit nötig.
 
 *   Router Renumbering (Typ 138), RFC 2894
 
@@ -312,13 +310,13 @@ unterstützt wird:
 
 Redirect-Nachrichten (RFC 4861) stellen ein erhebliches Sicherheitsrisiko
 dar.
-Der Administrator sollte daher von Fall zu Fall entscheiden ob die Vorteile
+Als Administrator muss ich daher von Fall zu Fall entscheiden ob die Vorteile
 dieser Nachricht den potentiellen Schaden bei einem Missbrauch überwiegen.
 
 *   Redirect (Typ 137)
 
 Falls ein Knoten den Node Information Dienst (RFC 4620) unterstützt, muss
-der Administrator entscheiden ob und an welchen Schnittstellen er auf
+ich entscheiden ob und an welchen Schnittstellen er auf
 entsprechende Anfragen reagieren soll.
 Wenn der Dienst deaktiviert oder nicht vorhanden ist, werden die Anfragen
 ignoriert und es ist keine Filterung notwendig.
@@ -332,15 +330,13 @@ Gegenwärtig nicht definierte Fehlermeldungen
 
 Die Spezifikation von ICMPv6 besagt, dass unbekannte ICMPv6-Fehlermeldungen
 an das Protokoll der höheren Ebene weitergereicht werden soll.
-Dieses höherwertige Protokoll wird aus dem in der ICMP-Nachricht enthaltenen
+Dieses höhere Protokoll wird aus dem in der ICMP-Nachricht enthaltenen
 Anfang des auslösenden Datagramms bestimmt.
 Es besteht die Möglichkeit, dass diese Nachrichten für einen versteckten
 Datenkanal benutzt werden.
-Der Administrator sollte daher entscheiden, ob er diese Nachrichten zulassen
-will.
 
 #### Der folgende Datenverkehr sollte verworfen werden, wenn nicht triftige
-Gründe dafür gefunden werden.
+Gründe für seine Verwendung gefunden werden.
 
 *   Private Experimentation (Typ 100, 101, 200, 201)
 *   Reserved for Expansion (Typ 127, 255), siehe RFC 4443
