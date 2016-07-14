@@ -1,6 +1,5 @@
 
-ICMPv6 für den Firewall-Administrator
-=====================================
+# ICMPv6 für den Firewall-Administrator
 
 ICMPv6 macht für IPv6, was ICMP für IPv4 macht und noch einiges mehr.
 So ist die Zuordnung von Link-Layer-Adressen (Adressen der OSI-Schicht 2),
@@ -36,8 +35,7 @@ Konkret hat ICMPv6 die folgenden Aufgaben:
 *   Unterstützung von Mobile IPv6
 *   experimentelle Erweiterungen
 
-Klassifizierung von ICMPv6-Nachrichten
---------------------------------------
+## Klassifizierung von ICMPv6-Nachrichten
 
 ICMPv6-Nachrichten können nach verschiedenen Kriterien klassifiziert werden.
 In RFC 4890 finden sich die folgenden:
@@ -73,8 +71,7 @@ In RFC 4890 finden sich die folgenden:
     Die ICMPv6-Nachricht mit Type 2 "Packet Too Big" sind entscheidend für
     eine erfolgreiche Verbindung über Pfade mit kürzerer MTU.
 
-Sicherheitsüberlegungen
------------------------
+## Sicherheitsüberlegungen
 
 Während es bei IPv6 generell möglich ist, Datenpakete kryptographisch
 abzusichern, trifft das auf ICMPv6 nur bedingt zu.
@@ -132,8 +129,7 @@ diese für verdeckte Kommnikationskanäle benutzt werden.
 Diesem kann ich mit DPI-Techniken begegnen, die sicherstellen, dass die
 ICMP-Nachrichten zu legitimen Datenverkehr gehören.
 
-Empfehlungen zur Filterung
---------------------------
+## Empfehlungen zur Filterung
 
 RFC 4890 teilt Filter-Regeln für ICMPv6 in zwei Klassen ein:
 
