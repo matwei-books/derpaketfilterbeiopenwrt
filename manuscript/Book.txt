@@ -20,6 +20,7 @@ part3.mdwn
 3-sysctl.mdwn
 3-openwrt-modell.mdwn
 3-openwrt-luci.mdwn
+3-openwrt-uci.mdwn
 part4.mdwn
 4-anforderungen.mdwn
 4-auswahl-hw-sw.mdwn
