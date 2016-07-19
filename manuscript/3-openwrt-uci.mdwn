@@ -41,12 +41,12 @@ verwenden.
 Einen Hinweis, welches Skript zu welcher Konfiguration gehört, liefert die
 Datei */etc/config/lucitrack* aus dem Paket *luci-base*.
 
-A> ## Wer die Init-Skripts genauer anschauen will
+A> ### Init-Skripts genauer anschauen
 A> 
 A> Um das richtige Skript zu finden, befrage ich UCI, zum Beispiel für
 A> die Firewall:
 A> 
-A>     less /etc/init.d/$(uci get ucitrack.@firewall[0].init)
+A>     # less /etc/init.d/$(uci get ucitrack.@firewall[0].init)
 A> 
 A> Die erste Zeile im Skript lautet
 A> 
@@ -110,7 +110,7 @@ Alle anderen Werte können beliebige Zeichenketten sein.
 Enthalten diese Leerzeichen oder Tabulatoren, muss ich sie mit einfachen oder
 doppelten Anführungszeichen begrenzen.
 
-Die Bezeichner und Dateinamen dürfen nur die Zeichen A-Z, a-z, 0-9 und _
+Die Bezeichner und Dateinamen dürfen nur die Zeichen *A-Z*, *a-z*, *0-9* und *_*
 enthalten.
 
 ## Das Kommandozeilenprogramm uci
@@ -216,7 +216,7 @@ Detaillierte Informationen finde ich auf der
 
 Ich kann mir die Einstellungen anzeigen lassen mit:
 
-    uci show firewall.@default[0]
+    # uci show firewall.@default[0]
 
 Es gibt nur einen Listeneintrag.
 
@@ -375,7 +375,7 @@ jedesmal die Firewall neu konfigurieren zu müssen.
 Um IPsets verwenden zu können, muss das Paket *ipset* installiert sein,
 entweder bereits im OpenWrt-Image oder mit:
 
-    opkg install ipset
+    # opkg install ipset
 
 Mit UCI kann ich IPsets lediglich anlegen beziehungsweise extern
 angelegte IPsets referenzieren.
