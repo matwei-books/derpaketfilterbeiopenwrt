@@ -8,6 +8,12 @@ Daraus wurden die PDF-, EPUB- und MOBI-Versionen erzeugt.
 Die Diagramme für die Datenpakete im Kapitel über IPv4 habe ich mit
 [ditaa][ditaa] erstellt.
 
+Die Graphen im Kapitel zum Modell der Firewall-Regeln habe ich ursprünglich
+mit [iptables2dot][] aus Backups der Firewall-Regeln mit `iptables-save`
+erzeugt, dann mit dem Editor etwas nachbearbeitet und schließlich mit
+dem Programm `dot` von [GraphViz][] in eine PNG-Datei für das Buch
+umgewandelt.
+
 Das Titelbild ist von einer Zeichnung gescannt, mit [Inkscape][inkscape]
 vektorisiert und in passender Auflösung als Rastergraphik exportiert.
 Die gesamte Titelseite ist mit [GIMP][gimp] erstellt.
@@ -16,4 +22,8 @@ Die gesamte Titelseite ist mit [GIMP][gimp] erstellt.
 
 [gimp]: https://www.gimp.org/
 
+[GraphViz]: http://www.graphviz.org/
+
 [inkscape]: https://inkscape.org/de/
+
+[iptables2dot]: http://search.cpan.org/~mamawe/App-Iptables2Dot/
