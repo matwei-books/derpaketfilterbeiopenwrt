@@ -1,3 +1,4 @@
+XXX mit Ausdruck "OpenWrt Sysupgrade" abgleichen XXX
 
 Wie halte ich das System aktuell?
 =================================
