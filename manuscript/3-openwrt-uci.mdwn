@@ -110,7 +110,7 @@ Alle anderen Werte können beliebige Zeichenketten sein.
 Enthalten diese Leerzeichen oder Tabulatoren, muss ich sie mit einfachen oder
 doppelten Anführungszeichen begrenzen.
 
-Die Bezeichner und Dateinamen dürfen nur die Zeichen *A-Z*, *a-z*, *0-9* und *_*
+Die Bezeichner und Dateinamen dürfen nur die Zeichen *_*, *A-Z*, *a-z* und *0-9*
 enthalten.
 
 ## Das Kommandozeilenprogramm uci
