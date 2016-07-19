@@ -1,14 +1,8 @@
 
-Die zentrale Konfigurationsschnittstelle UCI
-============================================
+# Die zentrale Konfigurationsschnittstelle UCI
 
 UCI steht für Unified Configuration Interface, die zentrale Schnittstelle
 für die Konfiguration von OpenWrt.
-
-Die Konfigurationsdaten sind über mehrere Dateien im Verzeichnis */etc/config*
-verteilt.
-Diese Dateien unterliegen alle den gleichen Syntax-Regeln und konzentrieren
-sich jeweils auf einen bestimmten Bereich der Konfiguration.
 
 Es gibt ein Kommandozeilenprogramm (`uci`) sowie API-Bindungen für
 verschiedene Programmiersprachen.
@@ -21,24 +15,21 @@ Ich verwende UCI direkt über das Kommandozeilenprogramm,
 
 *   für die automatisierte Konfiguration und
 
-*   wenn ich sowieso via SSH angemeldet bin und eben schnell etwas anpassen
-    will.
+*   wenn ich bereits via SSH angemeldet bin und schnell etwas anpassen will.
 
-Allgemeine Prinzipien
----------------------
+## Allgemeine Prinzipien
 
-UCI arbeitet mit verschiedenen Konfigurationsdateien im Verzeichnis
-*/etc/config*.
-Jede Datei deckt einen Bereich der Konfiguration ab, wie zum Beispiel
-*network* für die Netzwerkeinstellungen und *firewall* für die
-Firewalleinstellungen.
+UCI arbeitet mit Konfigurationsdateien im Verzeichnis */etc/config*.
+Jede dieser Dateien deckt einen Bereich der Konfiguration ab, wie zum
+Beispiel *network* für die Netzwerk-Einstellungen und *firewall* für die
+Firewall-Einstellungen.
 
 Ich kann die Dateien mit einem beliebigen Texteditor bearbeiten oder mit dem
 Kommandozeilenprogramm `uci`.
-In selbstgeschriebenen Programmen kann ich auf die API für verschiedene
+In eigenen Programmen kann ich auf die API für verschiedene
 Programmiersprachen (C, Lua, Shell) zurückgreifen.
 
-Damit eine Änderung in der Konfiguration wirksam wird, muss der
+Damit eine Änderung in der Konfiguration wirksam wird, muss anschließend der
 entsprechende Dienst neu gestartet werden, zum Beispiel für die Firewall:
 
     # /etc/init.d/firewall restart
@@ -50,21 +41,25 @@ verwenden.
 Einen Hinweis, welches Skript zu welcher Konfiguration gehört, liefert die
 Datei */etc/config/lucitrack* aus dem Paket *luci-base*.
 
-> ## Wer die Init-Skripts genauer anschauen will
-> 
-> Die erste Zeile in den Skripts lautet
->
->     #!/bin/sh /etc/rc.common
-> 
-> Das bedeutet, das in dem Beispiel mit dem Neustart der Firewall die Shell
-> das Skript `/etc/rc.common` mit den Argumenten */etc/init.d/firewall* und
-> *restart* aufruft.
-> Will ich also eines der Startup-Skripts analysieren, fange ich bei
-> */etc/rc.common* an um die in den Skripts verwendeten Funktionen zu
-> verstehen.
+A> ## Wer die Init-Skripts genauer anschauen will
+A> 
+A> Um das richtige Skript zu finden, befrage ich UCI, zum Beispiel für
+A> die Firewall:
+A> 
+A>     less /etc/init.d/$(uci get ucitrack.@firewall[0].init)
+A> 
+A> Die erste Zeile im Skript lautet
+A> 
+A>     #!/bin/sh /etc/rc.common
+A> 
+A> Das bedeutet, das in dem Beispiel mit dem Neustart der Firewall die Shell
+A> das Skript `/etc/rc.common` mit den Argumenten */etc/init.d/firewall* und
+A> *restart* aufruft.
+A> Will ich also eines der Startup-Skripts analysieren, fange ich bei
+A> */etc/rc.common* an um die in den Skripts verwendeten Funktionen zu
+A> verstehen.
 
-Syntax der Konfigurationsdateien
---------------------------------
+## Syntax der Konfigurationsdateien
 
 Die Syntax der Dateien unter */etc/config/* ist recht einfach.
 Die Anweisungen stehen auf jeweils einer Zeile und beginnen mit einer
@@ -108,18 +103,17 @@ Es gibt die folgenden Direktiven:
         list network 'wan1'
 	list network 'wan2'
 
-Als Boolesche Werte können '1', 'on', 'yes' beziehungsweise '0', 'off', 'no'
-verwendet werden.
+Als Boolesche Werte kann ich '1', 'on', 'yes' beziehungsweise '0', 'off', 'no'
+verwenden.
 
 Alle anderen Werte können beliebige Zeichenketten sein.
-Enthalten diese Leerzeichen oder Tabulatoren, müssen sie mit einfachen oder
-doppelten Anführungszeichen begrenzt werden.
+Enthalten diese Leerzeichen oder Tabulatoren, muss ich sie mit einfachen oder
+doppelten Anführungszeichen begrenzen.
 
 Die Bezeichner und Dateinamen dürfen nur die Zeichen A-Z, a-z, 0-9 und _
 enthalten.
 
-Das Kommandozeilenprogramm uci
------------------------------
+## Das Kommandozeilenprogramm uci
 
 An dieser Stelle gebe ich nur eine kurze Einführung in das
 Kommandozeilenprogramm.
@@ -135,14 +129,23 @@ Die wichtigsten Befehle sind für mich:
 
 *   `uci get $config.$section[.$option]
 
-    Das liefert nur den entsprechenden Wert, der dann zum Beispiel in einem
-    Skript weiter verwendet werden kann.
+    Dieser Aufruf liefert nur den Wert, den ich dann in einem Skript weiter
+    verwenden kann.  
+    Um zum Beispiel den DHCP-Dämon neu zu starten, kann ich folgendes
+    aufrufen und brauche nicht zu wissen, dass das Init-Skript *dnsmasq*
+    heißt:
+
+        /etc/init.d/$(uci get ucitrack.@dhcp[0].init) restart
+
+    Beim Aufruf von Hand bin ich wahrscheinlich schneller, wenn ich
+    direkt in /etc/init.d/ nachsehe.
+    Ein Skript wird damit jedoch robuster gegenüber Änderungen.
 
 *   `uci export [$config]`
 
     Dieser Aufruf zeigt die Konfiguration in der Form, wie sie in den
     Konfigurationsdateien steht.
-    Mit `uci import` kann das wieder importiert werden, so dass sich diese
+    Mit `uci import` kann ich das wieder importieren, so dass sich diese
     beiden Befehle für Backup und Restore der Konfiguration eignen.
 
 *   `uci import`
@@ -179,9 +182,8 @@ Netzkonfiguration, die `uci` mir nur anzeigt, wenn ich den Suchpfad auf
     network.loopback.up=1
     network.loopback.device=lo
 
-Zum Abschluß noch ein Hinweis zur Konfiguration von Listenoptionen.
 Habe ich eine neue Listenoption angelegt, kann ich diese mit dem Index `-1`
-referenzieren und muss mich nicht um die aktuelle Position in der Liste
+referenzieren und muss mich nicht um die genaue Position in der Liste
 kümmern:
 
     # uci add firewall rule
@@ -192,8 +194,7 @@ kümmern:
     # uci commit
     # /etc/init.d/firewall restart
 
-Konfiguration der Firewall
---------------------------
+## Konfiguration der Firewall
 
 Bei der Firewall kennt UCI die folgenden Sektionen:
 
@@ -203,9 +204,13 @@ Bei der Firewall kennt UCI die folgenden Sektionen:
 *   include
 *   forwarding
 *   redirect
+*   ipset
 
 Alle Sektionen sind Listeneinträge, das heißt ich greife darauf mit der
 Notation `firewall.@sektion[$index]' zu.
+
+Detaillierte Informationen finde ich auf der
+[Wikiseite zur Firewall-Konfiguration][wiki-uci-firewall]
 
 ### Sektion defaults
 
@@ -218,7 +223,7 @@ Es gibt nur einen Listeneintrag.
 Hier kann ich die globalen Einstellungen treffen, die ich in LuCI bei der
 Startseite für die Firewall finde.
 
-Den Schutz vor SYN-Floos-Atacken aktiviere ich mit
+Den Schutz vor SYN-Flood-Atacken aktiviere ich mit
 
     # uci set firewall.@defaults[0].syn_flood=1
 
@@ -232,7 +237,7 @@ Entsprechend gebe ich die Policies für die drei Einsprungsketten vor:
     # uci set firewall.@defaults[0].output=ACCEPT
     # uci set firewall.@defaults[0].forward=REJECT
 
-Da iptables an sich keine REJECT Policy kennt, landet in diesem Fall ein
+Da iptables keine REJECT Policy kennt, landet in diesem Fall ein
 Sprung zur Kette *reject* in der Kette *delegate_forward*.
 
 ### Sektion zone
@@ -243,17 +248,15 @@ Eine Übersicht über die Einstellungen aller Zonen bekomme ich mit
 
     # uci show firewall|grep zone
 
-In dieser Sektion kann ich die allgemeinen Einstellungen für eine Zone
+Ich kann in dieser Sektion die allgemeinen Einstellungen für eine Zone
 vorgeben.
-
 Um beispielsweise eine neue Zone für die WAN-Schnittstelle zu definieren
 würde ich das folgende eingeben:
 
-    # uci add firewall.zone
+    # uci add firewall zone
     # uci set firewall.@zone[-1].name=wan
     # uci set firewall.@zone[-1].input=DROP
     # uci set firewall.@zone[-1].output=DROP
-    # uci set firewall.@zone[-1].forward=DROP
     # uci set firewall.@zone[-1].forward=DROP
     # uci set firewall.@zone[-1].masq=1
     # uci set firewall.@zone[-1].mtu_fix=1
@@ -263,10 +266,9 @@ Der erste Aufruf legt eine neue Zone an und der zweite benennt diese.
 
 Die Optionen *input*, *output* und *forward* bestimmen die Policies für
 diese Zone.
-Diese Einträge bestimmen die Regeln in Kette (XXX noch ergänzen).
 
-Mit der Option *masq* kann ich bestimmen, dass alle Datagramme zu dieser
-Zone mit derselben Absenderadresse hinausgehen sollen.
+Mit der Option *masq* kann ich bestimmen, dass alle Datagramme für diese
+Zone mit der selben Absenderadresse hinausgehen sollen.
 
 Die Option *mtu_fix* sorgt dafür, dass die MSS beim
 TCP-Verbindungsaufbau an die MTU der Verbindung angepasst wird.
@@ -278,8 +280,8 @@ Netzwerkeinstellungen, die dieser Firewall-Zone zugeordnet werden.
 
 In LuCI wird bei den Firewallregeln unterschieden nach
 
-*   Regeln, die einen Port am Router öffnen,
-*   Weiterleitungsregeln und
+*   Regeln, die einen Port am Router öffnen und
+*   Regeln für die Weiterleitung
 
 Diese gebe ich auf unterschiedliche Art ein.
 
@@ -288,7 +290,7 @@ Diese gebe ich auf unterschiedliche Art ein.
 Um beispielsweise den SSH-Port auf der WAN-Seite zu öffnen, gebe ich
 folgendes ein:
 
-    # uci add firewall.rule
+    # uci add firewall rule
     # uci set firewall.@rule[-1].name=Allow-SSH
     # uci set firewall.@rule[-1].target=ACCEPT
     # uci set firewall.@rule[-1].src=wan
@@ -297,7 +299,7 @@ folgendes ein:
 
 Der erste Aufruf legt die Regel an und der zweite benennt sie.
 
-Die Option *target* gibt an, wie mit den zutreffenden Datagrammen zu
+Die Option *target* gibt an, wie mit den passenden Datagrammen zu
 verfahren ist, ACCEPT heißt zulassen.
 
 Die Option *src* legt die Zone (wan) fest, *proto* (tcp) und *dest_port*
@@ -305,7 +307,10 @@ Die Option *src* legt die Zone (wan) fest, *proto* (tcp) und *dest_port*
 
 #### Regeln für das Weiterleiten von Traffic
 
-    # uci add firewall.rule
+Um Datenverkehr in andere Zonen weiterzuleiten, muss ich sowohl die
+Quell- als auch die Ziel-Zone angeben, wie in folgendem Beispiel:
+
+    # uci add firewall rule
     # uci set firewall.@rule[-1].name=Allow-LAN-WAN
     # uci set firewall.@rule[-1].enabled=1
     # uci set firewall.@rule[-1].target=ACCEPT
@@ -315,13 +320,11 @@ Die Option *src* legt die Zone (wan) fest, *proto* (tcp) und *dest_port*
 ### Sektion include
 
 Diese Sektion enthält nur einen Eintrag: den Namen der Datei, in der ich
-zusätzliche Regeln ablege, die ich mit UCI oder LuCI nicht einstellen kann.
+eigene Regeln ablege, die ich mit UCI oder LuCI nicht einstellen kann.
 
-Voreingestellt ist der Name auf */etc/firewall.user*.
+Hier ist der Name */etc/firewall.user* voreingestellt.
 
-Normalerweise will ich das nicht verwenden und darum auch nicht ändern.
-
-Habe ich jedoch eine experimentelle Konfiguration, zu der ich schnell
+Habe ich eine experimentelle Konfiguration, zu der ich schnell
 umschalten will, dann kann ich das mit den folgenden Befehlen:
 
     # uci set firewall.@include[0].path=/etc/firewall.other
@@ -330,13 +333,27 @@ umschalten will, dann kann ich das mit den folgenden Befehlen:
 Dabei gehe ich davon aus, dass die experimentelle Firewall-Konfiguration in
 der Datei */etc/firewall.other* abgelegt ist.
 
+Ich kann auch mehrere Skript-Dateien angeben, die nacheinander
+aufgerufen werden.
+
 ### Sektion forwarding
+
+Die Sektion *forwarding* steuert den Datenverkehr zwischen den Zonen und
+kann MSS-Clamping in bestimmten Richtungen aktivieren.
+
+Eine *forwarding* Regel deckt nur eine Richtung ab.
+Um den Verkehr in beiden Richtungen zu regulieren, muss ich daher zwei
+Regeln definieren.
+
+    # uci add firewall forwarding
+    # uci set firewall.@forwarding[-1].src=lan
+    # uci set firewall.@forwarding[-1].dest=wan
 
 ### Sektion redirect
 
 In dieser Sektion landen die Regeln für die Adressumsetzung.
 
-    # uci add firewall.redirect
+    # uci add firewall redirect
     # uci set firewall.@redirect[-1].name=Masquerade
     # uci set firewall.@redirect[-1].enabled=1
     # uci set firewall.@redirect[-1].target=SNAT
@@ -345,4 +362,28 @@ In dieser Sektion landen die Regeln für die Adressumsetzung.
     # uci set firewall.@redirect[-1].proto=all
     # uci set firewall.@redirect[-1].src_dip=192.168.1.1
 
+### Section ipset
 
+Die UCI firewall ab Version 3 kann mit IPsets umgehen.
+Das bietet die Möglichkeit, große Adress- und/oder Portlisten in
+einer einzigen Regel abzuhandeln.
+Damit wird die Firewall entlastet, da IPsets sehr effizient beim
+Behandeln von großen Listen sind.
+Außerdem kann ich über die IPsets dynamisch die Listen ändern, ohne
+jedesmal die Firewall neu konfigurieren zu müssen.
+
+Um IPsets verwenden zu können, muss das Paket *ipset* installiert sein,
+entweder bereits im OpenWrt-Image oder mit:
+
+    opkg install ipset
+
+Mit UCI kann ich IPsets lediglich anlegen beziehungsweise extern
+angelegte IPsets referenzieren.
+Um konkrete Adressen oder Ports zum IPset hinzuzufügen oder zu
+entfernen, verwende ich den `ipset` Befehl direkt oder in einem Skript.
+
+Dieses Skript kann ich über die Sektion *include* automatisch beim
+Modifizieren der Firewall aufrufen lassen oder via `cron`, wenn das
+Skript die Daten von externen Quellen holt.
+
+[wiki-uci-firewall]: https://wiki.openwrt.org/doc/uci/firewall
