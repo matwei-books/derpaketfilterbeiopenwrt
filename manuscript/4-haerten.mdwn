@@ -2,8 +2,7 @@
 # Härten des Systems
 
 Ein wichtiger Aspekt beim Betrieb eines jeden Rechners ist das Härten des
-Systems, damit ich hinreichend sicher sein kann, dass ich meine Geräte
-kontrolliere und nicht jemand anders.
+Systems, damit ich meine Geräte kontrolliere und nicht jemand anders.
 
 Für das konkrete Absichern eines OpenWrt-Systems finde ich Informationen im
 [Wiki][wiki].
@@ -43,7 +42,7 @@ Bevor jemand anderes das Gerät manipulieren kann, muss er sich die
 Zugangsdaten besorgen.
 
 Dazu reicht es allerdings, wenn er die Möglichkeit hat, den Datenverkehr
-zwischen dem Administrator und dem OpenWrt-Gerät genau dann mitschneiden
+zwischen Administrator und Gerät genau dann mitschneiden
 kann, wenn der Administrator sich anmeldet.
 
 Da entsprechende Software bereits seit vielen Jahren verfügbar ist,
@@ -110,12 +109,12 @@ A>
 A> Geeignete Software ist im Internet frei verfügbar.
 A> Dabei sollte ich den Passwort-Cracker aber nicht im Internet laufen lassen.
 A> 
-A> Besser ist es, einen einfachen Stringvergleich für den Kennwort-Test
+A> Besser ist es, einen einfachen Stringvergleich als Kennwort-Test
 A> einzustellen, denn ich will ja nur wissen, nach wievielen Versuchen das
 A> Kennwort gefunden wurde.
 A> Damit läuft der Cracker auch auf einfacher Hardware hinreichend schnell.
-A> Und natürlich muss das auf einem Rechner laufen, der nicht öffentlich
-A> zugänglich ist.
+A> Und natürlich muss das auf einem nicht öffentlich zugänglichen Rechner
+A> laufen.
 
 Als weitere Schutzmaßnahme kann ich die Administrator-Zugänge auf andere
 Ports verlegen, anstelle von 22 für SSH und 443 für HTTPS.
@@ -170,8 +169,7 @@ geschieht, um viele Größenordnungen höher.
 
 Ein kompromittierter Server ist auch in einem dedizierten Netz
 problematisch.
-Ein kompromittierter Router gibt das ganze Netz preis, das dahinter
-angeschlossen ist.
+Ein kompromittierter Router gibt das ganze Netz dahinter preis.
 
 Eine Ausnahme kann man für den Endpunkt eines VPN machen, das auf dem
 OpenWrt-Gerät endet.
@@ -237,8 +235,8 @@ Von außen kann ich das mit dem Programm nmap auf einem benachbarten Rechner
 machen.
 Bei einem Zugangs-Router kann ich einen der vielen Dienstleister im Internet,
 die solche Scans anbieten, bemühen.
-Von innen, also auf dem Gerät selbst zeigt mir ``netstat -aunt`` alle
-offenen TCP- und UDP-Ports an.
+Von innen, also auf dem Gerät selbst zeigt mir der Befehl ``netstat -aunt``
+alle offenen TCP- und UDP-Ports an.
 
 **Halte das System aktuell.** ist immer wichtig, da ständig Programmfehler
 gefunden und beseitigt werden.
