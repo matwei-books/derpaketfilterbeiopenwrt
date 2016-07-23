@@ -6,23 +6,19 @@ Ein wichtiger Aspekt beim Betrieb eines jeden Rechners ist das Härten des
 Systems, damit ich hinreichend sicher sein kann, dass ich meine Geräte
 kontrolliere und nicht jemand anders.
 
-Dabei kann ich mich von den [Ten Immutable Laws Of Security][tilos] leiten
-lassen, die in einem Technet Artikel von Mircrosoft zu finden sind.
-
 Für das konkrete Absichern eines OpenWrt-Systems finde ich Informationen im
-[Wiki von OpenWrt][wiki].
-
+[Wiki][wiki].
 Außerdem kann ich auf allgemeine Tipps zum Härten von Linux-Systemen
 zurückgreifen, die ich entsprechend der Situation an meinem Gerät adaptiere.
 
 Den Zugang sichern
 ------------------
 
-Bei der Sicherung des Zugangs geht es um die Art und Weise der Anmeldung
-selbst.
+Die allererste Maßnahme ist die Absicherung des Zugangs zum Gerät.
+Dabei geht es um die Art und Weise der Anmeldung selbst.
 
-Im OpenWrt-Wiki werden vier Arten, sich am System anzumelden, unterschieden,
-die von völlig unsicher bis ziemlich sicher gehen.
+Das OpenWrt-Wiki unterscheidet vier Arten, sich am System anzumelden,
+die von völlig unsicher bis ziemlich sicher reichen.
 
 1.  Frag nach gar nichts
 2.  Frag nach Benutzername und Kennwort über eine ungesicherte Verbindung
@@ -33,36 +29,33 @@ die von völlig unsicher bis ziemlich sicher gehen.
 
 Jeder, der diesen Zugang erreichen kann, kann alles mit dem System machen,
 ohne sich anmelden zu müssen.
-
 Offensichtlich ist das für feindliche Umgebungen wie das Internet völlig
 ungeeignet.
 
 In vertrauenswürdigen Umgebungen ist so ein Zugang vielleicht tolerabel,
 wenn absolut nichts von der Sicherheit des Gerätes abhängt.
-
 Das kann zum Beispiel eine Testumgebung sein, in der vor jedem Test der
 OpenWrt-Router automatisch konfiguriert wird.
-Einen anderen Einsatzfall kann ich mir im Moment nicht vorstellen.
 
 ### 2. Frag nach Benutzername und Kennwort über eine ungesicherte Verbindung
 
-Das betrifft die Administration via Telnet oder HTTP.
+Das entspricht der Administration via Telnet oder HTTP.
 Es ist etwas besser als Variante 1.
 Bevor jemand anderes das Gerät manipulieren kann, muss er sich die
 Zugangsdaten besorgen.
 
-Dazu reicht es, wenn er die Möglichkeit hat, den Datenverkehr zwischen dem
-Administrator und dem OpenWrt-Gerät genau dann mitschneiden kann, wenn sich
-der Administrator anmeldet.
+Dazu reicht es allerdings, wenn er die Möglichkeit hat, den Datenverkehr
+zwischen dem Administrator und dem OpenWrt-Gerät genau dann mitschneiden
+kann, wenn der Administrator sich anmeldet.
 
 Da entsprechende Software bereits seit vielen Jahren verfügbar ist,
-reduziert sich der Aufwand für den Angreifer auf das Positionieren eines
-solchen Programms auf einem geeigneten Rechner zwischen Administrator und
-OpenWrt-Gerät.
+reduziert sich der Aufwand für den Angreifer auf das Installieren und
+Starten eines solchen Programms auf einem geeigneten Rechner zwischen
+Administrator und OpenWrt-Gerät.
 
 ### 3. Frag nach Benutzername und Kennwort über eine gesicherte Verbindung
 
-Dazu verwende ich SSH oder HTTPS für die Administration.
+Hier verwende ich SSH oder HTTPS für die Administration.
 Damit ist das System relativ sicher.
 
 Natürlich kann die Verschlüsselung gebrochen werden.
@@ -77,8 +70,8 @@ Kennwort mit einem Brute-Force-Angriff zu erraten.
 
 ### 4. Frag nach Benutzername und einer Signatur anstelle eines Kennworts
 
-Das ist die Anmeldung via SSH mit Public-Key-Authentication beziehungsweise
-HTTPS mit Client-Zertifikat.
+Das entspricht der Anmeldung via SSH mit Public-Key-Authentication
+beziehungsweise HTTPS mit Client-Zertifikat.
 
 Beim Public-Key-Verfahren verwende ich einen privaten Schlüssel, um mich am
 Gerät anzumelden.
@@ -88,19 +81,19 @@ Ein Angreifer kann keine Passworte ausprobieren, da keine für die Anmeldung
 verwendet werden.
 Um Zugang zu dem Gerät zu bekommen, muss er in den Besitz des privaten
 Schlüssels gelangen.
-Damit ist die Hürde für ihn noch ein Stück höher.
+Damit ist die Hürde für ihn noch etwas höher.
 
 Allerdings muss ich nun aufpassen, dass mir der private Schlüssel nicht
 abhanden kommt.
 Und das sowohl in dem Sinne, dass jemand der den Schlüssel bekommt, Zugang
-zum OpenWrt-Gerät bekommt, als auch in dem Sinne, dass ich keinen Zugang
-ohne den Schlüssel habe.
+zum OpenWrt-Gerät erhält, als auch in dem Sinne,
+dass ich ohne den Schlüssel keinen Zugang habe.
 
-Neben diesen vier prinzipiellen Arten, wie der Zugang zum Gerät geregelt
+Neben diesen vier Arten, wie der Zugang zum Gerät geregelt
 ist, gibt es begleitende Maßnahmen, die die Sicherheit erhöhen können.
 
 Mittels Paketfilterregeln kann ich den Zugang zur
-Administrationsschnittstelle auf vertrauenswürdige IP-Adressen beschränken.
+Administrator-Schnittstelle auf vertrauenswürdige IP-Adressen beschränken.
 Das ist ein starker Schutz, wenn die freigegebenen IP-Adressen wirklich zu
 vertrauenswürdigen Geräten führen.
 
@@ -111,46 +104,45 @@ wirkungslos.
 Mit starken Kennworten erschwere ich Brute-Force-Attacken, die auf
 Wörterbüchern aufbauen.
 
-> Woran erkenne ich ein starkes Kennwort?
-> 
-> Indem ich selbst mit einem guten Password-Cracker versuche, das Passwort
-> zu knacken.
-> Geeignete Software ist im Internet frei verfügbar.
-> Dabei sollte ich den Passwort-Cracker aber nicht im Internet (Stichwort
-> Cloud) laufen lassen.
-> Besser ist es, einen einfachen Stringvergleich für den Kennwort-Test
-> einzustellen, denn ich will ja nur wissen, nach wievielen Versuchen das
-> Kennwort gefunden wurde.
-> Dann läuft der Cracker auch auf einfacher Hardware hinreichend schnell.
-> Und natürlich muss das auf einem Rechner laufen, der nicht öffentlich
-> zugänglich ist.
+A> Woran erkenne ich ein starkes Kennwort?
+A> 
+A> Indem ich selbst mit einem guten Password-Cracker versuche, das Passwort
+A> zu knacken.
+A> 
+A> Geeignete Software ist im Internet frei verfügbar.
+A> Dabei sollte ich den Passwort-Cracker aber nicht im Internet laufen lassen.
+A> 
+A> Besser ist es, einen einfachen Stringvergleich für den Kennwort-Test
+A> einzustellen, denn ich will ja nur wissen, nach wievielen Versuchen das
+A> Kennwort gefunden wurde.
+A> Damit läuft der Cracker auch auf einfacher Hardware hinreichend schnell.
+A> Und natürlich muss das auf einem Rechner laufen, der nicht öffentlich
+A> zugänglich ist.
 
-Als weitere Schutzmaßnahme kann ich die Administrationszugänge auf andere
-Ports verlegen anstelle von 22 für SSH und 443 für HTTPS.
-Damit schütze ich mich vor automatischen Programmen, die nach Services an
+Als weitere Schutzmaßnahme kann ich die Administrator-Zugänge auf andere
+Ports verlegen, anstelle von 22 für SSH und 443 für HTTPS.
+Damit schütze ich mich vor Skripts, die nach Services an
 diesen Ports suchen um anschließend Brute-Force-Attacken darauf zu beginnen.
 
 System härten
 -------------
 
-Damit sind wir durch mit der Absicherung des Zugangs, der nächste Schritt
-ist die Härtung des Systems selbst.
+Der nächste Schritt ist die Härtung des Systems selbst.
 Das ist vor allem dann wichtig, wenn das Gerät nicht nur als Router
 arbeitet, sondern zusätzlich weitere Dienste anbietet.
 
 Der erste Punkt ist, so wenig wie möglich Software auf dem Gerät zu
 installieren und zu starten.
-Nur, was wirklich nötig ist.
+Nur das, was wirklich nötig ist.
 
 Falls ich Dienste auf dem Gerät anbiete, die als Einfallstor für Angreifer
 dienen können, kann ich mit SELinux den Schaden im Fall eines erfolgreichen
 Angriffs in Grenzen halten.
 SELinux ist für OpenWrt verfügbar.
-Das Thema aber sehr umfangreich ist, gehe ich an dieser Stelle nicht weiter
-darauf ein.
+Da das Thema aber sehr umfangreich ist, gehe ich hier nicht weiter darauf ein.
 
 Ein weiterer Punkt, der bereits bei der Absicherung des Zugangs angedeutet
-war, ist das Verwenden von weiteren Benutzerkennungen.
+war, ist das Verwenden von anderen Benutzernamen.
 Prinzipiell brauche ich nur das Paket *sudo* um den Zugang zu privilegierten
 Diensten für die einzelnen Benutzer zu steuern.
 Das Paket *shadow-useradd* erleichtert das Einrichten von weiteren
@@ -159,9 +151,10 @@ ohne dass anlegen.
 Für die Public-Key-Authentication bei SSH kopiere ich für jeden Benutzer die
 zugelassenen Schlüssel in die Datei *$HOME/.ssh/authenticated_keys*.
 
-Verwendet das System für die angebotenen Dienste externe Datenträger, ist es
-unter Umständen sinnvoll, diese zu verschlüsseln.
-Das geht wiederum zu Lasten der Performance.
+Mit individuellen Zugängen für die einzelnen Administratoren kann ich
+auch einfacher nachvollziehen, wer wann am Gerät administriert hat.
+Außerdem ist es einfacher, kompromittierte Zugänge zu sperren, ohne
+gleich alle Administratoren auszusperren.
 
 Netzwerk härten
 ---------------
@@ -181,36 +174,35 @@ geschieht, um viele Größenordnungen höher.
 
 Ein kompromittierter Server ist auch in einem dedizierten Netz
 problematisch.
-Ein kompromittierter Router gibt jedoch das ganze Netz preis, das dahinter
+Ein kompromittierter Router gibt das ganze Netz preis, das dahinter
 angeschlossen ist.
 
-Eine Ausnahme könnte man für den Endpunkt eines VPN machen, das auf dem
+Eine Ausnahme kann man für den Endpunkt eines VPN machen, das auf dem
 OpenWrt-Gerät endet.
-Hier kann man zumindest den Zugriff auf wenige Adressen beschränken und für
+Hier kann ich den Zugriff auf die Adressen aus dem VPN beschränken und für
 alle anderen sperren.
 
-Eine Möglichkeit, einzelne Ports für einzelne Adressen freizugeben ist
-Port-Knocking.
-Dafür kann man bei OpenWrt das Paket *knockd* installieren.
+Um einzelne Ports für einzelne Adressen freizugeben, kann ich
+Port-Knocking verwenden.
+Dafür gibt es bei OpenWrt das Paket *knockd*.
 
-Eine weitere Möglichkeit, beliebige, aber vorher definierte Aktionen auf dem
+Eine weitere Möglichkeit, beliebige, vorher definierte Aktionen auf dem
 Gerät aus der Ferne zu starten ist Ostiary, für das es ebenfalls ein Paket
 bei OpenWrt gibt und Client-Programme für sehr viele Betriebssysteme.
-Damit ist es ebenfalls möglich, Ports für einzelne IP-Adressen
-freizuschalten.
+Damit lassen sich ebenfalls Ports für einzelne IP-Adressen freischalten.
 
 Mit fail2ban kann ich Brute-Force-Attacken, die von einzelnen Adressen
-ausgehen, sehr gut abbrechen.
+ausgehen, abbrechen.
 Ähnliches kann ich mit dem Programm logtrigger selbst implementieren.
 
 Bei der Absicherung des Zugangs schrieb ich bereits, dass ein
-verschlüsselter Konfigurationszugang sicherer ist, als ein
+verschlüsselter Administrator-Zugang sicherer ist, als ein
 unverschlüsselter.
-Für SSH anstelle von Telnet ist das recht einfach zu installieren, und
+Für SSH anstelle von Telnet ist das einfach zu installieren, und
 mittlerweile meist sowieso schon eingerichtet.
 
-Beim Webinterface muss ich noch selbst Hand anlegen, die notwendige Software
-installieren, konfigurieren und aktivieren.
+Beim Web-Interface muss ich oft noch selbst Hand anlegen, die notwendige
+Software installieren, konfigurieren und aktivieren.
 Das geht so:
 
     # opkg install px5g uhttpd-mod-tls
@@ -219,11 +211,11 @@ Das geht so:
     # /etc/init.d/uhttpd restart
     # opkg remove px5g
 
-Bei *px5g* handelt es sich um den Zertifikatsgenerator, der wird nur zum
-Erzeugen eines Zertifikats für den Webserver benötigt und kann daher am Ende
-wieder entfernt werden.
+Bei *px5g* handelt es sich um den Zertifikatsgenerator.
+Dieser wird nur zum Erzeugen eines Zertifikats für den Webserver benötigt
+und kann am Ende wieder entfernt werden.
 
-Alternativ kann ich das Webinterface auch durch einen SSH- oder
+Alternativ kann ich das Web-Interface auch durch einen SSH- oder
 OpenVPN-Tunnel verwenden.
 
 Allgemeine Hinweise
@@ -232,13 +224,13 @@ Allgemeine Hinweise
 Im Internet finden sich etliche Seiten mit Hinweisen, wie ein Linux-System
 gehärtet werden kann.
 Einige dieser Hinweise lassen sich für das Härten eines OpenWrt-Systems
-verwenden.
+adaptieren.
 
-**Minimire die Anzahl der Software-Pakete,** ist ein Tipp, der immer sinnvoll
-ist, das dadurch die Angriffsfläche reduziert wird.
+**Minimiere die Anzahl der Software-Pakete,** ist immer sinnvoll,
+da dadurch die Angriffsfläche reduziert wird.
 Nun ist auf vielen OpenWrt-Systemen sowieso wenig Platz, so dass dieser
-Punkt ohnehin schon berücksichtigt ist.
-Bei Standard-Images sollte man aber nur das nachinstallieren, was wirklich
+Punkt ohnehin schon in den meisten Fällen berücksichtigt ist.
+Bei Standard-Images sollte man nur das nachinstallieren, was wirklich
 benötigt ist.
 Und bei selbst erstellten Images erst gar nichts überflüssiges hinein
 nehmen.
@@ -247,25 +239,26 @@ nehmen.
 Damit vergewissere ich mich, das ich keinen Dienst vergessen habe,
 abzuschalten beziehungsweise zu sperren.
 Von außen kann ich das mit dem Programm nmap auf einem benachbarten Rechner
-machen oder einen der vielen Dienstleister im Internet, die solche Scans
-anbieten, bemühen.
+machen.
+Bei einem Zugangs-Router kann ich einen der vielen Dienstleister im Internet,
+die solche Scans anbieten, bemühen.
 Von innen, also auf dem Gerät selbst zeigt mir ``netstat -aunt`` alle
 offenen TCP- und UDP-Ports an.
 
 **Halte das System aktuell.** ist immer wichtig, da ständig Programmfehler
 gefunden und beseitigt werden.
-Aber nicht, wenn das System nicht aktualisiert wird.
+Aber nur, wenn ich mein System auch aktualisiere.
 
-**Schaue regelmäßig in die Logs,** ist ein wichtiger Rat.
-Nicht nur, weil ich dann Einbruchsversuche sehen kann und nötigenfalls
-Gegenmaßnahmen ergreifen, sondern auch, weil sich System- und
-Hardware-Fehler hin und wieder dort bemerkbar machen.
-Sehr komfortabel geht das, wenn ich einen zentralen Logserver mit
-geeigneter Software zur Auswertung der Logs habe und diese vom OpenWrt-Gerät
-dorthin sende.
+**Schaue regelmäßig in die Logs,** ist ein sehr guter Rat.
+Nicht nur, weil ich dann Einbruchsversuche sehen und nötigenfalls
+Gegenmaßnahmen ergreifen kann, sondern auch, weil sich System- und
+Hardware-Fehler oft dort bemerkbar machen.
+Sehr komfortabel kann ich in die Logs schauen, wenn ich einen zentralen
+Log-Server mit Software zur Auswertung der Protokolle habe und diese vom
+OpenWrt-Gerät dorthin sende.
 
 **Beobachte das System mit IDS und Monitoring-Systemen.**
-Währen Logs meist erst nach dem Vorfall konsultiert werden, melden sich
+Während Logs meist erst nach dem Vorfall konsultiert werden, melden sich
 diese Systeme sofort, wenn sie Anomalien entdecken.
 
 **Ein Netzwerk-Service pro System.**
@@ -279,9 +272,7 @@ Systems nur auf einen Dienst konzentrieren, was die Sache sehr erleichtert.
 Das ist bei Embedded Systems eher nicht die Norm, da sich im Normalfall
 keine Benutzer anmelden.
 OpenWrt bietet jedoch die Möglichkeit und wenn sowieso schon verschiedene
-Zugänge für Revision und Operating existieren, sind die Hürden nur gering,
+Zugänge für Revision und Operating existieren, sind die Hürden gering,
 den root-Zugang ganz zu deaktivieren.
-
-[tilos]: https://technet.microsoft.com/en-us/library/hh278941.aspx/
 
 [wiki]: http://wiki.openwrt.org/doc/howto/secure.access
