@@ -1,6 +1,5 @@
 
-Härten des Systems
-==================
+# Härten des Systems
 
 Ein wichtiger Aspekt beim Betrieb eines jeden Rechners ist das Härten des
 Systems, damit ich hinreichend sicher sein kann, dass ich meine Geräte
@@ -11,8 +10,7 @@ Für das konkrete Absichern eines OpenWrt-Systems finde ich Informationen im
 Außerdem kann ich auf allgemeine Tipps zum Härten von Linux-Systemen
 zurückgreifen, die ich entsprechend der Situation an meinem Gerät adaptiere.
 
-Den Zugang sichern
-------------------
+## Den Zugang sichern
 
 Die allererste Maßnahme ist die Absicherung des Zugangs zum Gerät.
 Dabei geht es um die Art und Weise der Anmeldung selbst.
@@ -124,8 +122,7 @@ Ports verlegen, anstelle von 22 für SSH und 443 für HTTPS.
 Damit schütze ich mich vor Skripts, die nach Services an
 diesen Ports suchen um anschließend Brute-Force-Attacken darauf zu beginnen.
 
-System härten
--------------
+## System härten
 
 Der nächste Schritt ist die Härtung des Systems selbst.
 Das ist vor allem dann wichtig, wenn das Gerät nicht nur als Router
@@ -156,8 +153,7 @@ auch einfacher nachvollziehen, wer wann am Gerät administriert hat.
 Außerdem ist es einfacher, kompromittierte Zugänge zu sperren, ohne
 gleich alle Administratoren auszusperren.
 
-Netzwerk härten
----------------
+## Netzwerk härten
 
 Ein wichtiger Punkt ist, keinen Port am externen Interface des Routers (WAN)
 zu öffnen.
@@ -218,8 +214,7 @@ und kann am Ende wieder entfernt werden.
 Alternativ kann ich das Web-Interface auch durch einen SSH- oder
 OpenVPN-Tunnel verwenden.
 
-Allgemeine Hinweise
--------------------
+## Allgemeine Hinweise
 
 Im Internet finden sich etliche Seiten mit Hinweisen, wie ein Linux-System
 gehärtet werden kann.
