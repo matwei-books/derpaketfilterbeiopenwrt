@@ -24,6 +24,7 @@ part3.mdwn
 part4.mdwn
 4-anforderungen.mdwn
 4-auswahl-hw-sw.mdwn
+4-haerten.mdwn
 4-testen.mdwn
 backmatter.txt
 anhang.mdwn
