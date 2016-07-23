@@ -74,7 +74,7 @@ Beim Public-Key-Verfahren verwende ich einen privaten Schlüssel, um mich am
 Gerät anzumelden.
 Den zugehörigen öffentlichen Schlüssel habe ich auf dem Gerät hinterlegt.
 
-Ein Angreifer kann keine Passworte ausprobieren, da keine für die Anmeldung
+Ein Angreifer kann keine Passworte erraten, da keine für die Anmeldung
 verwendet werden.
 Um Zugang zu dem Gerät zu bekommen, muss er in den Besitz des privaten
 Schlüssels gelangen.
