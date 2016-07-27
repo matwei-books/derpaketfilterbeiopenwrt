@@ -24,25 +24,25 @@ damit schlechter vorhersehbar für die Endgeräte machen.
 
 Eine Art das Netz "intelligenter" zu machen sind Middle-Boxes, die den
 Datenverkehr inspizieren, manipulieren und aussondern.
-Dazu zählt die Netzwerk Adressumsetzung, die einen schwerwiegenden
-Eingriff in die Datagramme darstellt.
+Zu den Manipulationen zählt unter anderem die Netzwerk-Adressumsetzung,
+die einen schwerwiegenden Eingriff in die Datagramme darstellt.
 
-Sende ich in einem Netz ohne Middle-Boxes ein Datagramm von Rechner A nach
+Sende ich in einem Netz ohne Middle-Box ein Datagramm von Rechner A nach
 Rechner B, so kann ich damit rechnen, dass dieses Datagramm genauso beim Ziel
 ankommt, wie ich es abschicke.
 Lediglich die TTL wird vermindert und bei IPv4 die Prüfsumme mit der
 geänderten TTL neu berechnet.
 
-Der Empfänger des Datagramms kann aus diesem selbst den Absender erkennen
-und somit seine Antwort direkt an diesen adressieren.
-Damit ist bei einer Zwei-Wege-Kommunikation immer klar, wer mit wem
+Der Empfänger des Datagramms kann daraus selbst den Absender erkennen
+und seine Antwort direkt an diesen adressieren.
+Bei einer Zwei-Wege-Kommunikation ist damit immer klar, wer mit wem
 kommuniziert.
 
 Sobald NAT dazu kommt, weiss manchmal die eine Seite, manchmal die
 andere und manchmal beide nicht, mit wem sie kommunizieren.
 
 Das ist bei einer einfachen TCP-Verbindung, wie zum Beispiel beim Übertragen
-einer E-Mail via SMTP, unkritisch.
+einer Datei via HTTP, unkritisch.
 
 Es gibt jedoch Protokolle, die die Adressinformationen auswerten und
 verwenden.
@@ -58,17 +58,17 @@ In diesem Fall musste nachträglich eine Variante für IPsec via NAT
 geschaffen werden.
 
 ICMP-Fehlermeldungen gelangen bei manchen NAT-Boxen nicht zum
-Absender der ursprünglichen Nachricht.
+Absender der auslösenden Nachricht.
 Damit erschwert NAT dem Netzwerk-Administrator die Arbeit, weil er die
-umgesetzten Adressen bei seinen Analysen in Betracht ziehen muss.
+umgesetzten Adressen bei seinen Analysen kennen und in Betracht ziehen muss.
 
 Dem Nutzer des Endknotens erschwert es die Arbeit im Fehlerfall dadurch,
 dass er nicht weiß, an wen er sich wenden soll, beziehungsweise dadurch, dass
 er dem Mitarbeiter beim Support Adressen nennt, mit denen dieser nichts
 anfangen kann.
 
-NAT wird nach verschiedene Kriterien unterschieden.
-Ändere ich nur die IP-Adressen oder die Ports oder beides?
+NAT wird nach verschiedenen Kriterien unterschieden.
+Ändern sich nur die IP-Adressen oder die Ports oder beides?
 Betrachte ich nur die Richtung, dann kann ich zwischen Source-NAT (SNAT)
 und Destination-NAT (DNAT) unterscheiden.
 Eine weitere Unterscheidung berücksichtigt, ob Adressen eineindeutig
@@ -78,7 +78,7 @@ Beim Masquerading macht es einen Unterschied, ob der gleiche Port
 bei verschiedenen Verbindungen desselben Netzknotens auf den selben oder
 einen anderen Port umgesetzt wird.
 
-Insbesondere Masquerading verhindert die direkte Adressierbarkeit von
+Insbesondere verhindert Masquerading die direkte Adressierbarkeit von
 Endgeräten.
 Während das in vielen Fällen gewünscht ist, weil zum Beispiel interne
 Rechner nicht direkt von extern angegriffen werden können, erschwert es
@@ -97,31 +97,21 @@ kooperierende NAT-Boxen.
 Zwar könnten die beiden Endgeräte gleich über den
 Rendezvous-Server kommunizieren, anstelle sich mit den Eigenarten
 der beteiligten NAT-Boxen herumzuschlagen.
-Für die direkte Verbindung spricht jedoch zum einen die Latenz, da diese
+Für die direkte Verbindung spricht jedoch zum einen die Latenz, die
 in den meisten Fällen kleiner ist als über die beiden
 Verbindungen zum Rendezvous-Server, der alle Datagramme umsetzen müsste.
 Außerdem ist es eine Frage der Vertraulichkeit, ob ich alle
-meine Daten immer über den Server schicken will, oder lieber direkt.
+meine Daten über den Server schicken will, oder lieber direkt.
 
-Ein weiteres Problem beim Hole-Punching stellt das sogenannte Hair-Pinning
-dar, das auftritt, wenn zwei Rechner hinter derselben NAT-Box eine direkte
+Ein weiteres Problem beim Hole-Punching stellt das Hair-Pinning dar,
+das auftritt, wenn zwei Rechner hinter derselben NAT-Box eine direkte
 Verbindung aufnehmen wollen.
-
 In diesem Fall teilt der Rendezvous-Server beiden Clients die gleiche
 NAT-Adresse mit und diese versuchen über die NAT-Box eine Verbindung in das
 private Netz zurück aufzubauen.
 Damit das funktioniert, muss es die NAT-Box unterstützen.
-
-Der Rendezvous-Server kann den Clients gegenseitig die lokalen Adressen
-mitteilen, die sie ihm bei der Anmeldung angaben.
-Auf diese Art können die Clients zunächst eine direkte Verbindung mit ihren
-lokalen Adressen versuchen, bevor sie mittels Hole-Punching über die NAT-Box
-gehen.
-So ist man in diesem Fall nicht auf die Unterstützung der NAT-Box angewiesen.
-
 Sollten mehrere NAT-Boxen kaskadiert sein, muss zumindest die dem
 Rendezvous-Server zunächst gelegene NAT-Box Hair-Pinning unterstützen.
-
 RFC 2663, RFC 3022 und RFC 3303 gehen auf diese Aspekte ein.
 
 Aus dem vorgenannten ist sicher zu erkennen, das ich NAT eher für ein Übel
@@ -134,10 +124,8 @@ Knappheit der Adressen bei IPv4.
 Zwar gibt es einige, die den Standpunkt vertreten, dass NAT einen gewissen
 Schutz bietet, weil das Netz dahinter nicht von außen adressiert und somit
 das Netz auch ohne Firewall geschützt wäre.
-
-Dem halte ich entgegen, dass das Sperren von Zugriffen aus
-externen Netzen eine derart triviale Firewalleinstellung ist, dass dabei
-kaum etwas falsch gemacht werden kann und weiterhin NAT nicht vor Angriffen
-aus dem inneren Netz schützt, die zum Beispiel über Browserfehler durch
-bösartige Webseiten ausgeführt werden können.
+Doch kann NAT keine durchdachte und mit Hilfe einer Firewall durchgesetzte
+Policy ersetzen.
+Ist die Firewall einmal im Betrieb ist der zusätzliche Nutzen durch NAT
+nur noch marginal.
 
