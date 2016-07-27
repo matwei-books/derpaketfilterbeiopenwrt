@@ -1,6 +1,5 @@
 
-Network Address Translation
-===========================
+# Network Address Translation
 
 Der ursprüngliche Entwurf der Internet-Protokolle sah kein NAT vor.
 Er ging von "intelligenten" Endgeräten und einem "dummen" Netz aus, das
