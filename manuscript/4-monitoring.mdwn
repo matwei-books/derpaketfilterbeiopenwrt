@@ -1,9 +1,9 @@
 
-Monitoring
-==========
+# Monitoring
 
-Bei der Überwachung eines Paketfilters bin ich an zwei Aussagen
-interessiert:
+Bei der Überwachung eines Paketfilters interessieren mich neben den
+Vitaldaten, wie CPU- und Speicher-Auslastung sowie Durchsatz vor allem
+zwei Dinge:
 
 1.  Kein unerwünschter Datenverkehr soll den Paketfilter passieren.
 2.  Kein erwünschter Datenverkehr soll durch den Paketfilter blockiert
@@ -12,16 +12,18 @@ interessiert:
 Was erwünschter und unerwünschter Datenverkehr ist, sollte inzwischen
 hinreichend klar sein.
 
-Blockieren von unerwünschtem Datenverkehr
------------------------------------------
+## Blockieren von unerwünschtem Datenverkehr
+
+Um zu kontrollieren, dass kein unerwünschter Datenverkehr den
+Paketfilter passiert, bietet sich ein Intrusion Detection System (IDS)
+an.
 
 Habe ich die Funktion des Paketfilters vor der Inbetriebnahme in einer
 Testumgebung geprüft, dann verfüge ich bereits über die Informationen, mit
-denen ich ein IDS konfigurieren muss, damit es mir anzeigt, falls
+denen ich das IDS konfigurieren muss, damit es mir anzeigt, ob
 unerwünschter Datenverkehr durchkommt.
 
-Passieren von erwünschtem Datenverkehr
---------------------------------------
+## Passieren von erwünschtem Datenverkehr
 
 Schwieriger ist das Monitoring für den erwünschten Datenverkehr.
 Das Hauptproblem ist, dass ich nicht vorhersagen kann, wann erwünschter
@@ -35,7 +37,7 @@ Typischerweise kann ich nur bei abgehendem Verkehr beeinflussen, wann dieser
 auftritt.
 Bei ankommendem Verkehr kann ich das nicht vorhersagen.
 
-Hier habe ich zwei Möglichkeiten:
+Hier habe ich zwei Möglichkeiten aktiv einzugreifen:
 
 *   Ich kann an repräsentativen Stellen außerhalb meines Netzes Sonden
     platzieren, mit denen ich regulären Datenverkehr gezielt hervorrufen
@@ -44,15 +46,39 @@ Hier habe ich zwei Möglichkeiten:
     können.
 
 *   Alternativ könnte ich einen Paketgenerator unmittelbar außerhalb des
-    Paketfilters platzieren, der den gewünschten Datenverkehr simulieret,
+    Paketfilters platzieren, der den gewünschten Datenverkehr simuliert,
     wie im Testnetz.
     Das Hauptproblem bei diesem Ansatz ist, dass die Antwortdaten bei
     bidirektionalem Datenverkehr zum einen den Paketgenerator erreichen
-    sollten und zum anderen nicht darüber hinausgehen sollten, um andere
+    und zum anderen nicht darüber hinausgehen sollten, um andere
     Netze und Rechner nicht zu stören.
     Daher ist dieser Ansatz nur in Ausnahmefällen geeignet.
 
-Beim Monitoring-System muss ich den letzten Zeitpunkt des erwünschten
-Datenverkehrs registrieren und einen Fehlerfall generieren, wenn der letzte
-Zeitpunkt zu weit in der Vergangenheit liegt.
+Will ich rein passiv arbeiten kann ich beim Monitoring-System den letzten
+Zeitpunkt des erwünschten Datenverkehrs registrieren und einen Fehlerfall
+melden, wenn der letzte Zeitpunkt zu weit in der Vergangenheit liegt.
+
+## Vitaldaten
+
+Neben diesen beiden Hauptfunktionen des Paketfilters will ich in den
+meisten Fällen noch einige Vitaldaten beobachten, wie zum Beispiel:
+
+*   CPU-Last
+*   Speicherauslastung
+*   Temperatur
+*   Menge des Datenverkehrs
+
+Während ich bei den Hauptfunktionen nur an der Aussage *geht* oder
+*geht nicht* interessiert bin, brauche ich von den Vitaldaten
+Zeitreihen.
+Damit kann ich zum einen über Korrelationen auf Zusammenhänge schließen
+und zum anderen Argumente sammeln, wenn sich abzeichnet, dass das
+aktuell eingesetzte Gerät nicht mehr den Anforderungen gewachsen ist.
+
+Diese Daten frage ich über die Kommandozeile oder einen installierten
+SNMP-Dämon ab un speise sie in ein geeignetes Monitoring System ein.
+
+Die Zeitreihen, die ich in der Webschnittstelle von OpenWrt sehen kann,
+helfen mir bei Problemen eher selten weiter, weil ich dann oft keine
+Daten habe, mit denen ich die aktuellen Werte vergleichen kann.
 
