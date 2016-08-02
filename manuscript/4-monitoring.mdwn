@@ -55,8 +55,9 @@ Hier habe ich zwei Möglichkeiten aktiv einzugreifen:
     Daher ist dieser Ansatz nur in Ausnahmefällen geeignet.
 
 Will ich rein passiv arbeiten kann ich beim Monitoring-System den letzten
-Zeitpunkt des erwünschten Datenverkehrs registrieren und einen Fehlerfall
-melden, wenn der letzte Zeitpunkt zu weit in der Vergangenheit liegt.
+Zeitpunkt des erwünschten Datenverkehrs registrieren und auf ein
+mögliches Problem hinweisen, wenn der letzte Zeitpunkt zu weit in der
+Vergangenheit liegt.
 
 ## Vitaldaten
 
