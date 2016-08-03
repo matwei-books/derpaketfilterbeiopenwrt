@@ -142,8 +142,9 @@ sehe ich kein Problem darin, diese Datagramme zu sperren.
 
 ## IGMP
 
-Das Internet Group Management Protocol ermöglicht IPv4-Multicast.
-Die Multicast-Gruppen werden dabei in den Routern verwaltet, an denen die
+Das Internet Group Management Protocol ermöglicht die Verwaltung von
+IPv4-Multicast-Gruppen.
+Die Gruppen werden dabei in den Routern verwaltet, an denen die
 Empfänger angeschlossen sind.
 Es gibt drei Versionen von IGMP:
 
@@ -162,6 +163,24 @@ Es gibt drei Versionen von IGMP:
 Multicast-Gruppen.
 Als Firewall-Administrator entscheide ich lediglich, ob ich Multicast über
 Router überhaupt zulasse oder nicht.
+
+Einen Sonderfall stellt Multicast-DNS (mDNS) dar.
+Dieses ist beschränkt auf das lokale Netzsegment und wird unter anderem
+von *Bonjour* verwendet, der automatischen Netzwerk-Konfiguration von
+Apple-Rechnern.
+Normalerweise habe ich bei einem Paketfilter nichts mit diesem Protokoll
+zu tun, da es nicht geroutet wird.
+Betreibe ich meinen Paketfilter jedoch als Bridge, dann muss ich mich
+entscheiden, ob ich *Bonjour* darüber unterstützen will oder nicht.
+
+Multicast-DNS verwendet die Adresse 224.0.0.51 bei IPv4 sowie FF02::FB bei
+IPv6 und den UDP-Port 5353.
+Im Gegensatz zum normalen DNS, bei dem die Antworten von einer
+überschaubaren Anzahl von DNS-Servern kommen können, antwortet bei mDNS
+üblicherweise der Rechner, der den entsprechenden Record für sich
+beansprucht.
+Das muss ich berücksichtigen, wenn ich mDNS regulieren will.
+
 Will ich einzelne Gruppen oder Quellen sperren, muss ich die
 IGMP-Nachrichten analysieren und selektiv sperren.
 

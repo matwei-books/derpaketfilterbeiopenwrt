@@ -50,6 +50,9 @@ muss ich mich auch mit diesen Protokollen auseinandersetzen.
 
 ARP, das Address Resolution Protocol finde ich in RFC 826 beschrieben.
 RFC 5227 aktualisiert es beim Thema Erkennung von Adresskonflikten.
+Das Protokoll spielt eine wesentliche Rolle bei *Bonjour*, der
+automatischen Netzwerk-Konfiguration von Apple-Rechnern sowie bei
+*APIPA* (Automatic Private IP Adressing) von Windows-Rechnern.
 
 RFC 3927 beschreibt die automatische Konfiguration von link-lokalen
 IPv4-Adressen.

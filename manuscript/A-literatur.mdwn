@@ -9,6 +9,17 @@ Weidner, Mathias; Linux kopflos mit PC Engines ALIX;
 Lulu Press, Raleigh, 2012;
 ISBN 978-1-4717-2849-5
 
+## Artikel
+
+### ctRudl2014 {#lit-ct-rudl2014}
+
+Tomas Rudl; Finden ohne Suche - Bonjour konfiguriert und findet Geräte
+im Netz; c't Magazin für Computertechnik 2014 Heft 15, S. 162-165;
+ISSN 0724-8679
+
+Dieser Artikel führt kurz und verständlich in das Protokoll *Bonjour*
+für die automatische Netzwerk-Konfiguration ein.
+
 ## Online-Qellen
 
 ### Comparison of firewalls (Wikipedia)
