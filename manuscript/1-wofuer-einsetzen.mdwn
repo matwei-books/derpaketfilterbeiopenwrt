@@ -20,8 +20,8 @@ Bei diesen Einsatzfällen will ich den Paketfilter auf jeden Fall nutzen.
 Als Internet-Zugangsrouter nutze ich meist einfache, stromsparende Hardware,
 wie zum Beispiel einen billigen SOHO-Router, auf dem ich OpenWrt installiert
 habe.
-Die Liste der unterstützten Geräte finde ich unter
-<http://wiki.openwrt.org/toh/start>.
+Die Liste der unterstützten Geräte finde ich in der [Table of Hardware][toh]
+im OpenWrt-Wiki.
 
 Hier muss ich bei IPv4 meistens Masquerading zum Uplink einstellen, um meine
 internen Adressen zu verbergen.
@@ -85,3 +85,4 @@ Bei all diesen Einsatzfällen nutze ich die Möglichkeiten der eingesetzten
 Hardware.
 Der Paketfilter hilft mir den Datenverkehr in geordnete Bahnen zu lenken.
 
+[toh]: https://wiki.openwrt.org/toh/start
