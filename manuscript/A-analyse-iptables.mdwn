@@ -1,27 +1,20 @@
 
-Analyse von Iptables-Firewalls
-==============================
+# Analyse von Iptables-Firewalls
 
-Manchmal muss ich eine gegebene Iptables-Firewall analysieren.
+Manchmal muss ich eine vorgegebene Iptables-Firewall analysieren.
 Sei es dass ich eine mir bisher unbekannte Firewall übernehmen, warten
 oder erweitern soll, oder dass ich einen Audit mache, ob die Firewall
 die Vorgaben einer Sicherheitsrichtlinie erfüllt.
 
-Dann benötige ich als Erstes die Kenntnis der Wege eines Datenpakets
-durch den Netzwerk-Code des Kernels und muss wissen, welche Bedeutung
-die Einsprungspunkte für die verschiedenen Ketten in den
-Firewall-Tabellen haben.
-
-Weiterhin benötige ich eine Aufstellung aller Regeln und Ketten, wie ich
+Dann benötige ich eine Aufstellung aller Regeln und Ketten, wie ich
 sie mit `iptables-save` oder `ip6tables-save` bekomme.
 Um die Regeln in den richtigen Kontext setzen zu können brauche ich
-Informationen über die angeschlossenen Netze und die
-Kernel-Routen.
+außerdem Informationen über die angeschlossenen Netze und die Routen.
 
-Falls vorhanden, lege ich mir die Sicherheitsrichtlinie, die für diese
-Firewall gilt, bereit.
+Falls vorhanden, lege ich mir die Sicherheitsrichtlinien, die für diese
+Firewall gelten, bereit.
 
-Mein weiteres Vorgehen hängt von der Beantwortung zweier Fragen ab:
+Nun hängt mein weiteres Vorgehen von den Antworten auf zwei Fragen ab:
 
 *   Kenne ich die Struktur der Regelketten dieser Firewall?
 
@@ -31,18 +24,15 @@ Die Frage nach der Struktur bestimmt mein Vorgehen bei der Analyse
 der Regeln in den einzelnen Ketten.
 
 Gibt es nur die vordefinierten Ketten oder kenne ich die Struktur,
-wie zum Beispiel für OpenWrt im Kapitel "Modell der Firewall-Regeln bei
-OpenWrt" beschrieben, kann ich mich sofort an die Analyse der Regeln in
-den Ketten machen.
+wie zum Beispiel für OpenWrt in diesem Buch beschrieben,
+kann ich mich sofort an die Analyse der Regeln in den Ketten machen.
 
 Gibt es benutzerdefinierte Ketten und ist mir deren Zusammenspiel nicht
-klar, beginne ich damit, die Zusammenhänge zwischen den Regelketten zu
-analysieren.
+klar, beginne ich damit, die Struktur der Regelketten zu analysieren.
 
-Die Sicherheitsrichtlinie kann mir bei der
-Interpretation der einzelnen Regeln helfen.
+Eine Sicherheitsrichtlinie kann mir bei der Interpretation der Regeln helfen.
 Ist mir die Richtlinie bekannt, kann ich jede Regel danach
-bewerten, ob sie zu ihrer Durchsetzung beiträgt und notieren,
+bewerten, ob sie zu deren Durchsetzung beiträgt und notieren,
 welchen Teil der Richtlinie sie unterstützt.
 
 Kenne ich die Sicherheitsrichtlinie nicht, muss ich mir bei der Analyse
@@ -55,13 +45,12 @@ Ich betrachte die Tabellen *raw*, *mangle*, *nat* und *filter*
 jeweils für sich und berücksichtige dabei die Erkenntnisse
 aus den anderen Tabellen.
 
-Struktur von Regelketten
-------------------------
+## Struktur der Regelketten
 
-Benutzerdefinierte Regelketten können sich als zweischneidiges Schwert
-erweisen: sie können Paketfilterregeln vereinfachen und übersichtlicher
-machen und andererseits die Analyse des Paketfilters erschweren, wenn
-mir der Zusammenhang zwischen ihnen nicht klar ist.
+Benutzerdefinierte Regelketten sind ein zweischneidiges Schwert:
+sie können Paketfilterregeln vereinfachen und übersichtlicher machen oder
+die Analyse des Paketfilters erschweren, wenn
+mir der Zusammenhang zwischen den Ketten nicht klar ist.
 
 Für OpenWrt habe ich den Zusammenhang zwischen den Regelketten im Kapitel
 "Modell der Firewall-Regeln bei OpenWrt" erläutert.
@@ -70,44 +59,42 @@ von OpenWrt können ganz andere Ketten im Spiel sein.
 Dann muss ich deren Struktur erst analysieren.
 
 Damit eine benutzerdefinierte Regelkette überhaupt berücksichtigt wird,
-muss es einen Sprung zu ihr aus einer anderen Kette geben, die ihrerseits
-berücksichtigt wird.
-Die vordefinierten Ketten werden auf jeden Fall berücksichtigt und zwar
-an den zugehörigen Einsprungspunkten im Kernel.
+muss es einen Sprung aus einer anderen Kette, die selbst berücksichtigt
+wird, zu ihr geben.
+Die vordefinierten Ketten werden auf jeden Fall berücksichtigt,
+sie sind die Einsprungspunkte im Kernel.
 
-Graphen mit den Regelketten als Knoten und den Sprung-Regeln als Kanten
-dazwischen sind für mich am anschaulichsten.
-Diese Graphen kann ich aus der Ausgabe von `iptables-save` und
+Diese Sprünge sind für mich als Graphen - mit den Regelketten als Knoten
+und den Sprung-Regeln als Kanten dazwischen - am anschaulichsten.
+Solche Graphen kann ich aus der Ausgabe von `iptables-save` und
  `ip6tables-save` gewinnen.
 Das Perl-Modul *App::Iptables2Dot* enthält ein Programm, welches mir die
 Ausgabe von `iptables-save` für das Programm `dot` von Graphviz aufbereitet.
 Mit `dot` kann ich mir den Graph als Bild in verschiedenen Formaten
 ausgeben lassen.
 
-Damit bekomme ich einen Überblick über die Struktur der Regelketten.
+Damit bekomme ich eine graphische Übersicht über die Struktur der Regelketten.
 Mit dieser graphischen Übersicht kann ich auf einen Blick erkennen, von
 welcher Kette es zu welcher anderen geht und ob es Regelketten gibt, die
 überhaupt nicht erreicht werden.
 
-Nun kann ich mir die Sprung-Regeln und die diesen vorangehenden
-Regeln anschauen und darüber auf den Zweck der angesprungenen Regelkette
-schließen.
+Nun kann ich mir die Regeln anschauen und darüber auf den Zweck der
+einzelnen Regelketten schließen.
 
 Nachdem ich mich auf diese Art mit der Struktur der Regelketten vertraut
 gemacht habe, kann ich mit der detaillierten Analyse der einzelnen Ketten
 beginnen.
 
-Analyse der Regeln in den Ketten
---------------------------------
+## Analyse der Regeln in den Ketten
 
-Im Allgemeinen beginne ich bei der Analyse mit den vordefinierten Regelketten.
-Ich betrachte nacheinander alle Regeln einer Kette und vergleiche meine
+Ich beginne mit den vordefinierten Regelketten.
+Nacheinander betrachte ich alle Regeln einer Kette und vergleiche meine
 Erkenntnisse mit der Sicherheitsrichtlinie.
 Steht mir keine Richtlinie zur Verfügung, formuliere ich eine
 Ad-Hoc-Richtlinie an Hand der Regeln.
 
 Stelle ich dabei fest, dass eine Regel nur im Verbund mit anderen Regeln
-arbeiten kann, mach ich mir eine Notiz und schaue nach, ob die
+arbeiten kann, mach ich mir eine Notiz und schaue später nach, ob die
 anderen Regeln vorhanden sind.
 
 Bin ich fertig mit allen Regeln einer Kette, mache ich mit der ersten
@@ -118,16 +105,11 @@ Sicherheitsrichtlinie.
 
 Habe ich Regeln gefunden, die von der Sicherheitsrichtlinie nicht gedeckt
 sind, überlege ich, ob diese Regeln entfernt werden können.
-Dabei ist es hilfreich, die Meinung anderer dazu zu hören.
-Gibt es ein Change Management, finde ich vielleicht in den zugehörigen
+Dabei ist es hilfreich, die Meinung anderer Betroffener zu hören.
+Gibt es ein Change Management, finde ich vielleicht in den
 Aufzeichnungen Informationen zu diesen Regeln.
 
 Finde ich hingegen Teile der Sicherheitsrichtlinie, die nicht durch
 Paketfilterregeln abgedeckt sind, überlege ich, mit welchen Regeln ich die
 Firewall ergänzen kann.
-
-Hatte ich vorher keine Sicherheitsrichtlinie, dann betrachte ich am Ende
-die entstandene Ad-Hoc-Richtlinie und überlege, welchem Zweck diese
-dienen könnte und ob der vermutete Zweck durch die Ad-Hoc-Richtlinie
-angemessen umgesetzt wird.
 
