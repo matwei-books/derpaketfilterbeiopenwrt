@@ -1,8 +1,8 @@
 
 # Analyse von Iptables-Firewalls
 
-Manchmal muss ich eine vorgegebene Iptables-Firewall analysieren.
-Sei es dass ich eine mir bisher unbekannte Firewall übernehmen, warten
+Manchmal muss ich eine mir bisher unbekannte Iptables-Firewall analysieren.
+Sei es dass ich eine bestehende fremde Firewall übernehmen, warten
 oder erweitern soll, oder dass ich einen Audit mache, ob die Firewall
 die Vorgaben einer Sicherheitsrichtlinie erfüllt.
 
@@ -14,7 +14,7 @@ außerdem Informationen über die angeschlossenen Netze und die Routen.
 Falls vorhanden, lege ich mir die Sicherheitsrichtlinien, die für diese
 Firewall gelten, bereit.
 
-Nun hängt mein weiteres Vorgehen von den Antworten auf zwei Fragen ab:
+Dann hängt mein weiteres Vorgehen von den Antworten auf zwei Fragen ab:
 
 *   Kenne ich die Struktur der Regelketten dieser Firewall?
 
@@ -94,7 +94,7 @@ Steht mir keine Richtlinie zur Verfügung, formuliere ich eine
 Ad-Hoc-Richtlinie an Hand der Regeln.
 
 Stelle ich dabei fest, dass eine Regel nur im Verbund mit anderen Regeln
-arbeiten kann, mach ich mir eine Notiz und schaue später nach, ob die
+arbeiten kann, mache ich mir eine Notiz und schaue später nach, ob die
 anderen Regeln vorhanden sind.
 
 Bin ich fertig mit allen Regeln einer Kette, mache ich mit der ersten
