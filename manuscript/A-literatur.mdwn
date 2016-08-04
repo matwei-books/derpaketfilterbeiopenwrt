@@ -22,6 +22,14 @@ für die automatische Netzwerk-Konfiguration ein.
 
 ## Online-Qellen
 
+### Firewall configuration (OpenWrt Wiki)
+
+<https://wiki.openwrt.org/doc/uci/firewall>
+
+### Table of Hardware (OpenWrt-Wiki)
+
+<https://wiki.openwrt.org/toh/start>
+
 ### Comparison of firewalls (Wikipedia)
 
 <http://en.wikipedia.org/wiki/Comparison_of_firewalls>
