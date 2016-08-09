@@ -1,70 +1,70 @@
 
-Kann ich Paketfilter umgehen?
-=============================
+# Kann ich Paketfilter umgehen?
 
-Für den Entwurf von Paketfilterregeln,, das Testen und das Monitoring ist es
-vorteilhaft, wenn ich weiß, auf welche Art und Weise ein Paketfilter
-umgangen werden kann.
-Diesem Thema widmet sich dieses Kapitel.
+Weiß ich, auf welche Art und Weise ein Paketfilter umgangen werden kann,
+hilft mir dass beim Entwurf von Paketfilterregeln, beim Testen und
+Monitoring.
+Darum schaue ich in diesem Kapitel, wie ich Informationen an einem
+Paketfilter vorbei übertragen kann.
 
 Nicht alle der hier vorgestellten Möglichkeiten sind von vornherein illegitim
-und schädlich.
-Jede einzelne muss ich im konkreten Kontext betrachten, in dem der
-Paketfilter eingesetzt wird.
+oder schädlich.
+Jede einzelne muss ich im konkreten Kontext betrachten, in dem ich den
+Paketfilter einsetze.
 
-Zustandslose Firewallregeln
----------------------------
+## Stateless Firewallregeln
 
-Eine Möglichkeit, eine Firewall zu umgehen beziehungsweise zu überwinden,
-findet sich, wenn diese stateless betrieben wird, also die Conntrack-Module
+Eine Möglichkeit, die Firewall zu umgehen beziehungsweise zu überwinden,
+findet sich bei stateless Firewalls, das heißt, wenn die Conntrack-Module
 nicht aktiv sind.
 
-Man kann mit einer stateless Firewall TCP-Verbindungen in einer Richtung
-sperren und in der anderen Richtung offen lassen, indem man Datagramme ohne
-gesetztes ACK-Bit nur in einer Richtung erlaubt.
+Ich kann mit einer stateless Firewall TCP-Verbindungen in einer Richtung
+sperren und in der anderen Richtung offen lassen, indem ich Datagramme ohne
+gesetztes ACK-Bit nur in einer Richtung erlaube.
+
 Zwar kann man dann aus der anderen Richtung keine Verbindung aufbauen,
 jedoch ist es möglich, Informationen über die Rechner hinter dem Paketfilter
 zu erlangen.
-Sendet man ein Datenpaket mit gesetztem ACK-Bit an einen Rechner hinter dem
-Paketfilter, dann antwortet dieser mit TCP-Reset, falls ein Socket an den
+Kommt ein Datenpaket mit gesetztem ACK-Bit an einem Rechner hinter dem
+Paketfilter an, dann antwortet dieser mit TCP-Reset, falls ein Socket an den
 Zielport gebunden ist und mit ICMP-Unreachable-Port, wenn nicht.
-Beide Antworten gehen üblicherweise durch die Firewall durch und teilen dem
-Angreifer auf diese Art mit, ob der betreffende Port offen ist.
-Das Programm *nmap* scannt mit Option `-PA` genau nach dieser Methode.
+Diese Antworten gehen oft durch die Firewall und teilen dem
+Angreifer auf diese Art mit, ob der Port offen ist.
+Das Programm *nmap* scannt bei gesetzter Option `-PA` mit dieser Methode.
 
 Bei einer stateful Firewall wäre das nicht möglich, weil diese erkennen
 würde, dass das erste Datagramm zu keiner gültigen Verbindung gehört und es
-damit gleich verwerfen würde.
+gleich verwerfen würde.
 
-Normalerweise zieht man als Firewall-Administrator daher stateful
+Normalerweise ziehe ich als Firewall-Administrator daher stateful
 Paketfilterregeln vor.
 Lediglich bei speziellen Performance-Problemen kann es nötig sein auf
 stateless Regeln auszuweichen.
 
-Nichtlineare Protokolle
------------------------
+## Dynamisch ausgehandelte Protokolle
 
-Nichtlineare Protokolle sind Protokolle, die mit einer Kombination von
-festgelegten und dynamisch ausgehandelten Ports arbeiten, wie zum Beispiel
+Dynamisch ausgehandelte Protokolle arbeiten mit einer Kombination von
+festgelegten und dynamisch ausgehandelten Ports, wie zum Beispiel
 FTP, TFTP oder SiP.
-Ohne Connection Tracking muss ich hier ganze Portbereiche freigeben, so dass
-ich im ungünstigsten Fall sogar unerwünschte Datenverbindungen in Kauf
+Ohne Connection Tracking muss ich hier ganze Bereiche von Ports freigeben,
+so dass ich im ungünstigsten Fall auch unerwünschte Datenverbindungen in Kauf
 nehmen muss.
 
-Application Level Gateways
---------------------------
+Will ich diese Protokolle über den Paketfilter regulieren, werde ich
+daher auf jeden Fall mit stateful Regeln und Connection Tracking
+arbeiten und dafür nötigenfalls leistungsfähigere Hardware einsetzen.
+
+## Application Level Gateways
 
 Application Level Gateways (ALG) erlauben es, Paketfilter zu umgehen.
 Ihre Aufgabe ist es, explizit den Datenverkehr zu kontrollieren und zu
 steuern, der mit einfachen Paketfiltern nicht kontrolliert werden kann.
 Das sind meist Protokolle der oberen vier OSI-Schichten.
-Da die ALG zu genau diesem Zweck im Netz platziert werden, lasse ich sie
-aus den weiteren Betrachtungen hier aus.
-Ich behalte aber im Hinterkopf, dass ALG einen möglichen Weg bieten können,
+Damit liegen Application Level Gateways außerhalb des Themas dieses Buches.
+Ich behalte aber im Hinterkopf, dass ALG einen Weg bieten können,
 auf dem Daten mein Netz unkontrolliert erreichen oder verlassen.
 
-Virtual Private Networks
-------------------------
+## Virtual Private Networks
 
 Das gleiche gilt für VPN, seien diese mit IPsec, OpenVPN, SSH-Tunneln oder
 auf andere Art und Weise realisiert.
@@ -77,12 +77,11 @@ sondern nur über einen vorgeschalteten Paketfilter, zum Beispiel den der
 DMZ, indem ich das VPN-Gateway genau dort platziere.
 
 Zusätzlich sperre ich allen anderen VPN-Datenverkehr mit den Paketfiltern,
-so dass deren Regeln nicht umgangen werden können.
+so dass deren Regeln auf diese Art nicht umgangen werden können.
 
-NAT Traversal
--------------
+## NAT Traversal
 
-NAT Traversal ist, je nach Gegebenheit, möglicherweise eine gewünschte
+NAT Traversal ist, je nach Gegebenheit, eine möglicherweise gewünschte
 Methode, einen Paketfilter zu passieren.
 Dabei geht es darum, einen direkte TCP- oder UDP-Verbindung zwischen zwei
 Rechnern aufzubauen, die sich beide hinter einer NAT-Box befinden.
@@ -106,29 +105,27 @@ Je nachdem, ob solch direkter Verkehr in meiner Sicherheitsrichtlinie
 erlaubt ist oder nicht, muss ich meine Paketfilter-Regeln entsprechend
 anpassen.
 
-Netzwerk Topologie
-------------------
+## Netzwerk Topologie
 
-Eine nicht zu unterschätzende Möglichkeit, Paketfilter zu überwinden, ist
+Eine weitere Möglichkeit, Paketfilter zu überwinden, ist,
 diese zu umgehen, wenn es mehrere Wege zum Ziel gibt.
 Das kann ein vermaschtes Netz sein, eine zweite Verbindung zum Internet oder
 Daten, die über das Netz eines Kooperationspartners laufen.
+
 Daher muss ich bei der Umsetzung einer Sicherheitsrichtlinie immer die
 komplette Topologie des Netzes, in dem diese gelten soll, kennen.
 
-Fragmentierung
---------------
+## Fragmentierung
 
 Mit fragmentierten Paketen ist es gelegentlich möglich, simpel gestrickte
 Paketfilter auszutricksen, wenn die Fragmente nicht genug Informationen für
-eine korrekte Identifizierung haben.
+eine korrekte Identifizierung enthalten.
 
-Die Abhilfe ist relativ einfach: ich kann die Datenpakete direkt am
+Die Abhilfe dafür ist einfach: ich kann die Datenpakete direkt am
 Paketfilter zusammensetzen oder, falls das zu Performanceproblemen führt,
 die Fragmente gleich verwerfen.
 
-Verdeckte Kanäle
-----------------
+## Verdeckte Kanäle
 
 Schließlich gibt es noch die Möglichkeit, Daten unkontrolliert über verdeckte
 Kanäle zu versenden, die sich in anderen Protokollen verbergen.
@@ -139,10 +136,9 @@ transportieren können.
 
 Bei ICMP habe ich das Problem, das zumindest einige dieser Datagramme für
 das korrekte Funktionieren des Netzes erforderlich sind.
-Hier kann ich nur mit Rate-Limits und stateful Paketfilter-Regeln
-arbeiten.
+Hier kann ich mit Rate-Limits und stateful Paketfilter-Regeln arbeiten.
 
-Bei allen anderen Protokollen kann ich mit Application Level Gateways
-arbeiten und auf diesen den Verkehr für die entsprechenden Protokolle
-kontrollieren.
+Bei allen anderen Protokollen können Application Level Gateways helfen,
+wenn ich auf diesen den Verkehr für die entsprechenden Protokolle
+kontrolliere.
 
