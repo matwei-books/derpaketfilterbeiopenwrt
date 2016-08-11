@@ -22,8 +22,7 @@ Aber eine Firewall-Dokumentation ist das nicht.
 Ich will zunächst etwas ausholen und darauf eingehen, welche
 Informationen überhaupt in eine Firewall-Dokumentation gehören, dann
 allgemeine Vorgehensweisen ansprechen um schließlich auf
-konkrete Techniken zu kommen, die ich bei der OpenWrt-Firewall verwenden
-kann.
+Techniken zu kommen, die ich bei der OpenWrt-Firewall verwenden kann.
 
 ## Informationen in einer Firewall-Dokumentation
 
@@ -162,7 +161,6 @@ Die dritte Möglichkeit, `iptables-save`, eignet sich nur für eine Analyse der
 Paketfilterregeln selbst.
 Hier fehlen unter anderem die Informationen zur Konfiguration der
 Schnittstellen, die `uci export` mitliefert.
-
 Der große Vorteil von `iptables-save` ist, dass ich die Firewall-Regeln sehr
 einfach für die weitere Verarbeitung aufbereiten kann.
 
