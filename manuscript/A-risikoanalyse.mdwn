@@ -22,8 +22,7 @@ Paketfilterregeln.
 Dazu muss ich sie aber erst einmal erarbeitet haben.
 Dem geht die Ermittlung meines Schutzbedarfs voraus, die Risikoanalyse.
 
-Bei der Risikoanalyse und auch bei der Festlegung der Sicherheitsrichtlinie
-ist es wichtig, dass ich die Grenzen des Systems bestimme.
+Wichtig ist, dass ich die Grenzen des Systems bestimme.
 Sinnvollerweise liegen diese in meinem Verantwortungsbereich, da eine
 Sicherheitsrichtlinie nur dann ihren Zweck erfüllt, wenn ich sie auch
 durchsetzen kann.
@@ -31,7 +30,6 @@ durchsetzen kann.
 Bei der Risikoanalyse identifiziere und bewerte ich Risiken, um dann im
 Rahmen des Risikomanagements mögliche negative Ereignisse mit geeigneten
 Maßnahmen zu vermeiden, zu reduzieren oder auf Dritte abzuwälzen.
-
 Negative Ereignisse im Rahmen der IT-Sicherheit sind Beeinträchtigungen der
 Vertraulichkeit, der Integrität oder der Verfügbarkeit von Daten.
 
@@ -65,7 +63,7 @@ Kategorien gleichartiger Geräte, wie Arbeitsplatzrechner, Server, Router,
 Switch usw., gruppieren.
 Für jedes IT-System in einer dieser Gruppen muss ich mit den gleichen
 Bedrohungen rechnen wie für alle IT-Systeme der gleichen Gruppe.
-Dementsprechend stehen mir für diese die gleichen
+Dementsprechend stehen mir dafür die gleichen
 Präventionsmaßnahmen zur Verfügung.
 
 Es wäre jedoch Verschwendung, alle Systeme gleich behandeln zu wollen,
