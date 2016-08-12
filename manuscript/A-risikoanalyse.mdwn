@@ -3,12 +3,12 @@ Risikoanalyse
 =============
 
 Wenn ich Firewall-Regeln für einen Paketfilter aufstelle, so balanciere ich
-damit zwischen dem möglichst ungehinderten Durchlassen erwünschten
+dabei zwischen dem möglichst ungehinderten Durchlassen erwünschten
 Datenverkehrs und dem möglichst vollständigen Sperren unerwünschten
 Datenverkehrs.
-Die Entscheidungen, die ich dabei treffen muss, sind nicht immer trivial,
-weswegen ich mich dabei gern auf eine - vorher erstellte -
-Sicherheitsrichtlinie stütze.
+Die Entscheidungen, die ich treffen muss, sind nicht immer trivial,
+weswegen ich mich gern auf - vorher erstellte -
+Sicherheitsrichtlinien stütze.
 
 Eine Sicherheitsrichtlinie bestimmt grob, welcher Datenverkehr wo in meinem
 Netzwerk erwünscht ist und welcher nicht.
@@ -17,9 +17,9 @@ erlaubt ist oder verboten.
 Diese Vorgabe kann in einem größeren Netzverbund an verschiedenen Stellen
 unterschiedlich ausfallen.
 
-Die Sicherheitsrichtlinie hilft mir beim Aufstellen konkreter
+Diese Sicherheitsrichtlinie hilft mir beim Aufstellen konkreter
 Paketfilterregeln.
-Dazu muss ich sie aber erstmal erarbeitet haben.
+Dazu muss ich sie aber erst einmal erarbeitet haben.
 Dem geht die Ermittlung meines Schutzbedarfs voraus, die Risikoanalyse.
 
 Bei der Risikoanalyse und auch bei der Festlegung der Sicherheitsrichtlinie
@@ -30,26 +30,22 @@ durchsetzen kann.
 
 Bei der Risikoanalyse identifiziere und bewerte ich Risiken, um dann im
 Rahmen des Risikomanagements mögliche negative Ereignisse mit geeigneten
-Präventionsmaßnahmen zu vermeiden, zu reduzieren oder auf Dritte abzuwälzen.
+Maßnahmen zu vermeiden, zu reduzieren oder auf Dritte abzuwälzen.
 
 Negative Ereignisse im Rahmen der IT-Sicherheit sind Beeinträchtigungen der
 Vertraulichkeit, der Integrität oder der Verfügbarkeit von Daten.
-Werden die betrachteten IT-Systeme zur Steuerung technischer Prozesse
-eingesetzt, kommen noch weitere negative Ereignisse in Betracht, jedoch kann
-ich diesen nicht mit einer Paketfilter-Firewall beikommen, so
-dass ich sie hier nicht weiter betrachte.
 
-Eine Beeinträchtigung oder Verletzung der Vertraulichkeit bedeutet, dass
+*Beeinträchtigung oder Verletzung der Vertraulichkeit* bedeutet, dass
 Informationen einem Personenkreis zugänglich werden, der dafür nicht
 berechtigt ist.
 Das können private E-Mails sein, geheime Geschäftsunterlagen oder anderes.
 
-Eine Beeinträchtigung oder Verletzung der Integrität bedeutet die
+*Beeinträchtigung oder Verletzung der Integrität* ist zum Beispiel die
 Manipulation von Daten durch Dritte, wie zum Beispiel das Verändern von
 Websites oder das Injizieren von SQL-Code in ein Content
 Management System.
 
-Eine Beeinträchtigung der Verfügbarkeit heißt, dass legitime Nutzer ein
+*Beeinträchtigung der Verfügbarkeit* heißt, dass legitime Nutzer ein
 System nicht mehr in vollem Umfang nutzen können.
 Das kann im einfachsten Fall durch Denial-of-Service-Attacken passieren,
 entweder durch Überlastung des Systems oder durch vollständige Abschaltung,
@@ -64,7 +60,7 @@ Bei einer kleinen Firma dauert es vielleicht einen Tag, bei großen
 Organisationen muss ich mit mehreren Wochen rechnen und bin auf
 die Mitarbeit anderer angewiesen.
 
-Habe ich alle IT-Systeme erfasst, kann ich diese nach verschiedenen
+Habe ich alle IT-Systeme erfasst, kann ich diese nach Typen, das heißt
 Kategorien gleichartiger Geräte, wie Arbeitsplatzrechner, Server, Router,
 Switch usw., gruppieren.
 Für jedes IT-System in einer dieser Gruppen muss ich mit den gleichen
@@ -72,9 +68,9 @@ Bedrohungen rechnen wie für alle IT-Systeme der gleichen Gruppe.
 Dementsprechend stehen mir für diese die gleichen
 Präventionsmaßnahmen zur Verfügung.
 
-Es wäre jedoch Verschwendung, alle Systeme gleich behandeln zu wollen und
-mit gleichem Aufwand Ihr Risiko bezüglich Vertraulichkeit, Integrität und
-Verfügbarkeit zu bewerten und entsprechende Maßnahmen einzuleiten.
+Es wäre jedoch Verschwendung, alle Systeme gleich behandeln zu wollen,
+ihr Risiko bezüglich Vertraulichkeit, Integrität und Verfügbarkeit mit
+gleichem Aufwand zu bewerten und entsprechende Maßnahmen einzuleiten.
 
 Darum ist der nächste Schritt, der auch parallel zur Strukturanalyse
 ablaufen kann, die Ermittlung der Aktivposten: wo habe ich welches Vermögen,
@@ -87,16 +83,16 @@ Vertraulichkeit, Integrität und Verfügbarkeit.
 Wenn ich zum Beispiel Internet-Banking betreibe, dann hat dieser
 Aktivposten sehr hohe Anforderungen bezüglich Vertraulichkeit (die
 Kennworte und TANs) und Integrität (die eingegebenen Beträge und
-Kontonummern) aber meist relativ geringe Anforderungen an die
+Kontonummern) aber meist geringe Anforderungen an die
 Verfügbarkeit, es sei denn, ich würde meine Rechnungen immer erst
 zum letztmöglichen Termin bezahlen.
 
 Bei einem Monitoring-System sind die Ansprüche bezüglich Vertraulichkeit
-vielleicht geringer, dafür aber hoch bezüglich Integrität (ich möchte keine
-Fehlalarme) und sehr hoch in Bezug auf Verfügbarkeit, da ich keinen Alarm
+geringer, dafür aber hoch bezüglich Integrität (ich möchte keine
+Fehlalarme) und in Bezug auf Verfügbarkeit, da ich keinen Alarm
 verpassen will.
 
-Im nächsten Schritt gruppiere ich alle in der Strukturanalyse ermittelten
+Ich gruppiere im nächsten Schritt alle in der Strukturanalyse ermittelten
 Systeme entsprechend den Aktivposten.
 Die Anforderungen an die Systeme in den einzelnen Gruppen ergeben sich
 aus den Anforderungen der Aktivposten.
@@ -104,34 +100,18 @@ Bei IT-Systemen, die für mehrere der Aktivposten genutzt werden, nehme ich
 die höchste Anforderung bezüglich Vertraulichkeit, Integrität und
 Verfügbarkeit.
 
-Zwar gibt es keine allgemeine Angaben, welche Anforderungen an die drei
-Kriterien eine IT-Systemkomponente erfüllen muss.
-Mit der Analyse der Infrastruktur und der Aktivposten kann ich diese
-jedoch für jede einzelne Komponente konkret abschätzen.
-
 Nachdem ich so den Schutzbedarf aller Systemkomponenten bestimmt habe,
-betrachte ich als nächstes die konkreten Bedrohungen der Komponente und
-wähle aus den möglichen Maßnahmen, die mich davor schützen können.
-Hierbei kann ich die IT-Komponenten nach ihrem Typ betrachten.
-
-Ein Arbeitsplatzrechner ist immer auf die gleiche Art und Weise angreifbar
-und kann auf die gleiche Art und Weise geschützt werden.
-Egal, ob er zum Lesen von E-Mail, zum Abschließen von Geldgeschäften oder
-als öffentliches Internet-Terminal in einer Bibliothek verwendet wird.
-Die IT-Grundschutzkataloge des BSI kann ich als Ausgangspunkt für eigene
+schaue ich als nächstes auf die konkreten Bedrohungen der Komponente und
+wähle je nach Bedarf die Maßnahmen aus, die mich davor schützen können.
+Hierbei betrachte ich die IT-Komponenten nach ihrem Typ.
+Die IT-Grundschutzkataloge des BSI kann ich dabei als Ausgangspunkt für eigene
 Überlegungen verwenden.
-
-Um meine Risikoanalyse abzuschließen, betrachte ich für jede IT-Komponente
-im System alle Aktivposten, die diese Komponente verwenden und bestimme damit
-den Schutzbedarf bezüglich Vertraulichkeit, Integrität und Verfügbarkeit.
-Dann bestimme ich entsprechend der Art der Komponente die Gefährdungen und
-die notwendigen Maßnahmen.
 
 Finde ich für eine Komponente keine geeigneten Schutzmaßnahmen, muss ich
 eine Änderung der Struktur des IT-Systems in Betracht ziehen.
 Das würde eine erneute Strukturanalyse nach sich ziehen.
 
-Alle ermittelten Maßnahmen fasse ich in der Sicherheitsrichtlinie
-zusammen, aus der ich am Ende unter anderem die Regeln für meine
+Alle ermittelten Maßnahmen fasse ich in Sicherheitsrichtlinien
+zusammen, aus denen ich am Ende unter anderem die Regeln für die
 Paketfilter ableite.
 
