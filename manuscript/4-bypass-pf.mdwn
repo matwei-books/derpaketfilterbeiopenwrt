@@ -41,6 +41,26 @@ Paketfilterregeln vor.
 Lediglich bei speziellen Performance-Problemen kann es nötig sein auf
 stateless Regeln auszuweichen.
 
+## Fehlerhafte IP-Optionen
+
+Lässt der Paketfilter ICMP-Pakete durch, entweder auf Grund der Policy,
+oder weil er als stateless Filter bestimmte ICMP-Pakete durchlassen
+muss, um die Funktionalität des Netzes nicht zu behindern, dann kann ich
+das ausnutzen um das Netz hinter dem Paketfilter zu erkunden.
+
+Dazu sende ich ICMP-Pakete mit ungültigem IP-Header oder ICMPv6-Pakete
+mit ungültigem Extension-Header.
+
+RFC 792 definiert für ICMP die Nachricht vom Typ 12 "Parameter Problem
+Message", die ein Host oder Gateway sendet, wenn er ein Datagramm nicht
+verarbeiten kann.
+
+Für IPv6 definiert RFC 4443 in Abschnitt 3.4 die ICMPv6 Nachricht
+"Parameter Problem", bei Datagrammen mit ungültigen Extension Headern.
+
+Um das auf dem Paketfilter zu unterbinden, kann ich fehlerhafte
+Datagramme verwerfen.
+
 ## Dynamisch ausgehandelte Protokolle
 
 Dynamisch ausgehandelte Protokolle arbeiten mit einer Kombination von
