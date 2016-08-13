@@ -11,6 +11,12 @@ ISBN 978-1-4717-2849-5
 
 ## Artikel
 
+### ctLindner2014
+
+Felix 'FX' Lindner; Licht aus! - Sicherheit kritischer Infrastrukturen
+im Test; c't Magazin für Computertechnik 2014 Heft 9, S. 150-155;
+ISSN 0724-8679
+
 ### ctRudl2014 {#lit-ct-rudl2014}
 
 Tomas Rudl; Finden ohne Suche - Bonjour konfiguriert und findet Geräte
