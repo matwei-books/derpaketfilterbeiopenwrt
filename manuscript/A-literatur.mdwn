@@ -24,23 +24,51 @@ für die automatische Netzwerk-Konfiguration ein.
 
 ### BSI Grundschatz
 
-<https://www.bsi.bund.de/DE/Themen/ITGrundschutz/itgrundschutz_node.html>
+<https://www.bsi.bund.de/DE/Themen/ITGrundschutz/itgrundschutz_node.html>  
+Aufgerufen: 2016-08-13
+
+Der vom Bundesamt für Sicherheit in der Informationstechnik entwickelte
+IT-Grundschutz hilft, notwendige Sicherheitsmaßnahmen zu identifizieren
+und umzusetzen.
 
 ### Firewall configuration (OpenWrt Wiki)
 
-<https://wiki.openwrt.org/doc/uci/firewall>
+<https://wiki.openwrt.org/doc/uci/firewall>  
+Aufgerufen: 2016-08-13
+
+Die Wiki-Seite zur Firewall-Konfiguration gibt detaillierte Hinweise
+insbesondere zur Konfiguration mit UCI.
+Viele Details, die in diesem Buch keinen Platz gefunden haben, finden
+sich dort.
 
 ### Table of Hardware (OpenWrt-Wiki)
 
 <https://wiki.openwrt.org/toh/start>
+Aufgerufen: 2016-08-13
+
+Auf dieser Seite findet man einen Überblick, welche Hardware von OpenWrt
+unterstützt wird und vor allem wie gut.
+Bevor ich ein Gerät für den Einsatz mit OpenWrt kaufe, schaue ich immer
+erst hier herein.
 
 ### Comparison of firewalls (Wikipedia)
 
-<http://en.wikipedia.org/wiki/Comparison_of_firewalls>
+<https://en.wikipedia.org/wiki/Comparison_of_firewalls>
+Aufgerufen: 2016-08-13
+
+Diese Seite eignet sich als Einstiegspunkt für die Suche nach
+Alternativen zu OpenWrt als Firewall.
+Hier finden sich sowohl proprietäre als auch Open Source Firewalls.
 
 ### List of router and firewall distributions (Wikipedia)
 
-<http://en.wikipedia.org/wiki/List_of_router_and_firewall_distributions>
+<https://en.wikipedia.org/wiki/List_of_router_and_firewall_distributions>
+Aufgerufen: 2016-08-13
+
+Ein weiterer Einstiegspunkt für die Suche nach Alternativen zu OpenWrt.
+Das ist eine Liste von Betriebssystemen (Distributionen) für den Einsatz
+von Computern als Router oder Firewall.
+Die meisten dieser Betriebssysteme basieren auf Linux oder BSD.
 
 %% http://www.mondaiji.com/blog/other/it/10175-the-hunt-for-the-ultimate-free-open-source-firewall-distro
 
