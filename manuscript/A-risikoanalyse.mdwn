@@ -1,6 +1,5 @@
 
-Risikoanalyse
-=============
+# Risikoanalyse
 
 Wenn ich Firewall-Regeln für einen Paketfilter aufstelle, so balanciere ich
 dabei zwischen dem möglichst ungehinderten Durchlassen erwünschten
@@ -49,6 +48,8 @@ Das kann im einfachsten Fall durch Denial-of-Service-Attacken passieren,
 entweder durch Überlastung des Systems oder durch vollständige Abschaltung,
 wie zum Beispiel mit Ping of Death.
 
+## Strukturanalyse
+
 Ein wichtiger Bestandteil der Risikoanalyse ist die Strukturanalyse, das
 Erfassen aller IT-Komponenten, die mit dem betrachteten System verbunden
 sind.
@@ -69,6 +70,8 @@ Präventionsmaßnahmen zur Verfügung.
 Es wäre jedoch Verschwendung, alle Systeme gleich behandeln zu wollen,
 ihr Risiko bezüglich Vertraulichkeit, Integrität und Verfügbarkeit mit
 gleichem Aufwand zu bewerten und entsprechende Maßnahmen einzuleiten.
+
+## Anforderungen an die Sicherheit
 
 Darum ist der nächste Schritt, der auch parallel zur Strukturanalyse
 ablaufen kann, die Ermittlung der Aktivposten: wo habe ich welches Vermögen,
@@ -112,4 +115,24 @@ Das würde eine erneute Strukturanalyse nach sich ziehen.
 Alle ermittelten Maßnahmen fasse ich in Sicherheitsrichtlinien
 zusammen, aus denen ich am Ende unter anderem die Regeln für die
 Paketfilter ableite.
+
+## Fallstricke
+
+Viele IT-Infrastrukturen, in denen Firewalls eingesetzt werden, sind aus
+Insellösungen entstanden, kleinen Netzen oder einzelnen Rechnern, die
+irgendwann mit anderen Netzen oder dem Internet verbunden wurden.
+Dabei bot sich die Vorstellung eines einzigen Schutzwalls, einer
+Firewall zwischen dem bestehenden - internen - Netz und dem anderen -
+externen - Netz an.
+Einerseits vereinfacht diese Betrachtungsweise die Konfiguration der
+Firewall am Perimeter, dem Verteidigungsring zwischen innen und außen.
+Andererseits lassen sich damit vordergründig Kosten sparen.
+
+Das Hauptproblem bei der Beschränkung auf diese simple Betrachtungsweise
+ist, dass ein einziger Weg von außen nach innen ausreicht, um das
+gesamte Konzept unwirksam zu machen.
+
+Aus diesem Grund ist es essentiell, bei der Risikoanalyse und den darauf
+aufbauenden Sicherheitsrichtlinien die verwendeten Modelle stets
+kritisch zu hinterfragen.
 
