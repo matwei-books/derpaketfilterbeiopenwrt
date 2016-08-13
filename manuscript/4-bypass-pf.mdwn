@@ -54,7 +54,6 @@ mit ungültigem Extension-Header.
 RFC 792 definiert für ICMP die Nachricht vom Typ 12 "Parameter Problem
 Message", die ein Host oder Gateway sendet, wenn er ein Datagramm nicht
 verarbeiten kann.
-
 Für IPv6 definiert RFC 4443 in Abschnitt 3.4 die ICMPv6 Nachricht
 "Parameter Problem", bei Datagrammen mit ungültigen Extension Headern.
 
