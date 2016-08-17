@@ -16,10 +16,9 @@ die Sicherheit der Software nun von OpenWrt auf den Anbieter dieser
 Software-Pakete ausdehnen und dass in meinen Sicherheitsüberlegungen
 berücksichtigen muss.
 
-Eine Alternative zu Repositories Dritter ist, die benötigte Software
+Eine Alternative zu Repositories Dritter ist, die Software
 selbst zu übersetzen.
-Diesen Weg muss ich sowieso gehen, wenn ich sie
-selbst geschrieben habe.
+Diesen Weg muss ich sowieso gehen, wenn ich der Autor bin.
 
 Nach der Frage, woher ich die benötigte Software bekomme, muss ich
 überlegen, wie ich sie auf den System installiere.
