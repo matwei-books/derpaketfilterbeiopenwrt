@@ -1,16 +1,15 @@
 
-Zusätzliche Software
-====================
+# Zusätzliche Software
 
 Manchmal reicht mir die Funktionalität nicht und ich benötige weitere
 Software, die im Firmware-Image von OpenWrt nicht enthalten ist.
 
-Dann kann ich mich in den Software Repositories von OpenWrt umschauen,
-ob ich dort etwas passendes finde.
+Dann kann ich zunächst in den Software Repositories von OpenWrt nachschauen,
+ob ich dort etwas Passendes finde.
 Diese Repositories enthalten eine Vielzahl von Paketen, die schon aus
 Platzgründen nicht alle im Firmware-Image untergebracht werden können.
 
-Finde ich auch dort nichts passendes, gibt es zuweilen die gewünschte
+Finde ich auch dort nichts Geeignetes, gibt es zuweilen die gewünschte
 Software in Repositories von dritter Stelle.
 Bei diesen muss ich jedoch bedenken, dass ich damit mein Vertrauen in
 die Sicherheit der Software nun von OpenWrt auf den Anbieter dieser
@@ -19,42 +18,41 @@ berücksichtigen muss.
 
 Eine Alternative zu Repositories Dritter ist, die benötigte Software
 selbst zu übersetzen.
-Diesen Weg muss ich sowieso gehen, wenn ich die benötigte Software
+Diesen Weg muss ich sowieso gehen, wenn ich sie
 selbst geschrieben habe.
 
 Nach der Frage, woher ich die benötigte Software bekomme, muss ich
-überlegen, wie ich die Software auf den System installiere.
+überlegen, wie ich sie auf den System installiere.
 
-Hier gibt es prinzipiell drei Möglichkeiten:
+Hier gibt es mehrere Möglichkeiten:
 
 *   Ich integriere die Software in meinem Firmware-Image.
     Diesen Weg kann ich gehen, wenn ich sowieso schon das Firmware-Image
     selbst erzeugt habe.
     Dazu muss die Software im Buildroot integriert sein.
-    Auf Details gehe ich hier nicht ein, das Wiki von OpenWrt liefert
-    Anleitungen dazu.
+    Auf Details gehe ich hier nicht ein, im Wiki von OpenWrt liefert
+    der [Developer Guide][devguide] Anleitungen dazu.
 
 *   Mit dem Software-Verwaltungsprogramm `opkg` kann ich zusätzliche
     Software aus den Repositories von OpenWrt oder von dritter Stelle
     installieren.
-    Nach der Installation der Firmware ist `opkg` normalerweise korrekt
+    Nach der Installation der Firmware ist `opkg` korrekt
     konfiguriert, so dass ich sofort auf die Repositories von OpenWrt
     zugreifen kann.
-
-    Eventuell muss ich mir Gedanken machen, wie ich auf meinem Gerät
-    Platz für diese zusätzliche Software schaffe.
 
     Für fremde Repositories muss ich die Konfiguration von `opkg` erst
     anpassen.
 
+    Eventuell muss ich mir Gedanken machen, wie ich auf meinem Gerät
+    Platz für diese Software schaffe.
+
 *   Einfache Skripts, die von den installierten Interpretern (Shell,
-    Lua, ...) ausgeführt werden können, kann ich einfach so auf das
+    Lua, ...) ausgeführt werden, kann ich einfach so auf das
     Gerät kopieren.
 
-Der Software-Paketmanager opkg
-------------------------------
+## Der Software-Paketmanager opkg
 
-In den meisten Fällen dürfte die einfachste Art, benötigte zusätzliche
+In den meisten Fällen dürfte die einfachste Art, zusätzliche
 Software zu installieren, der Paketmanager `opkg` sein.
 
 Nach der Installation ist dieser normalerweise auf die Repositories von
@@ -73,40 +71,36 @@ Dabei gibt es drei Kategorien von Software-Paketen:
 
 *   Kernel-Module sind zusätzlich noch von der Version des Kernels im
     Firmware-Image abhängig.
-    Insbesondere bei Firmware-Images aus dem Entwicklerzweig (Trunk)
-    muss ich hier bei der Aktualisierung der Pakete aufpassen, ob sie
-    noch zum laufenden Kernel passen und gegebenenfalls Firmware-Image
+    Gerade bei Firmware-Images aus dem Entwicklerzweig (Trunk)
+    muss ich bei der Aktualisierung der Pakete aufpassen, ob sie
+    noch zum laufenden Kernel passen und gegebenenfalls das Firmware-Image
     mit `sysupgrade` aktualisieren.
 
-Platz für zusätzliche Software
-------------------------------
+## Platz für zusätzliche Software
 
-Insbesondere beim Installieren von Software mit `opkg` kann es
+Beim Installieren von Software mit `opkg` kann es
 passieren, dass ich an die Grenze des verfügbaren Speichers gelange.
 
-Wenn die Hardware die Möglichkeit bietet, kann ich vielleicht
+Bietet die Hardware die Möglichkeit, kann ich vielleicht
 zusätzlichen Speicher via USB oder Card Reader bereitstellen.
-Dafür benötige ich gegebenenfalls zusätzliche Kernel-Module für USB und
+Dafür benötige ich vielleicht zusätzliche Kernel-Module für USB und
 die Dateisysteme, die ich verwenden will.
-Das OpenWrt-Wiki hilft mir weiter, wenn ich diesen Weg gehen will.
 
 Falls das Firmware-Image auf einem Wechseldatenträger (CompactFlash-
 oder SD-Card) untergebracht ist, kann ich vielleicht auf diesem noch
 freien Speicher nutzen.
 Dann benötige ich das Paket *block-mount*.
-Im Wiki finde ich Hilfe auf der Seite "Fstab configuration".
 
 Anschließend muss ich `opkg` so konfigurieren, dass Software-Pakete in
 dem zusätzlichen Speicher installiert werden.
 Zusätzlich muss ich den Suchpfad für ausführbare Programme anpassen,
 damit diese auch gefunden werden.
-Details dazu gibt die technische Referenz "OPKG Package Manager" im
+Details dazu gibt die technische Referenz [OPKG Package Manager][opkg] im
 OpenWrt-Wiki.
 
-Software portieren
-------------------
+## Software portieren
 
-Die dritte Möglichkeit, an benötigte Software zu gelangen, ist diese
+Die dritte Möglichkeit, an benötigte Software zu gelangen, ist, diese
 selbst zu übersetzen.
 
 Dazu muss ich diese, am besten mit dem Buildroot-System von OpenWrt, für
@@ -116,5 +110,7 @@ installieren oder im Firmware-Image einbinden kann.
 
 Dabei kann ich notwendige Abhängigkeiten von anderer Software gleich mit
 angeben, so dass diese automatisch mit installiert wird.
-Auch hierzu finde ich Details im Wiki.
 
+[devguide]: https://wiki.openwrt.org/doc/playground/developer
+
+[opkg]: https://wiki.openwrt.org/doc/techref/opkg
