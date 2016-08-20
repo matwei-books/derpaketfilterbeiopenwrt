@@ -54,22 +54,24 @@ Shell-Befehle, um die Vorschlagsliste zu erstellen:
       opkg list-changed-conffiles
     ) | sort -u
 
-Um die Zeilen zu verstehen, betrachtet man diese am Besten von außen nach
+Um die Befehle zu verstehen, betrachtet man diese am Besten von außen nach
 innen.
 Die Klammern in der ersten und letzten Zeile umfassen eine Subshell, deren
 Ausgabe an `sort` geschickt wird, welches die Ausgabe sortiert und dabei
 Duplikate entfernt.
 In der Subshell haben wir einen `find` Befehl in den Zeilen 2-4 und den
-Befehl `opkg list-changed-conffiles`, die die zu sortierenden Zeilen
-bereitstellen.
+Befehl `opkg list-changed-conffiles` in Zeile 5, die die zu sortierenden
+Zeilen bereitstellen.
 Der `find` Befehl gibt nur gefundene Dateien aus (`-type f`).
 Wo `find` nach den Dateien sucht, bestimmt der Ausdruck `$(sed ...)` in den
 Zeilen 2-4, der als Dateiliste an `find` übergeben wird.
 Der dabei aufgerufene `sed` Befehl gibt den Inhalt der in Zeile 3
-angegebenen Dateien Zeile für Zeile aus, wobei leere Zeilen und Zeilen, die
-mit `'#'` beginnen, ausgelassen werden.
+angegebenen Dateien aus, wobei er leere Zeilen und solche, die
+mit `'#'` beginnen, auslässt.
 
-Die Aktualisierung läuft wie folgt ab:
+~~~
+
+Die eigentliche Aktualisierung läuft wie folgt ab:
 
 1.  Ich prüfe, ob genügend Speicher (RAM) zur Verfügung steht und schaffe,
     wenn nötig, Platz.
