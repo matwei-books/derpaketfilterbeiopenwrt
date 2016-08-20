@@ -46,7 +46,7 @@ Damit kann ich mir selbst eine aktuelle Liste zusammenstellen.
 Konkret verwendet LuCI bei der Version *Chaos Calmer* die folgenden
 Shell-Befehle, um die Vorschlagsliste zu erstellen:
 
-{linenumbers=on,lang=sh}
+{linenos=on,lang=sh}
     (
       find $(sed -ne '/^[[:space:]]*$/d; /^#/d; p' \
              /etc/sysupgrade.conf /lib/upgrade/keep.d/* \
