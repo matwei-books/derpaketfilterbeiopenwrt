@@ -69,7 +69,9 @@ Der dabei aufgerufene `sed` Befehl gibt den Inhalt der in Zeile 3
 angegebenen Dateien aus, wobei er leere Zeilen und solche, die
 mit `'#'` beginnen, auslässt.
 
-~~~
+Die sortierte Liste, die das Skript ausgibt, kann ich in eine Datei
+schreiben, nachbereiten und dann zum Sichern der Konfigurationsdateien
+verwenden.
 
 Die eigentliche Aktualisierung läuft wie folgt ab:
 
