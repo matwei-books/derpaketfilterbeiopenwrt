@@ -54,8 +54,7 @@ Shell-Befehle, um die Vorschlagsliste zu erstellen:
       opkg list-changed-conffiles
     ) | sort -u
 
-Um die Befehle zu verstehen, betrachtet man diese am Besten von außen nach
-innen.
+Um die Befehle zu verstehen, betrachtet man sie am Besten von außen nach innen.
 Die Klammern in der ersten und letzten Zeile umfassen eine Subshell, deren
 Ausgabe an `sort` geschickt wird, welches die Ausgabe sortiert und dabei
 Duplikate entfernt.
