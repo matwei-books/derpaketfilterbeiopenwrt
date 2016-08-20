@@ -1,5 +1,5 @@
 
-# Wie halte ich das System aktuell?
+# System aktualisieren
 
 Auch bei OpenWrt muss ich mir Gedanken machen, wie ich mein System aktuell
 halte.
