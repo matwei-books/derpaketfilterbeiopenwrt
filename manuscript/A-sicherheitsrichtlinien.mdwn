@@ -1,0 +1,83 @@
+
+# Sicherheitsrichtlinien
+
+Die beste Risikoanalyse nützt wenig, wenn ihre Erkenntnisse nicht
+praktisch angewendet werden.
+Nun kann man in der Praxis nicht für jede einzelne Entscheidung dutzende
+oder gar hunderte Seiten wälzen.
+Hier benötigt man kurze, präzise Dokumente, die die wesentlichen Punkte
+in Erinnerung rufen - Sicherheitsrichtlinien.
+
+Damit die Richtlinien kurz und präzise sein können, müssen sie sich
+jeweils auf ein begrenztes Thema beschränken.
+Das bedeutet wiederum, dass für manche Themenbereiche mehrere
+Richtlinien gelten.
+Hier muss man darauf achten, dass die einzelnen Richtlinien einander
+nicht widersprechen.
+Dafür ist es sinnvoll, diese nicht nur nach dem Thema sondern zusätzlich
+nach dem Geltungsbereich abzugrenzen.
+
+Damit man die benötigten Informationen in den Richtlinien leicht findet,
+empfiehlt es sich, ein einheitliches Format zu schaffen und Templates zu
+verwenden.
+
+Beispiele für Sicherheitsrichtlinien finden sich bei [SANS][].
+
+Generell sollten Sicherheitsrichtlinien ungefähr die folgenden Punkte
+enthalten:
+
+*   Überblick
+*   Zweck
+*   Geltungsbereich
+*   Anweisungen
+*   mitgeltende Unterlagen
+*   Einhaltung
+*   Änderungsverzeichnis
+
+Die aktuelle Version sowie der Name oder die Nummer der Richtlinie
+sollte auf jeder Seite zu finden sein, zum Beispiel in den Kopf- oder
+Fußzeilen.
+
+Der **Überblick** gibt kurz und knapp den Kontext der Richtlinie an.
+Dafür reicht oft ein Satz.
+
+Der **Zweck** beschreibt die Ziele, die mit dieser Richtlinie erreicht
+werden sollen.
+Da das Thema der Richtlinie recht eng begrenzt ist, sollte auch dieser
+Abschnitt nicht allzu groß werden.
+
+Der **Geltungsbereich** schränkt ein, wo die Richtlinie anzuwenden ist.
+
+Diese ersten drei Punkte helfen dabei, zu bestimmen, ob die vorliegende
+Richtlinie beim konkreten Problem überhaupt anwendbar ist und gehören
+daher an den Anfang.
+
+Die **Anweisungen** stellen den Kern der Richtlinie dar.
+Das kann der umfangreichste Abschnitt sein, die Richtlinie kann aber
+auch nur aus einer einzigen Anweisung bestehen.
+
+Unter dem Punkt **mitgeltende Unterlagen** finden sich Hinweise auf
+weitere Dokumente oder andere Richtlinien, die in dem betreffenden
+Geltungsbereich zusätzlich zu berücksichtigen sind.
+
+Diese beiden Punkte sind der Kern der Richtlinie.
+Auf sie folgen noch ein paar Punkte, die sich mehr mit der Richtlinie
+und dem Umgang mit ihr beschäftigen als mit dem eigentlichen Thema.
+Da diese Punkte seltener benötigt werden, kommen sie nach dem Hauptteil.
+
+Der Abschnitt **Einhaltung** beschäftigt sich mit der Durchsetzung der
+Richtlinie.
+Wie wird das kontrolliert?
+Wie können Ausnahmen geregelt werden?
+Was passiert bei Nichteinhaltung der Richtlinie?
+Damit regelt dieser Abschnitt auch, wie diese Richtlinie geändert werden
+kann.
+Weil es hier nicht um den Inhalt der Richtlinie sondern um
+den Umgang mit ihr geht, kann dieser Punkt gegen Ende kommen.
+
+Das **Änderungsverzeichnis** ist oft nur für diejenigen interessant, die
+die Richtlinie erstellen und kommt daher ganz zum Schluss.
+Hier reicht eine tabellarische Aufführung der veröffentlichten
+Versionen.
+
+[SANS]: http://www.sans.org/security-resources/policies/
