@@ -118,20 +118,3 @@ sind alle Informationen für die Entscheidung enthalten.
 Da der IPv6-Header keine Prüfsumme enthält, müssen Router diese auch
 nicht neu berechnen, wenn sie das Hop-Limit-Feld reduzieren.
 
-## Gleichzeitiger Betrieb von IPv4 und IPv6
-
-Ein Problem für Firewall-Administratoren ist, dass voraussichtlich noch lange
-Zeit IPv4 und IPv6 gleichzeitig betrieben werden.
-Je nach Anbindung und gewünschter Verbindung kann dabei das eine Protokoll im
-Tunnel über das andere weiter geleitet werden oder umgekehrt.
-
-Nur wenn ich für beide Protokolle eine stabile Verbindung habe, kann ich
-alle Tunnel bedenkenlos unterbinden und direkt mit Firewall-Regeln für beide
-Protokolle arbeiten.
-
-Habe ich nur ein Protokoll von meinem ISP, kann ich dagegen selbst einen
-Tunnel an der Firewall betreiben und am Eingang dieses Tunnels filtern.
-
-In beiden Fällen sollte mein internes Netz IPv4 und IPv6 vollständig
-unterstützen, damit hier keine Tunnel mehr nötig sind.
-
