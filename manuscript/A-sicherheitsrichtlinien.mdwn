@@ -6,25 +6,20 @@ praktisch angewendet werden.
 Nun kann man in der Praxis nicht für jede einzelne Entscheidung dutzende
 oder gar hunderte Seiten wälzen.
 Hier benötigt man kurze, präzise Dokumente, die die wesentlichen Punkte
-in Erinnerung rufen - Sicherheitsrichtlinien.
+in Erinnerung rufen - Richtlinien, für das Thema des Buches: Sicherheitsrichtlinien.
 
-Damit die Richtlinien kurz und präzise sein können, müssen sie sich
-jeweils auf ein begrenztes Thema beschränken.
-Das bedeutet wiederum, dass für manche Themenbereiche mehrere
-Richtlinien gelten.
-Hier muss man darauf achten, dass die einzelnen Richtlinien einander
-nicht widersprechen.
-Dafür ist es sinnvoll, diese nicht nur nach dem Thema sondern zusätzlich
-nach dem Geltungsbereich abzugrenzen.
+Damit diese kurz und präzise sein können, müssen sie sich jeweils auf ein eng begrenztes Thema beschränken.
+Das bedeutet wiederum, dass für manche Themenbereiche mehrere Richtlinien gelten.
+Hier muss ich darauf achten, dass die einzelnen Richtlinien einander nicht widersprechen.
+Dafür ist es sinnvoll, diese nicht nur nach dem Thema sondern zusätzlich nach dem Geltungsbereich abzugrenzen.
 
 Damit man die benötigten Informationen in den Richtlinien leicht findet,
 empfiehlt es sich, ein einheitliches Format zu schaffen und Templates zu
 verwenden.
 
-Beispiele für Sicherheitsrichtlinien finden sich bei [SANS][].
+Beispiele für Sicherheitsrichtlinien finden sich beim [SANS Institute][SANS].
 
-Generell sollten Sicherheitsrichtlinien ungefähr die folgenden Punkte
-enthalten:
+Generell sollten Sicherheitsrichtlinien die folgenden Punkte enthalten:
 
 *   Überblick
 *   Zweck
@@ -43,12 +38,12 @@ Dafür reicht oft ein Satz.
 
 Der **Zweck** beschreibt die Ziele, die mit dieser Richtlinie erreicht
 werden sollen.
-Da das Thema der Richtlinie recht eng begrenzt ist, sollte auch dieser
+Da das Thema der Richtlinie eng begrenzt ist, sollte auch dieser
 Abschnitt nicht allzu groß werden.
 
 Der **Geltungsbereich** schränkt ein, wo die Richtlinie anzuwenden ist.
 
-Diese ersten drei Punkte helfen dabei, zu bestimmen, ob die vorliegende
+Diese ersten drei Punkte helfen dabei, zu bestimmen, ob eine vorliegende
 Richtlinie beim konkreten Problem überhaupt anwendbar ist und gehören
 daher an den Anfang.
 
@@ -70,10 +65,7 @@ Richtlinie.
 Wie wird das kontrolliert?
 Wie können Ausnahmen geregelt werden?
 Was passiert bei Nichteinhaltung der Richtlinie?
-Damit regelt dieser Abschnitt auch, wie diese Richtlinie geändert werden
-kann.
-Weil es hier nicht um den Inhalt der Richtlinie sondern um
-den Umgang mit ihr geht, kann dieser Punkt gegen Ende kommen.
+Damit regelt dieser Abschnitt auch, wie die Richtlinie geändert werden kann.
 
 Das **Änderungsverzeichnis** ist oft nur für diejenigen interessant, die
 die Richtlinie erstellen und kommt daher ganz zum Schluss.
@@ -81,3 +73,4 @@ Hier reicht eine tabellarische Aufführung der veröffentlichten
 Versionen.
 
 [SANS]: http://www.sans.org/security-resources/policies/
+
