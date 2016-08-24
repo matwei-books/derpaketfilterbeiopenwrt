@@ -1,10 +1,6 @@
 
 DRAFTS = \
-	 4-bypass-pf-draft.pdf \
-	 4-dokumentation-draft.pdf \
-	 4-aktualisieren-draft.pdf \
-	 4-zusaetzliche-software-draft.pdf \
-	 A-risikoanalyse-draft.pdf \
+	 A-sicherheitsrichtlinien-draft.pdf \
 #
 PANDOCDIR = ../pandoc
 
