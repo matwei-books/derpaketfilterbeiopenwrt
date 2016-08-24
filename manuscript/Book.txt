@@ -36,5 +36,6 @@ backmatter.txt
 anhang.mdwn
 A-analyse-iptables.mdwn
 A-risikoanalyse.mdwn
+A-sicherheitsrichtlinien.mdwn
 A-literatur.mdwn
 kolophon.mdwn
