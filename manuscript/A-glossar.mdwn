@@ -1,0 +1,489 @@
+6rd
+: IPv6 Rapid Deployment on IPv4 Infrastructures, ist ein Verfahren zum
+  Tunneln von IPv6 über IPv4-Netze, in RFC 5569 und RFC 5969
+  beschrieben.
+
+6to4
+: Connection of IPv6 Domains via IPv4 Clouds, ist ein Verfahren zum Tunneln
+  von IPv6 über IPv4-Netze, in RFC 3056 beschrieben.
+
+APIPA
+: Automatic Private IP Addressing, Implementierung von Microsoft für die
+  automatische Netzwerk-Konfiguration Zeroconf.
+
+Application Gateway, Application Layer Gateway
+: Eine Sicherheitskomponente in einem Computernetzwerk für Protokolle,
+  die problematisch bei der Adressumsetzung durch NAT sind. Definiert in
+  RFC 2663.
+
+ARP
+: Das Address Resolution Protocol ermittelt die zu einer IP-Adresse
+  gehörende Adresse der Netzzugangsschicht, in den meisten Fällen
+  Ethernet, in RFC 826 beschrieben.
+
+Arptables
+: Programm des Netfilter-Frameworks von Linux, mit dem die Regeln für
+  ARP-Einträge verwaltet werden können.
+
+Bonjour
+: Implementierung von Apple für die automatische Netzwerk-Konfiguration
+  Zeroconf.
+
+Broadcast
+: Eine Broadcast-Nachricht wird an alle Teilnehmer eines Teilnetzwerks
+  gesendet, im Gegensatz zu Multicast und Unicast.
+
+Broadcast-Domain
+: Der Bereich eines Netzwerkes, bis zu dem Broadcast-Nachrichten
+  gesendet werden.
+  Üblicherweise alle Geräte im selben Layer2-Netzwerk.
+
+Captive Portal
+: Ein Captive Portal leitet einen Webbrowser in einem Netzwerk auf eine
+  spezielle Seite um, bei der er sich anmelden muss, bevor er alle
+  Funktionen des Netzwerkes nutzen kann.
+
+CLI
+: Command Line Interface, die Kommandozeile, ein meist schwarzer Kasten,
+  in dem man Befehle als Text eingibt und Ausgaben als Text präsentiert
+  bekommt.
+
+Connection Tracking
+: Auf Deutsch auch Verbindungsverfolgung.
+  Die Statusinformationen von Verbindungen werden gespeichert, um ankommende
+  Datagramme besser auf Gültigkeit prüfen zu können.
+  Für bestimmte Protokolle, wie FTP, SIP, TFTP gibt es spezielle
+  Connection Tracking Module, die den Inhalt der Daten untersuchen, um
+  zusätzliche Verbindungen identifizieren zu können.
+
+Datagramm
+: Eine geschlossene, unabhängige Dateneinheit, die vom Sender an den
+  Empfänger geschickt wird.
+
+Datagramm-Header
+: Die Verwaltungsinformationen für das Versenden eines Datagramms werden
+  diesem üblicherweise vorangestellt und als Header bezeichnet.
+  Da die Datenübertragung gemäß dem OSI-Modell in Schichten unterteilt
+  wird und die höheren Schichten die Dienste der tieferen Schichten
+  nutzen, wird ein Datagramm um so länger, je tiefer die betrachte
+  Schicht ist.
+  So wird beispielsweise einem Datagramm, das per UDP über Ethernet versendet
+  wird, zunächst der UDP-Header vorangestellt, diesem wiederum der IP-Header
+  und diesem der Ethernet-Header.
+  Auf dem Kabel gehen dem eigentlichen Datenstrom ein paar Takte voraus,
+  um dem Empfänger die Synchronisierung zu ermöglichen.
+
+DHCP
+: Dynamic Host Configuration Protocol, ein Protokoll, dass die Zuweisung
+  der Netzwerk-Konfiguration an Clients durch einen Server ermöglicht.
+  Da dieses Protokoll auch über Router verwendet werden kann, ist es
+  möglich, dass ich es bei der Firewall-Konfiguration berücksichtigen
+  muss.
+  Beschrieben in RFC 2131.
+
+DMZ
+: Demilitarisierte Zone, ein Teilnetz eines Computernetzwerkes mit
+  kontrollierten Zugriffsmöglichkeiten.
+  Eine DMZ wird meist zwischen zwei Netzen, zwischen denen der Verkehr
+  reguliert werden soll, eingerichtet, zum Beispiel zwischen dem lokalen
+  Netz und dem Internet.
+
+DNAT
+: Destination NAT, Änderung der Zieladresse, siehe dazu auch NAT.
+
+DNS
+: Domain Name System, einer der wichtigsten Dienste in IP-basierten
+  Netzwerken, beantwortet Anfragen zu Rechner- und Dienstnamen,
+  Adressen, Zertifikaten,...
+
+DPI
+: Deep Packet Inspection, ein Verfahren zur Überwachung und Filterung
+  von Netzwerk-Datagrammen.
+  Während klassische Paketfilter nur die Datagramm-Header untersuchen,
+  werden hier sowohl Header als auch Daten berücksichtigt.
+
+Dual-Stack-Betrieb
+: Gleichzeitiger Betrieb von IPv4 und IPv6.
+
+Ebtables
+: Programm des Netfilter-Frameworks von Linux zu Administration von
+  Ethernet-Bridges.
+
+ECN
+: Explicit Congestion Notification, eine Erweiterung von TCP/IP zur
+  Überlastkontrolle, beschrieben in RFC 3168.
+
+Encapsulation
+: Das Verpacken von Datagrammen, einschließlich Headern, als Nutzdaten
+  in einem anderen Protokoll.
+  Encapsulation wird zum Beispiel bei VPNs verwendet, aber auch um
+  IPsec-Datagramme über einen NAT-Router zu transportieren.
+  Aufgrund der beschränkten maximalen Größe eines Datagramms, reduziert sich
+  die MTU des eingepackten Protokolls.
+
+Ethernet
+: Bezeichnung für die Technologie, das Protokoll und die Hardware für
+  kabelgebundene Datennetze.
+  Bildet die Schichten 1 und 2 des OSI-Modells ab.
+
+Ethernet-Bridge
+: Ein Gerät, dass zwei Ethernet-Netze miteinander verbindet.
+  Das kann ein einfacher Switch sein, oder eine Firewall, bei der man
+  dann Datagramme der OSI-Schichten 1 und 2, die normalerweise nicht
+  über Router gesendet werden, filtern kann.
+
+Firewall-Cluster
+: Eine Gruppe von Firewalls, die Zustandsinformationen austauschen,
+  um entweder bei Ausfall eines Geräts unverzüglich mit einem anderen
+  weiter zu arbeiten, oder den Datenverkehr im Sinne einer
+  Lastverteilung gleichzeitig zu filtern.
+
+Firmware
+: Software, die in einem Gerät eingebettet ist und vom Anwender gar
+  nicht oder nur mit speziellen Mitteln ausgetauscht werden kann.
+
+Fragmentierung
+: Ein Computernetz kann Datagramme nur bis zu einer bestimmten
+  Maximalgröße am Stück transportieren.
+  Überschreitet ein Datagramm diese Größe, muss es aufgeteilt
+  (fragmentiert) werden.
+
+FTP
+: File Transfer Protocol, ein Protokoll zur Übertragung von Dateien.
+  Ein wesentliches Merkmal dieses Protokolls ist, dass für Befehle und
+  Daten verschiedene TCP-Sitzungen verwendet werden.
+  Um dieses Protokoll sauber filtern zu können, müssen die TCP-Sitzungen
+  verfolgt und die Ports für die Daten dynamisch freigegeben werden.
+
+GRE
+: Generic Routing Encapsulation dient dazu, andere Protokolle
+  einzukapseln und über das Internet-Protokoll zu transportieren,
+  beschrieben in RFC 2890.
+
+Hair-Pinning
+: Manchmal auch NAT Loopback genannt, meint die Kommunikation zwischen
+  zwei Geräten hinter demselben NAT-Router über dessen öffentliche
+  Adresse.
+  Damit das funktioniert, muss es vom NAT-Router unterstützt werden.
+  Beim OpenWrt-Filter wird das bei der Konfiguration via LuCI meist
+  automatisch eingestellt.
+
+Hole-Punching
+: Meint ein Verfahren, mit dem zwei Geräte, die beide hinter NAT-Routern
+  angeschlossen sind, trotzdem eine direkte UDP-Verbindung aufbauen können.
+  RFC 3489 beschreibt eine weiterentwickelte Form des Verfahrens.
+
+ICMP
+: Das Internet Control Message Protocol dient dem Austausch von
+  Informations- und Fehlermeldungen für IPv4, definiert in RFC 792.
+
+ICMPv6
+: ICMP für IPv6.
+
+IDS
+: Ein Intrusion Detection System dient der automatischen Erkennung von
+  Angriffen gegen ein Computersystem oder -netz.
+
+IETF
+: Die Internet Engineering Task Force beschäftigt sich mit der
+  technischen Weiterentwicklung des Internet.
+
+IGMP
+: Das Internet Group Management Protocol dient zur Organisation von
+  Multicast-Gruppen bei IPv4.
+  Bei IPv6 werden dessen Aufgaben von ICMPv6 übernommen.
+
+IP
+: Internet Protokoll
+
+Ip6tables
+: Programm des Netfilter-Frameworks von Linux, mit dem die Regeln für
+  den IPv6-Paketfilter verwaltet werden können.
+
+IPS
+: Ein Intrusion Prevention System soll Funktionen bereitstellen, die
+  einen aktuellen Angriff gegen ein Computersystem oder -netz abwehren
+  können.
+
+IPsec
+: Internet Protocol Security bezeichnet einen Satz von Protokollen, die
+  eine kryptographisch gesicherte Kommunikation über unsichere Netze
+  ermöglichen soll.
+
+Iptables
+: Programm des Netfilter-Frameworks von Linux, mit dem die Regeln für
+  den IPv4-Paketfilter verwaltet werden können.
+
+IPv4
+: Internet Protocol Version 4, wurde 1981 im RFC 791 definiert.
+
+IPv6
+: Internet Protocol Version 6 ist der Nachfolger von IPv4.
+
+ISATAP
+: Intra-Site Automatic Tunnel Addressing Protocol ist ein Verfahren, um
+  IPv6-Datagramme über IPv4-Netze zu übertragen.
+
+ISP
+: Internet Service Provider, ein Dienstleister, der einen Zugang zum
+  Internet anbietet.
+
+L1, L2, L3
+: Die untersten Ebenen des OSI-Modells, L1 die Bitübertragungsschicht,
+  L2 die Sicherungsschicht, L3 die Vermittlungsschicht.
+
+Layer2-Domain
+: Ein Bereich eines Netzwerkes, in dem alle angeschlossenen Geräte in
+  der selben Sicherungsschicht verbunden sind. Bei IPv4 alle Geräte, die
+  über die Broadcast-Adresse erreicht werden können, bei IPv6 alle
+  Geräte, die über ihre link-lokalen Adressen erreicht werden können.
+
+link-lokale Adresse
+: Die Adresse, die durch Autokonfiguration ermittelt wurde. Bei IPv4 via
+  Zeroconf ausgehandelt, bei IPv6 durch SLAAC.
+
+MAC-Adresse
+: Media Access Control Address, die Hardware-Adresse jedes einzelnen
+  Netzwerkadapters.
+
+Masquerading
+: ist das Verbergen ganzer Netzwerke hinter einer einzelnen IP-Adresse
+  bei NAT.
+
+Monitoring
+: ist das Überwachen von Computern und Netzwerk-Komponenten auf
+  Fehlerzustände.
+
+MSS
+: Maximum Segment Size, die maximale Anzahl von Bytes, die als Nutzdaten
+  in einem TCP-Segment (einem Datagramm) versendet werden können.
+  Ist immer bezogen auf eine TCP-Sitzung, wird beim Verbindungsaufbau
+  ausgehandelt und ist geringer als die MTU.
+
+MSS-Clamping
+: Ein Hack, mit dem die MSS auf einem Datenpfad von einem Router
+  begrenzt wird, damit die einzelnen Datagramme nicht größer werden wie
+  die MTU.
+  Funktioniert nur mit TCP.
+
+MTU
+: Maximum Transmission Unit, maximale Größe eines nicht fragmentierten
+  Datagramms in einem Computernetzwerk.
+  Ist größer als die MSS bei TCP, da für diese noch die Größe des IP-
+  und des TCP-Headers von der MTU abgezogen werden muss.
+
+Multicast
+: Eine Multicast-Nachricht wird an eine Gruppe von Empfängern gesendet,
+  im Gegensatz zu Broadcast und Unicast.
+
+Multicast-DNS
+: Bestandteil der automatischen Konfiguration von Zeroconf zur Auflösung
+  von Namen.
+  Im Gegensatz zu normalem DNS, bei dem wenige DNS-Server für die
+  Namensauflösung zuständig sind, antwortet bei Multicast-DNS jeder Knoten
+  bei Anfragen zu den von ihm beanspruchten Namen.
+
+NAPT
+: Network Address Port Translation, eine Art von NAT, bei der sowohl die
+  Adressen als auch die Ports geändert werden.
+  Wird zum Beispiel verwendet, wenn mehrere Adressen eines Netzes zu
+  einer einzigen Adresse umgesetzt werden sollen.
+  Masquerading bei Linux ist eine Form von NAPT.
+
+NAT
+: Network Address Translation, das Verändern der Quell- und/oder
+  Ziel-Adressen von Datagrammen, die einen Router oder eine Firewall
+  passieren.
+
+NATBlaster
+: Ein Verfahren zum Aufbau von direkten TCP-Verbindungen zwischen zwei
+  Geräten, die sich beide hinter NAT befinden.
+
+NAT-Traversal
+: Verfahren zum Errichten und Aufrechterhalten von Netzwerkverbindungen
+  über NAT-Geräte.
+  Es gibt verschiedene Verfahren, die abhängig sind vom Verhalten der
+  NAT-Geräte und von den Anforderungen der transportierten Daten.
+  Wird zum Beispiel benötigt für Peer-to-Peer-Dateiaustausch,
+  Voice-over-IP oder IPsec.
+
+Neighbor Discovery
+: Das Auflösen von IPv6-Adressen zu Link-Layer-Adressen.
+  Ersetzt ARP von IPv4.
+
+Netfilter
+: Ein Software-Projekt, das Paketfilter, NAT und weitere für Firewalls
+  relevante Werkzeuge für Linux bereitstellt.
+  Darum geht es in diesem Buch.
+
+OpenVPN
+: Ein Programm zum Aufbau von VPN über verschlüsselte TLS-Verbindungen.
+  Kann mit UDP oder TCP arbeiten.
+
+OPKG Package Manager
+: Ein Programm zu Software-Verwaltung unter OpenWrt.
+
+OSI-Modell
+: Ein Schichtenmodell, das als Grundlage für den Entwurf von
+  Kommunikationsprotokollen entwickelt wurde.
+
+Path-MTU
+: Die kleinste MTU aller Teilnetze, die ein Datagramm durchquert um vom
+  Sender zum Empfänger zu gelangen.
+  TCP hat einen Mechanismus, um die Path-MTU automatisch zu bestimmen,
+  der durch einen unsachgemäß eingestellten Paketfilter gestört werden
+  kann.
+
+Perimeter-Router
+: Ein Router an der Grenze zwischen zwei Netzen, die zu verschiedenen
+  Verantwortungsbereichen gehören.
+  Zum Beispiel ein Internet-Zugangsrouter.
+
+Port-Scan
+: Das Ausprobieren verschiedener Ports an einem oder mehreren Rechnern,
+  um zu überprüfen, ob an diesen Ports Dienste angenommen werden.
+
+PPP
+: Point-to-Point Protocol, ursprünglich ein Protokoll für Wählleitungen,
+  ist heute das Standardprotokoll für Internetprovider.
+
+Privacy Extensions
+: Eine Erweiterung für IPv6, durch die sich Client-Rechner selbst
+  regelmäßig wechselnde Adressen zuweisen damit ein Rechner nicht an
+  Hand seiner IPv6-Adresse wiedererkannt werden kann.
+  Für Server eher nicht geeignet.
+
+Proxy
+: Ein Programm, dass stellvertretend für ein Client-Programm
+  eine Verbindung aufbaut.
+  Dabei baut das Client-Programm die Verbindung zum Proxy auf und dieser
+  wiederum zum Server.
+
+Receive-Window
+: Bei TCP ist die maximale Datenmenge, die ein Computer empfangen kann,
+  ohne diese bestätigen zu müssen.
+  Will der Sender mehr Daten schicken, muss er auf eine Bestätigung der
+  bisher gesendeten Daten warten.
+
+RFC
+: Request for Comments ist der Name für eine Reihe von Dokumenten zum
+  Internet, in denen die meisten im Internet verwendeten Protokolle
+  beschrieben sind.
+
+Router
+: Ein Netzwerkgerät, dass Datagramme zwischen verschiedenen Netzen
+  weiterleiten kann.
+
+SELinux
+: Eine Erweiterung des Linux-Kernels für verbesserte Sicherheit.
+
+SIP
+: Session Initiation Protocol, ein Protokoll zum Aufbau, zur Steuerung
+  und zum Abbau von Verbindungen zwischen zwei und mehreren Teilnehmern,
+  wird häufig in der IP-Telefonie verwendet und ist in RFC 3261
+  beschrieben.
+
+SLAAC
+: siehe Stateless Address Auto Configuration.
+
+SMTP
+: Simple Mail Transfer Protocol, zum Austausch von E-Mails im Internet.
+
+SNAT
+: Source NAT, die Veränderung der Quelladresse eines Datagramms.
+
+SNMP
+: Simple Network Management Protocol, ein einfaches Protokoll zu
+  Überwachung und Steuerung von Geräten in einem Computernetz.
+
+SOHO
+: Small Office Home Office, Bezeichnung für kleine Büros und
+  Heimarbeitsplätze und für alles, was in diesem Zusammenhang verkauft
+  wird, zum Beispiel SOHO-Router.
+
+SSH
+: Secure Shell, Bezeichnung für ein Protokoll und das entsprechende
+  Programm, mit dem eine verschlüsselte Verbindung zu einem entfernten
+  Rechner herstellen kann.
+
+stateful
+: zustandsorientiert, zustandsbehaftet, bei einem Paketfilter bedeutet
+  das, das der Filter sich den Zustand der Verbindungen, die über ihn
+  laufen, merkt und alle Datagramme damit bewertet.
+
+stateless
+: zustandslos, bei einem Paketfilter bedeutet das, dass jedes Datagramm
+  ausschließlich nach den Regeln und den im Paket enthaltenen Daten
+  bewertet.
+
+Stateless Address Auto Configuration
+: Ein Verfahren zur zustandslosen automatischen Adresskonfiguration von
+  Geräten in einem IPv6-Netz. Zustandslos meint, dass die Adresse weder
+  zentral vergeben noch gespeichert wird.
+
+STUN
+: Session Traversion Utilities for NAT, ein einfaches Protokoll um
+  NAT-Router zu erkennen und direkte Verbindungen von Geräten, die sich
+  hinter verschiedenen NAT-Routern befinden, zu ermöglichen.
+  Benötigt einen Rendezvous-Server im Internet.
+
+TCP
+: Transmission Control Protocol, ein zuverlässiges,
+  verbindungsorientiertes, paketvermitteltes Transportprotokoll für
+  Computernetze.
+  Paketvermittelt meint, dass das Protokoll Datagramme für die
+  Verbindung verwendet.
+  Zuverlässig meint, dass verlorene Datagramme automatisch wiederholt
+  werden.
+  Verbindungsorientiert meint, dass die Daten beim Empfänger in der
+  Reihenfolge ankommen, in der sie beim Sender versandt werden.
+
+TCP-Stealth
+: Eine Erweiterung für TCP, die konform mit dem Standard ist, aber
+  ermöglicht, offene Ports an einem Server vor Port-Scans zu verbergen.
+
+Telnet
+: Ein Protokoll und ein Programm zur unverschlüsselten Datenübertragung
+  über TCP.
+
+Teredo
+: Ein IPv6-Übergangsmechanismus mit dem IPv6-Datagramme über IPv4-Netz
+  übertragen werden können.
+
+TFTP
+: Trivial File Transfer Protocol, ein sehr einfaches Protokoll zur
+  Übertragung von Dateien.
+  Wird zum Beispiel beim Starten von Rechnern aus dem Netzwerk oder zum
+  Sichern von Konfigurationsdateien von Routern verwendet.
+
+UDP
+: Universal Datagram Protocol, ein minimales, verbindungsloses Protokoll
+  zur Datenübertragung.
+  Es gibt keine Gewähr, dass die Daten überhaupt oder in der richtigen
+  Reihenfolge ankommen.
+
+Unicast
+: Eine Unicast-Nachricht geht vom Sender zu genau einem Empfänger, im
+  Gegensatz zu Broadcast und Multicast.
+
+VoIP
+: Voice over IP, Telefonieren über das Internet
+
+VPN
+: Virtual Private Network, ein virtuelles Netzwerk, dass zum
+  Datentransport andere Netzwerke, zum Beispiel das Internet verwendet.
+  Zum Schutz der Kommunikation im VPN werden die Datagramme darin oft
+  verschlüsselt über das Transportnetz verschickt.
+
+WAN
+: Wide Area Network, ein System von Computern, die über große
+  Entfernungen miteinander vernetzt sind.
+  Bei SOHO-Routern meist die Bezeichnung für den Internet-Anschluss.
+
+WLAN
+: Wireless Local Area Network, ein lokales Funknetz.
+
+X86
+: die Abkürzung für eine Mikroprozessor-Architektur, die auf die
+  Prozessoren der 8086/8088 Reihe von Intel zurückgeht.
+
