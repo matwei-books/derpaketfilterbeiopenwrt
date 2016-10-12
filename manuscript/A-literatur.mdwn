@@ -220,6 +220,12 @@ RFC 1885 (obsolet durch RFC 2463 und 4443)
 
   RFC 4443 beschreibt den aktuellen Draft Standard für ICMPv6.
 
+RFC 2131
+: Dynamic Host Configuration Protocol
+
+  DHCP stellt eine Grundstruktur bereit um Konfigurationsinformationen
+  für Hosts in einem IP-Netzwerk zu verbreiten.
+
 RFC 2181
 : Clarifications to the DNS Specification
 
@@ -270,6 +276,26 @@ RFC 2474
   zur Unterstützung von QoS herangezogen werden.
 
   Die RFCs 3168 und 3260 aktualisieren und ergänzen diesen RFC.
+
+RFC 2663
+: IP Network Address Translator (NAT) Terminology and Considerations
+
+  Das Motiv für diesen RFC ist, Klarheit in einige Begriffe zu bringen, die
+  in Verbindung mit Netzwerk-Adressübersetzern verwendet werden.
+
+RFC 2784
+: Generic Routing Encapsulation (GRE)
+
+  Das ist ein Versuch, einen einfachen, allgemeinen Mechanismus
+  für die Kapselung eines Protokolls in einem anderen bereitzustellen.
+
+RFC 2894
+: Router Renumbering for IPv6
+
+  Dieses Dokument definiert Mechanismen um eine Reihe von Routern über
+  Netzumnummerierungen zu informieren.
+  Das will ich definitiv nur von vertrauenswürdigen Knoten aus
+  übertragen.
 
 RFC 3128
 : Protection Against a Variant of the Tiny Fragment Attack

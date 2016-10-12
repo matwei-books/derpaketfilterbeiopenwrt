@@ -85,8 +85,8 @@ ebenfalls 32 Bit pro Zeile zeigt.
 Der ICMP-Header folgt unmittelbar auf den IPv4-Header.
 
 ICMP ist für viele Firewall-Administratoren eine Problemzone.
-Um 2000 herum brachte Ofir Arkin seine Untersuchungsergebnisse über den
-Gebrauch von ICMP für das Scannen von Netzwerken heraus.
+Um das Jahr 2000 herum brachte Ofir Arkin seine Untersuchungsergebnisse
+über den Gebrauch von ICMP für das Scannen von Netzwerken heraus.
 Konnten zuvor in den meisten Firewalls ICMP-Pakete freizügig passieren,
 so wurden sie danach in vielen Konfigurationen rigoros gesperrt.
 Leider gibt es einige ICMP-Datagramme, die keinesfalls gesperrt werden
@@ -104,8 +104,8 @@ herangezogen werden.
 {width=58%}
 ![TCP Datagramm](images/w879-tcp.png)
 
-Beschrieben in RFC 793, ist TCP der am häufigsten verwendeten Protokolle
-im Internet.
+Beschrieben in RFC 793, ist TCP eines der am häufigsten verwendeten
+Protokolle im Internet.
 Die folgende ASCII-Graphik ist dem RFC entnommen und lässt bereits die
 Komplexität des Protokolls erahnen.
 

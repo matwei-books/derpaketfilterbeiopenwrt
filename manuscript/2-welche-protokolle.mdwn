@@ -77,6 +77,9 @@ RFC 1349 ändert und erläutert einige Aspekte des Type of Service
 RFC 2474 definiert das Differentiated Services (DS) Feld und
 RFC 6864 aktualisiert die Definition des ID-Feldes.
 
+Da dieses Protokoll eines der wichtigsten für Firewall-Administratoren
+ist, gehe ich in einem eigenen Kapitel intensiver darauf ein.
+
 ## IPv6
 
 IPv6 wurde erstmals 1995 in RFC 1883 beschrieben.
@@ -84,6 +87,9 @@ IPv6 wurde erstmals 1995 in RFC 1883 beschrieben.
 
 RFC 4303 "IP Encapsulation Security Payload (ESP)" beschreibt die IPv6
 Header Extensions für IPsec.
+
+Da dieses Protokoll immer wichtiger für Firewall-Administratoren wird,
+gehe ich in einem eigenen Kapitel intensiver darauf ein.
 
 ## ICMP
 
@@ -94,6 +100,11 @@ RFC 6633 und RFC 6918 begründen die Ablehnung von wenig genutzten
 ICMP-Nachrichten.
 Damit helfen mir diese beiden RFCs bei der Entscheidung für oder gegen
 diese Datagramme.
+
+Auch auf dieses Protokoll gehe ich in einem eigenen Kapitel intensiver
+ein, da gerade hier sehr viele Nuancen stecken, bei denen durch
+unbedachte Sperrung oder Freigabe potentiell Schaden angerichtet
+werden kann.
 
 ## ICMPv6
 
@@ -106,6 +117,9 @@ RFC 4884 aktualisiert und ergänzt diesen Draft Standard.
 Für mich als Firewall-Administrator ist RFC 4890 "Recommendations for
 Filtering ICMPv6 Messages in Firewalls" interessant, welches begründete
 Empfehlungen für die Behandlung von ICMPv6 gibt.
+
+Auch bei diesem Protokoll gehe ich auf wesentliche Punkte in einem
+eigenen Kapitel intensiver ein.
 
 ## IGMP
 

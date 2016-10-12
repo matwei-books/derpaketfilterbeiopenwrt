@@ -121,12 +121,13 @@ der Adressen und Routen.
 Nachrichten zur Umnummerierung des Netzes können ein Netzsegment unerreichbar
 machen.
 Diese Nachrichten will ich auf jeden Fall am Border-Router filtern.
+RFC 2894 beschreibt das Verfahren.
 
 ### Probleme durch ICMPv6-Transparenz
 
 Da ICMPv6-Nachrichten in beiden Richtungen zugelassen werden müssen, können
 diese für verdeckte Kommnikationskanäle benutzt werden.
-Diesem kann ich mit DPI-Techniken begegnen, die sicherstellen, dass die
+Diesem kann ich mit Connection Tracking begegnen, um sicherzustellen, dass die
 ICMP-Nachrichten zu legitimen Datenverkehr gehören.
 
 ## Empfehlungen zur Filterung
@@ -147,9 +148,9 @@ in Regeln für Nachrichten, die
 *   entsprechend einer Richtlinie verworfen werden können oder nicht,
 *   immer verworfen werden sollten.
 
-Generell müssen Firewalls, die als Bridge in einem Netzsegment arbeiten,
-link-lokale ICMPv6-Nachrichten eher durchlassen, während Firewall-Router
-diese einfach sperren können.
+Generell sollten Firewalls, die als Bridge in einem Netzsegment arbeiten,
+link-lokale ICMPv6-Nachrichten beachten, während Firewall-Router diese
+einfach ignorieren können.
 
 Eine Host-Firewall kann man sich als Spezialfall einer
 Firewall-Bridge vorstellen, die aus dem Netz nur Pakete für das eigene
