@@ -1,8 +1,8 @@
 
 # Was kann ich damit machen?
 
-Die nächste Frage ist: wofür kann ich OpenWrt einsetzen.
-Dazu will ich hier nur einen kurzen Ausschnitt geben und beschränke mich
+Als nächstes interessiert vielleicht, wofür sich OpenWrt einsetzen lässt.
+Dazu gebe ich hier nur einen kurzen Ausschnitt und beschränke mich
 auf Einsatzfälle, bei denen der Paketfilter eine Rolle spielt.
 
 OpenWrt kann ich einsetzen:

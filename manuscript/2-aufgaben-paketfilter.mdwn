@@ -108,8 +108,7 @@ betrachteten Systems erreiche und die Verluste, die bei der Benutzung des
 Systems entstehen.
 Das Ermitteln dieser Zahlen benötigt betriebswirtschaftliche Kenntnisse.
 
-Mit einer Security Policy (Sicherheitsrichtlinie) kann ich nur die
-Verluste direkt reduzieren.
+Mit einer Security Policy (Sicherheitsrichtlinie) kann ich nur Verluste reduzieren.
 Die ermittelten finanziellen Werte geben den finanziellen Rahmen vor,
 innerhalb dessen sich meine Security Policy und die von ihr abgeleiteten
 Maßnahmen bewegen müssen, damit ich mich nicht langfristig zugrunde richte.

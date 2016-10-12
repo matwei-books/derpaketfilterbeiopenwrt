@@ -41,22 +41,22 @@ verwenden.
 Einen Hinweis, welches Skript zu welcher Konfiguration gehört, liefert die
 Datei */etc/config/lucitrack* aus dem Paket *luci-base*.
 
-A> ### Init-Skripts genauer anschauen
+A> ### Init-Skripts analysieren
 A> 
 A> Um das richtige Skript zu finden, befrage ich UCI, zum Beispiel für
 A> die Firewall:
 A> 
 A>     # less /etc/init.d/$(uci get ucitrack.@firewall[0].init)
 A> 
-A> Die erste Zeile im Skript lautet
+A> Das Skript beginnt mit dieser Zeile:
 A> 
 A>     #!/bin/sh /etc/rc.common
 A> 
-A> Das bedeutet, das in dem Beispiel mit dem Neustart der Firewall die Shell
+A> Diese bedeutet, das in dem Beispiel mit dem Neustart der Firewall die Shell
 A> das Skript `/etc/rc.common` mit den Argumenten */etc/init.d/firewall* und
 A> *restart* aufruft.
 A> Will ich also eines der Startup-Skripts analysieren, fange ich bei
-A> */etc/rc.common* an um die in den Skripts verwendeten Funktionen zu
+A> */etc/rc.common* an, um die in den Skripts verwendeten Funktionen zu
 A> verstehen.
 
 ## Syntax der Konfigurationsdateien
