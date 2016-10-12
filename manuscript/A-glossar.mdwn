@@ -1,3 +1,5 @@
+# Glossar
+
 6rd
 : IPv6 Rapid Deployment on IPv4 Infrastructures, ist ein Verfahren zum
   Tunneln von IPv6 über IPv4-Netze, in RFC 5569 und RFC 5969
