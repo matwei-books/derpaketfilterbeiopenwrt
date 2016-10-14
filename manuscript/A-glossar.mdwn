@@ -1,12 +1,12 @@
 # Glossar
 
 6rd
-: IPv6 Rapid Deployment on IPv4 Infrastructures, ist ein Verfahren zum
+: IPv6 Rapid Deployment on IPv4 Infrastructures, ein Verfahren zum
   Tunneln von IPv6 über IPv4-Netze, in RFC 5569 und RFC 5969
   beschrieben.
 
 6to4
-: Connection of IPv6 Domains via IPv4 Clouds, ist ein Verfahren zum Tunneln
+: Connection of IPv6 Domains via IPv4 Clouds, ein Verfahren zum Tunneln
   von IPv6 über IPv4-Netze, in RFC 3056 beschrieben.
 
 APIPA
@@ -14,14 +14,15 @@ APIPA
   automatische Netzwerk-Konfiguration Zeroconf.
 
 Application Gateway, Application Layer Gateway
-: Eine Sicherheitskomponente in einem Computernetzwerk für Protokolle,
-  die problematisch bei der Adressumsetzung durch NAT sind. Definiert in
-  RFC 2663.
+: Ein anwendungsspezifischer Proxy-Dienst, der Hosts in einem
+  Adressbereich erlaubt sich mit Hosts in einem anderen Adressbereich zu
+  verbinden.
+  Definiert in RFC 2663.
 
 ARP
-: Das Address Resolution Protocol ermittelt die zu einer IP-Adresse
-  gehörende Adresse der Netzzugangsschicht, in den meisten Fällen
-  Ethernet, in RFC 826 beschrieben.
+: Address Resolution Protocol, ermittelt die zu einer IP-Adresse
+  gehörende Adresse der Netzzugangsschicht.
+  Beschrieben in RFC 826.
 
 Arptables
 : Programm des Netfilter-Frameworks von Linux, mit dem die Regeln für
@@ -32,11 +33,11 @@ Bonjour
   Zeroconf.
 
 Broadcast
-: Eine Broadcast-Nachricht wird an alle Teilnehmer eines Teilnetzwerks
+: Broadcast-Nachrichten werden an alle Teilnehmer eines Teilnetzwerks
   gesendet, im Gegensatz zu Multicast und Unicast.
 
 Broadcast-Domain
-: Der Bereich eines Netzwerkes, bis zu dem Broadcast-Nachrichten
+: Bereich eines Netzwerkes, bis zu dem Broadcast-Nachrichten
   gesendet werden.
   Üblicherweise alle Geräte im selben Layer2-Netzwerk.
 
@@ -46,7 +47,7 @@ Captive Portal
   Funktionen des Netzwerkes nutzen kann.
 
 CLI
-: Command Line Interface, die Kommandozeile, ein meist schwarzer Kasten,
+: Command Line Interface, die Kommandozeile, ein oft schwarzer Kasten,
   in dem man Befehle als Text eingibt und Ausgaben als Text präsentiert
   bekommt.
 
@@ -56,11 +57,12 @@ Connection Tracking
   Datagramme besser auf Gültigkeit prüfen zu können.
   Für bestimmte Protokolle, wie FTP, SIP, TFTP gibt es spezielle
   Connection Tracking Module, die den Inhalt der Daten untersuchen, um
-  zusätzliche Verbindungen identifizieren zu können.
+  weitere zur Sitzung gehörende Verbindungen identifizieren zu können.
 
 Datagramm
-: Eine geschlossene, unabhängige Dateneinheit, die vom Sender an den
+: Eine einzelne, unabhängige Dateneinheit, die vom Sender an den
   Empfänger geschickt wird.
+  Auch Datenpaket genannt.
 
 Datagramm-Header
 : Die Verwaltungsinformationen für das Versenden eines Datagramms werden
@@ -86,7 +88,7 @@ DHCP
 DMZ
 : Demilitarisierte Zone, ein Teilnetz eines Computernetzwerkes mit
   kontrollierten Zugriffsmöglichkeiten.
-  Eine DMZ wird meist zwischen zwei Netzen, zwischen denen der Verkehr
+  Eine DMZ wird meist zwischen Netzen, deren Verkehr
   reguliert werden soll, eingerichtet, zum Beispiel zwischen dem lokalen
   Netz und dem Internet.
 
@@ -95,8 +97,8 @@ DNAT
 
 DNS
 : Domain Name System, einer der wichtigsten Dienste in IP-basierten
-  Netzwerken, beantwortet Anfragen zu Rechner- und Dienstnamen,
-  Adressen, Zertifikaten,...
+  Netzwerken, beantwortet unter anderem Anfragen zu Rechner- und
+  Dienstnamen, Adressen und Zertifikaten.
 
 DPI
 : Deep Packet Inspection, ein Verfahren zur Überwachung und Filterung
@@ -158,7 +160,7 @@ FTP
   verfolgt und die Ports für die Daten dynamisch freigegeben werden.
 
 GRE
-: Generic Routing Encapsulation dient dazu, andere Protokolle
+: Generic Routing Encapsulation, dient dazu, andere Protokolle
   einzukapseln und über das Internet-Protokoll zu transportieren,
   beschrieben in RFC 2890.
 
@@ -176,22 +178,22 @@ Hole-Punching
   RFC 3489 beschreibt eine weiterentwickelte Form des Verfahrens.
 
 ICMP
-: Das Internet Control Message Protocol dient dem Austausch von
+: Internet Control Message Protocol, dient dem Austausch von
   Informations- und Fehlermeldungen für IPv4, definiert in RFC 792.
 
 ICMPv6
 : ICMP für IPv6.
 
 IDS
-: Ein Intrusion Detection System dient der automatischen Erkennung von
+: Intrusion Detection System, dient der automatischen Erkennung von
   Angriffen gegen ein Computersystem oder -netz.
 
 IETF
-: Die Internet Engineering Task Force beschäftigt sich mit der
+: Internet Engineering Task Force, beschäftigt sich mit der
   technischen Weiterentwicklung des Internet.
 
 IGMP
-: Das Internet Group Management Protocol dient zur Organisation von
+: Internet Group Management Protocol, dient zur Organisation von
   Multicast-Gruppen bei IPv4.
   Bei IPv6 werden dessen Aufgaben von ICMPv6 übernommen.
 
@@ -203,12 +205,12 @@ Ip6tables
   den IPv6-Paketfilter verwaltet werden können.
 
 IPS
-: Ein Intrusion Prevention System soll Funktionen bereitstellen, die
+: Intrusion Prevention System, soll Funktionen bereitstellen, die
   einen aktuellen Angriff gegen ein Computersystem oder -netz abwehren
   können.
 
 IPsec
-: Internet Protocol Security bezeichnet einen Satz von Protokollen, die
+: Internet Protocol Security, ein Satz von Protokollen, die
   eine kryptographisch gesicherte Kommunikation über unsichere Netze
   ermöglichen soll.
 
@@ -223,7 +225,7 @@ IPv6
 : Internet Protocol Version 6 ist der Nachfolger von IPv4.
 
 ISATAP
-: Intra-Site Automatic Tunnel Addressing Protocol ist ein Verfahren, um
+: Intra-Site Automatic Tunnel Addressing Protocol, ein Verfahren, um
   IPv6-Datagramme über IPv4-Netze zu übertragen.
 
 ISP
@@ -235,13 +237,13 @@ L1, L2, L3
   L2 die Sicherungsschicht, L3 die Vermittlungsschicht.
 
 Layer2-Domain
-: Ein Bereich eines Netzwerkes, in dem alle angeschlossenen Geräte in
+: Bereich eines Netzwerkes, in dem alle angeschlossenen Geräte in
   der selben Sicherungsschicht verbunden sind. Bei IPv4 alle Geräte, die
   über die Broadcast-Adresse erreicht werden können, bei IPv6 alle
   Geräte, die über ihre link-lokalen Adressen erreicht werden können.
 
 link-lokale Adresse
-: Die Adresse, die durch Autokonfiguration ermittelt wurde. Bei IPv4 via
+: durch Autokonfiguration ermittelte Adresse. Bei IPv4 via
   Zeroconf ausgehandelt, bei IPv6 durch SLAAC.
 
 MAC-Adresse
@@ -249,11 +251,11 @@ MAC-Adresse
   Netzwerkadapters.
 
 Masquerading
-: ist das Verbergen ganzer Netzwerke hinter einer einzelnen IP-Adresse
+: das Verbergen ganzer Netzwerke hinter einer einzelnen IP-Adresse
   bei NAT.
 
 Monitoring
-: ist das Überwachen von Computern und Netzwerk-Komponenten auf
+: das Überwachen von Computern und Netzwerk-Komponenten auf
   Fehlerzustände.
 
 MSS
@@ -275,7 +277,7 @@ MTU
   und des TCP-Headers von der MTU abgezogen werden muss.
 
 Multicast
-: Eine Multicast-Nachricht wird an eine Gruppe von Empfängern gesendet,
+: Multicast-Nachrichten werden an eine Gruppe von Empfängern gesendet,
   im Gegensatz zu Broadcast und Unicast.
 
 Multicast-DNS
@@ -283,7 +285,7 @@ Multicast-DNS
   von Namen.
   Im Gegensatz zu normalem DNS, bei dem wenige DNS-Server für die
   Namensauflösung zuständig sind, antwortet bei Multicast-DNS jeder Knoten
-  bei Anfragen zu den von ihm beanspruchten Namen.
+  auf Anfragen zu den von ihm beanspruchten Namen.
 
 NAPT
 : Network Address Port Translation, eine Art von NAT, bei der sowohl die
@@ -298,8 +300,8 @@ NAT
   passieren.
 
 NATBlaster
-: Ein Verfahren zum Aufbau von direkten TCP-Verbindungen zwischen zwei
-  Geräten, die sich beide hinter NAT befinden.
+: Verfahren und Software zum Aufbau von direkten TCP-Verbindungen zwischen
+  zwei Geräten, die sich beide hinter NAT befinden.
 
 NAT-Traversal
 : Verfahren zum Errichten und Aufrechterhalten von Netzwerkverbindungen
@@ -314,7 +316,7 @@ Neighbor Discovery
   Ersetzt ARP von IPv4.
 
 Netfilter
-: Ein Software-Projekt, das Paketfilter, NAT und weitere für Firewalls
+: Software-Projekt, das Paketfilter, NAT und weitere für Firewalls
   relevante Werkzeuge für Linux bereitstellt.
   Darum geht es in diesem Buch.
 
