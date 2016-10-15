@@ -32,13 +32,13 @@ noch nützlich ist.
 
 Es gibt vier Hauptteile.
 
-Im ersten Teil widme ich mich allgemeinen Fragen.
+Im **ersten** Teil widme ich mich allgemeinen Fragen.
 Was kann ich mit OpenWrt machen und was nicht?
 Welche Vor- und Nachteile hat OpenWrt gegenüber anderen Systemen?
 Im wesentlichen also Fragen, die interessant sind, bevor ich mich für
 OpenWrt entscheide.
 
-Im zweiten Teil wird es spezieller.
+Im **zweiten** Teil wird es spezieller.
 Das Buch behandelt Netzwerk-Paketfilter und um diese effektiv
 einzusetzen, muss ich einige Grundlagen über IP-Netzwerke wissen.
 Die wichtigsten Netzwerkthemen, wie IPv4, IPv6, ICMP und NAT betrachte
@@ -46,7 +46,7 @@ ich aus dem Blickwinkel des Firewall-Administrators.
 Die Themen dieses Teiles sind relevant für jede Art von
 Paketfilter-Firewall, nicht nur für Linux und OpenWrt.
 
-Im dritten Teil geht es mitten hinein in das Thema des Buches.
+Im **dritten** Teil geht es mitten hinein in das Thema des Buches.
 Die Beschreibung des Netfilter-Systems, der weiteren
 Kernel-Unterstützung für Firewalls und der zugehörigen
 Userspace-Programme ist noch übertragbar auf andere Linux-Systeme mit
@@ -55,7 +55,7 @@ Die neue *nftables* Firewall bleibt noch außen vor.
 Ganz spezifisch auf OpenWrt zugeschnitten sind die Kapitel über das
 Modell der Regelketten sowie die Konfiguration mit LuCI und UCI.
 
-Im vierten Teil geht es um praktische Fragen und Rezepte für spezielle
+Im **vierten** Teil geht es um praktische Fragen und Rezepte für spezielle
 Probleme.
 Wie ermittle ich überhaupt meine persönlichen Anforderungen?
 Wie wähle ich die Hardware und Software aus?
@@ -89,3 +89,22 @@ Ansonsten verwende ich *kursive Schrift* für Hervorhebungen.
 
 W> Warnungen sind mit diesem Symbol am Rand gekennzeichnet.
 
+## Danksagung
+
+OpenWrt ist das Werk vieler Freiwilliger.
+Da sind die unzähligen Autoren der Software, die Leute, die das System
+zusammenstellen und die, die es auf neue Hardware portieren und dort
+testen, die Autoren der Dokumentation für die Software und für die
+Webseiten von OpenWrt.
+Diejenigen, die in Foren Fragen beantworten, aber auch die, welche die
+Fragen stellen.
+Allen diesen verdanke ich die Kenntnisse, die ich in diesem Buch
+zusammengetragen und hoffentlich verständlich dargelegt habe.
+
+Neben diesen gebührt mein besonderer Dank Ulf Rudolf, der mich auf
+einige Unklarheiten in frühen Manuskripten hinwies und meinen Blick
+dafür schärfte.
+
+Nicht zu vergessen das Team von Leanpub, das mir ermöglichte, mich auf
+den Text sowie die Recherchen und Tests dafür zu konzentrieren und mir
+die Arbeit mit der Formatierung für die verschiedenen Formate abnahm.
