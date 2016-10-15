@@ -321,14 +321,14 @@ Netfilter
   Darum geht es in diesem Buch.
 
 OpenVPN
-: Ein Programm zum Aufbau von VPN über verschlüsselte TLS-Verbindungen.
+: Programm zum Aufbau von VPN über verschlüsselte TLS-Verbindungen.
   Kann mit UDP oder TCP arbeiten.
 
 OPKG Package Manager
-: Ein Programm zu Software-Verwaltung unter OpenWrt.
+: Programm zu Software-Verwaltung unter OpenWrt.
 
 OSI-Modell
-: Ein Schichtenmodell, das als Grundlage für den Entwurf von
+: Schichtenmodell, das als Grundlage für den Entwurf von
   Kommunikationsprotokollen entwickelt wurde.
 
 Path-MTU
@@ -339,12 +339,12 @@ Path-MTU
   kann.
 
 Perimeter-Router
-: Ein Router an der Grenze zwischen zwei Netzen, die zu verschiedenen
+: Router an der Grenze zwischen zwei Netzen, die zu verschiedenen
   Verantwortungsbereichen gehören.
   Zum Beispiel ein Internet-Zugangsrouter.
 
 Port-Scan
-: Das Ausprobieren verschiedener Ports an einem oder mehreren Rechnern,
+: Ausprobieren verschiedener Ports an einem oder mehreren Rechnern,
   um zu überprüfen, ob an diesen Ports Dienste angenommen werden.
 
 PPP
@@ -352,13 +352,13 @@ PPP
   ist heute das Standardprotokoll für Internetprovider.
 
 Privacy Extensions
-: Eine Erweiterung für IPv6, durch die sich Client-Rechner selbst
+: Erweiterung für IPv6, durch die sich Client-Rechner selbst
   regelmäßig wechselnde Adressen zuweisen damit ein Rechner nicht an
   Hand seiner IPv6-Adresse wiedererkannt werden kann.
   Für Server eher nicht geeignet.
 
 Proxy
-: Ein Programm, dass stellvertretend für ein Client-Programm
+: Programm, dass stellvertretend für ein Client-Programm
   eine Verbindung aufbaut.
   Dabei baut das Client-Programm die Verbindung zum Proxy auf und dieser
   wiederum zum Server.
@@ -370,19 +370,20 @@ Receive-Window
   bisher gesendeten Daten warten.
 
 RFC
-: Request for Comments ist der Name für eine Reihe von Dokumenten zum
+: Request for Comments, Name für eine Reihe von Dokumenten zum
   Internet, in denen die meisten im Internet verwendeten Protokolle
   beschrieben sind.
 
 Router
-: Ein Netzwerkgerät, dass Datagramme zwischen verschiedenen Netzen
+: Netzwerkgerät, dass Datagramme zwischen verschiedenen Layer2-Domains
   weiterleiten kann.
 
 SELinux
-: Eine Erweiterung des Linux-Kernels für verbesserte Sicherheit.
+: Security Enhanced Linux, Erweiterung des Linux-Kernels für verbesserte
+  Sicherheit.
 
 SIP
-: Session Initiation Protocol, ein Protokoll zum Aufbau, zur Steuerung
+: Session Initiation Protocol, Protokoll zum Aufbau, zur Steuerung
   und zum Abbau von Verbindungen zwischen zwei und mehreren Teilnehmern,
   wird häufig in der IP-Telefonie verwendet und ist in RFC 3261
   beschrieben.
@@ -397,7 +398,7 @@ SNAT
 : Source NAT, die Veränderung der Quelladresse eines Datagramms.
 
 SNMP
-: Simple Network Management Protocol, ein einfaches Protokoll zu
+: Simple Network Management Protocol, einfaches Protokoll zu
   Überwachung und Steuerung von Geräten in einem Computernetz.
 
 SOHO
@@ -408,20 +409,20 @@ SOHO
 SSH
 : Secure Shell, Bezeichnung für ein Protokoll und das entsprechende
   Programm, mit dem eine verschlüsselte Verbindung zu einem entfernten
-  Rechner herstellen kann.
+  Rechner hergestellt kann.
 
 stateful
-: zustandsorientiert, zustandsbehaftet, bei einem Paketfilter bedeutet
-  das, das der Filter sich den Zustand der Verbindungen, die über ihn
-  laufen, merkt und alle Datagramme damit bewertet.
+: zustandsorientiert/zustandsbehaftet, bei einem Paketfilter bedeutet
+  das, das dieser sich den Zustand der Verbindungen, die über ihn
+  laufen, merkt und bei der Bewertung der Datagramme berücksichtigt.
 
 stateless
 : zustandslos, bei einem Paketfilter bedeutet das, dass jedes Datagramm
   ausschließlich nach den Regeln und den im Paket enthaltenen Daten
-  bewertet.
+  bewertet wird.
 
 Stateless Address Auto Configuration
-: Ein Verfahren zur zustandslosen automatischen Adresskonfiguration von
+: Verfahren zur zustandslosen automatischen Adresskonfiguration von
   Geräten in einem IPv6-Netz. Zustandslos meint, dass die Adresse weder
   zentral vergeben noch gespeichert wird.
 
@@ -447,11 +448,10 @@ TCP-Stealth
   ermöglicht, offene Ports an einem Server vor Port-Scans zu verbergen.
 
 Telnet
-: Ein Protokoll und ein Programm zur unverschlüsselten Datenübertragung
-  über TCP.
+: Protokoll und Programm zur unverschlüsselten Datenübertragung über TCP.
 
 Teredo
-: Ein IPv6-Übergangsmechanismus mit dem IPv6-Datagramme über IPv4-Netz
+: IPv6-Übergangsmechanismus mit dem IPv6-Datagramme über IPv4-Netz
   übertragen werden können.
 
 TFTP
@@ -474,20 +474,20 @@ VoIP
 : Voice over IP, Telefonieren über das Internet
 
 VPN
-: Virtual Private Network, ein virtuelles Netzwerk, dass zum
+: Virtual Private Network, ein Netzwerk, dass zum
   Datentransport andere Netzwerke, zum Beispiel das Internet verwendet.
-  Zum Schutz der Kommunikation im VPN werden die Datagramme darin oft
+  Zum Schutz der Kommunikation im VPN werden die Datagramme oft
   verschlüsselt über das Transportnetz verschickt.
 
 WAN
-: Wide Area Network, ein System von Computern, die über große
+: Wide Area Network, System von Computern, die über große
   Entfernungen miteinander vernetzt sind.
   Bei SOHO-Routern meist die Bezeichnung für den Internet-Anschluss.
 
 WLAN
-: Wireless Local Area Network, ein lokales Funknetz.
+: Wireless Local Area Network, lokales Funknetz.
 
 X86
-: die Abkürzung für eine Mikroprozessor-Architektur, die auf die
+: Abkürzung für eine Mikroprozessor-Architektur, die auf die
   Prozessoren der 8086/8088 Reihe von Intel zurückgeht.
 
