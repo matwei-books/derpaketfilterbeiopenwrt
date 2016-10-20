@@ -11,6 +11,16 @@ ISBN 978-1-4717-2849-5
 
 ## Artikel
 
+### BiFeWiPe2005
+
+Andrew Biggadike, Daniel Ferullo, Geoffrey Wilson, Adrian Perrig;
+NATBLASTER: Establishing TCP Connections Between Hosts Behind NATs;
+Proceedings of ACM SIGCOMM ASIA Workshop 2005
+<http://www.netsec.ethz.ch/publications/papers/natblaster.pdf>
+
+Die Autoren beschreiben ein Verfahren, um direkte TCP-Verbindungen
+zwischen zwei Hosts hinter NAT-Geräten aufzubauen.
+
 ### ctLindner2014
 
 Felix 'FX' Lindner; Licht aus! - Sicherheit kritischer Infrastrukturen
@@ -25,6 +35,25 @@ ISSN 0724-8679
 
 Dieser Artikel führt kurz und verständlich in das Protokoll *Bonjour*
 für die automatische Netzwerk-Konfiguration ein.
+
+### ctSchmidt2006
+
+Jürgen Schmidt; Der Lochtrick - Wie Skype & Co. Firewalls umgehen; c't
+Magazin für Computertechnik 2006 Heft 17, S. 142ff; ISSN 0724-8679
+
+Der Autor beschreibt anschaulich das "UDP hole punching" bei NAT-Geräten
+und zeigt, wie man das Prinzip mit einfachen Mitteln selbst ausprobieren
+kann.
+
+### FoSriKe2005
+
+Bryan Ford, Pyda Srisuresh, Dan Kegel; Peer-to-Peer Communication Across
+Network Address Translators; Proceedings of the USENIX Annual Technical
+Conference (Anaheim, CA), April 2005, S.179-192
+
+Die Autoren fassen die verschiedenen Verfahren, um direkte UDP- und
+TCP-Verbindungen über NAT-Geräte aufzubauen, zusammen und gehen auch auf
+die Eigenschaften von P2P-freundlcihen NAT-Geräten ein.
 
 ### ixWegener2013
 
@@ -297,6 +326,12 @@ RFC 2894
   Das will ich definitiv nur von vertrauenswürdigen Knoten aus
   übertragen.
 
+RFC 3027
+: Protocol Complications with the IP Network Address Translator
+
+  Dieser informatorische RFC von 2001 zeigt einige Probleme mit NAT auf
+  identifiziert Protokolle, die durch NAT gestört werden.
+
 RFC 3128
 : Protection Against a Variant of the Tiny Fragment Attack
 
@@ -348,6 +383,16 @@ RFC 4379
   Dieser RFC ist eher interessant, wenn man MPLS einsetzt und die
   Paketfilter darauf abstimmen will.
 
+RFC 4380
+: Teredo: Tunneling IPv6 over UDP through Network Address Translations (NATs)
+
+  Teredo ist ein älterer Mechanismus für das Tunneln von IPv6
+  Datenverkehr über IPv4-Netze.
+  Es ist für den Firewall-Administrator aus zwei Gründen interessant:
+  einerseits ist es ein Tunnel-Protokoll, das Daten von IPv6 in
+  IPv4-Datagrammen kapselt und ist zumindest in einigen Fällen in der
+  Lage direkte Verbindungen über NAT-Geräte herzustellen.
+
 RFC 4443
 : Internet Control Message Protocol (ICMPv6) for the Internet Protocol
   Version 6 (IPv6) Specification
@@ -391,6 +436,12 @@ RFC 5095
   Dieser Proposed Standard beschreibt das Problem ausführlich und erläutert,
   wie man damit am besten - insbesondere bei einem Paketfilter - umgeht.
 
+RFC 5128
+: State of Peer-to-Peer (P2P) Communication across Network Address Translators (NATs)
+
+  Dieser informatorische RFC von 2008 dokumentiert verschiedene Methoden
+  um direkte Kommunikation über NAT-Geräte zu ermöglichen.
+
 RFC 5227
 : IPv4 Address Conflict Detection
 
@@ -404,6 +455,14 @@ RFC 5227
   Beziehungsweise, falls auf beiden Seiten der Bridge eine IP-Adresse von
   unterschiedlichen Hosts bedient werden soll, kann man aus diesem RFC
   ableiten, wie das ermöglicht werden kann.
+
+RFC 5389
+: Session Traversal Utilities for NAT (STUN)
+
+  STUN ist ein Protokoll, das anderen Protokollen als Werkzeug dienen
+  kann, um NAT zu traversieren.
+  Das ist eine Weiterentwicklung des originalen STUN RFCs (3489), der
+  einige Probleme aufwies.
 
 RFC 5722
 : Handling of Overlapping IPv6 Fragments
