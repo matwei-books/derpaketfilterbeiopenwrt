@@ -249,6 +249,13 @@ RFC 1885 (obsolet durch RFC 2463 und 4443)
 
   RFC 4443 beschreibt den aktuellen Draft Standard für ICMPv6.
 
+RFC 2003
+: IP Encapsulation within IP
+
+  Dieses Dokument von 1996 beschreibt die Kapselung von IPv4-Datagrammen in
+  IPv4-Datagrammen.
+  Damit können generische Tunnel zwischen zwei Netzen aufgebaut werden.
+
 RFC 2131
 : Dynamic Host Configuration Protocol
 
@@ -367,6 +374,15 @@ RFC 3376
   interessant.
   Neben diesen sind noch die Abschnitte 9 und 10 aus RFC 2236 (IGMP v2)
   empfehlenswert.
+
+RFC 4213
+: Basic Transition Mechanisms for IPv6 Hosts and Routers
+
+  Dieses Dokument beschreibt zwei Kompatibilitätsmechanismen für
+  IPv6-Hosts oder -Router.
+  Der eine Mechanismus ist Dual Stack, der andere die Kapselung von
+  IPv6-Datagrammen in IPv4-Datagrammen ähnlich der in RFC 2003 für das
+  Tunneln von IPv4 in IPv4 beschriebenen.
 
 RFC 4301
 : Security Architecture for the Internet Protocol

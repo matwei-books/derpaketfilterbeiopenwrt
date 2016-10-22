@@ -180,3 +180,10 @@ RFC 4380 beschreibt dieses Protokoll.
 Protokolle in beliebigen anderen Protokollen zu kapseln.
 In RFC 2748 finde ich Informationen dazu.
 
+**IP Encapsulation within IP** erlaubt ebenfalls beinahe beliebige
+IP-Protokolle zu kapseln indem vor den inneren IP-Header ein
+äußerer gesetzt wird.
+RFC 2003 beschreibt das Verfahren für die Kapselung von IPv4 in IPv4.
+RFC 4213 beschreibt es für die Kapselung von IPv6 in IPv4.
+Auf BSD-Systemen ist diese Art der Kapselung als GIF-Interface (generic
+tunnel interface) bekannt.
