@@ -3,6 +3,12 @@
 
 ## Bücher
 
+### Hagen2014 {#lit-hagen2014}
+
+Hagen, Silvia; IPv6 Essentials - Integrating IPv6 into your IPv4 Network;
+O'Reilly, Sebastopol, 2014;
+ISBN 978-1-449-31921-2
+
 ### Weidner2012 {#lit-weidner2012}
 
 Weidner, Mathias; Linux kopflos mit PC Engines ALIX;
@@ -44,6 +50,18 @@ Magazin für Computertechnik 2006 Heft 17, S. 142ff; ISSN 0724-8679
 Der Autor beschreibt anschaulich das "UDP hole punching" bei NAT-Geräten
 und zeigt, wie man das Prinzip mit einfachen Mitteln selbst ausprobieren
 kann.
+
+### ctSKL2012
+
+Christian Schneider, Martina Kannen, Martin Leischner; Bringdienst -
+IPv6-Autokonfiguration für Clients; c't Magazin für Computertechnik 2012
+Heff 11, S. 72-76
+
+Die Autoren erläutern mehrere Verfahren der IPv6-Autokonfiguration von
+Clients und berichten über den Stand der Unterstützung verschiedener
+Client-Betriebssysteme von 2012.
+Vom Thema dieses Buches her ist die Erläuterung der Verfahren
+interessant.
 
 ### FoSriKe2005
 

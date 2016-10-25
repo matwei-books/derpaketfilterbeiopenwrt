@@ -77,6 +77,8 @@ Auch diese Aufgabe übernimmt ICMPv6.
 Neu gegenüber IPv4 ist Stateless Address Autoconfiguration (SLAAC).
 Diese erspart dem Netzwerk-Administrator einiges an Arbeit.
 Für IPv4 ist in RFC 3927 mittlerweile ein ähnliches Verfahren beschrieben.
+Der Artikel [ctSKL2012] erläutert die IPv6-Autokonfiguration
+mittels SLAAC sowie mit DHCPv6.
 
 Ebenfalls neu sind die Privacy Extensions bei IPv6, mit denen ein
 Client-Rechner in bestimmten Abständen neue Adressen für sich bestimmt und
