@@ -51,6 +51,15 @@ Der Autor beschreibt anschaulich das "UDP hole punching" bei NAT-Geräten
 und zeigt, wie man das Prinzip mit einfachen Mitteln selbst ausprobieren
 kann.
 
+### ctSchoeler2014 {#lit-ctSchoeler2014}
+
+Timo Schöler; Gemächliche Revolution - iptables Nachfolger für Linux;
+c't Magazin für Computertechnik 2014 Heft 5, S. 106-109; ISSN 0724-8679
+
+Dieser Artikel stellt das neue Firewall-Framework für Linux *nftables*
+kurz vor, hilft bei ersten Schritten und verweist für weitergehende
+Informationen auf geeignete Onlinequellen.
+
 ### ctSKL2012
 
 Christian Schneider, Martina Kannen, Martin Leischner; Bringdienst -

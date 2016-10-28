@@ -52,6 +52,8 @@ Kernel-Unterstützung für Firewalls und der zugehörigen
 Userspace-Programme ist noch übertragbar auf andere Linux-Systeme mit
 *iptables*.
 Die neue *nftables* Firewall bleibt noch außen vor.
+Wer daran interessiert ist, findet in
+[[ctSchoeler2014](#lit-ctSchoeler2014)] einen Einstieg in das Thema.
 Ganz spezifisch auf OpenWrt zugeschnitten sind die Kapitel über das
 Modell der Regelketten sowie die Konfiguration mit LuCI und UCI.
 
