@@ -60,7 +60,9 @@ geschlossen werden kann.
 
 Dann ist es praktisch, wenn ich einen alten PC mit zwei Netzwerkadaptern übrig
 habe.
-Möglicherweise kann ich auch OpenWrt in einer VM verwenden.
+Hier kann ich auch OpenWrt in einer VM verwenden, was der Artikel
+[[ctAhlers2014](#lit-ctAhlers2014)] am Beispiel eines Windows-Rechners unter
+Einsatz von VirtualBox beschreibt.
 Für den Paketfilter gilt das gleiche wie für einen normalen Zugangsrouter.
 
 ## IPv6-Tunnel-Endpunkt
