@@ -29,12 +29,31 @@ zwischen zwei Hosts hinter NAT-Geräten aufzubauen.
 
 ### ctAhlers2014 {#lit-ctAhlers2014}
 
-Ernst Ahlers; Ersatzteil - Alt-PC zum Router umrüsten
+Ernst Ahlers; Ersatzteil - Alt-PC zum Router umrüsten;
 c't Magazin für Computertechnik 2014 Heft 5, S. 96-99; ISSN 0724-8679
 
 Der Autor beschreibt wie sich ein Windows-Rechner mit VirtualBox in
 wenigen Schritten zum Router mit OpenWrt umrüsten lässt, falls der
 existierende Zugangsrechner nicht mehr verwendbar ist.
+
+### ctKaps2014 {#lit-ctKaps2014}
+
+Reiko Kaps; Schilde hoch! - Angriffen auf Router vorbeugen;
+c't Magazin für Computertechnik 2014 Heft 9, S. 90-91; ISSN 0724-8679
+
+Der Autor vermittelt einige grundlegende Hinweise, die zumindest das
+automatisierte Ausnutzen von Schwachstellen in Routern erschweren
+können.
+
+### ctKGEAPM2014 {#lit-ctKGEAPM2014}
+
+Julian Kirsch, Christian Grothoff, Monika Ermert, Jacob Appelbaum, Laura
+Poitras, Henrik Moltke; TCP Stealth vs. Five Eyes - Mit Technik gegen
+staatliche Geheimdienst-Botnetze;
+c't Magazin für Computertechnik 2014 Heft 22, S. 170-173; ISSN 0724-8679
+
+Die Autoren beschreiben kurz die Wirkungsweise von TCP-Stealth und wie
+der Linux-Kernel damit ergänzt werden kann.
 
 ### ctLindner2014
 
@@ -42,7 +61,7 @@ Felix 'FX' Lindner; Licht aus! - Sicherheit kritischer Infrastrukturen
 im Test; c't Magazin für Computertechnik 2014 Heft 9, S. 150-155;
 ISSN 0724-8679
 
-### ctRudl2014 {#lit-ct-rudl2014}
+### ctRudl2014 {#lit-ctRudl2014}
 
 Tomas Rudl; Finden ohne Suche - Bonjour konfiguriert und findet Geräte
 im Netz; c't Magazin für Computertechnik 2014 Heft 15, S. 162-165;
@@ -90,6 +109,18 @@ Conference (Anaheim, CA), April 2005, S.179-192
 Die Autoren fassen die verschiedenen Verfahren, um direkte UDP- und
 TCP-Verbindungen über NAT-Geräte aufzubauen, zusammen und gehen auch auf
 die Eigenschaften von P2P-freundlcihen NAT-Geräten ein.
+
+### ixGK2014 {#lit-ixGK2014}
+
+Christian Grothoff, Julian Kirsch; Gut verschlossen - Unsichtbare Server
+mit TCP Stealth;
+iX Magazin für professionelle Informationstechnik 2014 Heft 10, S.136-138;
+ISSN 0935-9680
+
+Die Autoren beschreiben die von ihnen entwickelte, mit dem TCP-Standard
+kompatible Erweiterung, die es erlaubt, bereits das erste Datenpaket
+einer TCP-Verbindung zu authentifizieren und damit die Entdeckung von
+durch TCP Stealth geschützten Diensten durch Portscans zu vereiteln.
 
 ### ixPlura2014
 

@@ -238,4 +238,6 @@ Damit ist TCP-Stealth noch schwerer zu entdecken, als Port-Knocking, welches
 für die Signatur zusätzliche Datagramme verwendet, die nichts mit der
 eigentlichen Verbindungsaufnahme zu tun haben und dadurch einem aufmerksamen
 Beobachter auffallen können.
+In [[ixGK2014](#lit-ixGK2014)] und [[ctKGEAPM2014](#lit-ctKGEAPM2014)]
+finden sich nähere Informationen dazu.
 

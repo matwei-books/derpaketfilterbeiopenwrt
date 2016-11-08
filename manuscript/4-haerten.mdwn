@@ -9,9 +9,27 @@ Für das konkrete Absichern eines OpenWrt-Systems finde ich Informationen im
 Außerdem kann ich auf allgemeine Tipps zum Härten von Linux-Systemen
 zurückgreifen, die ich entsprechend der Situation an meinem Gerät adaptiere.
 
+## Allgemeine Hinweise
+
+In [[ctKaps2014](#lit-ctKaps2014)] finden sich allgemeine Hinweise um
+automatisierten Angriffen auf Routern vorzubeugen, die sich auch für Geräte
+mit OpenWrt bewähren:
+
+*    Keine Konfiguration über Internet, oder
+*    wenn dann nur mit geänderten Ports und
+*    Verschlüsselung
+*    Geänderte Kennworte und,
+*    wenn möglich, geänderte Anmeldenamen sowie
+*    geänderte interne Netzbereiche und darin
+*    geänderte Routeradressen.
+
+Das sind einfache grundlegende Maßnahmen, die nicht viel gegen einen
+gezielten Angriff ausrichten können, aber dafür sorgen, dass einfach
+gestrickte Skripts ins Leere laufen.
+
 ## Den Zugang sichern
 
-Die allererste Maßnahme ist die Absicherung des Zugangs zum Gerät.
+Eine der ersten Maßnahmen ist die Absicherung des Zugangs zum Gerät.
 Dabei geht es um die Art und Weise der Anmeldung selbst.
 
 Das OpenWrt-Wiki unterscheidet vier Arten, sich am System anzumelden,
