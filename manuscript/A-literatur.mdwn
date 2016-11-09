@@ -134,6 +134,17 @@ ausgebaut werden kann.
 Auf X86-Systemen ist sie damit mehr als eine Alternative zum Paketfilter
 von OpenWrt.
 
+### ixStrobel2014 {#lit-ixStrobel2014}
+
+Stefan Strobel; Abwehrstrategien - Technische Ansätze zum Schutz vor APTs;
+iX Magazin für professionelle Informationstechnik 2014 Heft 2, S.  109-111;
+ISSN 0935-9680
+
+Der Autor gibt einen Überblick über technische Ansätze, um Advanced
+Persistent Threats zu begegnen.
+Ein Paketfilter findet dabei seinen Platz bei den klassischen Ansätzen
+am Übergang zwischen verschiedenen Netzen.
+
 ### ixWegener2013
 
 Christoph Wegener; Breit gefasst - Monitoring nach der Einführung von

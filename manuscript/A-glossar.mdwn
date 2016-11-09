@@ -9,6 +9,11 @@
 : Connection of IPv6 Domains via IPv4 Clouds, ein Verfahren zum Tunneln
   von IPv6 über IPv4-Netze, in RFC 3056 beschrieben.
 
+Advanced Persistent Threats, APT
+: Gezielte Angriffe, bei denen Angreifer mit Nachdruck und umfangreichen
+  Ressourcen versuchen in Rechnersysteme beziehungsweise -netzwerke
+  einzudringen.
+
 APIPA
 : Automatic Private IP Addressing, Implementierung von Microsoft für die
   automatische Netzwerk-Konfiguration Zeroconf.
