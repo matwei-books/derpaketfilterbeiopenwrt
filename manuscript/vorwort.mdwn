@@ -51,11 +51,13 @@ Die Beschreibung des Netfilter-Systems, der weiteren
 Kernel-Unterstützung für Firewalls und der zugehörigen
 Userspace-Programme ist noch übertragbar auf andere Linux-Systeme mit
 *iptables*.
-Die neue *nftables* Firewall bleibt noch außen vor.
-Wer daran interessiert ist, findet in
-[[ctSchoeler2014](#lit-ctSchoeler2014)] einen Einstieg in das Thema.
 Ganz spezifisch auf OpenWrt zugeschnitten sind die Kapitel über das
 Modell der Regelketten sowie die Konfiguration mit LuCI und UCI.
+Die neue *nftables* Firewall bleibt noch außen vor.
+Wer daran interessiert ist, findet in
+[[ctSchoeler2014](#lit-ctSchoeler2014)] einen Einstieg in das Thema und
+im [OpenWrt-Wiki][wiki-nftables] Informationen zum Stand der
+Integration.
 
 Im **vierten** Teil geht es um praktische Fragen und Rezepte für spezielle
 Probleme.
@@ -110,3 +112,5 @@ dafür schärfte.
 Nicht zu vergessen das Team von Leanpub, das mir ermöglichte, mich auf
 den Text sowie die Recherchen und Tests dafür zu konzentrieren und mir
 die Arbeit mit der Formatierung für die verschiedenen Formate abnahm.
+
+[wiki-nftables]: https://wiki.openwrt.org/doc/howto/nftables

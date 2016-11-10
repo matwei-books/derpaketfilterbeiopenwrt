@@ -177,6 +177,15 @@ insbesondere zur Konfiguration mit UCI.
 Viele Details, die in diesem Buch keinen Platz gefunden haben, finden
 sich dort.
 
+### nftables (OpenWrt-Wiki)
+
+<https://wiki.openwrt.org/doc/howto/nftables>
+Aufgerufen: 2016-11-10
+
+Nftables ist der Nachfolger von Netfilter, der Grundlage dieses Buches.
+Auf dieser Wiki-Seite finden sich Hinweise zum Stand der Integration von
+nftables in OpenWrt sowie Verweise zu weiteren Informationen.
+
 ### Table of Hardware (OpenWrt-Wiki)
 
 <https://wiki.openwrt.org/toh/start>
