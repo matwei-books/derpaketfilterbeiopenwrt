@@ -153,14 +153,19 @@ IPv6; iX Magazin für professionelle Informationstechnik 2013 Heft 3, S.
 
 ## Online-Qellen
 
-### BSI Grundschatz
+### BSI Grundschatz {#lit-BSI-Grundschutz}
 
 <https://www.bsi.bund.de/DE/Themen/ITGrundschutz/itgrundschutz_node.html>  
-Aufgerufen: 2016-08-13
+Aufgerufen: 2016-11-10
 
 Der vom Bundesamt für Sicherheit in der Informationstechnik entwickelte
 IT-Grundschutz hilft, notwendige Sicherheitsmaßnahmen zu identifizieren
 und umzusetzen.
+Für die Risikoanalyse ist insbesondere der BSI-Standard 100-3
+"Risikoanalyse auf der Basis von IT-Grundschutz" interessant, für die
+Einarbeitung in das Thema der BSI-Standard 100-2
+"IT-Grundschutz-Vorgehensweise", die beide über den Link
+IT-Grundschutz-Standards zu finden sind.
 
 ### Firewall configuration (OpenWrt Wiki)
 

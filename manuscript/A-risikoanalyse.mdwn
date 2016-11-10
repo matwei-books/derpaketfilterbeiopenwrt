@@ -107,6 +107,7 @@ wähle je nach Bedarf die Maßnahmen aus, die mich davor schützen können.
 Hierbei betrachte ich die IT-Komponenten nach ihrem Typ.
 Die IT-Grundschutzkataloge des BSI kann ich dabei als Ausgangspunkt für eigene
 Überlegungen verwenden.
+Mehr zum IT-Grundschutz finde ich unter [[BSI Grundschatz](#lit-BSI-Grundschutz)].
 
 Finde ich für eine Komponente keine geeigneten Schutzmaßnahmen, muss ich
 eine Änderung der Struktur des IT-Systems in Betracht ziehen.
