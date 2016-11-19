@@ -19,7 +19,7 @@ APIPA
   automatische Netzwerk-Konfiguration Zeroconf.
 
 Application Gateway, Application Layer Gateway
-: Ein anwendungsspezifischer Proxy-Dienst, der Hosts in einem
+: Ein anwendungsspezifischer Dienst, der Hosts in einem
   Adressbereich erlaubt sich mit Hosts in einem anderen Adressbereich zu
   verbinden.
   Definiert in RFC 2663.
@@ -32,6 +32,13 @@ ARP
 Arptables
 : Programm des Netfilter-Frameworks von Linux, mit dem die Regeln für
   ARP-Einträge verwaltet werden können.
+
+Basic NAT
+: ein Block von externen Adressen wird reserviert für die Adressen von Hosts in einem privaten Netzbereich, wenn sie Verbindungen zum externen Bereich aufbauen.
+
+Bi-directional NAT
+: erlaubt den Aufbau von Verbindungen von beiden Seiten (intern und extern).
+  Wird auch Two-Way-NAT genannt.
 
 Bonjour
 : Implementierung von Apple für die automatische Netzwerk-Konfiguration
@@ -300,9 +307,7 @@ NAPT
   Masquerading bei Linux ist eine Form von NAPT.
 
 NAT
-: Network Address Translation, das Verändern der Quell- und/oder
-  Ziel-Adressen von Datagrammen, die einen Router oder eine Firewall
-  passieren.
+: Network Address Translation, das Verändern der Quell- und/oder Ziel-Adressen von Datagrammen, die einen Router oder eine Firewall passieren.
 
 NATBlaster
 : Verfahren und Software zum Aufbau von direkten TCP-Verbindungen zwischen
@@ -325,6 +330,10 @@ Netfilter
   relevante Werkzeuge für Linux bereitstellt.
   Darum geht es in diesem Buch.
 
+Network Realm
+: Netzwerkbereich, in dem Adressen eindeutig vergeben sind.
+  Bei der Kommunikation zwischen verschiedenen Network Realms wird oft NAT eingesetzt, wenn die Adressräume überlappen oder wenn Adressen aus einem Realm ungültig im anderen sind.
+
 OpenVPN
 : Programm zum Aufbau von VPN über verschlüsselte TLS-Verbindungen.
   Kann mit UDP oder TCP arbeiten.
@@ -335,6 +344,9 @@ OPKG Package Manager
 OSI-Modell
 : Schichtenmodell, das als Grundlage für den Entwurf von
   Kommunikationsprotokollen entwickelt wurde.
+
+Packet Flow
+: Richtung in der sich ein Datagramm bewegt, bezogen auf ein Netzwerkinterface.
 
 Path-MTU
 : Die kleinste MTU aller Teilnetze, die ein Datagramm durchquert um vom
@@ -386,6 +398,10 @@ Router
 SELinux
 : Security Enhanced Linux, Erweiterung des Linux-Kernels für verbesserte
   Sicherheit.
+
+Session Flow
+: Richtung, in der eine Verbindung initiiert wurde, bezogen auf ein Netzwerkinterface.
+  Da eine Verbindung in den meisten Fällen aus Datagrammen in zwei Richtungen besteht, ist der Session Flow mitunter verschieden vom Packet Flow.
 
 SIP
 : Session Initiation Protocol, Protokoll zum Aufbau, zur Steuerung
@@ -464,6 +480,10 @@ TFTP
   Übertragung von Dateien.
   Wird zum Beispiel beim Starten von Rechnern aus dem Netzwerk oder zum
   Sichern von Konfigurationsdateien von Routern verwendet.
+
+Twice-NAT
+: Sowohl Quell- als auch Zieladresse von Datagrammen werden übersetzt.
+  Twice-NAT wird verwendet, um Netzwerkbereiche mit überlappendem Adressraum und Adresskollisionen zu verbinden.
 
 UDP
 : Universal Datagram Protocol, ein minimales, verbindungsloses Protokoll

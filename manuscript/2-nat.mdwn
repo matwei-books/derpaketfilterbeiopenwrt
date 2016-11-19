@@ -88,7 +88,6 @@ In diesem Bereich haben sich daher verschiedene Verfahren etabliert, die
 sich mit dem Hole-Punching bei NAT-Boxen beschäftigen, dem automatischen
 Öffnen von Verbindungen zur direkten Kommunikation von zwei Rechnern, die
 sich beide hinter NAT-Boxen befinden.
-
 Diese Verfahren benötigen einen Rendezvous-Server, über den die
 Endgeräte die nötigen Informationen zum Partner bekommen und natürlich
 kooperierende NAT-Boxen.
@@ -108,17 +107,15 @@ Verbindung aufnehmen wollen.
 In diesem Fall teilt der Rendezvous-Server beiden Clients die gleiche
 NAT-Adresse mit und diese versuchen über die NAT-Box eine Verbindung in das
 private Netz zurück aufzubauen.
-Damit das funktioniert, muss es die NAT-Box unterstützen.
+Damit das funktioniert, muss es von der NAT-Box unterstützt werden.
 Sollten mehrere NAT-Boxen kaskadiert sein, muss zumindest die dem
 Rendezvous-Server zunächst gelegene NAT-Box Hair-Pinning unterstützen.
 RFC 2663, RFC 3022 und RFC 3303 gehen auf diese Aspekte ein.
 
-Aus dem vorgenannten ist sicher zu erkennen, das ich NAT eher für ein Übel
-als für einen Segen halte.
-Wenn es sich beim Entwurf des Netzes vermeiden lässt, würde ich auf jeden Fall
-darauf verzichten.
-Es gibt für mich nur einen triftigen Grund, der für NAT spricht: die
-Knappheit der Adressen bei IPv4.
+Aus dem vorgenannten ist sicher zu erkennen, das ich NAT eher für ein Übel als für einen Segen halte.
+Wenn es sich beim Entwurf des Netzes vermeiden lässt, würde ich auf jeden Fall darauf verzichten.
+Allgemein spricht nur die Knappheit der Adressen bei IPv4 für NAT.
+Konkret ist NAT notwendig, wenn zwei Netzbereiche mit überlappender Adressvergabe, zum Beispiel mit Adressen nach RFC 1918, verbunden werden sollen oder wenn ein Netzbereich mit Adressen nach RFC 1918 an das Internet angeschlossen werden soll.
 
 Zwar gibt es einige, die den Standpunkt vertreten, dass NAT einen gewissen
 Schutz bietet, weil das Netz dahinter nicht von außen adressiert und somit
@@ -127,4 +124,9 @@ Doch kann NAT keine durchdachte und mit Hilfe einer Firewall durchgesetzte
 Policy ersetzen.
 Ist die Firewall einmal im Betrieb ist der zusätzliche Nutzen durch NAT
 nur noch marginal.
+
+Demgegenüber steht die zusätzliche Rechenzeit, die für NAT aufgewendet werden muss.
+Setze ich NAT ein, muss der NAT-Router für jedes Datagramm das umgesetzt werden soll, in einer Tabelle nachschauen und die Adressen, Ports und Prüfsummen modifizieren.
+Ist die CPU des NAT-Routers nicht leistungsfähig genug, kann der mögliche Durchsatz erheblich sinken.
+In einem konkreten Fall hatte ich Unterschiede von mehr als 30 Prozent im maximalen Durchsatz mit und ohne NAT gemessen.
 
