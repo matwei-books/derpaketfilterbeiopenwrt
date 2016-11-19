@@ -353,6 +353,11 @@ RFC 1885 (obsolet durch RFC 2463 und 4443)
 
   RFC 4443 beschreibt den aktuellen Draft Standard für ICMPv6.
 
+RFC 1918
+: Address Allocation for Private Internets
+
+  Dieser RFC beschreibt die Verwendung der Adressbereiche 10/8, 172.16/12 und 192.168/16 für private, nicht direkt mit dem Internet verbundene IPv4-Netzwerke.
+
 RFC 2003
 : IP Encapsulation within IP
 
