@@ -185,6 +185,13 @@ insbesondere zur Konfiguration mit UCI.
 Viele Details, die in diesem Buch keinen Platz gefunden haben, finden
 sich dort.
 
+### Netfilter/Nftables (OpenWrt-Wiki)
+
+<https://wiki.openwrt.org/doc/howto/netfilter>
+Aufgerufen: 2016-11-22
+
+Die Seite zu den Netfilter-Modulen mit weiteren Hinweisen und etlichen externen Referenzen.
+
 ### nftables (OpenWrt-Wiki)
 
 <https://wiki.openwrt.org/doc/howto/nftables>
