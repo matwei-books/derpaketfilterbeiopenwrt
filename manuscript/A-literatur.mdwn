@@ -167,6 +167,14 @@ Einarbeitung in das Thema der BSI-Standard 100-2
 "IT-Grundschutz-Vorgehensweise", die beide über den Link
 IT-Grundschutz-Standards zu finden sind.
 
+### Secure use of iptables and connection tracking helpers
+
+<https://home.regit.org/netfilter-en/secure-use-of-helpers/>
+Aufgerufen: 2016-11-22
+
+Die Autoren geben Hinweise auf Fallstricke beim Einsatz von Iptables
+Session-Helpern für das Tracking von Protokollen wie FTP oder SIP.
+
 ### Firewall configuration (OpenWrt Wiki)
 
 <https://wiki.openwrt.org/doc/uci/firewall>  

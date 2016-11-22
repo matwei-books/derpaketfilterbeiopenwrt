@@ -73,6 +73,19 @@ Will ich diese Protokolle über den Paketfilter regulieren, werde ich
 daher auf jeden Fall mit stateful Regeln und Connection Tracking
 arbeiten und dafür nötigenfalls leistungsfähigere Hardware einsetzen.
 
+Beim Einsatz von Connection Tracking muss ich allerdings einige Feinheiten beachten.
+So ist es sinnvoll, die dynamisch ausgehandelten Verbindungen, die den Zustand RELATED bekommen, wenn möglich an fest vorgegebene IP-Adressen zu binden, zum Beispiel an die des FTP-Servers, wenn ich FTP zu einzelnen Servern freischalte.
+
+Wenn ein Session Helper auf einem anderen als dem Stardard-Port arbeiten soll, kann ich mit dem `CT` Target in den Regeln der Tabelle *raw* den entsprechenden Port einstellen.
+Dabei muss ich aber beachten, dass der Session Helper nicht mehr an den Standard-Ports lauschen darf, da sonst darüber unerwünschte Verbindungen freigeschaltet werden können.
+Zu diesem Zweck deaktiviere ich das Parsen der Verbindungen per Default und aktiviere es für jede gewünschte Verbindung mit dem `CT` Target.
+
+Schließlich muss ich im Hinterkopf behalten, dass Session Helpers die Daten in IP-Datagrammen inspizieren und selbst keine Prüfungen auf Gültigkeit der Datagramme vornehmen wie der Rest der Connection Tracking Module.
+Es ist daher möglich, durch gespoofte Datagramme Verbindungen über Session Helper freizuschalten, indem ich ein passendes Datagramm über ein anderes Interface einspeise.
+Dem muss ich mit Anti-Spoofing-Maßnahmen begegnen, zum Beispiel mit dem *rpfilter* Modul.
+
+Der Webartikel [Secure use of iptables and connection tracking helpers][suoiacth] geht näher auf diese Problematik ein.
+
 ## Application Level Gateways
 
 Application Level Gateways (ALG) erlauben es, Paketfilter zu umgehen.
@@ -160,4 +173,6 @@ Hier kann ich mit Rate-Limits und stateful Paketfilter-Regeln arbeiten.
 Bei allen anderen Protokollen können Application Level Gateways helfen,
 wenn ich auf diesen den Verkehr für die entsprechenden Protokolle
 kontrolliere.
+
+[suoiacth]: https://home.regit.org/netfilter-en/secure-use-of-helpers/
 
