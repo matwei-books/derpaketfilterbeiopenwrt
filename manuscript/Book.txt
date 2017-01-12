@@ -29,6 +29,7 @@ part4.mdwn
 4-testen.mdwn
 4-monitoring.mdwn
 4-bypass-pf.mdwn
+4-tunnel-gateway.mdwn
 4-dokumentation.mdwn
 4-zusaetzliche-software.mdwn
 4-aktualisieren.mdwn
