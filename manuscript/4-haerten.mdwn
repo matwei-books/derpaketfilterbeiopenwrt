@@ -119,6 +119,8 @@ wirkungslos.
 Mit starken Kennworten erschwere ich Brute-Force-Attacken, die auf
 Wörterbüchern aufbauen.
 
+{pagebreak}
+
 A> Woran erkenne ich ein starkes Kennwort?
 A> 
 A> Indem ich selbst mit einem guten Password-Cracker versuche, das Passwort
