@@ -110,6 +110,6 @@ installieren oder im Firmware-Image einbinden kann.
 Dabei kann ich notwendige Abhängigkeiten von anderer Software gleich mit
 angeben, so dass diese automatisch mit installiert wird.
 
-[devguide]: https://wiki.openwrt.org/doc/playground/developer
+[devguide]: https://wiki.openwrt.org/doc/guide-developer
 
 [opkg]: https://wiki.openwrt.org/doc/techref/opkg
