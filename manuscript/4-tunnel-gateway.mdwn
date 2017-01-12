@@ -34,7 +34,7 @@ Dem stehen einige Nachteile gegenüber:
 * Die Konfiguration erfolgt an mehreren Stellen und muss in Teilschritte zerlegt werden, die zueinander passen.
 * Das Routing muss stimmen.
 
-Was mache ich also, wenn ich mein Tunnel-Gateway vor der Firewall platzieren will?
+Was mache ich, wenn ich mein Tunnel-Gateway vor der Firewall platzieren will?
 
 *   Falls NAT nötig ist, mache ich das auf dem Gateway.
     Damit kann ich die Regeln auf der Firewall einfacher halten, was der Sicherheit zugute kommt und die Fehlersuche vereinfacht.
@@ -59,7 +59,7 @@ Dem stehen einige Nachteile gegenüber
 *   Die Kombination aus Tunnel-Gateway und Firewall wird zum Single Point of Failure.
 *   Will oder muss ich das System ersetzen, muss das neue System alles können, was das alte konnte.
     Ich bekomme hier sehr leicht einen Vendor-Lock-In.
-*   Die Konfiguration ist im allgemeinen komplizierter als bei den anderen Varianten.
+*   Die Konfiguration ist komplizierter als bei den anderen Varianten.
 *   Die Fehlersuche ist schwieriger.
 
 Worauf achte ich also, wenn ich das Tunnel-Gateway auf der Firewall betreibe?
@@ -94,9 +94,7 @@ Worauf muss ich bei dieser Variante achten?
 
 ## Wo also platziere ich das Tunnel-Gateway?
 
-Aus den genannten Vor- und Nachteilen ergibt sich für mich das folgende.
-
-Ich platziere das Gateway vor der Firewall,
+Aus den genannten Vor- und Nachteilen ergibt sich für mich folgendes: ich platziere das Gateway vor der Firewall,
 
 * wenn ich mehrere Tunnel betreiben und dafür ein spezielles Gerät anschaffen will,
 * wenn ich die separate Konfiguration von Tunnel und Firewall haben will und das koordinieren kann und
@@ -113,7 +111,7 @@ Ich platziere das Gateway auf der Firewall,
 
 Ich platziere das Gateway hinter der Firewall,
 
-* wenn ich eine Layer2-Verbindung brauche und keine Layer2-Firewall habe,
+* wenn ich eine Layer-2-Verbindung brauche und keine Layer-2-Firewall habe,
 * wenn ich den Tunnel-Verkehr vor dem restlichen Netz (und der Firewall) verbergen will,
 * wenn ich mir der Implikationen für die Sicherheit bewusst bin und damit umgehen kann
 
