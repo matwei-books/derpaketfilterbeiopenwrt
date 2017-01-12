@@ -1,0 +1,125 @@
+# Wo platziere ich ein Tunnel-Gateway?
+
+Nachdem ich im Buch bereits darauf eingegangen war, welche Besonderheiten sich aus dem Einsatz von Tunneln und VPNs für den Paketfilter ergeben, gehe ich in diesem Kapitel intensiver darauf ein, wo ich ein Tunnel-Gateway in meinem Netz platziere.
+Dabei ist es egal, ob ich der Tunnel ein VPN ist, ein IPv6-Tunnel durch ein IPv4-Netz oder umgekehrt.
+Aus diesem Grunde spreche ich in diesem Kapitel nur von Tunnel, auch wenn eines der anderen gemeint sein kann.
+
+Und mit Platzierung meine ich nicht, ob in einem Schrank, unter dem Tisch oder an der Wand.
+Es geht hier um die logische Position im Netzwerk, konkret um die Positionierung relativ zur Paketfilter-Firewall.
+
+Dabei unterscheide ich grundsätzlich drei Möglichkeiten, das Tunnel-Gateway zu platzieren:
+
+1. vor der Firewall
+2. auf der Firewall
+3. hinter der Firewall
+
+![Wo platziere ich mein Tunnel-Gateway](images/wo-platziere-ich-mein-vpn-gateway.png)
+
+Jede der drei Positionen bringt Vor- und Nachteile, die ich nachfolgend gegenüberstellen möchte.
+
+## Gateway vor der Firewall
+
+Vor der Firewall heißt, aus Sicht eines Fremdnetzes kommt zuerst das Tunnel-Gateway, dann der Paketfilter, dann mein Netzwerk.
+
+Das hat verschiedene Vorteile:
+
+* Die Firewall kann den Traffic aus dem Tunnel filtern.
+* Die Sicherheit des Tunnel-Gateway ist weniger kritisch für die Sicherheit meines Netzes hinter der Firewall.
+* Ich kann die Konfiguration von Gateway und Firewall relativ einfach halten.
+* Die Konfiguration des Gateways ist getrennt von der Konfiguration der Firewall.
+  Damit kann das ein anderer Personenkreis machen und es skaliert besser, wenn ich viele Tunnel zu konfigurieren habe.
+* Ich kann das Einrichten in Teilschritte zerlegen.
+* Ich kann Gateway und Firewall unabhängig voneinander aktualisieren oder ersetzen.
+* Die Fehlersuche ist einfacher, wenn ich die Netzstruktur kenne.
+
+Dem stehen einige Nachteile gegenüber:
+
+* Ich brauche mindestens zwei Geräte.
+* Die Konfiguration erfolgt an mehreren Stellen und muss in Teilschritte zerlegt werden, die zueinander passen.
+* Das Routing muss stimmen.
+
+Was mache ich also, wenn ich mein Tunnel-Gateway vor der Firewall platzieren will?
+
+*   Falls NAT nötig ist, mache ich das auf dem Gateway.
+    Damit kann ich die Regeln auf der Firewall einfacher halten, was der Sicherheit zugute kommt und die Fehlersuche vereinfacht.
+*   Ich muss das Routing für den Tunnel anpassen.
+    Dabei muss ich den Überblick über die Subnetze behalten.
+    Hier macht sich eine gute Netzplanung bezahlt.
+*   Beim Einrichten eines neuen Tunnels muss ich die Konfiguration zwischen Firewall und Gateway koordinieren.
+*   Ich muss die Dokumentation von Gateway und Firewall für jeden einzelnen Tunnel zusammenführen.
+    Das erleichtert mir später die Fehlersuche.
+
+## Gateway auf der Firewall
+
+Auch das Platzieren des Tunnel-Gateways direkt auf der Firewall hat Vorteile:
+
+*   Ich brauche nur ein Gerät und kann damit, insbesondere bei wenig Traffic im Tunnel, einiges an Kosten sparen.
+*   Die Konfiguration erfolgt an einer Stelle.
+*   Das Routing ist etwas einfacher.
+*   Die Firewall sieht den Traffic aus dem Tunnel und kann ihn filtern.
+
+Dem stehen einige Nachteile gegenüber
+
+*   Die Kombination aus Tunnel-Gateway und Firewall wird zum Single Point of Failure.
+*   Will oder muss ich das System ersetzen, muss das neue System alles können, was das alte konnte.
+    Ich bekomme hier sehr leicht einen Vendor-Lock-In.
+*   Die Konfiguration ist im allgemeinen komplizierter als bei den anderen Varianten.
+*   Die Fehlersuche ist schwieriger.
+
+Worauf achte ich also, wenn ich das Tunnel-Gateway auf der Firewall betreibe?
+
+*   Ich achte darauf, dass ich genügend Ersatzgeräte zur Hand habe, so dass ich bei einem Ausfall schnell die alte Konfiguration wieder einspielen und damit weiterarbeiten kann.
+*   Ich dokumentiere nicht einfach nur die Konfiguration der Tunnels als Prosa, sondern auch aussagekräftige Diagramme, die mir das ganze System bei der Fehlersuche verständlicher machen.
+    Diese Art der Dokumentation ist auch bei den anderen Varianten nützlich, hier ist sie essentiell.
+
+## Gateway hinter der Firewall
+
+Auch diese Variante hat Vorteile:
+
+*   Die Daten werden durch mein Netz getunnelt, somit kann meine Netzstruktur über den Tunnel nicht mit Traceroute oder Ping erkundet werden.
+    Das ist - zugegeben - ein schwacher Vorteil, da ich mit einem Tunnel meist vertrauenswürdigen Partnern Zugriff auf Teile meines Netzwerks gestatte.
+*   Ich kann das Routing zum Tunnel auf die Geräte beschränken, die diesen nutzen.
+    Auch das ist nur ein schwacher Vorteil.
+*   Bei einem Layer-2-Tunnel benötige ich überhaupt keine zusätzlichen Routen.
+*   Firewall und Gateway werden separat konfiguriert wie in der ersten Variante.
+*   Ich kann die Geräte wie in der ersten Variante unabhängig voneinander auswechseln.
+
+Dem stehen die folgenden Nachteile gegenüber:
+
+*   Die Firewall kann den Traffic im Tunnel nicht filtern, ich bin auf die Sicherheitsvorkehrungen angewiesen, die ich am Tunnel-Gateway einstellen kann.
+*   Die Konfiguration erfolgt an verschiedenen Stellen und muss koordiniert werden.
+*   Verwende ich einen gerouteten Tunnel, brauche ich extra Routingeinträge zumindest bei den Rechnern, die diesen nutzen.
+
+Worauf muss ich bei dieser Variante achten?
+
+*   Wenn möglich, filtere ich den Traffic des Tunnels auf dem Gateway.
+*   Bei einem gerouteten Tunnel (Layer 3) muss ich die nötigen Routen eintragen, entweder auf dem nächsten Gateway oder auf den Rechnern, die den Tunnel nutzen.
+*   Für jeden Tunnel muss ich die Konfiguration von Gateway, Firewall und Routing zusammen dokumentieren.
+
+## Wo also platziere ich das Tunnel-Gateway?
+
+Aus den genannten Vor- und Nachteilen ergibt sich für mich das folgende.
+
+Ich platziere das Gateway vor der Firewall,
+
+* wenn ich mehrere Tunnel betreiben und dafür ein spezielles Gerät anschaffen will,
+* wenn ich die separate Konfiguration von Tunnel und Firewall haben will und das koordinieren kann und
+* wenn ich den Traffic restriktiv mit der Firewall regulieren will.
+
+Ich platziere das Gateway auf der Firewall,
+
+* wenn ich nur ein Gerät einsetzen kann oder will,
+* wenn ich den Tunnel-Traffic mit der Firewall filtern will,
+* wenn ich mit der höheren Komplexität umgehen kann und
+* wenn die Sicherheitsanforderungen nicht so hoch sind
+  * weil nicht so viel auf dem Spiel steht oder
+  * weil ich das Risiko auf andere Weise reduziere.
+
+Ich platziere das Gateway hinter der Firewall,
+
+* wenn ich eine Layer2-Verbindung brauche und keine Layer2-Firewall habe,
+* wenn ich den Tunnel-Verkehr vor dem restlichen Netz (und der Firewall) verbergen will,
+* wenn ich mir der Implikationen für die Sicherheit bewusst bin und damit umgehen kann
+
+Das heißt, ich betrachte die Frage der Platzierung des Tunnel-Gateways jedes Mal aufs Neue unter Berücksichtigung der oben genannten Punkte.
+
