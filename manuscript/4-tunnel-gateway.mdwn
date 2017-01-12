@@ -2,10 +2,6 @@
 
 Nachdem ich in anderen Kapiteln bereits darauf eingegangen war, welche Besonderheiten der Einsatz von Tunneln und VPNs für den Paketfilter mit sich bringt, gehe ich in diesem Kapitel intensiver darauf ein, wo ich ein Tunnel-Gateway in meinem Netz platziere.
 Dabei ist es egal, ob der Tunnel ein VPN ist, ein IPv6-Tunnel durch ein IPv4-Netz oder umgekehrt.
-Aus diesem Grunde spreche ich hier nur von Tunnel, auch wenn ein VPN gemeint sein kann.
-
-Und mit Platzierung meine ich nicht, ob in einem Schrank, unter dem Tisch oder an der Wand.
-Es geht hier um die logische Position im Netzwerk, konkret um die Positionierung relativ zur Paketfilter-Firewall.
 
 ![Wo platziere ich mein Tunnel-Gateway](images/wo-platziere-ich-mein-vpn-gateway.png)
 
