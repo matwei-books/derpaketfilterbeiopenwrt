@@ -15,14 +15,14 @@ FTP, die aus dem Datenstrom der Verbindung zu Port 21 die Ports der zugehörigen
 Datenverbindungen ermitteln.
 
 An den Grenzen von Netzwerken kommt oft zusätzlich noch die
-Adressenübersetzung, das heißt das Ändern von Quell- und / oder Zieladresse
+Adressübersetzung, das heißt das Ändern von Quell- und / oder Zieladresse
 sowie der Ports bei TCP und UDP als Aufgabe dazu.
 Diese Umsetzung findet sich vorwiegend bei IPv4-Netzen, weil bei diesen
 die Anzahl der frei verfügbaren global eindeutigen Adressen seit
 langem nicht mehr den Bedarf decken kann und daher Adressen mehrfach
 verwendet werden.
 
-Die Adressenübersetzung dient zwei Zielen:
+Die Adressübersetzung dient zwei Zielen:
 das eine ist das Verbergen ganzer Netze hinter einzelnen Adressen
 (Masquerading), das andere das Ermöglichen der Kommunikation von
 Rechnern in verschiedenen Netzen, die den gleichen Präfix verwenden.
@@ -35,7 +35,7 @@ es nicht ohne Änderung der TCP- und UDP-Ports ab.
 Von der externen Seite sind die internen Rechner nicht direkt adressierbar,
 da von außen nur eine IP-Adresse sichtbar ist.
 
-Ein Beispiel für die Adressenübersetzung ganzer Netzwerk-Präfixe ist ein
+Ein Beispiel für die Adressübersetzung ganzer Netzwerk-Präfixe ist ein
 Zusammenschluß zweier Netze, die bisher die gleichen privaten
 Netzwerkadressen verwendet haben.
 Da ich hier für die Umsetzung mit gleich großen Netzwerk-Präfixen arbeiten

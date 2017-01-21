@@ -71,7 +71,7 @@ Es gibt die drei Programme
 ## ebtables
 
 Für die Administration der Ethernet Bridging Tables gibt es das Programm
-`ebtables`, dass ich nur benötige, wenn ich eine Ethernet-Bridge betreibe.
+`ebtables`, das ich nur benötige, wenn ich eine Ethernet-Bridge betreibe.
 Die Bridge kann echte Ethernet-Adapter verbinden oder virtuelle Maschinen.
 
 Ein Einsatzfall, für den ich `ebtables` verwende, ist eine Bridge,
@@ -108,7 +108,7 @@ Falls mir die Funktionalität des Netfilter-Frameworks nicht ausreicht, kann
 ich dieses um eigene Funktionen ergänzen.
 
 Dafür gibt es verschiedene Wege.
-Ich kann ein Kernel-Modul schreiben, dass an den nötigen Hooks eingehängt
+Ich kann ein Kernel-Modul schreiben, das an den nötigen Hooks eingehängt
 und von einem Userspace-Programm gesteuert wird.
 
 Alternativ kann ich mit *libipq* die entsprechende Funktionalität auch

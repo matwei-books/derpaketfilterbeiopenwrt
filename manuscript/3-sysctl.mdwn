@@ -3,7 +3,7 @@
 
 Der Linux-Kernel bietet viele Einstellmöglichkeiten über das *proc*
 Dateisystem.
-Dieses spezielle Dateisystem, dass im Verzeichnisbaum unter `/proc`
+Dieses spezielle Dateisystem, das im Verzeichnisbaum unter `/proc`
 eingehängt ist, enthält Pseudo-Dateien, aus denen Kernelparameter
 ausgelesen werden können.
 Durch Schreiben in diese Dateien kann ich die Kernelparameter setzen.
@@ -34,7 +34,7 @@ Damit genug der Vorrede, kommen wir zu den für Paketfilter interessanten
 Variablen.
 
 *net.core.bpf_jit_enable*
-: Für die Architektur *x86_64* gibt es ein Framework, dass die
+: Für die Architektur *x86_64* gibt es ein Framework, das die
   Paketfilterung beschleunigen kann. Dieses wird mit diesem Parameter
   aktiviert.
 

@@ -174,7 +174,7 @@ Kapitel.
 Will ich meinen Paketfilter zustandsbezogen (stateful) betreiben, verwende
 ich die *conntrack* Module.
 
-Diese haben den Vorteil, das ich meine Regeln genauer bestimmen kann und
+Diese haben den Vorteil, dass ich meine Regeln genauer bestimmen kann und
 trotzdem einfacher halten kann.
 Bestimmte Anwendungen, wie das automatische Freischalten von
 FTP-Datenverbindungen, gehen nicht ohne diese Module.

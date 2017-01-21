@@ -434,7 +434,7 @@ SSH
 
 stateful
 : zustandsorientiert/zustandsbehaftet, bei einem Paketfilter bedeutet
-  das, das dieser sich den Zustand der Verbindungen, die über ihn
+  das, dass dieser sich den Zustand der Verbindungen, die über ihn
   laufen, merkt und bei der Bewertung der Datagramme berücksichtigt.
 
 stateless
@@ -486,7 +486,7 @@ Twice-NAT
   Twice-NAT wird verwendet, um Netzwerkbereiche mit überlappendem Adressraum und Adresskollisionen zu verbinden.
 
 UDP
-: Universal Datagram Protocol, ein minimales, verbindungsloses Protokoll
+: User Datagram Protocol, ein minimales, verbindungsloses Protokoll
   zur Datenübertragung.
   Es gibt keine Gewähr, dass die Daten überhaupt oder in der richtigen
   Reihenfolge ankommen.
@@ -499,7 +499,7 @@ VoIP
 : Voice over IP, Telefonieren über das Internet
 
 VPN
-: Virtual Private Network, ein Netzwerk, dass zum
+: Virtual Private Network, ein Netzwerk, das zum
   Datentransport andere Netzwerke, zum Beispiel das Internet verwendet.
   Zum Schutz der Kommunikation im VPN werden die Datagramme oft
   verschlüsselt über das Transportnetz verschickt.

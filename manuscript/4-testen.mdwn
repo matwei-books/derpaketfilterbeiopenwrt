@@ -27,7 +27,7 @@ einarbeiten will.
 Bei Tests der Firewall-Implementierung geht es um Fehler im
 Betriebssystem und der Paketfilter-Software.
 Probleme, die ich hierbei aufdecke, betreffen alle Paketfilter des
-betreffenden Typs, dass heißt in unserem Fall OpenWrt in der
+betreffenden Typs, das heißt in unserem Fall OpenWrt in der
 getesteten Version.
 Dann ist es sinnvoll, eine Fehlermeldung in den Bug-Tracker zu
 stellen, damit das Problem für alle gelöst werden kann.

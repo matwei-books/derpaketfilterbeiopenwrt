@@ -114,7 +114,7 @@ benötige ich nur, wenn die Hosts in einem Netzsegment ihr Gateway nicht
 kennen.
 Kann ich die Hosts auf andere Art konfigurieren, benötige ich diese
 Nachrichten nicht.
-Das Problem mit diesen beiden Typen und Typ 5 ist, das ein Rechner damit
+Das Problem mit diesen beiden Typen und Typ 5 ist, dass ein Rechner damit
 Datenverkehr auf sich umleiten und dann MITM-Angriffe gegen andere Rechner
 ausführen kann.
 Aus diesem Grund muss ich, wenn ich mit solchen Angriffen rechne, mein

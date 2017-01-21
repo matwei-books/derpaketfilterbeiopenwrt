@@ -51,7 +51,7 @@ System genau macht.
 Quelloffene Systeme bieten demgegenüber prinzipiell die Möglichkeit, das
 System bis in die letzte Ecke zu verstehen.
 Dafür muss ich eigene Arbeit investieren und viel lernen.
-Ich kann auch für quelloffene Systeme und den zugehörigen Support bezahlen.
+Ich kann aber auch für quelloffene Systeme und den zugehörigen Support bezahlen.
 
 Eine weitere Unterteilung betrifft das eingesetzte Betriebssystem,
 welches die Arbeitsweise des Paketfilters bestimmt.
@@ -81,7 +81,7 @@ Außerdem ist es einfach möglich, die Konfiguration automatisch zu
 erzeugen sowie aus der Konfiguration automatisch die 
 Dokumentation zu generieren.
 
-Bei der Konfiguration über Webinterface ist die Lernkurve am Anfang
+Bei der Konfiguration über ein Webinterface ist die Lernkurve am Anfang
 flach und kleine Änderungen der Konfiguration sind schnell gemacht.
 Dafür sind komplexe Konfigurationen nur mühsam und fehlerträchtig zu
 pflegen.

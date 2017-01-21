@@ -161,7 +161,7 @@ Bei zustandsbehafteten Regeln kann die Firewall Replay-Attacken erkennen,
 wenn die Sequenznummer eines Datagramms wesentlich kleiner ist, als die
 letzte Acknowledge-Nummer der Gegenrichtung.
 
-## Universal Datagram Protocol (UDP)
+## User Datagram Protocol (UDP)
 
 Kommen wir nun zu UDP, dem letzten der Protokolle, auf die ich im Rahmen
 von IPv4 kurz eingehen will.

@@ -104,7 +104,7 @@ selbst zu übersetzen.
 
 Dazu muss ich diese, am besten mit dem Buildroot-System von OpenWrt, für
 mein Gerät kompilieren.
-Sinnvollerweise erzeuge ich gleich ein Paket, dass ich mit `opkg`
+Sinnvollerweise erzeuge ich gleich ein Paket, das ich mit `opkg`
 installieren oder im Firmware-Image einbinden kann.
 
 Dabei kann ich notwendige Abhängigkeiten von anderer Software gleich mit

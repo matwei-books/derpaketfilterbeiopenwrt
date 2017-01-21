@@ -43,7 +43,7 @@ Ich benötige sowohl für IPv4 als auch für IPv6 Routing-Informationen und
 gegebenenfalls zwei Routing-Protokolle.
 
 Auch die Fehlersuche wird komplizierter, weil ich in Betracht
-ziehen muss, das ein Host versucht, einen Dienst mit dem falschen Protokoll
+ziehen muss, dass ein Host versucht, einen Dienst mit dem falschen Protokoll
 zu erreichen, oder dass IPv4- und IPv6-Datagramme unterschiedliche Wege
 gehen.
 

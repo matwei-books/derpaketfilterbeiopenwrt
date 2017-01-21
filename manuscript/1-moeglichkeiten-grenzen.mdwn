@@ -85,7 +85,7 @@ Je nach Hardware ist die Unterstützung verschieden gut.
 Vor dem Kauf eines Gerätes muss ich auf jeden Fall ein Blick in die Liste
 der unterstützen Hardware werfen.
 
-Die Software in den Repositories ist manchmal nicht aktuell genug für meinen
+Manchmal ist die Software in den Repositories nicht aktuell genug für meinen
 Einsatzfall.
 Dann muss ich eine neuere Version selbst übersetzen.
 Das kann sich über Abhängigkeiten von Versionen anderer Software zu

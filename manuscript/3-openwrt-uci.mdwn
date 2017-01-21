@@ -52,7 +52,7 @@ A> Das Skript beginnt mit dieser Zeile:
 A> 
 A>     #!/bin/sh /etc/rc.common
 A> 
-A> Diese bedeutet, das in dem Beispiel mit dem Neustart der Firewall die Shell
+A> Diese bedeutet, dass in dem Beispiel mit dem Neustart der Firewall die Shell
 A> das Skript `/etc/rc.common` mit den Argumenten */etc/init.d/firewall* und
 A> *restart* aufruft.
 A> Will ich also eines der Startup-Skripts analysieren, fange ich bei

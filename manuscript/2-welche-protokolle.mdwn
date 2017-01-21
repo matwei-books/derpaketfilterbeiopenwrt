@@ -134,7 +134,7 @@ hoher Bandbreite bringt.
 
 RFC 3376 beschreibt Version 3.
 Diese ergänzt das Protokoll um Quellenfilterung, das heisst ein Mitglied
-einer Multicast-Gruppe kann dem Router mitteilen, das es nur an Datagrammen
+einer Multicast-Gruppe kann dem Router mitteilen, dass es nur an Datagrammen
 von bestimmten Routern oder nicht an solchen interessiert ist.
 
 Bei IPv6 übernimmt ICMPv6 die Steuerung der Multicast-Zugehörigkeit.

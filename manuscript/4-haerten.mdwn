@@ -249,7 +249,7 @@ Und bei selbst erstellten Images erst gar nichts überflüssiges hinein
 nehmen.
 
 **Kontrolliere die offenen Ports.**
-Damit vergewissere ich mich, das ich keinen Dienst vergessen habe,
+Damit vergewissere ich mich, dass ich keinen Dienst vergessen habe,
 abzuschalten beziehungsweise zu sperren.
 Von außen kann ich das mit dem Programm nmap auf einem benachbarten Rechner
 machen.

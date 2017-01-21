@@ -150,7 +150,7 @@ Die *Covered Networks* entsprechen denen in den Netzwerkeinstellungen
 
 Bei *Inter-Zone-Forwarding* stelle ich ein, zu beziehungsweise von
 welchen Zonen ich Datagramme weiterleiten möchte.
-Dabei erzeugt ein Haken bei den entsprechenden Zonen, dass ein Sprung in der
+Dabei bewirkt ein Haken bei den entsprechenden Zonen, dass ein Sprung in der
 Kette *zone_quellname_forward* zur Kette *zone_zielname_dest_ACCEPT*
 angelegt wird.
 

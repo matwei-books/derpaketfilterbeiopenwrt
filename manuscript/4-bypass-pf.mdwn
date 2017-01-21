@@ -166,7 +166,7 @@ Das können IP-Daten sein, die sich in DNS-Datagrammen oder ICMP-Datagrammen
 verbergen. Oder in beliebigen anderen Protokollen, die Nutzerdaten
 transportieren können.
 
-Bei ICMP habe ich das Problem, das zumindest einige dieser Datagramme für
+Bei ICMP habe ich das Problem, dass zumindest einige dieser Datagramme für
 das korrekte Funktionieren des Netzes erforderlich sind.
 Hier kann ich mit Rate-Limits und stateful Paketfilter-Regeln arbeiten.
 

@@ -112,7 +112,7 @@ Sollten mehrere NAT-Boxen kaskadiert sein, muss zumindest die dem
 Rendezvous-Server zunächst gelegene NAT-Box Hair-Pinning unterstützen.
 RFC 2663, RFC 3022 und RFC 3303 gehen auf diese Aspekte ein.
 
-Aus dem vorgenannten ist sicher zu erkennen, das ich NAT eher für ein Übel als für einen Segen halte.
+Aus dem vorgenannten ist sicher zu erkennen, dass ich NAT eher für ein Übel als für einen Segen halte.
 Wenn es sich beim Entwurf des Netzes vermeiden lässt, würde ich auf jeden Fall darauf verzichten.
 Allgemein spricht nur die Knappheit der Adressen bei IPv4 für NAT.
 Konkret ist NAT notwendig, wenn zwei Netzbereiche mit überlappender Adressvergabe, zum Beispiel mit Adressen nach RFC 1918, verbunden werden sollen oder wenn ein Netzbereich mit Adressen nach RFC 1918 an das Internet angeschlossen werden soll.
