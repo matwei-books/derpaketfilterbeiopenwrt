@@ -85,7 +85,6 @@ wirklich dort ankommen, muss der IP-Stack des VPN-Routers sie zu "sehen"
 bekommen.
 Dafür nehme ich mit `ebtables` diese Datagramme von der Weiterleitung durch
 die Bridge aus und führe sie dem IP-Stack zu.
-Das konkrete Vorgehen dazu beschreibe ich in Teil 4.
 
 ## arptables
 
