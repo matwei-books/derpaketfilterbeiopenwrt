@@ -381,7 +381,7 @@ Proxy
   wiederum zum Server.
 
 Receive-Window
-: Bei TCP ist die maximale Datenmenge, die ein Computer empfangen kann,
+: Bei TCP die maximale Datenmenge, die ein Computer empfangen kann,
   ohne diese bestätigen zu müssen.
   Will der Sender mehr Daten schicken, muss er auf eine Bestätigung der
   bisher gesendeten Daten warten.

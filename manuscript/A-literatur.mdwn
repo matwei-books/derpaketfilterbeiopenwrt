@@ -9,11 +9,28 @@ Hagen, Silvia; IPv6 Essentials - Integrating IPv6 into your IPv4 Network;
 O'Reilly, Sebastopol, 2014;
 ISBN 978-1-449-31921-2
 
+Die Bücher von Silvia Hagen sind hilfreich für das Einarbeiten in das
+Thema IPv6.
+
+### SteChe2005 {#lit-steche2005}
+
+Steinberg, Daniel H., Cheshire, Stuart; Zero Configuration Networking: the Definite Guide;
+O'Reilly, Sebastopol, 2005;
+ISBN 978-0-596-10100-8
+
+Die Autoren beschreiben detailliert die Mechanismen zur automatischen
+Netzwerkkonfiguration von elektronischen Geräten.
+Wer nur einen kurzen Überblick möchte, kann zunächst zu dem Artikel
+[[ctRudl2014](#lit-ctRudl2014)] greifen.
+
 ### Weidner2012 {#lit-weidner2012}
 
 Weidner, Mathias; Linux kopflos mit PC Engines ALIX;
 Lulu Press, Raleigh, 2012;
 ISBN 978-1-4717-2849-5
+
+In einem Kapitel dieses Buches hatte ich mich mit der Konfiguration des
+Paketfilters bei einer älteren Version von OpenWrt beschäftigt.
 
 ## Artikel
 
@@ -91,12 +108,12 @@ Informationen auf geeignete Onlinequellen.
 ### ctSKL2012
 
 Christian Schneider, Martina Kannen, Martin Leischner; Bringdienst -
-IPv6-Autokonfiguration für Clients; c't Magazin für Computertechnik 2012
+IPv6 Autokonfiguration für Clients; c't Magazin für Computertechnik 2012
 Heff 11, S. 72-76
 
 Die Autoren erläutern mehrere Verfahren der IPv6-Autokonfiguration von
 Clients und berichten über den Stand der Unterstützung verschiedener
-Client-Betriebssysteme von 2012.
+Client Betriebssysteme von 2012.
 Vom Thema dieses Buches her ist die Erläuterung der Verfahren
 interessant.
 
@@ -108,7 +125,7 @@ Conference (Anaheim, CA), April 2005, S.179-192
 
 Die Autoren fassen die verschiedenen Verfahren, um direkte UDP- und
 TCP-Verbindungen über NAT-Geräte aufzubauen, zusammen und gehen auch auf
-die Eigenschaften von P2P-freundlcihen NAT-Geräten ein.
+die Eigenschaften von P2P-freundlichen NAT-Geräten ein.
 
 ### ixGK2014 {#lit-ixGK2014}
 
@@ -150,6 +167,9 @@ am Übergang zwischen verschiedenen Netzen.
 Christoph Wegener; Breit gefasst - Monitoring nach der Einführung von
 IPv6; iX Magazin für professionelle Informationstechnik 2013 Heft 3, S.
 114-118; ISSN 0935-9680
+
+Der Autor geht auf einige Besonderheiten ein, die sich beim Monitoring
+nach der Einführung von IPv6 ergeben.
 
 ## Online-Qellen
 
@@ -530,7 +550,7 @@ RFC 4380
   Datenverkehr über IPv4-Netze.
   Es ist für den Firewall-Administrator aus zwei Gründen interessant:
   einerseits ist es ein Tunnel-Protokoll, das Daten von IPv6 in
-  IPv4-Datagrammen kapselt und ist zumindest in einigen Fällen in der
+  IPv4-Datagrammen kapselt und andererseits ist es zumindest in einigen Fällen in der
   Lage direkte Verbindungen über NAT-Geräte herzustellen.
 
 RFC 4443
@@ -538,7 +558,7 @@ RFC 4443
   Version 6 (IPv6) Specification
 
   Dieser Draft Standard von 2006 beschreibt die aktuelle Version von ICMPv6.
-  Da dieses ICMPv6 mehr Aufgaben wahrnimmt, als ICMP bei IPv4 ist es für den
+  Da ICMPv6 mehr Aufgaben wahrnimmt, als ICMP bei IPv4 ist es für den
   Betrieb eines Paketfilters für IPv6 unverzichtbar, sich damit vertraut zu
   machen.
 

@@ -95,7 +95,7 @@ angewendet.
 Die Policy darf kein Sprung zu einer anderen Regelkette und nicht
 **RETURN** sein.
 
-Die Iptables-Extension-Module stellen weitere Targets sowie zusätzliche
+Iptables-Extension-Module stellen weitere Targets sowie zusätzliche
 Match-Optionen für die Regeln bereit.
 
 ### Einsprungspunkte für Paketfilterregeln
@@ -174,7 +174,7 @@ Kapitel.
 Will ich meinen Paketfilter zustandsbezogen (stateful) betreiben, verwende
 ich die *conntrack* Module.
 
-Diese haben den Vorteil, dass ich meine Regeln genauer bestimmen kann und
+Diese haben den Vorteil, dass ich meine Regeln genauer bestimmen und
 trotzdem einfacher halten kann.
 Bestimmte Anwendungen, wie das automatische Freischalten von
 FTP-Datenverbindungen, gehen nicht ohne diese Module.
@@ -235,7 +235,7 @@ Andere Erweiterungen beziehen sich auf die MAC-Adresse, die Limitierung von
 Datagrammen oder den Benutzer oder Prozess, der ein lokal erzeugtes Datagramm
 verursacht hat.
 
-Andere Erweiterungen, erlauben mir zusätzliche Targets, das heißt Aktionen,
+Weitere Erweiterungen, erlauben mir zusätzliche Targets, das heißt Aktionen,
 in den Regeln, wie zum Beispiel:
 
 *   LOG für das Protokollieren von Datagrammen

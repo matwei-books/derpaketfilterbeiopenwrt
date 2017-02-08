@@ -17,7 +17,7 @@ mit OpenWrt bewähren:
 
 *    Keine Konfiguration über Internet, oder
 *    wenn dann nur mit geänderten Ports und
-*    Verschlüsselung
+*    Verschlüsselung.
 *    Geänderte Kennworte und,
 *    wenn möglich, geänderte Anmeldenamen sowie
 *    geänderte interne Netzbereiche und darin
@@ -163,7 +163,7 @@ Prinzipiell brauche ich nur das Paket *sudo* um den Zugang zu privilegierten
 Diensten für die einzelnen Benutzer zu steuern.
 Das Paket *shadow-useradd* erleichtert das Einrichten von weiteren
 Benutzern, erfahrene Unix-Administratoren können weitere Benutzer aber auch
-ohne dass anlegen.
+ohne dieses anlegen.
 Für die Public-Key-Authentication bei SSH kopiere ich für jeden Benutzer die
 zugelassenen Schlüssel in die Datei *$HOME/.ssh/authenticated_keys*.
 

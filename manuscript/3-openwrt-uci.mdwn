@@ -101,7 +101,7 @@ Es gibt die folgenden Direktiven:
     Beispiel:
 
         list network 'wan1'
-	list network 'wan2'
+        list network 'wan2'
 
 Als Boolesche Werte kann ich '1', 'on', 'yes' beziehungsweise '0', 'off', 'no'
 verwenden.

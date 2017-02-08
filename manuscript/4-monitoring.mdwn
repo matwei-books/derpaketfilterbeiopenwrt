@@ -77,7 +77,7 @@ und zum anderen Argumente sammeln, wenn sich abzeichnet, dass das
 aktuell eingesetzte Gerät nicht mehr den Anforderungen gewachsen ist.
 
 Diese Daten frage ich über die Kommandozeile oder einen installierten
-SNMP-Dämon ab un speise sie in ein geeignetes Monitoring System ein.
+SNMP-Dämon ab und speise sie in ein geeignetes Monitoring System ein.
 
 Die Zeitreihen, die ich in der Webschnittstelle von OpenWrt sehen kann,
 helfen mir bei Problemen eher selten weiter, weil ich dann oft keine
